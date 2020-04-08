@@ -1,4 +1,4 @@
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
 /**
  * Created by Vahid Zafari on 2/23/2016.

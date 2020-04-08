@@ -1,4 +1,4 @@
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
 import java.io.Serializable;
 import java.time.Clock;

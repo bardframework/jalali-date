@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
 import java.io.Serializable;
 import java.time.*;
@@ -144,10 +144,10 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         2049, 2050, 2053, 2054, 2057, 2058, 2061, 2062, 2063, 2065, 2066, 2067, 2069, 2070, 2071, 2073, 2074, 2075,
         2077, 2078, 2079, 2081, 2082, 2083, 2085, 2086, 2087, 2089, 2090, 2091, 2093, 2094, 2095, 2096, 2097, 2098,
         2099, 2100);
-    private static int jalaliDaysInMonth[] = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
+    private static int[] jalaliDaysInMonth = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
 
     //-----------------------------------------------------------------------
-    private static int gregorianDaysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     /**
      * The year.
      */
@@ -889,7 +889,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the day-of-week, not null
      */
     public DayOfWeek getDayOfWeek() {
-        int dow0 = (int) Math.floorMod(toEpochDay() + 3, 7);
+        int dow0 = Math.floorMod(toEpochDay() + 3, 7);
         return DayOfWeek.of(dow0 + 1);
     }
 
@@ -1418,7 +1418,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         long monthCount = year * 12L + (month - 1);
         long calcMonths = monthCount + monthsToAdd;  // safe overflow
         int newYear = YEAR.checkValidIntValue(Math.floorDiv(calcMonths, 12));
-        int newMonth = (int) Math.floorMod(calcMonths, 12) + 1;
+        int newMonth = Math.floorMod(calcMonths, 12) + 1;
         return resolvePreviousValid(newYear, newMonth, day);
     }
 

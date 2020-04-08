@@ -1,7 +1,7 @@
-package org.bardframework.jalalidate.utils;
+package org.bardframework.time.utils;
 
-import org.bardframework.jalalidate.JalaliDate;
-import org.bardframework.jalalidate.JalaliDateTime;
+import org.bardframework.time.JalaliDate;
+import org.bardframework.time.JalaliDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

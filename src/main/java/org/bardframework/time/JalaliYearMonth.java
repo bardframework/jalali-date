@@ -1,4 +1,4 @@
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
 import java.io.Serializable;
 import java.time.Clock;
@@ -793,7 +793,7 @@ public final class JalaliYearMonth implements Temporal, TemporalAdjuster, Compar
         long monthCount = year * 12L + (month - 1);
         long calcMonths = monthCount + monthsToAdd;  // safe overflow
         int newYear = YEAR.checkValidIntValue(Math.floorDiv(calcMonths, 12));
-        int newMonth = (int) Math.floorMod(calcMonths, 12) + 1;
+        int newMonth = Math.floorMod(calcMonths, 12) + 1;
         return with(newYear, newMonth);
     }
 

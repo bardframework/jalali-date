@@ -1,4 +1,4 @@
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

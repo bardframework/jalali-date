@@ -1,4 +1,4 @@
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
 import java.io.Serializable;
 import java.time.*;
@@ -323,7 +323,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
 
     @Override
     public List<Era> eras() {
-        return Arrays.<Era>asList(IsoEra.values());
+        return Arrays.asList(IsoEra.values());
     }
 
     //-----------------------------------------------------------------------
