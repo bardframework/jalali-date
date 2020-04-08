@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.bardframework</groupId>
-    <version>1398.08.22</version>
     <artifactId>jalali-date</artifactId>
+    <version>1399.01.07</version>
 
     <properties>
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
