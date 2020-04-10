@@ -7,7 +7,6 @@ import java.util.TimeZone;
 
 /**
  * @author Vahid Zafari
- * @since 1.0
  */
 public class JalaliCalendar extends Calendar {
 
@@ -86,8 +85,8 @@ public class JalaliCalendar extends Calendar {
         14 * ONE_HOUR,    // ZONE_OFFSET
         2 * ONE_HOUR    // DST_OFFSET (double summer time)
     };
-    private static int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    private static int[] jalaliDaysInMonth = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
+    private static final int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static final int[] jalaliDaysInMonth = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
     private static TimeZone timeZone = TimeZone.getDefault();
     private static boolean isTimeSeted = false;
     private GregorianCalendar cal;
@@ -265,7 +264,7 @@ public class JalaliCalendar extends Calendar {
             leap = 0;
 
             gregorianDayNo--;
-            gregorianYear += (int) Math.floor(gregorianDayNo / 365);
+            gregorianYear += Math.floor(gregorianDayNo / 365);
             gregorianDayNo = gregorianDayNo % 365;
         }
 

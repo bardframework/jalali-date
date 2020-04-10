@@ -41,7 +41,6 @@ import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
  * However, any application that makes use of historical dates, and requires them
  * to be accurate will find the ISO-8601 approach unsuitable.
  * <p>
- * <p>
  * This is a <a href="{@docRoot}/java/lang/doc-files/ValueBased.html">value-based</a>
  * class; use of identity-sensitive operations (including reference equality
  * ({@code ==}), identity hash code, or synchronization) on instances of
@@ -49,8 +48,7 @@ import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
  * The {@code equals} method should be used for comparisons.
  *
  * @author Vahid Zafari
- * @implSpec This class is immutable and thread-safe.
- * @since 1.0
+ * This class is immutable and thread-safe.
  */
 public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster, Comparable<JalaliMonthDay>, Serializable {
 
@@ -688,9 +686,8 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      */
     @Override
     public String toString() {
-        return new StringBuilder(10).append("--")
-            .append(month < 10 ? "0" : "").append(month)
-            .append(day < 10 ? "-0" : "-").append(day)
-            .toString();
+        return "--" +
+            (month < 10 ? "0" : "") + month +
+            (day < 10 ? "-0" : "-") + day;
     }
 }

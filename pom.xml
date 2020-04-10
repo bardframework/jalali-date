@@ -6,7 +6,7 @@
 
     <groupId>org.bardframework</groupId>
     <artifactId>jalali-date</artifactId>
-    <version>1399.01.07</version>
+    <version>0.2</version>
 
     <properties>
         <junit-jupiter.version>5.5.2</junit-jupiter.version>
@@ -44,4 +44,14 @@
     <contributors>
         <contributor/>
     </contributors>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.0.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

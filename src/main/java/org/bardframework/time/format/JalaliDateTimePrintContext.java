@@ -18,22 +18,21 @@ import static java.time.temporal.ChronoField.*;
  * Context object used during date and time printing.
  * <p>
  * This class provides a single wrapper to items used in the format.
- *
- * @implSpec This class is a mutable context intended for use from a single thread.
+ * <p>
+ * This class is a mutable context intended for use from a single thread.
  * Usage of the class is thread-safe within standard printing as the framework creates
  * a new instance of the class for each format and printing is single-threaded.
- * @since 1.8
  */
 final class JalaliDateTimePrintContext {
 
     /**
      * The temporal being output.
      */
-    private TemporalAccessor temporal;
+    private final TemporalAccessor temporal;
     /**
      * The formatter, not null.
      */
-    private JalaliDateTimeFormatter formatter;
+    private final JalaliDateTimeFormatter formatter;
     /**
      * Whether the current formatter is optional.
      */

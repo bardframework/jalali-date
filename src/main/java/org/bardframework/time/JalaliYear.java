@@ -40,7 +40,6 @@ import static java.time.temporal.ChronoUnit.*;
  * However, any application that makes use of historical dates, and requires them
  * to be accurate will find the ISO-8601 approach unsuitable.
  * <p>
- * <p>
  * This is a <a href="{@docRoot}/java/lang/doc-files/ValueBased.html">value-based</a>
  * class; use of identity-sensitive operations (including reference equality
  * ({@code ==}), identity hash code, or synchronization) on instances of
@@ -48,8 +47,7 @@ import static java.time.temporal.ChronoUnit.*;
  * The {@code equals} method should be used for comparisons.
  *
  * @author Vahid Zafari
- * @implSpec This class is immutable and thread-safe.
- * @since 1.0
+ * This class is immutable and thread-safe.
  */
 public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<JalaliYear>, Serializable {
 
@@ -665,11 +663,11 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
                 case YEARS:
                     return plusYears(amountToAdd);
                 case DECADES:
-                    return plusYears(Math.multiplyExact(amountToAdd, 10));
+                    return plusYears(Math.multiplyExact(amountToAdd, 10L));
                 case CENTURIES:
-                    return plusYears(Math.multiplyExact(amountToAdd, 100));
+                    return plusYears(Math.multiplyExact(amountToAdd, 100L));
                 case MILLENNIA:
-                    return plusYears(Math.multiplyExact(amountToAdd, 1000));
+                    return plusYears(Math.multiplyExact(amountToAdd, 1000L));
                 case ERAS:
                     return with(ERA, Math.addExact(getLong(ERA), amountToAdd));
             }

@@ -23,11 +23,10 @@ import static java.time.temporal.ChronoField.*;
  * <p>
  * Once parsing is completed, this class can be used as the resultant {@code TemporalAccessor}.
  * In most cases, it is only exposed once the fields have been resolved.
- *
- * @implSpec This class is a mutable context intended for use from a single thread.
+ * <p>
+ * This class is a mutable context intended for use from a single thread.
  * Usage of the class is thread-safe within standard parsing as a new instance of this class
  * is automatically created for each parse and parsing is single-threaded
- * @since 1.8
  */
 public final class Parsed implements TemporalAccessor {
     // some fields are accessed using package scope from DateTimeParseContext
@@ -303,7 +302,7 @@ public final class Parsed implements TemporalAccessor {
             long ap = fieldValues.remove(AMPM_OF_DAY);
             long hap = fieldValues.remove(HOUR_OF_AMPM);
             if (resolverStyle == ResolverStyle.LENIENT) {
-                updateCheckConflict(AMPM_OF_DAY, HOUR_OF_DAY, Math.addExact(Math.multiplyExact(ap, 12), hap));
+                updateCheckConflict(AMPM_OF_DAY, HOUR_OF_DAY, Math.addExact(Math.multiplyExact(ap, 12L), hap));
             } else {  // STRICT or SMART
                 AMPM_OF_DAY.checkValidValue(ap);
                 HOUR_OF_AMPM.checkValidValue(ap);

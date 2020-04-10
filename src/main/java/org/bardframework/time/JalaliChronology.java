@@ -37,8 +37,6 @@ import java.util.*;
  * </ul>
  *
  * @author Vahid Zafari
- * @implSpec This class is immutable and thread-safe.
- * @since 1.0
  */
 public final class JalaliChronology extends AbstractChronology implements Serializable {
 

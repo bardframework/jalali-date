@@ -38,7 +38,6 @@ import static java.time.temporal.ChronoField.*;
  * However, any application that makes use of historical dates, and requires them
  * to be accurate will find the ISO-8601 approach unsuitable.
  * <p>
- * <p>
  * This is a <a href="{@docRoot}/java/lang/doc-files/ValueBased.html">value-based</a>
  * class; use of identity-sensitive operations (including reference equality
  * ({@code ==}), identity hash code, or synchronization) on instances of
@@ -46,8 +45,7 @@ import static java.time.temporal.ChronoField.*;
  * The {@code equals} method should be used for comparisons.
  *
  * @author Vahid Zafari
- * @implSpec This class is immutable and thread-safe.
- * @since 1.0
+ * This class is immutable and thread-safe.
  */
 public final class JalaliDate implements ChronoLocalDate, Serializable {
 
@@ -86,7 +84,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
     /**
      * Seconds per day.
      */
-    static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
+    static final long SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
     /**
      * Milliseconds per day.
      */
@@ -144,10 +142,10 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         2049, 2050, 2053, 2054, 2057, 2058, 2061, 2062, 2063, 2065, 2066, 2067, 2069, 2070, 2071, 2073, 2074, 2075,
         2077, 2078, 2079, 2081, 2082, 2083, 2085, 2086, 2087, 2089, 2090, 2091, 2093, 2094, 2095, 2096, 2097, 2098,
         2099, 2100);
-    private static int[] jalaliDaysInMonth = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
+    private static final int[] jalaliDaysInMonth = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
 
     //-----------------------------------------------------------------------
-    private static int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static final int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     /**
      * The year.
      */
@@ -889,8 +887,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the day-of-week, not null
      */
     public DayOfWeek getDayOfWeek() {
-        int dow0 = Math.floorMod(toEpochDay() + 3, 7);
-        return DayOfWeek.of(dow0 + 1);
+        long dow0 = Math.floorMod(toEpochDay() + 3, 7L);
+        return DayOfWeek.of((int) (dow0 + 1));
     }
 
     //-----------------------------------------------------------------------
@@ -1348,11 +1346,11 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
                 case YEARS:
                     return plusYears(amountToAdd);
                 case DECADES:
-                    return plusYears(Math.multiplyExact(amountToAdd, 10));
+                    return plusYears(Math.multiplyExact(amountToAdd, 10L));
                 case CENTURIES:
-                    return plusYears(Math.multiplyExact(amountToAdd, 100));
+                    return plusYears(Math.multiplyExact(amountToAdd, 100L));
                 case MILLENNIA:
-                    return plusYears(Math.multiplyExact(amountToAdd, 1000));
+                    return plusYears(Math.multiplyExact(amountToAdd, 1000L));
                 case ERAS:
                     return with(ERA, Math.addExact(getLong(ERA), amountToAdd));
             }
@@ -1417,8 +1415,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         }
         long monthCount = year * 12L + (month - 1);
         long calcMonths = monthCount + monthsToAdd;  // safe overflow
-        int newYear = YEAR.checkValidIntValue(Math.floorDiv(calcMonths, 12));
-        int newMonth = Math.floorMod(calcMonths, 12) + 1;
+        int newYear = YEAR.checkValidIntValue(Math.floorDiv(calcMonths, 12L));
+        int newMonth = (int) (Math.floorMod(calcMonths, 12L) + 1);
         return resolvePreviousValid(newYear, newMonth, day);
     }
 
@@ -1438,7 +1436,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public JalaliDate plusWeeks(long weeksToAdd) {
-        return plusDays(Math.multiplyExact(weeksToAdd, 7));
+        return plusDays(Math.multiplyExact(weeksToAdd, 7L));
     }
 
     /**
@@ -2091,9 +2089,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
     @Override
     public int hashCode() {
         int yearValue = year;
-        int monthValue = month;
-        int dayValue = day;
-        return (yearValue & 0xFFFFF800) ^ ((yearValue << 11) + (monthValue << 6) + (dayValue));
+        return (yearValue & 0xFFFFF800) ^ ((yearValue << 11) + ((int) month << 6) + ((int) day));
     }
 
     //-----------------------------------------------------------------------

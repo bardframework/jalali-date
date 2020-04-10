@@ -63,8 +63,6 @@ import static java.time.temporal.ChronoUnit.MONTHS;
  * concept defined exactly equivalent to the ISO-8601 calendar system.
  *
  * @author Vahid Zafari
- * @implSpec This is an immutable and thread-safe enum.
- * @since 1.0
  */
 public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
 

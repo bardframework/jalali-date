@@ -21,11 +21,10 @@ import java.util.function.Consumer;
  * It has the ability to store and retrieve the parsed values and manage optional segments.
  * It also provides key information to the parsing methods.
  * <p>
- *
- * @implSpec This class is a mutable context intended for use from a single thread.
+ * <p>
+ * This class is a mutable context intended for use from a single thread.
  * Usage of the class is thread-safe within standard parsing as a new instance of this class
  * is automatically created for each parse and parsing is single-threaded
- * @since 1.8
  */
 final class JalaliDateTimeParseContext {
 
@@ -36,7 +35,7 @@ final class JalaliDateTimeParseContext {
     /**
      * The formatter, not null.
      */
-    private JalaliDateTimeFormatter formatter;
+    private final JalaliDateTimeFormatter formatter;
     /**
      * Whether to parse using case sensitively.
      */
