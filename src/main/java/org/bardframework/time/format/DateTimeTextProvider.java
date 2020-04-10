@@ -1,9 +1,6 @@
 package org.bardframework.time.format;
 
 import org.bardframework.time.JalaliChronology;
-import sun.util.locale.provider.CalendarDataUtility;
-import sun.util.locale.provider.LocaleProviderAdapter;
-import sun.util.locale.provider.LocaleResources;
 
 import java.time.chrono.Chronology;
 import java.time.chrono.JapaneseChronology;
@@ -77,11 +74,8 @@ class DateTimeTextProvider {
      * @return the localized resource, or null if not available
      * @throws NullPointerException if key or locale is null
      */
-    @SuppressWarnings("unchecked")
     static <T> T getLocalizedResource(String key, Locale locale) {
-        LocaleResources lr = LocaleProviderAdapter.getResourceBundleBased().getLocaleResources(locale);
-        ResourceBundle rb = lr.getJavaTimeFormatData();
-        return rb.containsKey(key) ? (T) rb.getObject(key) : null;
+        return null;
     }
 
     /**
@@ -98,7 +92,7 @@ class DateTimeTextProvider {
      * @param locale the locale to get text for, not null
      * @return the text for the field value, null if no text found
      */
-    public String getText(TemporalField field, long value, TextStyle style, Locale locale) {
+    String getText(TemporalField field, long value, TextStyle style, Locale locale) {
         Object store = findStore(field, locale);
         if (store instanceof LocaleStore) {
             return ((LocaleStore) store).getText(value, style);
@@ -121,7 +115,7 @@ class DateTimeTextProvider {
      * @param locale the locale to get text for, not null
      * @return the text for the field value, null if no text found
      */
-    public String getText(Chronology chrono, TemporalField field, long value, TextStyle style, Locale locale) {
+    String getText(Chronology chrono, TemporalField field, long value, TextStyle style, Locale locale) {
         if (chrono == JalaliChronology.INSTANCE || !(field instanceof ChronoField)) {
             return getText(field, value, style, locale);
         }
@@ -161,7 +155,7 @@ class DateTimeTextProvider {
         } else if (field == AMPM_OF_DAY) {
             return JalaliDateTimeFormatter.AMPM_OF_DAY.get(value);
         } else {
-            return CalendarDataUtility.retrieveJavaTimeFieldValueName(chrono.getCalendarType(), fieldIndex, fieldValue, style.toCalendarStyle(), locale);
+            return null;
         }
     }
 
@@ -181,7 +175,7 @@ class DateTimeTextProvider {
      * @return the iterator of text to field pairs, in order from longest text to shortest text,
      * null if the field or style is not parsable
      */
-    public Iterator<Entry<String, Long>> getTextIterator(TemporalField field, TextStyle style, Locale locale) {
+    Iterator<Entry<String, Long>> getTextIterator(TemporalField field, TextStyle style, Locale locale) {
         Object store = findStore(field, locale);
         if (store instanceof LocaleStore) {
             return ((LocaleStore) store).getTextIterator(style);
@@ -206,8 +200,8 @@ class DateTimeTextProvider {
      * @return the iterator of text to field pairs, in order from longest text to shortest text,
      * null if the field or style is not parsable
      */
-    public Iterator<Entry<String, Long>> getTextIterator(Chronology chrono, TemporalField field,
-                                                         TextStyle style, Locale locale) {
+    Iterator<Entry<String, Long>> getTextIterator(Chronology chrono, TemporalField field,
+                                                  TextStyle style, Locale locale) {
         if (chrono == JalaliChronology.INSTANCE || !(field instanceof ChronoField)) {
             return getTextIterator(field, style, locale);
         }
@@ -231,7 +225,7 @@ class DateTimeTextProvider {
         }
 
         int calendarStyle = (style == null) ? Calendar.ALL_STYLES : style.toCalendarStyle();
-        Map<String, Integer> map = null;// CalendarDataUtility.retrieveJavaTimeFieldValueNames(chrono.getCalendarType(), fieldIndex, calendarStyle, locale);
+        Map<String, Integer> map = null;
         if (map == null) {
             return null;
         }
@@ -288,7 +282,7 @@ class DateTimeTextProvider {
                     // Stand-alone isn't applicable to era names.
                     continue;
                 }
-                Map<String, Integer> displayNames = null;//CalendarDataUtility.retrieveJavaTimeFieldValueNames("gregory", Calendar.ERA, textStyle.toCalendarStyle(), locale);
+                Map<String, Integer> displayNames = null;
                 if (displayNames != null) {
                     Map<Long, String> map = new HashMap<>();
                     for (Entry<String, Integer> entry : displayNames.entrySet()) {
