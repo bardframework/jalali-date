@@ -11,12 +11,16 @@ import java.util.Random;
 /**
  * Created by Vahid Zafari on 4/29/2016.
  */
-class JalaliDateTest {
+public class JalaliDateTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JalaliDateTest.class);
 
+    private int getRandomNumberInRange(int min, int max) {
+        return new Random().ints(min, (max + 1)).findFirst().orElse(min);
+    }
+
     @Test
-    void jalaliToLocalBatch() {
+    public void jalaliToLocalBatch() {
         JalaliDate generatedDate;
         for (int i = 0; i < 10000; i++) {
             generatedDate = null;
@@ -37,7 +41,7 @@ class JalaliDateTest {
     }
 
     @Test
-    void localToJalaliBatch() {
+    public void localToJalaliBatch() {
         LocalDate generatedDate;
         for (int i = 0; i < 10000; i++) {
             generatedDate = null;
@@ -57,12 +61,8 @@ class JalaliDateTest {
         }
     }
 
-    private int getRandomNumberInRange(int min, int max) {
-        return new Random().ints(min, (max + 1)).findFirst().orElse(min);
-    }
-
     @Test
-    void testEpochDay() {
+    public void testEpochDay() {
         JalaliDate jalaliDate = JalaliDate.now();
         long epoch = jalaliDate.toEpochDay();
         Assertions.assertEquals(jalaliDate, JalaliDate.ofEpochDay(epoch));

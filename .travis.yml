@@ -13,4 +13,4 @@ script:
     - mvn clean package
 
 after_success:
-    - mvn install
+    - mvn clean test jacoco:report coveralls:report
