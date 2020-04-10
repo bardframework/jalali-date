@@ -48,8 +48,7 @@ import static java.time.temporal.ChronoField.*;
  * can be used, see {@link #appendPattern(String)}.
  * In practice, this simply parses the pattern and calls other methods on the builder.
  *
- * @implSpec This class is a mutable builder intended for use from a single thread.
- * @since 1.8
+ * This class is a mutable builder intended for use from a single thread.
  */
 public final class JalaliDateTimeFormatterBuilder {
 
@@ -2063,7 +2062,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * for the next parser. If an error occurs, the returned index will be negative
      * and will have the error position encoded using the complement operator.
      *
-     * @implSpec This interface must be implemented with care to ensure other classes operate correctly.
+     * This interface must be implemented with care to ensure other classes operate correctly.
      * All implementations that can be instantiated must be final, immutable and thread-safe.
      * <p>
      * The context is not a thread-safe object and a new instance will be created
@@ -4333,8 +4332,8 @@ public final class JalaliDateTimeFormatterBuilder {
      * the field for day-of-week, week-of-month, or week-of-year is selected.
      */
     static final class WeekBasedFieldPrinterParser implements DateTimePrinterParser {
-        private char chr;
-        private int count;
+        private final char chr;
+        private final int count;
 
         /**
          * Constructor.

@@ -34,7 +34,7 @@ public final class DateTimeUtils {
         if (null == date) {
             throw new IllegalArgumentException("null date not acceptable.");
         }
-        return date.toEpochDay() * 24 * 60 * 60 * 1000;
+        return date.toEpochDay() * 24 * 60 * 60 * 1000L;
     }
 
 
@@ -88,9 +88,9 @@ public final class DateTimeUtils {
             throw new IllegalArgumentException("null dateTime not acceptable.");
         }
         return toEpochMills(dateTime.toLocalDate())
-            + (dateTime.getHour() * 60 * 60 * 1000)
-            + (dateTime.getMinute() * 60 * 1000)
-            + (dateTime.getSecond() * 1000)
+            + (dateTime.getHour() * 60 * 60 * 1000L)
+            + (dateTime.getMinute() * 60 * 1000L)
+            + (dateTime.getSecond() * 1000L)
             + dateTime.getNano() / 1000000;
     }
 
@@ -99,9 +99,9 @@ public final class DateTimeUtils {
             throw new IllegalArgumentException("null dateTime not acceptable.");
         }
         return toEpochMills(dateTime.toLocalDate())
-            + (dateTime.getHour() * 60 * 60 * 1000)
-            + (dateTime.getMinute() * 60 * 1000)
-            + (dateTime.getSecond() * 1000)
+            + (dateTime.getHour() * 60 * 60 * 1000L)
+            + (dateTime.getMinute() * 60 * 1000L)
+            + (dateTime.getSecond() * 1000L)
             + dateTime.getNano() / 1000000;
     }
 
@@ -109,7 +109,7 @@ public final class DateTimeUtils {
     /**
      * convert date to persian date string divided by '/'
      *
-     * @param date
+     * @param date the date
      * @return null if date is null, else persian date with 'yyyy/mm/dd' format
      */
     public static String toPersian(LocalDate date) {
@@ -119,7 +119,7 @@ public final class DateTimeUtils {
     /**
      * convert date to persian date string divided by '/'
      *
-     * @param dateTime
+     * @param dateTime the dateTime
      * @return null if date is null, else persian date with 'yyyy/MM/dd HH:mm' format
      */
     public static String toPersian(LocalDateTime dateTime) {
@@ -129,7 +129,7 @@ public final class DateTimeUtils {
     /**
      * convert date to string divided by '/'
      *
-     * @param dateTime
+     * @param dateTime the dateTime
      * @return null if date is null, else date with 'yyyy/MM/dd HH:mm' format
      */
     public static String toLocalString(LocalDateTime dateTime) {
@@ -139,7 +139,7 @@ public final class DateTimeUtils {
     /**
      * convert date to string divided by '/'
      *
-     * @param date
+     * @param date the dateTime
      * @return null if date is null, else date with 'yyyy/MM/dd' format
      */
     public static String toLocalString(LocalDate date) {

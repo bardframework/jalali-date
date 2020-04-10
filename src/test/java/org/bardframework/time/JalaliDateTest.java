@@ -1,6 +1,5 @@
-package org.bardframework.jalalidate;
+package org.bardframework.time;
 
-import org.bardframework.time.JalaliDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -60,5 +59,12 @@ class JalaliDateTest {
 
     private int getRandomNumberInRange(int min, int max) {
         return new Random().ints(min, (max + 1)).findFirst().orElse(min);
+    }
+
+    @Test
+    void testEpochDay() {
+        JalaliDate jalaliDate = JalaliDate.now();
+        long epoch = jalaliDate.toEpochDay();
+        Assertions.assertEquals(jalaliDate, JalaliDate.ofEpochDay(epoch));
     }
 }

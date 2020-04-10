@@ -351,8 +351,7 @@ import static java.time.temporal.ChronoField.*;
  * day-of-week was valid for the date.
  * </ol>
  *
- * @implSpec This class is immutable and thread-safe.
- * @since 1.8
+ * This class is immutable and thread-safe.
  */
 public final class JalaliDateTimeFormatter {
 

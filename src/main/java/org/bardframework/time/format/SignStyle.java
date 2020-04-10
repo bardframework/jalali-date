@@ -6,9 +6,6 @@ package org.bardframework.time.format;
  * The formatting engine allows the positive and negative signs of numbers
  * to be controlled using this enum.
  * See {@link JalaliDateTimeFormatterBuilder} for usage.
- *
- * @implSpec This is an immutable and thread-safe enum.
- * @since 1.8
  */
 public enum SignStyle {
 
@@ -57,9 +54,8 @@ public enum SignStyle {
      * @param positive   true if positive sign parsed, false for negative sign
      * @param strict     true if strict, false if lenient
      * @param fixedWidth true if fixed width, false if not
-     * @return
      */
-    boolean parse(boolean positive, boolean strict, boolean fixedWidth) {
+    public boolean parse(boolean positive, boolean strict, boolean fixedWidth) {
         switch (ordinal()) {
             case 0: // NORMAL
                 // valid if negative or (positive and lenient)

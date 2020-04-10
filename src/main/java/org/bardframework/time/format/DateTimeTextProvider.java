@@ -1,6 +1,9 @@
 package org.bardframework.time.format;
 
 import org.bardframework.time.JalaliChronology;
+import sun.util.locale.provider.CalendarDataUtility;
+import sun.util.locale.provider.LocaleProviderAdapter;
+import sun.util.locale.provider.LocaleResources;
 
 import java.time.chrono.Chronology;
 import java.time.chrono.JapaneseChronology;
@@ -17,10 +20,9 @@ import static java.time.temporal.ChronoField.*;
 
 /**
  * A provider to obtain the textual form of a date-time field.
- *
- * @implSpec Implementations must be thread-safe.
+ * <p>
+ * Implementations must be thread-safe.
  * Implementations should cache the textual information.
- * @since 1.8
  */
 class DateTimeTextProvider {
 
@@ -77,9 +79,9 @@ class DateTimeTextProvider {
      */
     @SuppressWarnings("unchecked")
     static <T> T getLocalizedResource(String key, Locale locale) {
-        //LocaleResources lr = LocaleProviderAdapter.getResourceBundleBased().getLocaleResources(locale);
-        //ResourceBundle rb = lr.getJavaTimeFormatData();
-        return null;//rb.containsKey(key) ? (T) rb.getObject(key) : null;
+        LocaleResources lr = LocaleProviderAdapter.getResourceBundleBased().getLocaleResources(locale);
+        ResourceBundle rb = lr.getJavaTimeFormatData();
+        return rb.containsKey(key) ? (T) rb.getObject(key) : null;
     }
 
     /**
@@ -159,7 +161,7 @@ class DateTimeTextProvider {
         } else if (field == AMPM_OF_DAY) {
             return JalaliDateTimeFormatter.AMPM_OF_DAY.get(value);
         } else {
-            return null;//CalendarDataUtility.retrieveJavaTimeFieldValueName(chrono.getCalendarType(), fieldIndex, fieldValue, style.toCalendarStyle(), locale);
+            return CalendarDataUtility.retrieveJavaTimeFieldValueName(chrono.getCalendarType(), fieldIndex, fieldValue, style.toCalendarStyle(), locale);
         }
     }
 

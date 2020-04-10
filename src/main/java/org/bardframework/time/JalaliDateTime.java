@@ -1,9 +1,5 @@
 package org.bardframework.time;
 
-/**
- * Created by Vahid Zafari on 2/23/2016.
- */
-
 import java.io.Serializable;
 import java.time.*;
 import java.time.chrono.ChronoLocalDateTime;
@@ -42,7 +38,6 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * However, any application that makes use of historical dates, and requires them
  * to be accurate will find the ISO-8601 approach unsuitable.
  * <p>
- * <p>
  * This is a <a href="{@docRoot}/java/lang/doc-files/ValueBased.html">value-based</a>
  * class; use of identity-sensitive operations (including reference equality
  * ({@code ==}), identity hash code, or synchronization) on instances of
@@ -50,8 +45,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * The {@code equals} method should be used for comparisons.
  *
  * @author Vahid Zafari
- * @implSpec This class is immutable and thread-safe.
- * @since 1.0
+ * This class is immutable and thread-safe.
  */
 public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoLocalDateTime<JalaliDate>, Serializable {
 
@@ -73,7 +67,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
     /**
      * Hours per day.
      */
-    static final int HOURS_PER_DAY = 24;
+    static final long HOURS_PER_DAY = 24;
     /**
      * Minutes per hour.
      */
@@ -81,7 +75,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
     /**
      * Minutes per day.
      */
-    static final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
+    static final long MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
     /**
      * Seconds per minute.
      */
@@ -93,7 +87,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
     /**
      * Seconds per day.
      */
-    static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
+    static final long SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
     /**
      * Milliseconds per day.
      */
@@ -431,7 +425,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
      * @throws DateTimeException if unable to toModel to a {@code LocalDateTime}
      */
     public static JalaliDateTime from(TemporalAccessor temporal) {
-        if (temporal instanceof LocalDateTime) {
+        if (temporal instanceof JalaliDateTime) {
             return (JalaliDateTime) temporal;
         }
         try {
@@ -1732,7 +1726,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
                         timePart = timePart / NANOS_PER_HOUR;
                         break;
                     case HALF_DAYS:
-                        amount = Math.multiplyExact(amount, 2);
+                        amount = Math.multiplyExact(amount, 2L);
                         timePart = timePart / (NANOS_PER_HOUR * 12);
                         break;
                 }
