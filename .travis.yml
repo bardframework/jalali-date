@@ -15,4 +15,4 @@ script:
     - mvn
 
 after_success:
-    - mvn clean test
+    - mvn clean package
