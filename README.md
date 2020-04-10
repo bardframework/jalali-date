@@ -3,7 +3,7 @@ Bard Framework Jalali Date
 [![Build Status](https://travis-ci.org/bard-framework/jalali-date.svg)](https://travis-ci.org/bard-framework/jalali-date)
 [![Coverage Status](https://coveralls.io/repos/bard-framework/jalali-date/badge.svg)](https://coveralls.io/r/bard-framework/jalali-date)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.bardframework.commons/jalali-date/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.bardframework.commons/jalali-date/)
-[![Javadocs](https://javadoc.io/badge/org.bardframework.commons/jalali-date/3.10.svg)](https://javadoc.io/doc/org.bardframework.commons/jalali-date/3.10)
+[![Javadocs](https://javadoc.io/badge/org.bardframework.commons/jalali-date/0.2.svg)](https://javadoc.io/doc/org.bardframework.commons/jalali-date/0.2)
 
 Bard Framework Jalali Date, is a Jalali (Shamsi) calendar implementation in java for parsing, validating, manipulating, 
   converting and formatting persian dates (like java 8 LocalDate(Time) in java 8)
