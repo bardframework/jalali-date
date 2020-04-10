@@ -44,14 +44,4 @@
     <contributors>
         <contributor/>
     </contributors>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
-            </plugin>
-        </plugins>
-    </build>
 </project>
