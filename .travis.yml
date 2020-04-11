@@ -9,8 +9,14 @@ matrix:
     allow_failures:
         -   jdk: openjdk-ea
 
+addons:
+    sonarcloud:
+        organization: "bard-framework"
+        token:
+            secure: ${SOANR_TOKEN}
+
 script:
     - mvn clean package
 
 after_success:
-    - mvn clean test jacoco:report coveralls:report
+    - mvn clean jacoco:report install coveralls:report sonar:sonar -Dsonar.projectKey=bard-framework_jalali-date

@@ -54,6 +54,7 @@ public enum SignStyle {
      * @param positive   true if positive sign parsed, false for negative sign
      * @param strict     true if strict, false if lenient
      * @param fixedWidth true if fixed width, false if not
+     * @return result
      */
     public boolean parse(boolean positive, boolean strict, boolean fixedWidth) {
         switch (ordinal()) {

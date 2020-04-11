@@ -24,7 +24,7 @@ Alternatively you can pull it from the central Maven repositories:
 
 ```xml
 <dependency>
-  <groupId>org.bardframework.commons</groupId>
+  <groupId>org.bardframework</groupId>
   <artifactId>jalali-date</artifactId>
   <version>0.2</version>
 </dependency>
