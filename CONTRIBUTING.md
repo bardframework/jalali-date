@@ -8,9 +8,9 @@ follow so that we can have a chance of keeping on top of things.
 Getting Started
 ---------------
 
-+ Make sure you have a [Bard account](https://issues.bardframework.ir).
++ Make sure you have a [Bard account](https://issues.bardframework.org).
 + Make sure you have a [GitHub account](https://github.com/signup/free).
-+ If you're planning to implement a new feature it makes sense to discuss your changes on the [dev list](https://bardframework.ir/mail-lists.html) first. This way you can make sure you're not wasting your time on something that isn't considered to be in Bard Jalali Date's scope.
++ If you're planning to implement a new feature it makes sense to discuss your changes on the [dev list](https://bardframework.org/mail-lists.html) first. This way you can make sure you're not wasting your time on something that isn't considered to be in Bard Jalali Date's scope.
 + Submit a [Ticket] for your issue, assuming one does not already exist.
   + Clearly describe the issue including steps to reproduce when it is a bug.
   + Make sure you fill in the earliest version that you know has the issue.
@@ -71,4 +71,4 @@ Additional Resources
 + `#bard-framework` IRC channel on `irc.freenode.org`
 
 [cla]:https://www.apache.org/licenses/contributor-agreements.html#clas
-[issues]:https://issues.bardframework.ir/browse/JALALIDATE
+[issues]:https://issues.bardframework.org/browse/JALALIDATE
