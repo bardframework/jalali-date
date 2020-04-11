@@ -1,19 +1,17 @@
 language: java
+os:
+    - linux
+dist: xenial
 jdk:
     - openjdk8
-
-matrix:
-    include:
-        -   os: linux
-            jdk: openjdk8
-    allow_failures:
-        -   jdk: openjdk-ea
+    - openjdk13
+    - openjdk14
 
 addons:
     sonarcloud:
         organization: "bard-framework"
         token:
-            secure: ${SOANR_TOKEN}
+            secure: $SOANR_TOKEN
 
 script:
     - mvn clean package
