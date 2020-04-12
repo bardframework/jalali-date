@@ -14,7 +14,7 @@ Getting Started
 + Submit a [Ticket] for your issue, assuming one does not already exist.
   + Clearly describe the issue including steps to reproduce when it is a bug.
   + Make sure you fill in the earliest version that you know has the issue.
-+ Find the corresponding [repository on GitHub](https://github.com/bard-framework?tab=repositories&q=jalali),
++ Find the corresponding [repository on GitHub](https://github.com/bardframework?tab=repositories&q=jalali),
 [fork](https://help.github.com/articles/fork-a-repo/) and check out your forked repository.
 
 Making Changes
@@ -68,7 +68,7 @@ Additional Resources
 + [General GitHub documentation](https://help.github.com/)
 + [GitHub pull request documentation](https://help.github.com/articles/creating-a-pull-request/)
 + [Bard Framework Twitter Account](https://twitter.com/BardFramework)
-+ `#bard-framework` IRC channel on `irc.freenode.org`
++ `#bardframework` IRC channel on `irc.freenode.org`
 
 [cla]:https://www.apache.org/licenses/contributor-agreements.html#clas
 [issues]:https://issues.bardframework.org/browse/JALALIDATE

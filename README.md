@@ -1,10 +1,11 @@
 Bard Framework Jalali Date
 ===================
-[![Build Status](https://travis-ci.org/bard-framework/jalali-date.svg)](https://travis-ci.org/bard-framework/jalali-date)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bard-framework_jalali-date&metric=alert_status)](https://sonarcloud.io/dashboard?id=bard-framework_jalali-date)
-[![Coverage Status](https://coveralls.io/repos/bard-framework/jalali-date/badge.svg)](https://coveralls.io/r/bard-framework/jalali-date)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.bardframework.commons/jalali-date/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.bardframework.commons/jalali-date/)
-[![Javadocs](https://javadoc.io/badge/org.bardframework.commons/jalali-date/0.2.svg)](https://javadoc.io/doc/org.bardframework.commons/jalali-date/0.2)
+[![Build Status](https://travis-ci.org/bardframework/jalali-date.svg)](https://travis-ci.org/bardframework/jalali-date)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bardframework_jalali-date&metric=alert_status)](https://sonarcloud.io/dashboard?id=bardframework_jalali-date)
+[![Coverage Status](https://coveralls.io/repos/bardframework/jalali-date/badge.svg)](https://coveralls.io/r/bardframework/jalali-date)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.bardframework/jalali-date/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.bardframework/jalali-date/)
+[![Javadocs](https://javadoc.io/badge/org.bardframework/jalali-date/0.2.svg)](https://javadoc.io/doc/org.bardframework/jalali-date/0.2)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Bard Framework Jalali Date, is a Jalali (Shamsi) calendar implementation in java for parsing, validating, manipulating, 
   converting and formatting persian dates (like java 8 LocalDate(Time) in java 8)
@@ -60,6 +61,6 @@ Additional Resources
 + [Bard Framework Homepage](https://bardframework.org/)
 + [Bard Framework Issue Tracker](https://issues.bardframework.org/browse/JALALIDATE)
 + [Bard Framework Twitter Account](https://twitter.com/BardFramework)
-+ `#bard-framework` IRC channel on `irc.freenode.org`
++ `#bardframework` IRC channel on `irc.freenode.org`
 
 [ml]:https://bardframework.org/mail-lists.html

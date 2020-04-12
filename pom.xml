@@ -10,7 +10,7 @@
 
     <name>Bard Framework Jalali Date</name>
     <description>Library for parsing, validating, manipulating, converting and formatting jalali dates</description>
-    <url>https://github.com/bard-framework/jalali-date</url>
+    <url>https://github.com/bardframework/jalali-date</url>
 
     <properties>
         <junit-jupiter.version>5.6.1</junit-jupiter.version>
@@ -35,9 +35,9 @@
     </dependencies>
 
     <scm>
-        <connection>scm:git:git://github.com/bard-framework/jalali-date.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:bard-framework/jalali-date.git</developerConnection>
-        <url>https://github.com/bard-framework/jalali-date/tree/master</url>
+        <connection>scm:git:git://github.com/bardframework/jalali-date.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:bardframework/jalali-date.git</developerConnection>
+        <url>https://github.com/bardframework/jalali-date/tree/master</url>
     </scm>
 
     <licenses>

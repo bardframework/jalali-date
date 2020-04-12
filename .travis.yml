@@ -7,11 +7,11 @@ jdk:
 
 addons:
     sonarcloud:
-        organization: "bard-framework"
+        organization: "bardframework"
         token: $SOANR_TOKEN
 
 script:
     - mvn clean package
 
 after_success:
-    - mvn clean jacoco:report install coveralls:report sonar:sonar -Dsonar.projectKey=bard-framework_jalali-date
+    - mvn clean jacoco:report install coveralls:report sonar:sonar -Dsonar.projectKey=bardframework_jalali-date
