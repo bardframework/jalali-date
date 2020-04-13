@@ -350,7 +350,7 @@ import static java.time.temporal.ChronoField.*;
  * (year + month + day-of-month) to a date, and this stage would check that
  * day-of-week was valid for the date.
  * </ol>
- *
+ * <p>
  * This class is immutable and thread-safe.
  */
 public final class JalaliDateTimeFormatter {

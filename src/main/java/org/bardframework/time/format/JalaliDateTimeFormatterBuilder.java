@@ -47,7 +47,7 @@ import static java.time.temporal.ChronoField.*;
  * Finally, a shorthand pattern, mostly compatible with {@code java.text.SimpleDateFormat SimpleDateFormat}
  * can be used, see {@link #appendPattern(String)}.
  * In practice, this simply parses the pattern and calls other methods on the builder.
- *
+ * <p>
  * This class is a mutable builder intended for use from a single thread.
  */
 public final class JalaliDateTimeFormatterBuilder {
@@ -2061,7 +2061,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * the specified index and the return value specifies the new parse position
      * for the next parser. If an error occurs, the returned index will be negative
      * and will have the error position encoded using the complement operator.
-     *
+     * <p>
      * This interface must be implemented with care to ensure other classes operate correctly.
      * All implementations that can be instantiated must be final, immutable and thread-safe.
      * <p>

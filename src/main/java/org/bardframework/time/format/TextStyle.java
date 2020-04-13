@@ -18,7 +18,7 @@ import java.util.Calendar;
  * in the word used when the text is used alone, as opposed to in a complete date.
  * For example, the word used for a month when used alone in a date picker is different
  * to the word used for month in association with a day and year in a date.
- *
+ * <p>
  * This is immutable and thread-safe enum.
  */
 public enum TextStyle {

@@ -1,4 +1,4 @@
-Contributing to Bard Jalali Date
+Contributing to Bard Framework
 ======================
 
 You have found a bug or you have an idea for a cool new feature? Contributing code is a great way to give something back to
@@ -8,25 +8,24 @@ follow so that we can have a chance of keeping on top of things.
 Getting Started
 ---------------
 
-+ Make sure you have a [Bard account](https://issues.bardframework.org).
-+ Make sure you have a [GitHub account](https://github.com/signup/free).
-+ If you're planning to implement a new feature it makes sense to discuss your changes on the [dev list](https://bardframework.org/mail-lists.html) first. This way you can make sure you're not wasting your time on something that isn't considered to be in Bard Jalali Date's scope.
++ Make sure you have a [GitHub account][github-signup].
++ If you're planning to implement a new feature it makes sense to discuss your changes on the [dev list][mails] first. This way you can make sure you're not wasting your time on something that isn't considered to be in Bard 's scope.
 + Submit a [Ticket] for your issue, assuming one does not already exist.
   + Clearly describe the issue including steps to reproduce when it is a bug.
   + Make sure you fill in the earliest version that you know has the issue.
-+ Find the corresponding [repository on GitHub](https://github.com/bardframework?tab=repositories&q=jalali),
-[fork](https://help.github.com/articles/fork-a-repo/) and check out your forked repository.
++ Find the corresponding [repository on GitHub][github-search],
+[fork][github-fork] and check out your forked repository.
 
 Making Changes
 --------------
 
 + Create a _topic branch_ for your isolated work.
   * Usually you should base your branch on the `master` or `trunk` branch.
-  * A good topic branch name can be the bug id plus a keyword, e.g. `JALALIDATE-123-InputStream`.
+  * A good topic branch name can be the bug id plus a keyword, e.g. `BARD-123-InputStream`.
   * If you have submitted multiple issues, try to maintain separate branches and pull requests.
 + Make commits of logical units.
   * Make sure your commit messages are meaningful and in the proper format. Your commit message should contain the key of the issue.
-  * e.g. `JALALIDATE-123: Close input stream earlier`
+  * e.g. `BARD-123: Close input stream earlier`
 + Respect the original code style:
   + Only use spaces for indentation.
   + Create minimal diffs - disable _On Save_ actions like _Reformat Source Code_ or _Organize Imports_. If you feel the source code should be reformatted create a separate PR for this change first.
@@ -46,10 +45,6 @@ In this case, it is appropriate to start the first line of a commit with '(doc)'
 Submitting Changes
 ------------------
 
-+ Sign and submit the Apache [Contributor License Agreement][cla] if you haven't already.
-  * Note that small patches & typical bug fixes do not require a CLA as
-    clause 5 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0.html#contributions)
-    covers them.
 + Push your changes to a topic branch in your fork of the repository.
 + Submit a _Pull Request_ to the corresponding repository in the `bard` organization.
   * Verify _Files Changed_ shows only your intended changes and does not
@@ -62,13 +57,15 @@ If you prefer to not use GitHub, then you can instead use
 
 Additional Resources
 --------------------
++ [General GitHub documentation][github-help]
++ [GitHub pull request documentation][github-pull-request]
++ [Bard Framework Twitter Account][twitter]
 
-+ [Bard Jalali Date issues page][issues]
-+ [Contributor License Agreement][cla]
-+ [General GitHub documentation](https://help.github.com/)
-+ [GitHub pull request documentation](https://help.github.com/articles/creating-a-pull-request/)
-+ [Bard Framework Twitter Account](https://twitter.com/BardFramework)
-+ `#bardframework` IRC channel on `irc.freenode.org`
-
-[cla]:https://www.apache.org/licenses/contributor-agreements.html#clas
-[issues]:https://issues.bardframework.org/browse/JALALIDATE
+[github-fork]:https://help.github.com/en/github/getting-started-with-github/fork-a-repo
+[github-help]:https://help.github.com
+[github-pull-request]:https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
+[github-search]:https://github.com/bardframework?tab=repositories
+[github-signup]:https://github.com/signup/free
+[mails]:https://bardframework.org/mails-list.html
+[maven]:https://maven-badges.herokuapp.com/maven-central/org.bardframework/bard-parent
+[twitter]:https://twitter.com/BardFramework
