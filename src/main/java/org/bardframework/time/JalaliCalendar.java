@@ -471,7 +471,7 @@ public class JalaliCalendar extends Calendar {
         boolean temp = isTimeSet;
         if (!areFieldsSet) {
             setMinimalDaysInFirstWeek(1);
-            setFirstDayOfWeek(7);
+            setFirstDayOfWeek(Calendar.SATURDAY);
 
             //Day_Of_Year
             int dayOfYear = 0;
@@ -531,7 +531,7 @@ public class JalaliCalendar extends Calendar {
             super.set(MONTH, amount % 12);
             if (get(DAY_OF_MONTH) > jalaliDaysInMonth[amount % 12]) {
                 super.set(DAY_OF_MONTH, jalaliDaysInMonth[amount % 12]);
-                if (get(MONTH) == 11 && isLeepYear(get(YEAR))) {
+                if (get(MONTH) == Calendar.DECEMBER && isLeepYear(get(YEAR))) {
                     super.set(DAY_OF_MONTH, 30);
                 }
             }
@@ -540,7 +540,7 @@ public class JalaliCalendar extends Calendar {
         } else if (field == YEAR) {
 
             super.set(YEAR, get(YEAR) + amount);
-            if (get(DAY_OF_MONTH) == 30 && get(MONTH) == 11 && !isLeepYear(get(YEAR))) {
+            if (get(DAY_OF_MONTH) == 30 && get(MONTH) == Calendar.DECEMBER && !isLeepYear(get(YEAR))) {
                 super.set(DAY_OF_MONTH, 29);
             }
 
