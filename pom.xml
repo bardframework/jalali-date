@@ -10,7 +10,7 @@
         <version>1</version>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>1399.01.25</version>
+    <version>0.2</version>
 
     <packaging>jar</packaging>
 
