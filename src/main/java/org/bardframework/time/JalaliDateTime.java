@@ -1,5 +1,8 @@
 package org.bardframework.time;
 
+import org.bardframework.time.format.JalaliDateTimeFormatter;
+import org.bardframework.time.temporal.JalaliIsoFields;
+
 import java.io.Serializable;
 import java.time.*;
 import java.time.chrono.ChronoLocalDateTime;
@@ -449,7 +452,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
      * @throws DateTimeParseException if the text cannot be parsed
      */
     public static JalaliDateTime parse(CharSequence text) {
-        return parse(text, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return parse(text, JalaliDateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     /**
@@ -462,7 +465,7 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
      * @return the parsed jalali date-time, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliDateTime parse(CharSequence text, DateTimeFormatter formatter) {
+    public static JalaliDateTime parse(CharSequence text, JalaliDateTimeFormatter formatter) {
         Objects.requireNonNull(formatter, "formatter");
         return formatter.withChronology(JalaliChronology.INSTANCE).parse(text, JalaliDateTime::from);
     }
@@ -705,6 +708,12 @@ public final class JalaliDateTime implements Temporal, TemporalAdjuster, ChronoL
         if (field instanceof ChronoField) {
             ChronoField f = (ChronoField) field;
             return (f.isTimeBased() ? time.getLong(field) : date.getLong(field));
+        }
+        if (WeekFields.WEEK_BASED_YEARS.equals(field)) {
+            return JalaliIsoFields.getWeekBasedYear(date);
+        }
+        if (IsoFields.WEEK_OF_WEEK_BASED_YEAR.equals(field)) {
+            return JalaliIsoFields.getWeek(date);
         }
         return field.getFrom(this);
     }

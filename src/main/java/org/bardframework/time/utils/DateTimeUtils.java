@@ -2,12 +2,14 @@ package org.bardframework.time.utils;
 
 import org.bardframework.time.JalaliDate;
 import org.bardframework.time.JalaliDateTime;
+import org.bardframework.time.format.JalaliDateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -198,5 +200,25 @@ public final class DateTimeUtils {
 
     public static long getNowUtcMills() {
         return DateTimeUtils.toEpochMills(LocalDateTime.now(ZoneOffset.UTC));
+    }
+
+    public static Date getDateOfJalaliString(String jalaliString, String pattern, ZoneId zoneId) {
+        JalaliDateTimeFormatter formatter = JalaliDateTimeFormatter.ofPattern(pattern);
+        JalaliDateTime jalaliDateTime = JalaliDateTime.parse(jalaliString, formatter);
+        LocalDateTime localDateTime = jalaliDateTime.toLocalDateTime();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    public static Date getDateOfJalaliString(String jalaliString, ZoneId zoneId) {
+        JalaliDateTime jalaliDateTime = JalaliDateTime.of(jalaliString);
+        LocalDateTime localDateTime = jalaliDateTime.toLocalDateTime();
+        ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+        return Date.from(zonedDateTime.toInstant());
+    }
+
+    public static String formatJalali(LocalDateTime dateTime, String pattern) {
+        JalaliDateTimeFormatter formatter = JalaliDateTimeFormatter.ofPattern(pattern);
+        return formatter.format(JalaliDateTime.of(dateTime));
     }
 }

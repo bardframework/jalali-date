@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.bardframework.time;
 
 import java.io.Serializable;
@@ -888,8 +884,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the day-of-week, not null
      */
     public DayOfWeek getDayOfWeek() {
-        long dow0 = Math.floorMod(toEpochDay() + 3, 7L);
-        return DayOfWeek.of((int) (dow0 + 1));
+        int dow0 = (int) Math.floorMod(toEpochDay() + 3, 7L);
+        return DayOfWeek.of(dow0 + 1);
     }
 
     //-----------------------------------------------------------------------
@@ -1931,7 +1927,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
                 total++;
             }
         }
-        total += getDayOfYear();
+        total += this.getDayOfYear();
         return total - DAYS_LEFT_IN_1970_01_01;
     }
 
