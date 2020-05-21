@@ -7,10 +7,10 @@
     <parent>
         <groupId>org.bardframework</groupId>
         <artifactId>bard-parent</artifactId>
-        <version>1</version>
+        <version>2</version>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
 
     <packaging>jar</packaging>
 
@@ -18,14 +18,21 @@
     <description>Library for parsing, validating, manipulating, converting and formatting jalali dates</description>
     <url>https://github.com/bardframework/jalali-date</url>
 
+    <properties>
+        <junit-jupiter.version>5.6.2</junit-jupiter.version>
+        <slf4j.version>1.7.30</slf4j.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

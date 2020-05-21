@@ -1,17 +1,15 @@
 package org.bardframework.time.temporal;
 
 import org.bardframework.time.JalaliDate;
-import org.bardframework.time.JalaliDateTime;
-import org.bardframework.time.utils.DateTimeUtils;
 
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalField;
 import java.time.temporal.ValueRange;
-import java.util.Date;
 import java.util.Map;
 
 import static java.time.temporal.IsoFields.WEEK_BASED_YEAR;
@@ -99,15 +97,5 @@ public class JalaliIsoFields {
     private static int getWeekRange(int weekOfYear) {
         LocalDate date = LocalDate.of(weekOfYear, 1, 1);
         return date.getDayOfWeek() != DayOfWeek.THURSDAY && (date.getDayOfWeek() != DayOfWeek.WEDNESDAY || !date.isLeapYear()) ? 52 : 53;
-    }
-
-    public static long getNowUtcMills() {
-        return DateTimeUtils.toEpochMills(LocalDateTime.now(ZoneOffset.UTC));
-    }
-
-    public static Date parseJalali(String jalaliDateTime) {
-        LocalDateTime ldt = JalaliDateTime.of(jalaliDateTime).toLocalDateTime();
-        ZonedDateTime zdt = ldt.atZone(ZoneId.systemDefault());
-        return Date.from(zdt.toInstant());
     }
 }
