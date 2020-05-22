@@ -14,9 +14,9 @@ import java.util.Date;
 /**
  * Created by Vahid Zafari on 8/12/2016.
  */
-public final class DateTimeUtils {
+public final class JalaliDateTimeUtils {
 
-    private DateTimeUtils() {
+    private JalaliDateTimeUtils() {
     }
 
     /**

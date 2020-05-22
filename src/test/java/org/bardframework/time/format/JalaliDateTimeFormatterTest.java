@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.utils.DateTimeUtils;
+import org.bardframework.time.utils.JalaliDateTimeUtils;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -12,13 +12,13 @@ import java.util.Date;
 class JalaliDateTimeFormatterTest {
 
     @Test
-    void test() throws Exception {
+    void test() {
         Date generatedDate = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
         String pattern = "yyyy MM dd HH";
         ZoneId zoneId = ZoneId.systemDefault();
         LocalDateTime localDateTime = Instant.ofEpochMilli(generatedDate.getTime()).atZone(zoneId).toLocalDateTime();
-        String jalaliString = DateTimeUtils.formatJalali(localDateTime, pattern);
-        Date revertedDate = DateTimeUtils.getDateOfJalaliString(jalaliString, pattern, zoneId);
+        String jalaliString = JalaliDateTimeUtils.formatJalali(localDateTime, pattern);
+        Date revertedDate = JalaliDateTimeUtils.getDateOfJalaliString(jalaliString, pattern, zoneId);
         System.out.println(generatedDate + " -> " + jalaliString + " -> " + " -> " + revertedDate);
     }
 }
