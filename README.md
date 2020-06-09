@@ -4,7 +4,7 @@ Bard Framework Jalali Date
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bardframework_jalali-date&metric=alert_status)](https://sonarcloud.io/dashboard?id=bardframework_jalali-date)
 [![Coverage Status](https://coveralls.io/repos/bardframework/jalali-date/badge.svg)](https://coveralls.io/r/bardframework/jalali-date)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.bardframework/jalali-date/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.bardframework/jalali-date/)
-[![Javadocs](https://javadoc.io/badge/org.bardframework/jalali-date/0.3.1.svg)](https://javadoc.io/doc/org.bardframework/jalali-date/0.3.1)
+[![Javadocs](https://javadoc.io/badge/org.bardframework/jalali-date/0.3.2.svg)](https://javadoc.io/doc/org.bardframework/jalali-date/0.3.2)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Bard Framework Jalali Date, is a Jalali (Shamsi) calendar implementation in java for parsing, validating, manipulating, 
@@ -26,7 +26,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.bardframework</groupId>
   <artifactId>jalali-date</artifactId>
-  <version>0.3.1</version>
+  <version>0.3.2</version>
 </dependency>
 ```
 
