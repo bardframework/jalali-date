@@ -354,10 +354,11 @@ import static java.time.temporal.ChronoField.*;
  * This class is immutable and thread-safe.
  */
 public final class DateTimeFormatterJalali {
-
-    public static final Map<Long, String> DAY_OF_WEEK = new HashMap<>();
-    public static final Map<Long, String> MONTH_OF_YEAR = new HashMap<>();
-    public static final Map<Long, String> AMPM_OF_DAY = new HashMap<>();
+    private static final Locale LOCALE_FA = new Locale("fa");
+    private static final Locale LOCALE_EN = new Locale("en");
+    private static final Map<Locale, Map<Long, String>> DAY_OF_WEEK = new HashMap<>();
+    private static final Map<Locale, Map<Long, String>> MONTH_OF_YEAR = new HashMap<>();
+    private static final Map<Locale, Map<Long, String>> AMPM_OF_DAY = new HashMap<>();
     /**
      * The ISO date formatter that formats or parses a date without an
      * offset, such as '2011-12-03'.
@@ -742,39 +743,70 @@ public final class DateTimeFormatterJalali {
     };
 
     static {
-        AMPM_OF_DAY.put(0L, "ق\u200Cظ");
-        AMPM_OF_DAY.put(1L, "ب\u200Cظ");
+        AMPM_OF_DAY.put(LOCALE_FA, new HashMap<>());
+        AMPM_OF_DAY.get(LOCALE_FA).put(0L, "ق‌ظ");
+        AMPM_OF_DAY.get(LOCALE_FA).put(1L, "ب‌ظ");
+
+        AMPM_OF_DAY.put(LOCALE_EN, new HashMap<>());
+        AMPM_OF_DAY.get(LOCALE_EN).put(0L, "AM");
+        AMPM_OF_DAY.get(LOCALE_EN).put(1L, "PM");
         // manually code maps to ensure correct data always used
         // (locale data can be changed by application code)
-        DAY_OF_WEEK.put(1L, "دوشنبه");
-        DAY_OF_WEEK.put(2L, "سهشنبه");
-        DAY_OF_WEEK.put(3L, "چهارشنبه");
-        DAY_OF_WEEK.put(4L, "پنجشنبه");
-        DAY_OF_WEEK.put(5L, "جمعه");
-        DAY_OF_WEEK.put(6L, "شنبه");
-        DAY_OF_WEEK.put(7L, "یکشنبه");
-        MONTH_OF_YEAR.put(1L, "فروردین");
-        MONTH_OF_YEAR.put(2L, "اردیبهشت");
-        MONTH_OF_YEAR.put(3L, "خرداد");
-        MONTH_OF_YEAR.put(4L, "تیر");
-        MONTH_OF_YEAR.put(5L, "مرداد");
-        MONTH_OF_YEAR.put(6L, "شهریور");
-        MONTH_OF_YEAR.put(7L, "مهر");
-        MONTH_OF_YEAR.put(8L, "آبان");
-        MONTH_OF_YEAR.put(9L, "آذر");
-        MONTH_OF_YEAR.put(10L, "دی");
-        MONTH_OF_YEAR.put(11L, "بهمن");
-        MONTH_OF_YEAR.put(12L, "اسفند");
+        DAY_OF_WEEK.put(LOCALE_FA, new HashMap<>());
+        DAY_OF_WEEK.get(LOCALE_FA).put(1L, "دوشنبه");
+        DAY_OF_WEEK.get(LOCALE_FA).put(2L, "سه‌شنبه");
+        DAY_OF_WEEK.get(LOCALE_FA).put(3L, "چهارشنبه");
+        DAY_OF_WEEK.get(LOCALE_FA).put(4L, "پنجشنبه");
+        DAY_OF_WEEK.get(LOCALE_FA).put(5L, "جمعه");
+        DAY_OF_WEEK.get(LOCALE_FA).put(6L, "شنبه");
+        DAY_OF_WEEK.get(LOCALE_FA).put(7L, "یکشنبه");
+
+        DAY_OF_WEEK.put(LOCALE_EN, new HashMap<>());
+        DAY_OF_WEEK.get(LOCALE_EN).put(1L, "DoShanbe");
+        DAY_OF_WEEK.get(LOCALE_EN).put(2L, "SeShanbe");
+        DAY_OF_WEEK.get(LOCALE_EN).put(3L, "ChaharShanbe");
+        DAY_OF_WEEK.get(LOCALE_EN).put(4L, "PanjShanbe");
+        DAY_OF_WEEK.get(LOCALE_EN).put(5L, "Jome");
+        DAY_OF_WEEK.get(LOCALE_EN).put(6L, "Shanbe");
+        DAY_OF_WEEK.get(LOCALE_EN).put(7L, "YekShanbe");
+
+        MONTH_OF_YEAR.put(LOCALE_FA, new HashMap<>());
+        MONTH_OF_YEAR.get(LOCALE_FA).put(1L, "فروردین");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(2L, "اردیبهشت");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(3L, "خرداد");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(4L, "تیر");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(5L, "مرداد");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(6L, "شهریور");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(7L, "مهر");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(8L, "آبان");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(9L, "آذر");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(10L, "دی");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(11L, "بهمن");
+        MONTH_OF_YEAR.get(LOCALE_FA).put(12L, "اسفند");
+
+        MONTH_OF_YEAR.put(LOCALE_EN, new HashMap<>());
+        MONTH_OF_YEAR.get(LOCALE_EN).put(1L, "Farvardin");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(2L, "Ordibehesht");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(3L, "Khordad");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(4L, "Tir");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(5L, "Mordad");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(6L, "Shahrivar");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(7L, "Mehr");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(8L, "Aban");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(9L, "Azar");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(10L, "Dey");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(11L, "Bahman");
+        MONTH_OF_YEAR.get(LOCALE_EN).put(12L, "Esfand");
         RFC_1123_DATE_TIME = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .parseLenient()
             .optionalStart()
-            .appendText(ChronoField.DAY_OF_WEEK, DAY_OF_WEEK)
+            .appendText(ChronoField.DAY_OF_WEEK, getDayOfWeek(LOCALE_FA))
             .appendLiteral(", ")
             .optionalEnd()
             .appendValue(DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
             .appendLiteral(' ')
-            .appendText(ChronoField.MONTH_OF_YEAR, MONTH_OF_YEAR)
+            .appendText(ChronoField.MONTH_OF_YEAR, getMonthOfYear(LOCALE_FA))
             .appendLiteral(' ')
             .appendValue(YEAR, 4)  // 2 digit year not handled
             .appendLiteral(' ')
@@ -1476,5 +1508,44 @@ public final class DateTimeFormatterJalali {
         String pattern = printerParser.toString();
         pattern = pattern.startsWith("[") ? pattern : pattern.substring(1, pattern.length() - 1);
         return pattern;
+    }
+
+    static String retrieveJavaTimeFieldValueName(int field, long value, int style, Locale locale) {
+        if (field == Calendar.MONTH) {
+            return getMonthOfYear(locale).get(value);
+        } else if (field == Calendar.DAY_OF_WEEK) {
+            return getDayOfWeek(locale).get(value);
+        } else if (field == Calendar.AM_PM) {
+            return getAmPm(locale).get(value);
+        } else {
+            return null;
+        }
+    }
+
+    public static Map<Long, String> getDayOfWeek(Locale locale) {
+        if (locale.getLanguage().startsWith("fa")) {
+            locale = LOCALE_FA;
+        } else {
+            locale = LOCALE_EN;
+        }
+        return DAY_OF_WEEK.get(locale);
+    }
+
+    public static Map<Long, String> getAmPm(Locale locale) {
+        if (locale.getLanguage().startsWith("fa")) {
+            locale = LOCALE_FA;
+        } else {
+            locale = LOCALE_EN;
+        }
+        return AMPM_OF_DAY.get(locale);
+    }
+
+    public static Map<Long, String> getMonthOfYear(Locale locale) {
+        if (locale.getLanguage().startsWith("fa")) {
+            locale = LOCALE_FA;
+        } else {
+            locale = LOCALE_EN;
+        }
+        return MONTH_OF_YEAR.get(locale);
     }
 }

@@ -148,15 +148,7 @@ class DateTimeTextProvider {
         } else {
             return null;
         }
-        if (field == MONTH_OF_YEAR) {
-            return DateTimeFormatterJalali.MONTH_OF_YEAR.get(value);
-        } else if (field == DAY_OF_WEEK) {
-            return DateTimeFormatterJalali.DAY_OF_WEEK.get(value);
-        } else if (field == AMPM_OF_DAY) {
-            return DateTimeFormatterJalali.AMPM_OF_DAY.get(value);
-        } else {
-            return null;
-        }
+        return DateTimeFormatterJalali.retrieveJavaTimeFieldValueName(fieldIndex, fieldValue, style.toCalendarStyle(), locale);
     }
 
     /**
@@ -299,7 +291,7 @@ class DateTimeTextProvider {
         if (field == MONTH_OF_YEAR) {
             for (TextStyle textStyle : TextStyle.values()) {
                 Map<Long, String> map = new HashMap<>();
-                for (Entry<Long, String> entry : DateTimeFormatterJalali.MONTH_OF_YEAR.entrySet()) {
+                for (Entry<Long, String> entry : DateTimeFormatterJalali.getMonthOfYear(locale).entrySet()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
                 styleMap.put(textStyle, map);
@@ -310,7 +302,7 @@ class DateTimeTextProvider {
         if (field == DAY_OF_WEEK) {
             for (TextStyle textStyle : TextStyle.values()) {
                 Map<Long, String> map = new HashMap<>();
-                for (Entry<Long, String> entry : DateTimeFormatterJalali.DAY_OF_WEEK.entrySet()) {
+                for (Entry<Long, String> entry : DateTimeFormatterJalali.getDayOfWeek(locale).entrySet()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
                 styleMap.put(textStyle, map);
@@ -321,7 +313,7 @@ class DateTimeTextProvider {
         if (field == AMPM_OF_DAY) {
             for (TextStyle textStyle : TextStyle.values()) {
                 Map<Long, String> map = new HashMap<>();
-                for (Entry<Long, String> entry : DateTimeFormatterJalali.AMPM_OF_DAY.entrySet()) {
+                for (Entry<Long, String> entry : DateTimeFormatterJalali.getAmPm(locale).entrySet()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
                 styleMap.put(textStyle, map);
