@@ -50,7 +50,7 @@ import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
  * @author Vahid Zafari
  * This class is immutable and thread-safe.
  */
-public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster, Comparable<JalaliMonthDay>, Serializable {
+public final class MonthDayJalali implements TemporalAccessor, TemporalAdjuster, Comparable<MonthDayJalali>, Serializable {
 
     /**
      * Serialization version.
@@ -83,7 +83,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @param month      the month-of-year to represent, validated from 1 to 12
      * @param dayOfMonth the day-of-month to represent, validated from 1 to 29-31
      */
-    private JalaliMonthDay(int month, int dayOfMonth) {
+    private MonthDayJalali(int month, int dayOfMonth) {
         this.month = month;
         this.day = dayOfMonth;
     }
@@ -99,7 +99,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      *
      * @return the current month-day using the system clock and default time-zone, not null
      */
-    public static JalaliMonthDay now() {
+    public static MonthDayJalali now() {
         return now(Clock.systemDefaultZone());
     }
 
@@ -115,7 +115,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @param zone the zone ID to use, not null
      * @return the current month-day using the system clock, not null
      */
-    public static JalaliMonthDay now(ZoneId zone) {
+    public static MonthDayJalali now(ZoneId zone) {
         return now(Clock.system(zone));
     }
 
@@ -131,8 +131,8 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @param clock the clock to use, not null
      * @return the current month-day, not null
      */
-    public static JalaliMonthDay now(Clock clock) {
-        final JalaliDate now = JalaliDate.now(clock);  // called once
+    public static MonthDayJalali now(Clock clock) {
+        final LocalDateJalali now = LocalDateJalali.now(clock);  // called once
         return of(now.getMonth(), now.getDayOfMonth());
     }
 
@@ -152,14 +152,14 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month
      */
-    public static JalaliMonthDay of(JalaliMonth month, int dayOfMonth) {
+    public static MonthDayJalali of(MonthJalali month, int dayOfMonth) {
         Objects.requireNonNull(month, "month");
         DAY_OF_MONTH.checkValidValue(dayOfMonth);
         if (dayOfMonth > month.maxLength()) {
             throw new DateTimeException("Illegal value for DayOfMonth field, value " + dayOfMonth +
                 " is not valid for month " + month.name());
         }
-        return new JalaliMonthDay(month.getValue(), dayOfMonth);
+        return new MonthDayJalali(month.getValue(), dayOfMonth);
     }
 
     //-----------------------------------------------------------------------
@@ -180,8 +180,8 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month
      */
-    public static JalaliMonthDay of(int month, int dayOfMonth) {
-        return of(JalaliMonth.of(month), dayOfMonth);
+    public static MonthDayJalali of(int month, int dayOfMonth) {
+        return of(MonthJalali.of(month), dayOfMonth);
     }
 
     //-----------------------------------------------------------------------
@@ -205,13 +205,13 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @return the month-day, not null
      * @throws DateTimeException if unable to toModel to a {@code JalaliMonthDay}
      */
-    public static JalaliMonthDay from(TemporalAccessor temporal) {
-        if (temporal instanceof JalaliMonthDay) {
-            return (JalaliMonthDay) temporal;
+    public static MonthDayJalali from(TemporalAccessor temporal) {
+        if (temporal instanceof MonthDayJalali) {
+            return (MonthDayJalali) temporal;
         }
         try {
-            if (!JalaliChronology.INSTANCE.equals(Chronology.from(temporal))) {
-                temporal = JalaliDate.from(temporal);
+            if (!ChronologyJalali.INSTANCE.equals(Chronology.from(temporal))) {
+                temporal = LocalDateJalali.from(temporal);
             }
             return of(temporal.get(MONTH_OF_YEAR), temporal.get(DAY_OF_MONTH));
         } catch (DateTimeException ex) {
@@ -230,7 +230,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @return the parsed month-day, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliMonthDay parse(CharSequence text) {
+    public static MonthDayJalali parse(CharSequence text) {
         return parse(text, PARSER);
     }
 
@@ -246,9 +246,9 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @return the parsed month-day, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliMonthDay parse(CharSequence text, DateTimeFormatter formatter) {
+    public static MonthDayJalali parse(CharSequence text, DateTimeFormatter formatter) {
         Objects.requireNonNull(formatter, "formatter");
-        return formatter.parse(text, JalaliMonthDay::from);
+        return formatter.parse(text, MonthDayJalali::from);
     }
 
     //-----------------------------------------------------------------------
@@ -392,7 +392,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * Gets the month-of-year field from 1 to 12.
      * <p>
      * This method returns the month as an {@code int} from 1 to 12.
-     * Application code is frequently clearer if the enum {@link JalaliMonth}
+     * Application code is frequently clearer if the enum {@link MonthJalali}
      * is used by calling {@link #getMonth()}.
      *
      * @return the month-of-year, from 1 to 12
@@ -405,16 +405,16 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
     /**
      * Gets the month-of-year field using the {@code JalaliMonth} enum.
      * <p>
-     * This method returns the enum {@link JalaliMonth} for the month.
+     * This method returns the enum {@link MonthJalali} for the month.
      * This avoids confusion as to what {@code int} values mean.
      * If you need access to the primitive {@code int} value then the enum
-     * provides the {@link JalaliMonth#getValue() int value}.
+     * provides the {@link MonthJalali#getValue() int value}.
      *
      * @return the month-of-year, not null
      * @see #getMonthValue()
      */
-    public JalaliMonth getMonth() {
-        return JalaliMonth.of(month);
+    public MonthJalali getMonth() {
+        return MonthJalali.of(month);
     }
 
     /**
@@ -438,10 +438,10 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      *
      * @param year the year to validate
      * @return true if the year is valid for this month-day
-     * @see JalaliYear#isValidMonthDay(JalaliMonthDay)
+     * @see YearJalali#isValidMonthDay(MonthDayJalali)
      */
     public boolean isValidYear(int year) {
-        return !(day == 29 && month == 2 && !JalaliYear.isLeap(year));
+        return !(day == 29 && month == 2 && !YearJalali.isLeap(year));
     }
 
     //-----------------------------------------------------------------------
@@ -459,8 +459,8 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @return a {@code JalaliMonthDay} based on this month-day with the requested month, not null
      * @throws DateTimeException if the month-of-year value is invalid
      */
-    public JalaliMonthDay withMonth(int month) {
-        return with(JalaliMonth.of(month));
+    public MonthDayJalali withMonth(int month) {
+        return with(MonthJalali.of(month));
     }
 
     /**
@@ -475,13 +475,13 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @param month the month-of-year to set in the returned month-day, not null
      * @return a {@code JalaliMonthDay} based on this month-day with the requested month, not null
      */
-    public JalaliMonthDay with(JalaliMonth month) {
+    public MonthDayJalali with(MonthJalali month) {
         Objects.requireNonNull(month, "month");
         if (month.getValue() == this.month) {
             return this;
         }
         int day = Math.min(this.day, month.maxLength());
-        return new JalaliMonthDay(month.getValue(), day);
+        return new MonthDayJalali(month.getValue(), day);
     }
 
     /**
@@ -497,7 +497,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @throws DateTimeException if the day-of-month value is invalid,
      *                           or if the day-of-month is invalid for the month
      */
-    public JalaliMonthDay withDayOfMonth(int dayOfMonth) {
+    public MonthDayJalali withDayOfMonth(int dayOfMonth) {
         if (dayOfMonth == this.day) {
             return this;
         }
@@ -528,7 +528,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
     @Override
     public <R> R query(TemporalQuery<R> query) {
         if (query == TemporalQueries.chronology()) {
-            return (R) JalaliChronology.INSTANCE;
+            return (R) ChronologyJalali.INSTANCE;
         }
         return TemporalAccessor.super.query(query);
     }
@@ -562,7 +562,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      */
     @Override
     public Temporal adjustInto(Temporal temporal) {
-        if (!Chronology.from(temporal).equals(JalaliChronology.INSTANCE)) {
+        if (!Chronology.from(temporal).equals(ChronologyJalali.INSTANCE)) {
             throw new DateTimeException("Adjustment only supported on ISO date-time");
         }
         temporal = temporal.with(MONTH_OF_YEAR, month);
@@ -599,8 +599,8 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @return the local date formed from this month-day and the specified year, not null
      * @throws DateTimeException if the year is outside the valid range of years
      */
-    public JalaliDate atYear(int year) {
-        return JalaliDate.of(year, month, isValidYear(year) ? day : 28);
+    public LocalDateJalali atYear(int year) {
+        return LocalDateJalali.of(year, month, isValidYear(year) ? day : 28);
     }
 
     //-----------------------------------------------------------------------
@@ -615,7 +615,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @return the comparator value, negative if less, positive if greater
      */
     @Override
-    public int compareTo(JalaliMonthDay other) {
+    public int compareTo(MonthDayJalali other) {
         int cmp = (month - other.month);
         if (cmp == 0) {
             cmp = (day - other.day);
@@ -629,7 +629,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @param other the other month-day to compare to, not null
      * @return true if this is after the specified month-day
      */
-    public boolean isAfter(JalaliMonthDay other) {
+    public boolean isAfter(MonthDayJalali other) {
         return compareTo(other) > 0;
     }
 
@@ -639,7 +639,7 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
      * @param other the other month-day to compare to, not null
      * @return true if this point is before the specified month-day
      */
-    public boolean isBefore(JalaliMonthDay other) {
+    public boolean isBefore(MonthDayJalali other) {
         return compareTo(other) < 0;
     }
 
@@ -658,8 +658,8 @@ public final class JalaliMonthDay implements TemporalAccessor, TemporalAdjuster,
         if (this == obj) {
             return true;
         }
-        if (obj instanceof JalaliMonthDay) {
-            JalaliMonthDay other = (JalaliMonthDay) obj;
+        if (obj instanceof MonthDayJalali) {
+            MonthDayJalali other = (MonthDayJalali) obj;
             return month == other.month && day == other.day;
         }
         return false;

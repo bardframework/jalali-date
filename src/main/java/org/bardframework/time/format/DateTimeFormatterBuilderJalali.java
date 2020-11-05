@@ -1,7 +1,7 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.JalaliChronology;
-import org.bardframework.time.JalaliDate;
+import org.bardframework.time.ChronologyJalali;
+import org.bardframework.time.LocalDateJalali;
 
 import java.lang.ref.SoftReference;
 import java.math.BigDecimal;
@@ -50,7 +50,7 @@ import static java.time.temporal.ChronoField.*;
  * <p>
  * This class is a mutable builder intended for use from a single thread.
  */
-public final class JalaliDateTimeFormatterBuilder {
+public final class DateTimeFormatterBuilderJalali {
 
     /**
      * Length comparator.
@@ -111,7 +111,7 @@ public final class JalaliDateTimeFormatterBuilder {
     /**
      * The parent builder, null for the outermost builder.
      */
-    private final JalaliDateTimeFormatterBuilder parent;
+    private final DateTimeFormatterBuilderJalali parent;
     /**
      * The list of printers that will be used.
      */
@@ -123,7 +123,7 @@ public final class JalaliDateTimeFormatterBuilder {
     /**
      * The currently active builder, used by the outermost builder.
      */
-    private JalaliDateTimeFormatterBuilder active = this;
+    private DateTimeFormatterBuilderJalali active = this;
     /**
      * The width to pad the next field to.
      */
@@ -140,7 +140,7 @@ public final class JalaliDateTimeFormatterBuilder {
     /**
      * Constructs a new instance of the builder.
      */
-    public JalaliDateTimeFormatterBuilder() {
+    public DateTimeFormatterBuilderJalali() {
         super();
         parent = null;
         optional = false;
@@ -154,7 +154,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param parent   the parent builder, not null
      * @param optional whether the formatter is optional, not null
      */
-    private JalaliDateTimeFormatterBuilder(JalaliDateTimeFormatterBuilder parent, boolean optional) {
+    private DateTimeFormatterBuilderJalali(DateTimeFormatterBuilderJalali parent, boolean optional) {
         super();
         this.parent = parent;
         this.optional = optional;
@@ -215,7 +215,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder parseCaseSensitive() {
+    public DateTimeFormatterBuilderJalali parseCaseSensitive() {
         appendInternal(SettingsParser.SENSITIVE);
         return this;
     }
@@ -237,7 +237,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder parseCaseInsensitive() {
+    public DateTimeFormatterBuilderJalali parseCaseInsensitive() {
         appendInternal(SettingsParser.INSENSITIVE);
         return this;
     }
@@ -257,7 +257,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder parseStrict() {
+    public DateTimeFormatterBuilderJalali parseStrict() {
         appendInternal(SettingsParser.STRICT);
         return this;
     }
@@ -276,7 +276,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder parseLenient() {
+    public DateTimeFormatterBuilderJalali parseLenient() {
         appendInternal(SettingsParser.LENIENT);
         return this;
     }
@@ -308,7 +308,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param value the value to default the field to
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder parseDefaulting(TemporalField field, long value) {
+    public DateTimeFormatterBuilderJalali parseDefaulting(TemporalField field, long value) {
         Objects.requireNonNull(field, "field");
         appendInternal(new DefaultValueParser(field, value));
         return this;
@@ -334,7 +334,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param field the field to append, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendValue(TemporalField field) {
+    public DateTimeFormatterBuilderJalali appendValue(TemporalField field) {
         Objects.requireNonNull(field, "field");
         appendValue(new NumberPrinterParser(field, 1, 19, SignStyle.NORMAL));
         return this;
@@ -388,7 +388,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the width is invalid
      */
-    public JalaliDateTimeFormatterBuilder appendValue(TemporalField field, int width) {
+    public DateTimeFormatterBuilderJalali appendValue(TemporalField field, int width) {
         Objects.requireNonNull(field, "field");
         if (width < 1 || width > 19) {
             throw new IllegalArgumentException("The width must be from 1 to 19 inclusive but was " + width);
@@ -429,7 +429,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the widths are invalid
      */
-    public JalaliDateTimeFormatterBuilder appendValue(
+    public DateTimeFormatterBuilderJalali appendValue(
         TemporalField field, int minWidth, int maxWidth, SignStyle signStyle) {
         if (minWidth == maxWidth && signStyle == SignStyle.NOT_NEGATIVE) {
             return appendValue(field, maxWidth);
@@ -486,7 +486,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the width or base value is invalid
      */
-    public JalaliDateTimeFormatterBuilder appendValueReduced(TemporalField field,
+    public DateTimeFormatterBuilderJalali appendValueReduced(TemporalField field,
                                                              int width, int maxWidth, int baseValue) {
         Objects.requireNonNull(field, "field");
         ReducedPrinterParser pp = new ReducedPrinterParser(field, width, maxWidth, baseValue, null);
@@ -546,7 +546,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the width or base value is invalid
      */
-    public JalaliDateTimeFormatterBuilder appendValueReduced(TemporalField field, int width, int maxWidth, JalaliDate baseDate) {
+    public DateTimeFormatterBuilderJalali appendValueReduced(TemporalField field, int width, int maxWidth, LocalDateJalali baseDate) {
         Objects.requireNonNull(field, "field");
         Objects.requireNonNull(baseDate, "baseDate");
         ReducedPrinterParser pp = new ReducedPrinterParser(field, width, maxWidth, 0, baseDate);
@@ -568,7 +568,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param pp the printer-parser, not null
      * @return this, for chaining, not null
      */
-    private JalaliDateTimeFormatterBuilder appendValue(NumberPrinterParser pp) {
+    private DateTimeFormatterBuilderJalali appendValue(NumberPrinterParser pp) {
         if (active.valueParserIndex >= 0) {
             final int activeValueParser = active.valueParserIndex;
 
@@ -630,7 +630,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @throws IllegalArgumentException if the field has a variable set of valid values or
      *                                  either width is invalid
      */
-    public JalaliDateTimeFormatterBuilder appendFraction(
+    public DateTimeFormatterBuilderJalali appendFraction(
         TemporalField field, int minWidth, int maxWidth, boolean decimalPoint) {
         appendInternal(new FractionPrinterParser(field, minWidth, maxWidth, decimalPoint));
         return this;
@@ -651,7 +651,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param textStyle the text style to use, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendText(TemporalField field, TextStyle textStyle) {
+    public DateTimeFormatterBuilderJalali appendText(TemporalField field, TextStyle textStyle) {
         Objects.requireNonNull(field, "field");
         Objects.requireNonNull(textStyle, "textStyle");
         appendInternal(new TextPrinterParser(field, textStyle, DateTimeTextProvider.getInstance()));
@@ -694,7 +694,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param textLookup the map from the value to the text
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendText(TemporalField field, Map<Long, String> textLookup) {
+    public DateTimeFormatterBuilderJalali appendText(TemporalField field, Map<Long, String> textLookup) {
         Objects.requireNonNull(field, "field");
         Objects.requireNonNull(textLookup, "textLookup");
         Map<Long, String> copy = new LinkedHashMap<>(textLookup);
@@ -746,14 +746,14 @@ public final class JalaliDateTimeFormatterBuilder {
      * The {@linkplain ResolverStyle resolver style} has no effect on instant parsing.
      * The end-of-day time of '24:00' is handled as midnight at the start of the following day.
      * The leap-second time of '23:59:59' is handled to some degree, see
-     * {@link JalaliDateTimeFormatter#parsedLeapSecond()} for full details.
+     * {@link DateTimeFormatterJalali#parsedLeapSecond()} for full details.
      * <p>
      * An alternative to this method is to format/parse the instant as a single
      * epoch-seconds value. That is achieved using {@code appendValue(INSTANT_SECONDS)}.
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendInstant() {
+    public DateTimeFormatterBuilderJalali appendInstant() {
         appendInternal(new InstantPrinterParser(-2));
         return this;
     }
@@ -784,7 +784,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * The {@linkplain ResolverStyle resolver style} has no effect on instant parsing.
      * The end-of-day time of '24:00' is handled as midnight at the start of the following day.
      * The leap-second time of '23:59:60' is handled to some degree, see
-     * {@link JalaliDateTimeFormatter#parsedLeapSecond()} for full details.
+     * {@link DateTimeFormatterJalali#parsedLeapSecond()} for full details.
      * <p>
      * An alternative to this method is to format/parse the instant as a single
      * epoch-seconds value. That is achieved using {@code appendValue(INSTANT_SECONDS)}.
@@ -793,7 +793,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *                         from 0 to 9, or -1 to use as many digits as necessary
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendInstant(int fractionalDigits) {
+    public DateTimeFormatterBuilderJalali appendInstant(int fractionalDigits) {
         if (fractionalDigits < -1 || fractionalDigits > 9) {
             throw new IllegalArgumentException("The fractional digits must be from -1 to 9 inclusive but was " + fractionalDigits);
         }
@@ -811,7 +811,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendOffsetId() {
+    public DateTimeFormatterBuilderJalali appendOffsetId() {
         appendInternal(OffsetIdPrinterParser.INSTANCE_ID_Z);
         return this;
     }
@@ -854,7 +854,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param noOffsetText the text to use when the offset is zero, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendOffset(String pattern, String noOffsetText) {
+    public DateTimeFormatterBuilderJalali appendOffset(String pattern, String noOffsetText) {
         appendInternal(new OffsetIdPrinterParser(pattern, noOffsetText));
         return this;
     }
@@ -889,7 +889,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @throws IllegalArgumentException if style is neither {@link TextStyle#FULL
      *                                  full} nor {@link TextStyle#SHORT short}
      */
-    public JalaliDateTimeFormatterBuilder appendLocalizedOffset(TextStyle style) {
+    public DateTimeFormatterBuilderJalali appendLocalizedOffset(TextStyle style) {
         Objects.requireNonNull(style, "style");
         if (style != TextStyle.FULL && style != TextStyle.SHORT) {
             throw new IllegalArgumentException("Style must be either full or short");
@@ -944,7 +944,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @see #appendZoneRegionId()
      */
-    public JalaliDateTimeFormatterBuilder appendZoneId() {
+    public DateTimeFormatterBuilderJalali appendZoneId() {
         appendInternal(new ZoneIdPrinterParser(TemporalQueries.zoneId(), "ZoneId()"));
         return this;
     }
@@ -1000,7 +1000,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @see #appendZoneId()
      */
-    public JalaliDateTimeFormatterBuilder appendZoneRegionId() {
+    public DateTimeFormatterBuilderJalali appendZoneRegionId() {
         appendInternal(new ZoneIdPrinterParser(QUERY_REGION_ONLY, "ZoneRegionId()"));
         return this;
     }
@@ -1058,7 +1058,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @see #appendZoneId()
      */
-    public JalaliDateTimeFormatterBuilder appendZoneOrOffsetId() {
+    public DateTimeFormatterBuilderJalali appendZoneOrOffsetId() {
         appendInternal(new ZoneIdPrinterParser(TemporalQueries.zone(), "ZoneOrOffsetId()"));
         return this;
     }
@@ -1074,7 +1074,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * If the zone is a {@code ZoneOffset} it will be printed using the
      * result of {@link ZoneOffset#getId()}.
      * If the zone is not an offset, the textual name will be looked up
-     * for the locale set in the {@link JalaliDateTimeFormatter}.
+     * for the locale set in the {@link DateTimeFormatterJalali}.
      * If the temporal object being printed represents an instant, then the text
      * will be the summer or winter time text as appropriate.
      * If the lookup for text does not find any suitable result, then the
@@ -1086,7 +1086,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * is accepted. Many textual zone names are not unique, such as CST can be
      * for both "Central Standard Time" and "China Standard Time". In this
      * situation, the zone id will be determined by the region information from
-     * formatter's  {@link JalaliDateTimeFormatter#getLocale() locale} and the standard
+     * formatter's  {@link DateTimeFormatterJalali#getLocale() locale} and the standard
      * zone id for that area, for example, America/New_York for the America Eastern
      * zone. The {@link #appendZoneText(TextStyle, Set)} may be used
      * to specify a set of preferred {@link ZoneId} in this situation.
@@ -1094,7 +1094,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param textStyle the text style to use, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendZoneText(TextStyle textStyle) {
+    public DateTimeFormatterBuilderJalali appendZoneText(TextStyle textStyle) {
         appendInternal(new ZoneTextPrinterParser(textStyle, null));
         return this;
     }
@@ -1112,7 +1112,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * If the zone is a {@code ZoneOffset} it will be printed using the
      * result of {@link ZoneOffset#getId()}.
      * If the zone is not an offset, the textual name will be looked up
-     * for the locale set in the {@link JalaliDateTimeFormatter}.
+     * for the locale set in the {@link DateTimeFormatterJalali}.
      * If the temporal object being printed represents an instant, then the text
      * will be the summer or winter time text as appropriate.
      * If the lookup for text does not find any suitable result, then the
@@ -1124,7 +1124,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * is accepted. Many textual zone names are not unique, such as CST can be
      * for both "Central Standard Time" and "China Standard Time". In this
      * situation, the zone id will be determined by the region information from
-     * formatter's  {@link JalaliDateTimeFormatter#getLocale() locale} and the standard
+     * formatter's  {@link DateTimeFormatterJalali#getLocale() locale} and the standard
      * zone id for that area, for example, America/New_York for the America Eastern
      * zone. This method also allows a set of preferred {@link ZoneId} to be
      * specified for parsing. The matched preferred zone id will be used if the
@@ -1137,7 +1137,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param preferredZones the set of preferred zone ids, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendZoneText(TextStyle textStyle,
+    public DateTimeFormatterBuilderJalali appendZoneText(TextStyle textStyle,
                                                          Set<ZoneId> preferredZones) {
         Objects.requireNonNull(preferredZones, "preferredZones");
         appendInternal(new ZoneTextPrinterParser(textStyle, preferredZones));
@@ -1165,7 +1165,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendChronologyId() {
+    public DateTimeFormatterBuilderJalali appendChronologyId() {
         appendInternal(new ChronoPrinterParser(null));
         return this;
     }
@@ -1179,7 +1179,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param textStyle the text style to use, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendChronologyText(TextStyle textStyle) {
+    public DateTimeFormatterBuilderJalali appendChronologyText(TextStyle textStyle) {
         Objects.requireNonNull(textStyle, "textStyle");
         appendInternal(new ChronoPrinterParser(textStyle));
         return this;
@@ -1201,7 +1201,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * </ul>
      * During formatting, the chronology is obtained from the temporal object
      * being formatted, which may have been overridden by
-     * {@link JalaliDateTimeFormatter#withChronology(Chronology)}.
+     * {@link DateTimeFormatterJalali#withChronology(Chronology)}.
      * <p>
      * During parsing, if a chronology has already been parsed, then it is used.
      * Otherwise the default from {@code JalaliDateTimeFormatter.withChronology(Chronology)}
@@ -1215,7 +1215,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if both the date and time styles are null
      */
-    public JalaliDateTimeFormatterBuilder appendLocalized(FormatStyle dateStyle, FormatStyle timeStyle) {
+    public DateTimeFormatterBuilderJalali appendLocalized(FormatStyle dateStyle, FormatStyle timeStyle) {
         if (dateStyle == null && timeStyle == null) {
             throw new IllegalArgumentException("Either the date or time style must be non-null");
         }
@@ -1231,7 +1231,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param literal the literal to append, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendLiteral(char literal) {
+    public DateTimeFormatterBuilderJalali appendLiteral(char literal) {
         appendInternal(new CharLiteralPrinterParser(literal));
         return this;
     }
@@ -1248,7 +1248,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param literal the literal to append, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendLiteral(String literal) {
+    public DateTimeFormatterBuilderJalali appendLiteral(String literal) {
         Objects.requireNonNull(literal, "literal");
         if (literal.length() > 0) {
             if (literal.length() == 1) {
@@ -1269,7 +1269,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param formatter the formatter to add, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder append(JalaliDateTimeFormatter formatter) {
+    public DateTimeFormatterBuilderJalali append(DateTimeFormatterJalali formatter) {
         Objects.requireNonNull(formatter, "formatter");
         appendInternal(formatter.toPrinterParser(false));
         return this;
@@ -1288,7 +1288,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param formatter the formatter to add, not null
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder appendOptional(JalaliDateTimeFormatter formatter) {
+    public DateTimeFormatterBuilderJalali appendOptional(DateTimeFormatterJalali formatter) {
         Objects.requireNonNull(formatter, "formatter");
         appendInternal(formatter.toPrinterParser(true));
         return this;
@@ -1514,7 +1514,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the pattern is invalid
      */
-    public JalaliDateTimeFormatterBuilder appendPattern(String pattern) {
+    public DateTimeFormatterBuilderJalali appendPattern(String pattern) {
         Objects.requireNonNull(pattern, "pattern");
         parsePattern(pattern);
         return this;
@@ -1793,7 +1793,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if pad width is too small
      */
-    public JalaliDateTimeFormatterBuilder padNext(int padWidth) {
+    public DateTimeFormatterBuilderJalali padNext(int padWidth) {
         return padNext(padWidth, ' ');
     }
 
@@ -1820,7 +1820,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if pad width is too small
      */
-    public JalaliDateTimeFormatterBuilder padNext(int padWidth, char padChar) {
+    public DateTimeFormatterBuilderJalali padNext(int padWidth, char padChar) {
         if (padWidth < 1) {
             throw new IllegalArgumentException("The pad width must be at least one but was " + padWidth);
         }
@@ -1850,9 +1850,9 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return this, for chaining, not null
      */
-    public JalaliDateTimeFormatterBuilder optionalStart() {
+    public DateTimeFormatterBuilderJalali optionalStart() {
         active.valueParserIndex = -1;
-        active = new JalaliDateTimeFormatterBuilder(active, true);
+        active = new DateTimeFormatterBuilderJalali(active, true);
         return this;
     }
 
@@ -1883,7 +1883,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @return this, for chaining, not null
      * @throws IllegalStateException if there was no previous call to {@code optionalStart}
      */
-    public JalaliDateTimeFormatterBuilder optionalEnd() {
+    public DateTimeFormatterBuilderJalali optionalEnd() {
         if (active.parent == null) {
             throw new IllegalStateException("Cannot call optionalEnd() as there was no previous call to optionalStart()");
         }
@@ -1935,7 +1935,7 @@ public final class JalaliDateTimeFormatterBuilder {
      *
      * @return the created formatter, not null
      */
-    public JalaliDateTimeFormatter toFormatter() {
+    public DateTimeFormatterJalali toFormatter() {
         return toFormatter(Locale.getDefault(Locale.Category.FORMAT));
     }
 
@@ -1956,7 +1956,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param locale the locale to use for formatting, not null
      * @return the created formatter, not null
      */
-    public JalaliDateTimeFormatter toFormatter(Locale locale) {
+    public DateTimeFormatterJalali toFormatter(Locale locale) {
         return toFormatter(locale, ResolverStyle.SMART, null);
     }
 
@@ -1967,7 +1967,7 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param resolverStyle the resolver style to use, not null
      * @return the created formatter, not null
      */
-    JalaliDateTimeFormatter toFormatter(ResolverStyle resolverStyle, Chronology chrono) {
+    DateTimeFormatterJalali toFormatter(ResolverStyle resolverStyle, Chronology chrono) {
         return toFormatter(Locale.getDefault(Locale.Category.FORMAT), resolverStyle, chrono);
     }
 
@@ -1980,13 +1980,13 @@ public final class JalaliDateTimeFormatterBuilder {
      * @param chrono the chronology to use, may be null
      * @return the created formatter, not null
      */
-    private JalaliDateTimeFormatter toFormatter(Locale locale, ResolverStyle resolverStyle, Chronology chrono) {
+    private DateTimeFormatterJalali toFormatter(Locale locale, ResolverStyle resolverStyle, Chronology chrono) {
         Objects.requireNonNull(locale, "locale");
         while (active.parent != null) {
             optionalEnd();
         }
         CompositePrinterParser pp = new CompositePrinterParser(printerParsers, false);
-        return new JalaliDateTimeFormatter(pp, locale, DecimalStyle.STANDARD, resolverStyle, null, chrono, null);
+        return new DateTimeFormatterJalali(pp, locale, DecimalStyle.STANDARD, resolverStyle, null, chrono, null);
     }
 
     //-----------------------------------------------------------------------
@@ -2001,12 +2001,12 @@ public final class JalaliDateTimeFormatterBuilder {
         LENIENT;
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             return true;  // nothing to do here
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             // using ordinals to avoid javac synthetic inner class
             switch (ordinal()) {
                 case 0:
@@ -2084,7 +2084,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @return false if unable to query the value from the date-time, true otherwise
          * @throws DateTimeException if the date-time cannot be printed successfully
          */
-        boolean format(JalaliDateTimePrintContext context, StringBuilder buf);
+        boolean format(DateTimePrintContextJalali context, StringBuilder buf);
 
         /**
          * Parses text into date-time information.
@@ -2100,7 +2100,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @throws NullPointerException      if the context or text is null
          * @throws IndexOutOfBoundsException if the position is invalid
          */
-        int parse(JalaliDateTimeParseContext context, CharSequence text, int position);
+        int parse(DateTimeParseContextJalali context, CharSequence text, int position);
     }
 
     //-----------------------------------------------------------------------
@@ -2135,7 +2135,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             int length = buf.length();
             if (optional) {
                 context.startOptional();
@@ -2156,7 +2156,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             if (optional) {
                 context.startOptional();
                 int pos = position;
@@ -2219,7 +2219,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             int preLen = buf.length();
             if (!printerParser.format(context, buf)) {
                 return false;
@@ -2236,7 +2236,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             // cache context before changed by decorated parser
             final boolean strict = context.isStrict();
             // parse
@@ -2285,11 +2285,11 @@ public final class JalaliDateTimeFormatterBuilder {
             this.value = value;
         }
 
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             return true;
         }
 
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             if (context.getParsed(field) == null) {
                 context.setParsedField(field, value, position, position);
             }
@@ -2310,13 +2310,13 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             buf.append(literal);
             return true;
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int length = text.length();
             if (position == length) {
                 return ~position;
@@ -2354,13 +2354,13 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             buf.append(literal);
             return true;
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int length = text.length();
             if (position > length || position < 0) {
                 throw new IndexOutOfBoundsException();
@@ -2467,7 +2467,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Long valueLong = context.getValue(field);
             if (valueLong == null) {
                 return false;
@@ -2520,7 +2520,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param value   the value of the field, not null
          * @return the value
          */
-        long getValue(JalaliDateTimePrintContext context, long value) {
+        long getValue(DateTimePrintContextJalali context, long value) {
             return value;
         }
 
@@ -2530,15 +2530,15 @@ public final class JalaliDateTimeFormatterBuilder {
          *
          * @param context the context
          * @return true if the field is fixed width
-         * @see JalaliDateTimeFormatterBuilder#appendValue(TemporalField, int)
+         * @see DateTimeFormatterBuilderJalali#appendValue(TemporalField, int)
          */
-        boolean isFixedWidth(JalaliDateTimeParseContext context) {
+        boolean isFixedWidth(DateTimeParseContextJalali context) {
             return subsequentWidth == -1 ||
                 (subsequentWidth > 0 && minWidth == maxWidth && signStyle == SignStyle.NOT_NEGATIVE);
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int length = text.length();
             if (position == length) {
                 return ~position;
@@ -2648,7 +2648,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param successPos the position after the field being parsed
          * @return the new position
          */
-        int setValue(JalaliDateTimeParseContext context, long value, int errorPos, int successPos) {
+        int setValue(DateTimeParseContextJalali context, long value, int errorPos, int successPos) {
             return context.setParsedField(field, value, errorPos, successPos);
         }
 
@@ -2673,10 +2673,10 @@ public final class JalaliDateTimeFormatterBuilder {
         /**
          * The base date for reduced value parsing.
          */
-        static final JalaliDate BASE_DATE = JalaliDate.of((JalaliDate.now().getYear() / 100) * 100, 1, 1);
+        static final LocalDateJalali BASE_DATE = LocalDateJalali.of((LocalDateJalali.now().getYear() / 100) * 100, 1, 1);
 
         private final int baseValue;
-        private final JalaliDate baseDate;
+        private final LocalDateJalali baseDate;
 
         /**
          * Constructor.
@@ -2687,7 +2687,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param baseValue the base value
          * @param baseDate  the base date
          */
-        ReducedPrinterParser(TemporalField field, int minWidth, int maxWidth, int baseValue, JalaliDate baseDate) {
+        ReducedPrinterParser(TemporalField field, int minWidth, int maxWidth, int baseValue, LocalDateJalali baseDate) {
             this(field, minWidth, maxWidth, baseValue, baseDate, 0);
             if (minWidth < 1 || minWidth > 10) {
                 throw new IllegalArgumentException("The minWidth must be from 1 to 10 inclusive but was " + minWidth);
@@ -2720,14 +2720,14 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param baseDate        the base date
          * @param subsequentWidth the subsequentWidth for this instance
          */
-        private ReducedPrinterParser(TemporalField field, int minWidth, int maxWidth, int baseValue, JalaliDate baseDate, int subsequentWidth) {
+        private ReducedPrinterParser(TemporalField field, int minWidth, int maxWidth, int baseValue, LocalDateJalali baseDate, int subsequentWidth) {
             super(field, minWidth, maxWidth, SignStyle.NOT_NEGATIVE, subsequentWidth);
             this.baseValue = baseValue;
             this.baseDate = baseDate;
         }
 
         @Override
-        long getValue(JalaliDateTimePrintContext context, long value) {
+        long getValue(DateTimePrintContextJalali context, long value) {
             long absValue = Math.abs(value);
             int baseValue = this.baseValue;
             if (baseDate != null) {
@@ -2743,7 +2743,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        int setValue(JalaliDateTimeParseContext context, long value, int errorPos, int successPos) {
+        int setValue(DateTimeParseContextJalali context, long value, int errorPos, int successPos) {
             int baseValue = this.baseValue;
             if (baseDate != null) {
                 baseValue = baseDate.get(field);
@@ -2807,10 +2807,10 @@ public final class JalaliDateTimeFormatterBuilder {
          *
          * @param context the context
          * @return if the field is fixed width
-         * @see JalaliDateTimeFormatterBuilder#appendValueReduced(TemporalField, int, int, int)
+         * @see DateTimeFormatterBuilderJalali#appendValueReduced(TemporalField, int, int, int)
          */
         @Override
-        boolean isFixedWidth(JalaliDateTimeParseContext context) {
+        boolean isFixedWidth(DateTimeParseContextJalali context) {
             if (!context.isStrict()) {
                 return false;
             }
@@ -2864,7 +2864,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Long value = context.getValue(field);
             if (value == null) {
                 return false;
@@ -2894,7 +2894,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int effectiveMin = (context.isStrict() ? minWidth : 0);
             int effectiveMax = (context.isStrict() ? maxWidth : 9);
             int length = text.length();
@@ -3021,14 +3021,14 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Long value = context.getValue(field);
             if (value == null) {
                 return false;
             }
             String text;
             Chronology chrono = context.getTemporal().query(TemporalQueries.chronology());
-            if (chrono == null || chrono == JalaliChronology.INSTANCE) {
+            if (chrono == null || chrono == ChronologyJalali.INSTANCE) {
                 text = provider.getText(field, value, textStyle, context.getLocale());
             } else {
                 text = provider.getText(chrono, field, value, textStyle, context.getLocale());
@@ -3041,7 +3041,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence parseText, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence parseText, int position) {
             int length = parseText.length();
             if (position < 0 || position > length) {
                 throw new IndexOutOfBoundsException();
@@ -3049,7 +3049,7 @@ public final class JalaliDateTimeFormatterBuilder {
             TextStyle style = (context.isStrict() ? textStyle : null);
             Chronology chrono = context.getEffectiveChronology();
             Iterator<Entry<String, Long>> it;
-            if (chrono == null || chrono == JalaliChronology.INSTANCE) {
+            if (chrono == null || chrono == ChronologyJalali.INSTANCE) {
                 it = provider.getTextIterator(field, style, context.getLocale());
             } else {
                 it = provider.getTextIterator(chrono, field, style, context.getLocale());
@@ -3108,7 +3108,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             // use INSTANT_SECONDS, thus this code is not bound by Instant.MAX
             Long inSecs = context.getValue(INSTANT_SECONDS);
             Long inNanos = null;
@@ -3173,19 +3173,19 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             // new context to avoid overwriting fields like year/month/day
             int minDigits = Math.max(fractionalDigits, 0);
             int maxDigits = (fractionalDigits < 0 ? 9 : fractionalDigits);
-            CompositePrinterParser parser = new JalaliDateTimeFormatterBuilder()
-                .append(JalaliDateTimeFormatter.ISO_LOCAL_DATE).appendLiteral('T')
+            CompositePrinterParser parser = new DateTimeFormatterBuilderJalali()
+                .append(DateTimeFormatterJalali.ISO_LOCAL_DATE).appendLiteral('T')
                 .appendValue(HOUR_OF_DAY, 2).appendLiteral(':')
                 .appendValue(MINUTE_OF_HOUR, 2).appendLiteral(':')
                 .appendValue(SECOND_OF_MINUTE, 2)
                 .appendFraction(NANO_OF_SECOND, minDigits, maxDigits, true)
                 .appendLiteral('Z')
                 .toFormatter().toPrinterParser(false);
-            JalaliDateTimeParseContext newContext = context.copy();
+            DateTimeParseContextJalali newContext = context.copy();
             int pos = parser.parse(newContext, text, position);
             if (pos < 0) {
                 return pos;
@@ -3267,7 +3267,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Long offsetSecs = context.getValue(OFFSET_SECONDS);
             if (offsetSecs == null) {
                 return false;
@@ -3302,7 +3302,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int length = text.length();
             int noOffsetLen = noOffsetText.length();
             if (noOffsetLen == 0) {
@@ -3407,7 +3407,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Long offsetSecs = context.getValue(OFFSET_SECONDS);
             if (offsetSecs == null) {
                 return false;
@@ -3457,7 +3457,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int pos = position;
             int end = pos + text.length();
             String gmtText = "GMT";  // TODO: get localized version of 'GMT'
@@ -3618,7 +3618,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             ZoneId zone = context.getValue(TemporalQueries.zoneId());
             if (zone == null) {
                 return false;
@@ -3640,7 +3640,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        protected PrefixTree getTree(JalaliDateTimeParseContext context) {
+        protected PrefixTree getTree(DateTimeParseContextJalali context) {
             if (textStyle == TextStyle.NARROW) {
                 return super.getTree(context);
             }
@@ -3709,7 +3709,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             ZoneId zone = context.getValue(query);
             if (zone == null) {
                 return false;
@@ -3718,7 +3718,7 @@ public final class JalaliDateTimeFormatterBuilder {
             return true;
         }
 
-        protected PrefixTree getTree(JalaliDateTimeParseContext context) {
+        protected PrefixTree getTree(DateTimeParseContextJalali context) {
             // prepare parse tree
             Set<String> regionIds = ZoneRulesProvider.getAvailableZoneIds();
             final int regionIdsSize = regionIds.size();
@@ -3746,7 +3746,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * Etc/GMC although both are valid.
          */
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             int length = text.length();
             if (position > length) {
                 throw new IndexOutOfBoundsException();
@@ -3799,7 +3799,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param parser    parser for the value after the prefix
          * @return the position after the parse
          */
-        private int parseOffsetBased(JalaliDateTimeParseContext context, CharSequence text, int prefixPos, int position, OffsetIdPrinterParser parser) {
+        private int parseOffsetBased(DateTimeParseContextJalali context, CharSequence text, int prefixPos, int position, OffsetIdPrinterParser parser) {
             String prefix = text.toString().substring(prefixPos, position).toUpperCase();
             if (position >= text.length()) {
                 context.setParsed(ZoneId.of(prefix));
@@ -3813,7 +3813,7 @@ public final class JalaliDateTimeFormatterBuilder {
                 return position;
             }
 
-            JalaliDateTimeParseContext newContext = context.copy();
+            DateTimeParseContextJalali newContext = context.copy();
             int endPos = parser.parse(newContext, text, position);
             try {
                 if (endPos < 0) {
@@ -3868,7 +3868,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param context the parse context
          * @return the tree, not null
          */
-        public static PrefixTree newTree(JalaliDateTimeParseContext context) {
+        public static PrefixTree newTree(DateTimeParseContextJalali context) {
             //if (!context.isStrict()) {
             //    return new LENIENT("", null, null);
             //}
@@ -3885,7 +3885,7 @@ public final class JalaliDateTimeFormatterBuilder {
          * @param context the parse context
          * @return the tree, not null
          */
-        public static PrefixTree newTree(Set<String> keys, JalaliDateTimeParseContext context) {
+        public static PrefixTree newTree(Set<String> keys, DateTimeParseContextJalali context) {
             PrefixTree tree = newTree(context);
             for (String k : keys) {
                 tree.add0(k, k);
@@ -4076,7 +4076,7 @@ public final class JalaliDateTimeFormatterBuilder {
 
             @Override
             protected boolean isEqual(char c1, char c2) {
-                return JalaliDateTimeParseContext.charEqualsIgnoreCase(c1, c2);
+                return DateTimeParseContextJalali.charEqualsIgnoreCase(c1, c2);
             }
 
             @Override
@@ -4193,7 +4193,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Chronology chrono = context.getValue(TemporalQueries.chronology());
             if (chrono == null) {
                 return false;
@@ -4207,7 +4207,7 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             // simple looping parser to find the chronology
             if (position < 0 || position > text.length()) {
                 throw new IndexOutOfBoundsException();
@@ -4261,7 +4261,7 @@ public final class JalaliDateTimeFormatterBuilder {
         /**
          * Cache of formatters.
          */
-        private static final ConcurrentMap<String, JalaliDateTimeFormatter> FORMATTER_CACHE = new ConcurrentHashMap<>(16, 0.75f, 2);
+        private static final ConcurrentMap<String, DateTimeFormatterJalali> FORMATTER_CACHE = new ConcurrentHashMap<>(16, 0.75f, 2);
 
         private final FormatStyle dateStyle;
         private final FormatStyle timeStyle;
@@ -4279,13 +4279,13 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             Chronology chrono = Chronology.from(context.getTemporal());
             return formatter(context.getLocale(), chrono).toPrinterParser(false).format(context, buf);
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             Chronology chrono = context.getEffectiveChronology();
             return formatter(context.getLocale(), chrono).toPrinterParser(false).parse(context, text, position);
         }
@@ -4301,13 +4301,13 @@ public final class JalaliDateTimeFormatterBuilder {
          * @return the formatter, not null
          * @throws IllegalArgumentException if the formatter cannot be found
          */
-        private JalaliDateTimeFormatter formatter(Locale locale, Chronology chrono) {
+        private DateTimeFormatterJalali formatter(Locale locale, Chronology chrono) {
             String key = chrono.getId() + '|' + locale.toString() + '|' + dateStyle + timeStyle;
-            JalaliDateTimeFormatter formatter = FORMATTER_CACHE.get(key);
+            DateTimeFormatterJalali formatter = FORMATTER_CACHE.get(key);
             if (formatter == null) {
                 String pattern = getLocalizedDateTimePattern(dateStyle, timeStyle, chrono, locale);
-                formatter = new JalaliDateTimeFormatterBuilder().appendPattern(pattern).toFormatter(locale);
-                JalaliDateTimeFormatter old = FORMATTER_CACHE.putIfAbsent(key, formatter);
+                formatter = new DateTimeFormatterBuilderJalali().appendPattern(pattern).toFormatter(locale);
+                DateTimeFormatterJalali old = FORMATTER_CACHE.putIfAbsent(key, formatter);
                 if (old != null) {
                     formatter = old;
                 }
@@ -4347,12 +4347,12 @@ public final class JalaliDateTimeFormatterBuilder {
         }
 
         @Override
-        public boolean format(JalaliDateTimePrintContext context, StringBuilder buf) {
+        public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             return printerParser(context.getLocale()).format(context, buf);
         }
 
         @Override
-        public int parse(JalaliDateTimeParseContext context, CharSequence text, int position) {
+        public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             return printerParser(context.getLocale()).parse(context, text, position);
         }
 

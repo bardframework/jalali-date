@@ -1,5 +1,6 @@
 package org.bardframework.time.zone;
 
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.zone.ZoneRulesException;
@@ -30,6 +31,9 @@ public class ZoneUtils {
         if (zone instanceof ZoneOffset) {
             return ZoneRules.of((ZoneOffset) zone);
         }
-        throw new IllegalStateException("not supported: " + zone.getClass());
+        /*
+            can't access inner property of ZoneRegion
+         */
+        return ZoneRules.of(zone.getRules().getOffset(Instant.EPOCH));
     }
 }

@@ -18,7 +18,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
 
 /**
  * A date-time with an offset from UTC/Greenwich in the ISO-8601 calendar system,
- * such as {@code 2007-12-03T10:15:30+01:00}.
+ * such as {@code 1367-08-12T10:15:30+03:30}.
  * <p>
  * {@code OffsetDateTime} is an immutable representation of a date-time with an offset.
  * This class stores all date and time fields, to a precision of nanoseconds,
@@ -308,12 +308,12 @@ public final class OffsetDateTimeJalali
 
     /**
      * Obtains an instance of {@code OffsetDateTime} from a text string
-     * such as {@code 2007-12-03T10:15:30+01:00}.
+     * such as {@code 1367-08-12T10:15:30+03:30}.
      * <p>
      * The string must represent a valid date-time and is parsed using
      * {@link DateTimeFormatter#ISO_OFFSET_DATE_TIME}.
      *
-     * @param text the text to parse such as "2007-12-03T10:15:30+01:00", not null
+     * @param text the text to parse such as "1367-08-12T10:15:30+03:30", not null
      * @return the parsed offset date-time, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
@@ -588,8 +588,8 @@ public final class OffsetDateTimeJalali
      * <p>
      * This method returns an object with the same {@code JalaliDateTime} and the specified {@code ZoneOffset}.
      * No calculation is needed or performed.
-     * For example, if this time represents {@code 2007-12-03T10:30+02:00} and the offset specified is
-     * {@code +03:00}, then this method will return {@code 2007-12-03T10:30+03:00}.
+     * For example, if this time represents {@code 1367-08-12T10:30+02:00} and the offset specified is
+     * {@code +03:00}, then this method will return {@code 1367-08-12T10:30+03:00}.
      * <p>
      * To take into account the difference between the offsets, and adjust the time fields,
      * use {@link #withOffsetSameInstant}.
@@ -611,8 +611,8 @@ public final class OffsetDateTimeJalali
      * adjusted by the difference between the two offsets.
      * This will result in the old and new objects representing the same instant.
      * This is useful for finding the local time in a different offset.
-     * For example, if this time represents {@code 2007-12-03T10:30+02:00} and the offset specified is
-     * {@code +03:00}, then this method will return {@code 2007-12-03T11:30+03:00}.
+     * For example, if this time represents {@code 1367-08-12T10:30+02:00} and the offset specified is
+     * {@code +03:00}, then this method will return {@code 1367-08-12T11:30+03:00}.
      * <p>
      * To change the offset without adjusting the local time use {@link #withOffsetSameLocal}.
      * <p>
@@ -1167,8 +1167,8 @@ public final class OffsetDateTimeJalali
      * </ol>
      * <p>
      * For example, 2007-03-31 plus one month would result in the invalid date
-     * 2007-04-31. Instead of returning an invalid result, the last valid day
-     * of the month, 2007-04-30, is selected instead.
+     * 1367-08-12. Instead of returning an invalid result, the last valid day
+     * of the month, 1367-08-12, is selected instead.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
@@ -1357,9 +1357,9 @@ public final class OffsetDateTimeJalali
      * <li>Adjust the day-of-month to the last valid day if necessary</li>
      * </ol>
      * <p>
-     * For example, 2007-03-31 minus one month would result in the invalid date
-     * 2007-02-31. Instead of returning an invalid result, the last valid day
-     * of the month, 2007-02-28, is selected instead.
+     * For example, 1367-01-31 minus one month would result in the invalid date
+     * 1366-12-31. Instead of returning an invalid result, the last valid day
+     * of the month, 1366-12-30, is selected instead.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
@@ -1378,7 +1378,7 @@ public final class OffsetDateTimeJalali
      * the month and year fields as necessary to ensure the result remains valid.
      * The result is only invalid if the maximum/minimum year is exceeded.
      * <p>
-     * For example, 2009-01-07 minus one week would result in 2008-12-31.
+     * For example, 1367-01-07 minus one week would result in 1366-12-30.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
@@ -1397,7 +1397,7 @@ public final class OffsetDateTimeJalali
      * month and year fields as necessary to ensure the result remains valid.
      * The result is only invalid if the maximum/minimum year is exceeded.
      * <p>
-     * For example, 2009-01-01 minus one day would result in 2008-12-31.
+     * For example, 1367-01-01 minus one day would result in 1366-12-30.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
@@ -1734,12 +1734,12 @@ public final class OffsetDateTimeJalali
      * <p>
      * For example, the following is the comparator order:
      * <ol>
-     * <li>{@code 2008-12-03T10:30+01:00}</li>
-     * <li>{@code 2008-12-03T11:00+01:00}</li>
-     * <li>{@code 2008-12-03T12:00+02:00}</li>
-     * <li>{@code 2008-12-03T11:30+01:00}</li>
-     * <li>{@code 2008-12-03T12:00+01:00}</li>
-     * <li>{@code 2008-12-03T12:30+01:00}</li>
+     * <li>{@code 1367-08-12T10:30+01:00}</li>
+     * <li>{@code 1367-08-12T11:00+01:00}</li>
+     * <li>{@code 1367-08-12T12:00+02:00}</li>
+     * <li>{@code 1367-08-12T11:30+01:00}</li>
+     * <li>{@code 1367-08-12T12:00+01:00}</li>
+     * <li>{@code 1367-08-12T12:30+01:00}</li>
      * </ol>
      * Values #2 and #3 represent the same instant on the time-line.
      * When two values represent the same instant, the local date-time is compared
@@ -1846,7 +1846,7 @@ public final class OffsetDateTimeJalali
     //-----------------------------------------------------------------------
 
     /**
-     * Outputs this date-time as a {@code String}, such as {@code 2007-12-03T10:15:30+01:00}.
+     * Outputs this date-time as a {@code String}, such as {@code 1367-08-12T10:15:30+03:30}.
      * <p>
      * The output will be one of the following ISO-8601 formats:
      * <ul>

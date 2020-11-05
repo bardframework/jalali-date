@@ -17,7 +17,7 @@ import static java.time.temporal.ChronoField.*;
 import static java.time.temporal.ChronoUnit.*;
 
 /**
- * A year in the ISO-8601 calendar system, such as {@code 2007}.
+ * A year in the ISO-8601 calendar system, such as {@code 1367}.
  * <p>
  * {@code JalaliYear} is an immutable date-time object that represents a year.
  * Any field that can be derived from a year can be obtained.
@@ -28,7 +28,7 @@ import static java.time.temporal.ChronoUnit.*;
  * As such, historical years must be treated with caution.</b>
  * <p>
  * This class does not store or represent a month, day, time or time-zone.
- * For example, the value "2007" can be stored in a {@code JalaliYear}.
+ * For example, the value "1367" can be stored in a {@code JalaliYear}.
  * <p>
  * Years represented by this class follow the ISO-8601 standard and use
  * the proleptic numbering system. JalaliYear 1 is preceded by year 0, then by year -1.
@@ -49,7 +49,7 @@ import static java.time.temporal.ChronoUnit.*;
  * @author Vahid Zafari
  * This class is immutable and thread-safe.
  */
-public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<JalaliYear>, Serializable {
+public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<YearJalali>, Serializable {
 
     /**
      * The minimum supported year, '-999,999,999'.
@@ -84,7 +84,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      *
      * @param year the year to represent
      */
-    private JalaliYear(int year) {
+    private YearJalali(int year) {
         this.year = year;
     }
 
@@ -99,7 +99,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      *
      * @return the current year using the system clock and default time-zone, not null
      */
-    public static JalaliYear now() {
+    public static YearJalali now() {
         return now(Clock.systemDefaultZone());
     }
 
@@ -115,7 +115,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param zone the zone ID to use, not null
      * @return the current year using the system clock, not null
      */
-    public static JalaliYear now(ZoneId zone) {
+    public static YearJalali now(ZoneId zone) {
         return now(Clock.system(zone));
     }
 
@@ -131,9 +131,9 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param clock the clock to use, not null
      * @return the current year, not null
      */
-    public static JalaliYear now(Clock clock) {
-        final JalaliDate now = JalaliDate.now(clock);  // called once
-        return JalaliYear.of(now.getYear());
+    public static YearJalali now(Clock clock) {
+        final LocalDateJalali now = LocalDateJalali.now(clock);  // called once
+        return YearJalali.of(now.getYear());
     }
 
     //-----------------------------------------------------------------------
@@ -152,10 +152,10 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return the year, not null
      * @throws DateTimeException if the field is invalid
      */
-    public static JalaliYear of(int isoYear)
+    public static YearJalali of(int isoYear)
         throws DateTimeException {
         YEAR.checkValidValue(isoYear);
-        return new JalaliYear(isoYear);
+        return new YearJalali(isoYear);
     }
 
     //-----------------------------------------------------------------------
@@ -178,14 +178,14 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return the year, not null
      * @throws DateTimeException if unable to toModel to a {@code JalaliYear}
      */
-    public static JalaliYear from(TemporalAccessor temporal) {
-        if (temporal instanceof JalaliYear) {
-            return (JalaliYear) temporal;
+    public static YearJalali from(TemporalAccessor temporal) {
+        if (temporal instanceof YearJalali) {
+            return (YearJalali) temporal;
         }
         Objects.requireNonNull(temporal, "temporal");
         try {
-            if (!JalaliChronology.INSTANCE.equals(Chronology.from(temporal))) {
-                temporal = JalaliDate.from(temporal);
+            if (!ChronologyJalali.INSTANCE.equals(Chronology.from(temporal))) {
+                temporal = LocalDateJalali.from(temporal);
             }
             return of(temporal.get(YEAR));
         } catch (DateTimeException ex) {
@@ -195,16 +195,16 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
     }
 
     /**
-     * Obtains an instance of {@code JalaliYear} from a text string such as {@code 2007}.
+     * Obtains an instance of {@code JalaliYear} from a text string such as {@code 1367}.
      * <p>
      * The string must represent a valid year.
      * Years outside the range 0000 to 9999 must be prefixed by the plus or minus symbol.
      *
-     * @param text the text to parse such as "2007", not null
+     * @param text the text to parse such as "1367", not null
      * @return the parsed year, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliYear parse(CharSequence text) {
+    public static YearJalali parse(CharSequence text) {
         return parse(text, PARSER);
     }
 
@@ -220,9 +220,9 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return the parsed year, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliYear parse(CharSequence text, DateTimeFormatter formatter) {
+    public static YearJalali parse(CharSequence text, DateTimeFormatter formatter) {
         Objects.requireNonNull(formatter, "formatter");
-        return formatter.parse(text, JalaliYear::from);
+        return formatter.parse(text, YearJalali::from);
     }
 
     //-----------------------------------------------------------------------
@@ -472,7 +472,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return true if the year is leap, false otherwise
      */
     public boolean isLeap() {
-        return JalaliYear.isLeap(year);
+        return YearJalali.isLeap(year);
     }
 
     /**
@@ -484,7 +484,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param monthDay the month-day to validate, null returns false
      * @return true if the month and day are valid for this year
      */
-    public boolean isValidMonthDay(JalaliMonthDay monthDay) {
+    public boolean isValidMonthDay(MonthDayJalali monthDay) {
         return monthDay != null && monthDay.isValidYear(year);
     }
 
@@ -518,8 +518,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public JalaliYear with(TemporalAdjuster adjuster) {
-        return (JalaliYear) adjuster.adjustInto(this);
+    public YearJalali with(TemporalAdjuster adjuster) {
+        return (YearJalali) adjuster.adjustInto(this);
     }
 
     /**
@@ -564,17 +564,17 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public JalaliYear with(TemporalField field, long newValue) {
+    public YearJalali with(TemporalField field, long newValue) {
         if (field instanceof ChronoField) {
             ChronoField f = (ChronoField) field;
             f.checkValidValue(newValue);
             switch (f) {
                 case YEAR_OF_ERA:
-                    return JalaliYear.of((int) (year < 1 ? 1 - newValue : newValue));
+                    return YearJalali.of((int) (year < 1 ? 1 - newValue : newValue));
                 case YEAR:
-                    return JalaliYear.of((int) newValue);
+                    return YearJalali.of((int) newValue);
                 case ERA:
-                    return (getLong(ERA) == newValue ? this : JalaliYear.of(1 - year));
+                    return (getLong(ERA) == newValue ? this : YearJalali.of(1 - year));
             }
             throw new UnsupportedTemporalTypeException("Unsupported field: " + field);
         }
@@ -604,8 +604,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public JalaliYear plus(TemporalAmount amountToAdd) {
-        return (JalaliYear) amountToAdd.addTo(this);
+    public YearJalali plus(TemporalAmount amountToAdd) {
+        return (YearJalali) amountToAdd.addTo(this);
     }
 
     /**
@@ -657,7 +657,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public JalaliYear plus(long amountToAdd, TemporalUnit unit) {
+    public YearJalali plus(long amountToAdd, TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {
             switch ((ChronoUnit) unit) {
                 case YEARS:
@@ -685,7 +685,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return a {@code JalaliYear} based on this year with the years added, not null
      * @throws DateTimeException if the result exceeds the supported range
      */
-    public JalaliYear plusYears(long yearsToAdd) {
+    public YearJalali plusYears(long yearsToAdd) {
         if (yearsToAdd == 0) {
             return this;
         }
@@ -715,8 +715,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public JalaliYear minus(TemporalAmount amountToSubtract) {
-        return (JalaliYear) amountToSubtract.subtractFrom(this);
+    public YearJalali minus(TemporalAmount amountToSubtract) {
+        return (YearJalali) amountToSubtract.subtractFrom(this);
     }
 
     /**
@@ -739,7 +739,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public JalaliYear minus(long amountToSubtract, TemporalUnit unit) {
+    public YearJalali minus(long amountToSubtract, TemporalUnit unit) {
         return (amountToSubtract == Long.MIN_VALUE ? plus(Long.MAX_VALUE, unit).plus(1, unit) : plus(-amountToSubtract, unit));
     }
 
@@ -752,7 +752,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return a {@code JalaliYear} based on this year with the year subtracted, not null
      * @throws DateTimeException if the result exceeds the supported range
      */
-    public JalaliYear minusYears(long yearsToSubtract) {
+    public YearJalali minusYears(long yearsToSubtract) {
         return (yearsToSubtract == Long.MIN_VALUE ? plusYears(Long.MAX_VALUE).plusYears(1) : plusYears(-yearsToSubtract));
     }
 
@@ -780,7 +780,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
     @Override
     public <R> R query(TemporalQuery<R> query) {
         if (query == TemporalQueries.chronology()) {
-            return (R) JalaliChronology.INSTANCE;
+            return (R) ChronologyJalali.INSTANCE;
         } else if (query == TemporalQueries.precision()) {
             return (R) YEARS;
         }
@@ -815,7 +815,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      */
     @Override
     public Temporal adjustInto(Temporal temporal) {
-        if (!Chronology.from(temporal).equals(JalaliChronology.INSTANCE)) {
+        if (!Chronology.from(temporal).equals(ChronologyJalali.INSTANCE)) {
             throw new DateTimeException("Adjustment only supported on ISO date-time");
         }
         return temporal.with(YEAR, year);
@@ -870,7 +870,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      */
     @Override
     public long until(Temporal endExclusive, TemporalUnit unit) {
-        JalaliYear end = JalaliYear.from(endExclusive);
+        YearJalali end = YearJalali.from(endExclusive);
         if (unit instanceof ChronoUnit) {
             long yearsUntil = ((long) end.year) - year;  // no overflow
             switch ((ChronoUnit) unit) {
@@ -918,8 +918,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @throws DateTimeException if the day of year is zero or less, 366 or greater or equal
      *                           to 366 and this is not a leap year
      */
-    public JalaliDate atDay(int dayOfYear) {
-        return JalaliDate.ofYearDay(year, dayOfYear);
+    public LocalDateJalali atDay(int dayOfYear) {
+        return LocalDateJalali.ofYearDay(year, dayOfYear);
     }
 
     /**
@@ -936,8 +936,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param month the month-of-year to use, not null
      * @return the year-month formed from this year and the specified month, not null
      */
-    public JalaliYearMonth atMonth(JalaliMonth month) {
-        return JalaliYearMonth.of(year, month);
+    public YearMonthJalali atMonth(MonthJalali month) {
+        return YearMonthJalali.of(year, month);
     }
 
     /**
@@ -955,8 +955,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return the year-month formed from this year and the specified month, not null
      * @throws DateTimeException if the month is invalid
      */
-    public JalaliYearMonth atMonth(int month) {
-        return JalaliYearMonth.of(year, month);
+    public YearMonthJalali atMonth(int month) {
+        return YearMonthJalali.of(year, month);
     }
 
     /**
@@ -970,7 +970,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param monthDay the month-day to use, not null
      * @return the local date formed from this year and the specified month-day, not null
      */
-    public JalaliDate atMonthDay(JalaliMonthDay monthDay) {
+    public LocalDateJalali atMonthDay(MonthDayJalali monthDay) {
         return monthDay.atYear(year);
     }
 
@@ -986,7 +986,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @return the comparator value, negative if less, positive if greater
      */
     @Override
-    public int compareTo(JalaliYear other) {
+    public int compareTo(YearJalali other) {
         return year - other.year;
     }
 
@@ -996,7 +996,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param other the other year to compare to, not null
      * @return true if this is after the specified year
      */
-    public boolean isAfter(JalaliYear other) {
+    public boolean isAfter(YearJalali other) {
         return year > other.year;
     }
 
@@ -1006,7 +1006,7 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
      * @param other the other year to compare to, not null
      * @return true if this point is before the specified year
      */
-    public boolean isBefore(JalaliYear other) {
+    public boolean isBefore(YearJalali other) {
         return year < other.year;
     }
 
@@ -1025,8 +1025,8 @@ public final class JalaliYear implements Temporal, TemporalAdjuster, Comparable<
         if (this == obj) {
             return true;
         }
-        if (obj instanceof JalaliYear) {
-            return year == ((JalaliYear) obj).year;
+        if (obj instanceof YearJalali) {
+            return year == ((YearJalali) obj).year;
         }
         return false;
     }

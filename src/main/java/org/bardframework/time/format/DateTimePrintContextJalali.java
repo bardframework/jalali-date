@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.JalaliChronology;
+import org.bardframework.time.ChronologyJalali;
 
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -23,7 +23,7 @@ import static java.time.temporal.ChronoField.*;
  * Usage of the class is thread-safe within standard printing as the framework creates
  * a new instance of the class for each format and printing is single-threaded.
  */
-final class JalaliDateTimePrintContext {
+final class DateTimePrintContextJalali {
 
     /**
      * The temporal being output.
@@ -32,7 +32,7 @@ final class JalaliDateTimePrintContext {
     /**
      * The formatter, not null.
      */
-    private final JalaliDateTimeFormatter formatter;
+    private final DateTimeFormatterJalali formatter;
     /**
      * Whether the current formatter is optional.
      */
@@ -44,13 +44,13 @@ final class JalaliDateTimePrintContext {
      * @param temporal  the temporal object being output, not null
      * @param formatter the formatter controlling the format, not null
      */
-    JalaliDateTimePrintContext(TemporalAccessor temporal, JalaliDateTimeFormatter formatter) {
+    DateTimePrintContextJalali(TemporalAccessor temporal, DateTimeFormatterJalali formatter) {
         super();
         this.temporal = adjust(temporal, formatter);
         this.formatter = formatter;
     }
 
-    private static TemporalAccessor adjust(final TemporalAccessor temporal, JalaliDateTimeFormatter formatter) {
+    private static TemporalAccessor adjust(final TemporalAccessor temporal, DateTimeFormatterJalali formatter) {
         // normal case first (early return is an optimization)
         Chronology overrideChrono = formatter.getChronology();
         ZoneId overrideZone = formatter.getZone();
@@ -76,7 +76,7 @@ final class JalaliDateTimePrintContext {
         if (overrideZone != null) {
             // if have zone and instant, calculation is simple, defaulting chrono if necessary
             if (temporal.isSupported(INSTANT_SECONDS)) {
-                Chronology chrono = (effectiveChrono != null ? effectiveChrono : JalaliChronology.INSTANCE);
+                Chronology chrono = (effectiveChrono != null ? effectiveChrono : ChronologyJalali.INSTANCE);
                 return chrono.zonedDateTime(Instant.from(temporal), overrideZone);
             }
             // block changing zone on OffsetTime, and similar problem cases
@@ -94,7 +94,7 @@ final class JalaliDateTimePrintContext {
                 effectiveDate = effectiveChrono.date(temporal);
             } else {
                 // check for date fields other than epoch-day, ignoring case of converting null to ISO
-                if (!(overrideChrono == JalaliChronology.INSTANCE && temporalChrono == null)) {
+                if (!(overrideChrono == ChronologyJalali.INSTANCE && temporalChrono == null)) {
                     for (ChronoField f : ChronoField.values()) {
                         if (f.isDateBased() && temporal.isSupported(f)) {
                             throw new DateTimeException("Unable to apply override chronology '" + overrideChrono +

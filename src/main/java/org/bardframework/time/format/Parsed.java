@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.temporal.JalaliIsoFields;
+import org.bardframework.time.temporal.IsoFieldsJalali;
 
 import java.time.*;
 import java.time.chrono.ChronoLocalDate;
@@ -176,7 +176,7 @@ public final class Parsed implements TemporalAccessor {
                     TemporalField targetField = entry.getKey();
                     TemporalAccessor resolvedObject;
                     if (IsoFields.WEEK_OF_WEEK_BASED_YEAR.equals(targetField)) {
-                        resolvedObject = JalaliIsoFields.resolve(fieldValues, this, resolverStyle);
+                        resolvedObject = IsoFieldsJalali.resolve(fieldValues, this, resolverStyle);
                         fieldValues.remove(targetField);
                     } else {
                         resolvedObject = targetField.resolve(fieldValues, this, resolverStyle);

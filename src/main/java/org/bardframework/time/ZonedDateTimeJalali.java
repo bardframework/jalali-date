@@ -17,7 +17,7 @@ import static java.time.temporal.ChronoField.*;
 
 /**
  * A date-time with a time-zone in the ISO-8601 calendar system,
- * such as {@code 2007-12-03T10:15:30+01:00 Europe/Paris}.
+ * such as {@code 1367-08-12T10:15:30+03:30 Europe/Paris}.
  * <p>
  * {@code ZonedDateTime} is an immutable representation of a date-time with a time-zone.
  * This class stores all date and time fields, to a precision of nanoseconds,
@@ -511,12 +511,12 @@ public final class ZonedDateTimeJalali
 
     /**
      * Obtains an instance of {@code ZonedDateTime} from a text string such as
-     * {@code 2007-12-03T10:15:30+01:00[Europe/Paris]}.
+     * {@code 1367-08-12T10:15:30+03:30[Asia/Tehran]}.
      * <p>
      * The string must represent a valid date-time and is parsed using
      * {@link java.time.format.DateTimeFormatter#ISO_ZONED_DATE_TIME}.
      *
-     * @param text the text to parse such as "2007-12-03T10:15:30+01:00[Europe/Paris]", not null
+     * @param text the text to parse such as "1367-08-12T10:15:30+03:30[Asia/Tehran]", not null
      * @return the parsed zoned date-time, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
@@ -2162,7 +2162,7 @@ public final class ZonedDateTimeJalali
 
     /**
      * Outputs this date-time as a {@code String}, such as
-     * {@code 2007-12-03T10:15:30+01:00[Europe/Paris]}.
+     * {@code 1367-08-12T10:15:30+03:30[Asia/Tehran]}.
      * <p>
      * The format consists of the {@code JalaliDateTime} followed by the {@code ZoneOffset}.
      * If the {@code ZoneId} is not the same as the offset, then the ID is output.

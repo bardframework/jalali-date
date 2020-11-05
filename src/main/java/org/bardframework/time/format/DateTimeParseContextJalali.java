@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.JalaliChronology;
+import org.bardframework.time.ChronologyJalali;
 
 import java.time.ZoneId;
 import java.time.chrono.Chronology;
@@ -26,7 +26,7 @@ import java.util.function.Consumer;
  * Usage of the class is thread-safe within standard parsing as a new instance of this class
  * is automatically created for each parse and parsing is single-threaded
  */
-final class JalaliDateTimeParseContext {
+final class DateTimeParseContextJalali {
 
     /**
      * The list of parsed data.
@@ -35,7 +35,7 @@ final class JalaliDateTimeParseContext {
     /**
      * The formatter, not null.
      */
-    private final JalaliDateTimeFormatter formatter;
+    private final DateTimeFormatterJalali formatter;
     /**
      * Whether to parse using case sensitively.
      */
@@ -54,7 +54,7 @@ final class JalaliDateTimeParseContext {
      *
      * @param formatter the formatter controlling the parse, not null
      */
-    JalaliDateTimeParseContext(JalaliDateTimeFormatter formatter) {
+    DateTimeParseContextJalali(DateTimeFormatterJalali formatter) {
         super();
         this.formatter = formatter;
         parsed.add(new Parsed());
@@ -79,8 +79,8 @@ final class JalaliDateTimeParseContext {
      * Creates a copy of this context.
      * This retains the case sensitive and strict flags.
      */
-    JalaliDateTimeParseContext copy() {
-        JalaliDateTimeParseContext newContext = new JalaliDateTimeParseContext(formatter);
+    DateTimeParseContextJalali copy() {
+        DateTimeParseContextJalali newContext = new DateTimeParseContextJalali(formatter);
         newContext.caseSensitive = caseSensitive;
         newContext.strict = strict;
         return newContext;
@@ -121,7 +121,7 @@ final class JalaliDateTimeParseContext {
         if (chrono == null) {
             chrono = formatter.getChronology();
             if (chrono == null) {
-                chrono = JalaliChronology.INSTANCE;
+                chrono = ChronologyJalali.INSTANCE;
             }
         }
         return chrono;

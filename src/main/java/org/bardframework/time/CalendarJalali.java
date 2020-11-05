@@ -8,7 +8,7 @@ import java.util.TimeZone;
 /**
  * @author Vahid Zafari
  */
-public class JalaliCalendar extends Calendar {
+public class CalendarJalali extends Calendar {
 
     private static final int FARVARDIN = 0;
     private static final int ORDIBEHESHT = 1;
@@ -91,19 +91,19 @@ public class JalaliCalendar extends Calendar {
     private static boolean isTimeSeted = false;
     private GregorianCalendar cal;
 
-    public JalaliCalendar() {
+    public CalendarJalali() {
         this(TimeZone.getDefault(), Locale.getDefault());
     }
 
-    public JalaliCalendar(TimeZone zone) {
+    public CalendarJalali(TimeZone zone) {
         this(zone, Locale.getDefault());
     }
 
-    public JalaliCalendar(Locale aLocale) {
+    public CalendarJalali(Locale aLocale) {
         this(TimeZone.getDefault(), aLocale);
     }
 
-    public JalaliCalendar(TimeZone zone, Locale aLocale) {
+    public CalendarJalali(TimeZone zone, Locale aLocale) {
 
         super(zone, aLocale);
         timeZone = zone;
@@ -116,21 +116,21 @@ public class JalaliCalendar extends Calendar {
 
     }
 
-    public JalaliCalendar(int year, int month, int dayOfMonth) {
+    public CalendarJalali(int year, int month, int dayOfMonth) {
         this(year, month, dayOfMonth, 0, 0, 0, 0);
     }
 
-    public JalaliCalendar(int year, int month, int dayOfMonth, int hourOfDay,
+    public CalendarJalali(int year, int month, int dayOfMonth, int hourOfDay,
                           int minute) {
         this(year, month, dayOfMonth, hourOfDay, minute, 0, 0);
     }
 
-    public JalaliCalendar(int year, int month, int dayOfMonth, int hourOfDay,
+    public CalendarJalali(int year, int month, int dayOfMonth, int hourOfDay,
                           int minute, int second) {
         this(year, month, dayOfMonth, hourOfDay, minute, second, 0);
     }
 
-    JalaliCalendar(int year, int month, int dayOfMonth,
+    CalendarJalali(int year, int month, int dayOfMonth,
                    int hourOfDay, int minute, int second, int millis) {
         super();
 
@@ -279,7 +279,7 @@ public class JalaliCalendar extends Calendar {
     }
 
     public static int weekOfYear(int dayOfYear, int year) {
-        switch (dayOfWeek(JalaliCalendar.jalaliToGregorian(new YearMonthDate(year, 0, 1)))) {
+        switch (dayOfWeek(CalendarJalali.jalaliToGregorian(new YearMonthDate(year, 0, 1)))) {
             case 2:
                 dayOfYear++;
                 break;

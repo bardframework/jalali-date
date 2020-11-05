@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.JalaliChronology;
+import org.bardframework.time.ChronologyJalali;
 
 import java.time.chrono.Chronology;
 import java.time.chrono.JapaneseChronology;
@@ -116,7 +116,7 @@ class DateTimeTextProvider {
      * @return the text for the field value, null if no text found
      */
     String getText(Chronology chrono, TemporalField field, long value, TextStyle style, Locale locale) {
-        if (chrono == JalaliChronology.INSTANCE || !(field instanceof ChronoField)) {
+        if (chrono == ChronologyJalali.INSTANCE || !(field instanceof ChronoField)) {
             return getText(field, value, style, locale);
         }
 
@@ -149,11 +149,11 @@ class DateTimeTextProvider {
             return null;
         }
         if (field == MONTH_OF_YEAR) {
-            return JalaliDateTimeFormatter.MONTH_OF_YEAR.get(value);
+            return DateTimeFormatterJalali.MONTH_OF_YEAR.get(value);
         } else if (field == DAY_OF_WEEK) {
-            return JalaliDateTimeFormatter.DAY_OF_WEEK.get(value);
+            return DateTimeFormatterJalali.DAY_OF_WEEK.get(value);
         } else if (field == AMPM_OF_DAY) {
-            return JalaliDateTimeFormatter.AMPM_OF_DAY.get(value);
+            return DateTimeFormatterJalali.AMPM_OF_DAY.get(value);
         } else {
             return null;
         }
@@ -202,7 +202,7 @@ class DateTimeTextProvider {
      */
     Iterator<Entry<String, Long>> getTextIterator(Chronology chrono, TemporalField field,
                                                   TextStyle style, Locale locale) {
-        if (chrono == JalaliChronology.INSTANCE || !(field instanceof ChronoField)) {
+        if (chrono == ChronologyJalali.INSTANCE || !(field instanceof ChronoField)) {
             return getTextIterator(field, style, locale);
         }
 
@@ -299,7 +299,7 @@ class DateTimeTextProvider {
         if (field == MONTH_OF_YEAR) {
             for (TextStyle textStyle : TextStyle.values()) {
                 Map<Long, String> map = new HashMap<>();
-                for (Entry<Long, String> entry : JalaliDateTimeFormatter.MONTH_OF_YEAR.entrySet()) {
+                for (Entry<Long, String> entry : DateTimeFormatterJalali.MONTH_OF_YEAR.entrySet()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
                 styleMap.put(textStyle, map);
@@ -310,7 +310,7 @@ class DateTimeTextProvider {
         if (field == DAY_OF_WEEK) {
             for (TextStyle textStyle : TextStyle.values()) {
                 Map<Long, String> map = new HashMap<>();
-                for (Entry<Long, String> entry : JalaliDateTimeFormatter.DAY_OF_WEEK.entrySet()) {
+                for (Entry<Long, String> entry : DateTimeFormatterJalali.DAY_OF_WEEK.entrySet()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
                 styleMap.put(textStyle, map);
@@ -321,7 +321,7 @@ class DateTimeTextProvider {
         if (field == AMPM_OF_DAY) {
             for (TextStyle textStyle : TextStyle.values()) {
                 Map<Long, String> map = new HashMap<>();
-                for (Entry<Long, String> entry : JalaliDateTimeFormatter.AMPM_OF_DAY.entrySet()) {
+                for (Entry<Long, String> entry : DateTimeFormatterJalali.AMPM_OF_DAY.entrySet()) {
                     map.put(entry.getKey(), entry.getValue());
                 }
                 styleMap.put(textStyle, map);

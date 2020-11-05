@@ -38,12 +38,12 @@ import java.util.*;
  *
  * @author Vahid Zafari
  */
-public final class JalaliChronology extends AbstractChronology implements Serializable {
+public final class ChronologyJalali extends AbstractChronology implements Serializable {
 
     /**
      * Singleton instance of the JALALI chronology.
      */
-    public static final JalaliChronology INSTANCE = new JalaliChronology();
+    public static final ChronologyJalali INSTANCE = new ChronologyJalali();
 
     /**
      * Serialization version.
@@ -53,7 +53,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
     /**
      * Restricted constructor.
      */
-    private JalaliChronology() {
+    private ChronologyJalali() {
     }
 
     /**
@@ -102,7 +102,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws ClassCastException if the type of {@code era} is not {@code IsoEra}
      */
     @Override  // override with covariant return type
-    public JalaliDate date(Era era, int yearOfEra, int month, int dayOfMonth)
+    public LocalDateJalali date(Era era, int yearOfEra, int month, int dayOfMonth)
         throws DateTimeException {
         return date(prolepticYear(era, yearOfEra), month, dayOfMonth);
     }
@@ -111,7 +111,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * Obtains an JALALI local date from the proleptic-year, month-of-year
      * and day-of-month fields.
      * <p>
-     * This is equivalent to {@link JalaliDate#of(int, int, int)}.
+     * This is equivalent to {@link LocalDateJalali#of(int, int, int)}.
      *
      * @param prolepticYear the JALALI proleptic-year
      * @param month         the JALALI month-of-year
@@ -120,8 +120,8 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate date(int prolepticYear, int month, int dayOfMonth) {
-        return JalaliDate.of(prolepticYear, month, dayOfMonth);
+    public LocalDateJalali date(int prolepticYear, int month, int dayOfMonth) {
+        return LocalDateJalali.of(prolepticYear, month, dayOfMonth);
     }
 
     /**
@@ -134,14 +134,14 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate dateYearDay(Era era, int yearOfEra, int dayOfYear) {
+    public LocalDateJalali dateYearDay(Era era, int yearOfEra, int dayOfYear) {
         return dateYearDay(prolepticYear(era, yearOfEra), dayOfYear);
     }
 
     /**
      * Obtains an JALALI local date from the proleptic-year and day-of-year fields.
      * <p>
-     * This is equivalent to {@link JalaliDate#ofYearDay(int, int)}.
+     * This is equivalent to {@link LocalDateJalali#ofYearDay(int, int)}.
      *
      * @param prolepticYear the JALALI proleptic-year
      * @param dayOfYear     the JALALI day-of-year
@@ -149,22 +149,22 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate dateYearDay(int prolepticYear, int dayOfYear) {
-        return JalaliDate.ofYearDay(prolepticYear, dayOfYear);
+    public LocalDateJalali dateYearDay(int prolepticYear, int dayOfYear) {
+        return LocalDateJalali.ofYearDay(prolepticYear, dayOfYear);
     }
 
     /**
      * Obtains an JALALI local date from the epoch-day.
      * <p>
-     * This is equivalent to {@link JalaliDate#ofEpochDay(long)}.
+     * This is equivalent to {@link LocalDateJalali#ofEpochDay(long)}.
      *
      * @param epochDay the epoch day
      * @return the JALALI local date, not null
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate dateEpochDay(long epochDay) {
-        return JalaliDate.ofEpochDay(epochDay);
+    public LocalDateJalali dateEpochDay(long epochDay) {
+        return LocalDateJalali.ofEpochDay(epochDay);
     }
 
     //-----------------------------------------------------------------------
@@ -172,50 +172,50 @@ public final class JalaliChronology extends AbstractChronology implements Serial
     /**
      * Obtains an JALALI local date from another date-time object.
      * <p>
-     * This is equivalent to {@link JalaliDate#from(TemporalAccessor)}.
+     * This is equivalent to {@link LocalDateJalali#from(TemporalAccessor)}.
      *
      * @param temporal the date-time object to toModel, not null
      * @return the JALALI local date, not null
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate date(TemporalAccessor temporal) {
-        return JalaliDate.from(temporal);
+    public LocalDateJalali date(TemporalAccessor temporal) {
+        return LocalDateJalali.from(temporal);
     }
 
     /**
      * Obtains an JALALI local date-time from another date-time object.
      * <p>
-     * This is equivalent to {@link JalaliDateTime#from(TemporalAccessor)}.
+     * This is equivalent to {@link LocaleDateTimeJalali#from(TemporalAccessor)}.
      *
      * @param temporal the date-time object to toModel, not null
      * @return the JALALI local date-time, not null
      * @throws DateTimeException if unable to create the date-time
      */
     @Override  // override with covariant return type
-    public JalaliDateTime localDateTime(TemporalAccessor temporal) {
-        return JalaliDateTime.from(temporal);
+    public LocaleDateTimeJalali localDateTime(TemporalAccessor temporal) {
+        return LocaleDateTimeJalali.from(temporal);
     }
 
     /**
      * Obtains an JALALI zoned date-time from another date-time object.
      * <p>
-     * This is equivalent to {@link ZonedDateTime#from(TemporalAccessor)}.
+     * This is equivalent to {@link ZonedDateTimeJalali#from(TemporalAccessor)}.
      *
      * @param temporal the date-time object to toModel, not null
      * @return the JALALI zoned date-time, not null
      * @throws DateTimeException if unable to create the date-time
      */
     @Override  // override with covariant return type
-    public ZonedDateTime zonedDateTime(TemporalAccessor temporal)
+    public ZonedDateTimeJalali zonedDateTime(TemporalAccessor temporal)
         throws DateTimeException {
-        return ZonedDateTime.from(temporal);
+        return ZonedDateTimeJalali.from(temporal);
     }
 
     /**
      * Obtains an JALALI zoned date-time in this chronology from an {@code Instant}.
      * <p>
-     * This is equivalent to {@link ZonedDateTime#ofInstant(Instant, ZoneId)}.
+     * This is equivalent to {@link ZonedDateTimeJalali#ofInstant(Instant, ZoneId)}.
      *
      * @param instant the instant to create the date-time from, not null
      * @param zone    the time-zone, not null
@@ -223,8 +223,8 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if the result exceeds the supported range
      */
     @Override
-    public ZonedDateTime zonedDateTime(Instant instant, ZoneId zone) {
-        return ZonedDateTime.ofInstant(instant, zone);
+    public ZonedDateTimeJalali zonedDateTime(Instant instant, ZoneId zone) {
+        return ZonedDateTimeJalali.ofInstant(instant, zone);
     }
 
     //-----------------------------------------------------------------------
@@ -242,7 +242,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate dateNow() {
+    public LocalDateJalali dateNow() {
         return dateNow(Clock.systemDefaultZone());
     }
 
@@ -259,7 +259,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate dateNow(ZoneId zone) {
+    public LocalDateJalali dateNow(ZoneId zone) {
         return dateNow(Clock.system(zone));
     }
 
@@ -275,9 +275,9 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      * @throws DateTimeException if unable to create the date
      */
     @Override  // override with covariant return type
-    public JalaliDate dateNow(Clock clock) {
+    public LocalDateJalali dateNow(Clock clock) {
         Objects.requireNonNull(clock, "clock");
-        return date(JalaliDate.now(clock));
+        return date(LocalDateJalali.now(clock));
     }
 
     //-----------------------------------------------------------------------
@@ -303,7 +303,7 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      */
     @Override
     public boolean isLeapYear(long prolepticYear) {
-        return JalaliYear.isLeap(prolepticYear);
+        return YearJalali.isLeap(prolepticYear);
     }
 
     @Override
@@ -412,8 +412,8 @@ public final class JalaliChronology extends AbstractChronology implements Serial
      *                           because of a conflict in the input data
      */
     @Override  // override for performance
-    public JalaliDate resolveDate(Map<TemporalField, Long> fieldValues, ResolverStyle resolverStyle) {
-        return (JalaliDate) super.resolveDate(fieldValues, resolverStyle);
+    public LocalDateJalali resolveDate(Map<TemporalField, Long> fieldValues, ResolverStyle resolverStyle) {
+        return (LocalDateJalali) super.resolveDate(fieldValues, resolverStyle);
     }
 
 

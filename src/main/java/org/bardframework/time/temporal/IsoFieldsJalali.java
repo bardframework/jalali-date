@@ -1,6 +1,6 @@
 package org.bardframework.time.temporal;
 
-import org.bardframework.time.JalaliDate;
+import org.bardframework.time.LocalDateJalali;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ import java.util.Map;
 import static java.time.temporal.IsoFields.WEEK_BASED_YEAR;
 import static java.time.temporal.IsoFields.WEEK_OF_WEEK_BASED_YEAR;
 
-public class JalaliIsoFields {
+public class IsoFieldsJalali {
 
     public static ChronoLocalDate resolve(Map<TemporalField, Long> map, TemporalAccessor accessor, ResolverStyle style) {
         Long weekOfYear = map.get(WEEK_BASED_YEAR);
@@ -23,7 +23,7 @@ public class JalaliIsoFields {
         if (weekOfYear != null && dayOfWeek != null) {
             int var6 = WEEK_BASED_YEAR.range().checkValidIntValue(weekOfYear, WEEK_BASED_YEAR);
             long var7 = map.get(WEEK_OF_WEEK_BASED_YEAR);
-            JalaliDate date = JalaliDate.of(var6, 1, 4);
+            LocalDateJalali date = LocalDateJalali.of(var6, 1, 4);
             if (style == ResolverStyle.LENIENT) {
                 long var10 = dayOfWeek;
                 if (var10 > 7L) {
@@ -48,7 +48,7 @@ public class JalaliIsoFields {
         }
     }
 
-    public static int getWeekBasedYear(JalaliDate date) {
+    public static int getWeekBasedYear(LocalDateJalali date) {
         int year = date.getYear();
         int doy = date.getDayOfYear();
         if (doy <= 3) {
@@ -66,7 +66,7 @@ public class JalaliIsoFields {
         return year;
     }
 
-    public static int getWeek(JalaliDate date) {
+    public static int getWeek(LocalDateJalali date) {
         int dayOfWeek = date.getDayOfWeek().ordinal();
         int dayOfYear = date.getDayOfYear() - 1;
         int var3 = dayOfYear + (3 - dayOfWeek);
@@ -89,7 +89,7 @@ public class JalaliIsoFields {
         }
     }
 
-    private static ValueRange getWeekRange(JalaliDate date) {
+    private static ValueRange getWeekRange(LocalDateJalali date) {
         int weekOfYear = getWeekBasedYear(date);
         return ValueRange.of(1L, getWeekRange(weekOfYear));
     }

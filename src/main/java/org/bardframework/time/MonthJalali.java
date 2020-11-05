@@ -64,7 +64,7 @@ import static java.time.temporal.ChronoUnit.MONTHS;
  *
  * @author Vahid Zafari
  */
-public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
+public enum MonthJalali implements TemporalAccessor, TemporalAdjuster {
 
     /**
      * The singleton instance for the month of Farvardin with 31 days.
@@ -129,7 +129,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
     /**
      * Private cache of all the constants.
      */
-    private static final JalaliMonth[] ENUMS = JalaliMonth.values();
+    private static final MonthJalali[] ENUMS = MonthJalali.values();
 
     //-----------------------------------------------------------------------
 
@@ -144,7 +144,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
      * @return the month-of-year, not null
      * @throws DateTimeException if the month-of-year is invalid
      */
-    public static JalaliMonth of(int month) {
+    public static MonthJalali of(int month) {
         if (month < 1 || month > 12) {
             throw new DateTimeException("Invalid value for MonthOfYear: " + month);
         }
@@ -171,12 +171,12 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
      * @return the month-of-year, not null
      * @throws DateTimeException if unable to toModel to a {@code JalaliMonth}
      */
-    public static JalaliMonth from(TemporalAccessor temporal) {
-        if (temporal instanceof JalaliMonth) {
-            return (JalaliMonth) temporal;
+    public static MonthJalali from(TemporalAccessor temporal) {
+        if (temporal instanceof MonthJalali) {
+            return (MonthJalali) temporal;
         }
         try {
-            if (!JalaliChronology.INSTANCE.equals(Chronology.from(temporal))) {
+            if (!ChronologyJalali.INSTANCE.equals(Chronology.from(temporal))) {
                 temporal = LocalDate.from(temporal);
             }
             return of(temporal.get(MONTH_OF_YEAR));
@@ -355,7 +355,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
      * @param months the months to add, positive or negative
      * @return the resulting month, not null
      */
-    public JalaliMonth plus(long months) {
+    public MonthJalali plus(long months) {
         int amount = (int) (months % 12);
         return ENUMS[(ordinal() + (amount + 12)) % 12];
     }
@@ -371,7 +371,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
      * @param months the months to subtract, positive or negative
      * @return the resulting month, not null
      */
-    public JalaliMonth minus(long months) {
+    public MonthJalali minus(long months) {
         return plus(-(months % 12));
     }
 
@@ -523,7 +523,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
      *
      * @return the first month of the quarter corresponding to this month, not null
      */
-    public JalaliMonth firstMonthOfQuarter() {
+    public MonthJalali firstMonthOfQuarter() {
         return ENUMS[(ordinal() / 3) * 3];
     }
 
@@ -551,7 +551,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
     @Override
     public <R> R query(TemporalQuery<R> query) {
         if (query == TemporalQueries.chronology()) {
-            return (R) JalaliChronology.INSTANCE;
+            return (R) ChronologyJalali.INSTANCE;
         } else if (query == TemporalQueries.precision()) {
             return (R) MONTHS;
         }
@@ -595,7 +595,7 @@ public enum JalaliMonth implements TemporalAccessor, TemporalAdjuster {
      */
     @Override
     public Temporal adjustInto(Temporal temporal) {
-        if (!Chronology.from(temporal).equals(JalaliChronology.INSTANCE)) {
+        if (!Chronology.from(temporal).equals(ChronologyJalali.INSTANCE)) {
             throw new DateTimeException("Adjustment only supported on ISO date-time");
         }
         return temporal.with(MONTH_OF_YEAR, getValue());

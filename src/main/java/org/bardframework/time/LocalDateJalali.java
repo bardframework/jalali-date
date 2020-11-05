@@ -15,7 +15,7 @@ import static java.time.temporal.ChronoField.*;
 
 /**
  * A date without a time-zone in the ISO-8601 calendar system,
- * such as {@code 2007-12-03}.
+ * such as {@code 1367-08-12}.
  * <p>
  * {@code JalaliDate} is an immutable date-time object that represents a date,
  * often viewed as year-month-day. Other date fields, such as day-of-year,
@@ -43,19 +43,19 @@ import static java.time.temporal.ChronoField.*;
  * @author Vahid Zafari
  * This class is immutable and thread-safe.
  */
-public final class JalaliDate implements ChronoLocalDate, Serializable {
+public final class LocalDateJalali implements ChronoLocalDate, Serializable {
 
     /**
      * The minimum supported {@code JalaliDate}, '-999999999-01-01'.
      * This could be used by an application as a "far past" date.
      */
-    public static final JalaliDate MIN = JalaliDate.of(Year.MIN_VALUE, 1, 1);
+    public static final LocalDateJalali MIN = LocalDateJalali.of(Year.MIN_VALUE, 1, 1);
     /**
      * The maximum supported {@code JalaliDate}, '+999999999-12-31'.
      * This could be used by an application as a "far future" date.
      */
-    public static final JalaliDate MAX = JalaliDate.of(Year.MAX_VALUE, 12, 30);
-    public static final JalaliDate LOCAL_1970_01_01 = of(1348, 10, 11);
+    public static final LocalDateJalali MAX = LocalDateJalali.of(Year.MAX_VALUE, 12, 30);
+    public static final LocalDateJalali LOCAL_1970_01_01 = of(1348, 10, 11);
     public static final int DAYS_LEFT_IN_1970_01_01 = 492_634;
     public static final java.time.LocalDate JALALI_0001_01_01 = java.time.LocalDate.of(622, Month.MARCH, 22);
     /**
@@ -107,9 +107,9 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     static final long NANOS_PER_DAY = NANOS_PER_HOUR * HOURS_PER_DAY;
 
-    static final TemporalQuery<JalaliDate> LOCAL_DATE = (temporal) -> {
+    static final TemporalQuery<LocalDateJalali> LOCAL_DATE = (temporal) -> {
         if (temporal.isSupported(EPOCH_DAY)) {
-            return JalaliDate.ofEpochDay(temporal.getLong(EPOCH_DAY));
+            return LocalDateJalali.ofEpochDay(temporal.getLong(EPOCH_DAY));
         }
         return null;
     };
@@ -165,7 +165,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @param month      the month-of-year to represent, not null
      * @param dayOfMonth the day-of-month to represent, valid for year-month, from 1 to 31
      */
-    private JalaliDate(int year, int month, int dayOfMonth) {
+    private LocalDateJalali(int year, int month, int dayOfMonth) {
         this.year = year;
         this.month = (short) month;
         this.day = (short) dayOfMonth;
@@ -182,7 +182,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      *
      * @return the current date using the system clock and default time-zone, not null
      */
-    public static JalaliDate now() {
+    public static LocalDateJalali now() {
         return now(Clock.systemDefaultZone());
     }
 
@@ -200,7 +200,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @param zone the zone ID to use, not null
      * @return the current date using the system clock, not null
      */
-    public static JalaliDate now(ZoneId zone) {
+    public static LocalDateJalali now(ZoneId zone) {
         return now(Clock.system(zone));
     }
 
@@ -214,14 +214,14 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @param clock the clock to use, not null
      * @return the current date, not null
      */
-    public static JalaliDate now(Clock clock) {
+    public static LocalDateJalali now(Clock clock) {
         Objects.requireNonNull(clock, "clock");
         // inline to avoid creating object and Instant checks
         final Instant now = clock.instant();  // called once
         ZoneOffset offset = clock.getZone().getRules().getOffset(now);
         long epochSec = now.getEpochSecond() + offset.getTotalSeconds();  // overflow caught later
         long epochDay = Math.floorDiv(epochSec, SECONDS_PER_DAY);
-        return JalaliDate.ofEpochDay(epochDay);
+        return LocalDateJalali.ofEpochDay(epochDay);
     }
 
     //-----------------------------------------------------------------------
@@ -239,7 +239,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static JalaliDate of(int year, JalaliMonth month, int dayOfMonth) {
+    public static LocalDateJalali of(int year, MonthJalali month, int dayOfMonth) {
         YEAR.checkValidValue(year);
         Objects.requireNonNull(month, "month");
         DAY_OF_MONTH.checkValidValue(dayOfMonth);
@@ -259,14 +259,14 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static JalaliDate of(int year, int month, int dayOfMonth) {
+    public static LocalDateJalali of(int year, int month, int dayOfMonth) {
         YEAR.checkValidValue(year);
         MONTH_OF_YEAR.checkValidValue(month);
         DAY_OF_MONTH.checkValidValue(dayOfMonth);
         return create(year, month, dayOfMonth);
     }
 
-    public static JalaliDate of(String jalaliDate) {
+    public static LocalDateJalali of(String jalaliDate) {
         if (null == jalaliDate) {
             throw new IllegalArgumentException("invalid date: " + jalaliDate);
         }
@@ -274,7 +274,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         if (8 != digit.length()) {
             throw new IllegalArgumentException("cant obtain date value from: " + jalaliDate);
         }
-        return JalaliDate.of(Integer.parseInt(digit.substring(0, 4)), Integer.parseInt(digit.substring(4, 6)), Integer.parseInt(digit.substring(6, 8)));
+        return LocalDateJalali.of(Integer.parseInt(digit.substring(0, 4)), Integer.parseInt(digit.substring(4, 6)), Integer.parseInt(digit.substring(6, 8)));
     }
 
     /**
@@ -289,23 +289,23 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-year is invalid for the year
      */
-    public static JalaliDate ofYearDay(int year, int dayOfYear) {
+    public static LocalDateJalali ofYearDay(int year, int dayOfYear) {
         YEAR.checkValidValue(year);
         DAY_OF_YEAR.checkValidValue(dayOfYear);
-        boolean leap = JalaliChronology.INSTANCE.isLeapYear(year);
+        boolean leap = ChronologyJalali.INSTANCE.isLeapYear(year);
         if (dayOfYear == 366 && !leap) {
             throw new DateTimeException("Invalid date 'DayOfYear 366' as '" + year + "' is not a leap year");
         }
-        JalaliMonth moy = JalaliMonth.of((dayOfYear - 1) / 31 + 1);
+        MonthJalali moy = MonthJalali.of((dayOfYear - 1) / 31 + 1);
         int monthEnd = moy.firstDayOfYear(leap) + moy.length(leap) - 1;
         if (dayOfYear > monthEnd) {
             moy = moy.plus(1);
         }
         int dom = dayOfYear - moy.firstDayOfYear(leap) + 1;
-        return new JalaliDate(year, moy.getValue(), dom);
+        return new LocalDateJalali(year, moy.getValue(), dom);
     }
 
-    public static JalaliDate of(java.time.LocalDate localDate) {
+    public static LocalDateJalali of(java.time.LocalDate localDate) {
         return getFirstDayOfGregorianYearInJalaliDate(localDate.getYear()).plusDays(localDate.getDayOfYear() - 1);
 //        return ofEpochDay(localDate.toEpochDay());
     }
@@ -321,24 +321,24 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date, not null
      * @throws DateTimeException if the epoch day exceeds the supported date range
      */
-    static JalaliDate ofEpochDay(long epochDay) {
-        JalaliYear year = JalaliYear.of(LOCAL_1970_01_01.getYear());
-        JalaliMonth month = LOCAL_1970_01_01.getMonth();
+    public static LocalDateJalali ofEpochDay(long epochDay) {
+        YearJalali year = YearJalali.of(LOCAL_1970_01_01.getYear());
+        MonthJalali month = LOCAL_1970_01_01.getMonth();
         short day = LOCAL_1970_01_01.day;
         if (epochDay < 0) {
             LOCAL_1970_01_01.minusDays(10);
             epochDay = Math.abs(epochDay);
-            JalaliYear previousYear = year.minusYears(1);
+            YearJalali previousYear = year.minusYears(1);
             while (epochDay >= previousYear.length()) {
                 epochDay -= previousYear.length();
                 year = previousYear;
                 previousYear = year.minusYears(1);
             }
-            JalaliMonth previousMonth = month.minus(1);
+            MonthJalali previousMonth = month.minus(1);
             while (epochDay >= previousMonth.length(year.isLeap())) {
                 epochDay -= previousMonth.length(year.isLeap());
                 month = previousMonth;
-                if (JalaliMonth.ESFAND == month) {
+                if (MonthJalali.ESFAND == month) {
                     year = year.minusYears(1);
                 }
                 previousMonth = month.minus(1);
@@ -347,7 +347,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
             if (day < 0) {
                 month = month.minus(1);
                 day += month.length(year.isLeap());
-                if (JalaliMonth.ESFAND == month) {
+                if (MonthJalali.ESFAND == month) {
                     year = year.minusYears(1);
                 }
             }
@@ -359,7 +359,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
             while (epochDay >= month.length(year.isLeap())) {
                 epochDay -= month.length(year.isLeap());
                 month = month.plus(1);
-                if (JalaliMonth.FARVARDIN == month) {
+                if (MonthJalali.FARVARDIN == month) {
                     year = year.plusYears(1);
                 }
             }
@@ -367,7 +367,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
             if (day > month.length(year.isLeap())) {
                 day -= month.length(year.isLeap());
                 month = month.plus(1);
-                if (JalaliMonth.FARVARDIN == month) {
+                if (MonthJalali.FARVARDIN == month) {
                     year = year.plusYears(1);
                 }
             }
@@ -375,7 +375,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         return of(year.getValue(), month, day);
     }
 
-    private static JalaliDate getFirstDayOfGregorianYearInJalaliDate(int gregorianYear) {
+    private static LocalDateJalali getFirstDayOfGregorianYearInJalaliDate(int gregorianYear) {
         int day;
         if (_10.contains(gregorianYear)) {
             day = 10;
@@ -384,7 +384,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         } else {
             day = 11;
         }
-        return JalaliDate.of(gregorianYear - 622, 10, day);
+        return LocalDateJalali.of(gregorianYear - 622, 10, day);
     }
 
     /**
@@ -404,9 +404,9 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date, not null
      * @throws DateTimeException if unable to toModel to a {@code JalaliDate}
      */
-    public static JalaliDate from(TemporalAccessor temporal) {
+    public static LocalDateJalali from(TemporalAccessor temporal) {
         Objects.requireNonNull(temporal, "temporal");
-        JalaliDate date = temporal.query(LOCAL_DATE);
+        LocalDateJalali date = temporal.query(LOCAL_DATE);
         if (date == null) {
             throw new DateTimeException("Unable to obtain JalaliDate from TemporalAccessor: " + temporal + " of type " + temporal.getClass().getName());
         }
@@ -414,16 +414,16 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
     }
 
     /**
-     * Obtains an instance of {@code JalaliDate} from a text string such as {@code 2007-12-03}.
+     * Obtains an instance of {@code JalaliDate} from a text string such as {@code 1367-08-12}.
      * <p>
      * The string must represent a valid date and is parsed using
      * {@link DateTimeFormatter#ISO_LOCAL_DATE}.
      *
-     * @param text the text to parse such as "2007-12-03", not null
+     * @param text the text to parse such as "1367-08-12", not null
      * @return the parsed local date, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliDate parse(CharSequence text) {
+    public static LocalDateJalali parse(CharSequence text) {
         return parse(text, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
@@ -437,9 +437,9 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the parsed local date, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static JalaliDate parse(CharSequence text, DateTimeFormatter formatter) {
+    public static LocalDateJalali parse(CharSequence text, DateTimeFormatter formatter) {
         Objects.requireNonNull(formatter, "formatter");
-        return formatter.parse(text, JalaliDate::from);
+        return formatter.parse(text, LocalDateJalali::from);
     }
 
     //-----------------------------------------------------------------------
@@ -453,7 +453,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date, not null
      * @throws DateTimeException if the day-of-month is invalid for the month-year
      */
-    private static JalaliDate create(int year, int month, int dayOfMonth) {
+    private static LocalDateJalali create(int year, int month, int dayOfMonth) {
         if (dayOfMonth > 29) {
             int dom = 31;
             switch (month) {
@@ -465,18 +465,18 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
                     dom = 30;
                     break;
                 case 12:
-                    dom = JalaliYear.isLeap(year) ? 30 : 29;
+                    dom = YearJalali.isLeap(year) ? 30 : 29;
                     break;
             }
             if (dayOfMonth > dom) {
                 if (12 == month) {
                     throw new DateTimeException("Invalid date '30 Esfand' as '" + year + "' is not a leap year");
                 } else {
-                    throw new DateTimeException("Invalid date '" + JalaliMonth.of(month).name() + " " + dayOfMonth + "'");
+                    throw new DateTimeException("Invalid date '" + MonthJalali.of(month).name() + " " + dayOfMonth + "'");
                 }
             }
         }
-        return new JalaliDate(year, month, dayOfMonth);
+        return new LocalDateJalali(year, month, dayOfMonth);
     }
 
     /**
@@ -487,24 +487,24 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @param day   the day-of-month to represent, validated from 1 to 31
      * @return the resolved date, not null
      */
-    private static JalaliDate resolvePreviousValid(int year, int month, int day) {
+    private static LocalDateJalali resolvePreviousValid(int year, int month, int day) {
         switch (month) {
             case 12:
-                day = Math.min(day, JalaliChronology.INSTANCE.isLeapYear(year) ? 30 : 29);
+                day = Math.min(day, ChronologyJalali.INSTANCE.isLeapYear(year) ? 30 : 29);
                 break;
         }
-        return new JalaliDate(year, month, day);
+        return new LocalDateJalali(year, month, day);
     }
 
     public LocalDate toLocalDate() {
         int gregorianYear = this.getYear() + 622;
         LocalDate firstDayOfGregorianYearInGregorian = LocalDate.of(gregorianYear, 1, 1);
-        JalaliDate firstDayOfGregorianYearInJalali = getFirstDayOfGregorianYearInJalaliDate(gregorianYear);
+        LocalDateJalali firstDayOfGregorianYearInJalali = getFirstDayOfGregorianYearInJalaliDate(gregorianYear);
         int dif = this.getPositiveDistance(firstDayOfGregorianYearInJalali);
         return this.isBefore(firstDayOfGregorianYearInJalali) ? firstDayOfGregorianYearInGregorian.minusDays(dif) : firstDayOfGregorianYearInGregorian.plusDays(dif);
     }
 
-    public int getPositiveDistance(JalaliDate other) {
+    public int getPositiveDistance(LocalDateJalali other) {
         if (other == null) {
             return 0;
         }
@@ -520,7 +520,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         int current = this.getYear();
         int diff = this.getRemainDayOfYear() + other.getDayOfYear();
         while (current + 1 != other.getYear()) {
-            diff += JalaliYear.of(current).length();
+            diff += YearJalali.of(current).length();
             current += 1;
         }
         return diff;
@@ -646,7 +646,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
                     case ALIGNED_WEEK_OF_MONTH:
                         //TODO check this line again
 //                        return ValueRange.of(1, getMonth() == JalaliMonth.FEBRUARY && isLeapYear() == false ? 4 : 5);
-                        return ValueRange.of(1, getMonth() == JalaliMonth.ESFAND && !isLeapYear() ? 4 : 5);
+                        return ValueRange.of(1, getMonth() == MonthJalali.ESFAND && !isLeapYear() ? 4 : 5);
                     case YEAR_OF_ERA:
                         return (getYear() <= 0 ? ValueRange.of(1, Year.MAX_VALUE + 1) : ValueRange.of(1, Year.MAX_VALUE));
                 }
@@ -778,8 +778,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the ISO chronology, not null
      */
     @Override
-    public JalaliChronology getChronology() {
-        return JalaliChronology.INSTANCE;
+    public ChronologyJalali getChronology() {
+        return ChronologyJalali.INSTANCE;
     }
 
     /**
@@ -796,7 +796,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * the Japanese calendar system.
      * <p>
      * The returned era will be a singleton capable of being compared with the constants
-     * in {@link JalaliChronology} using the {@code ==} operator.
+     * in {@link ChronologyJalali} using the {@code ==} operator.
      *
      * @return the {@code JalaliChronology} era constant applicable at this date, not null
      */
@@ -823,7 +823,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * Gets the month-of-year field from 1 to 12.
      * <p>
      * This method returns the month as an {@code int} from 1 to 12.
-     * Application code is frequently clearer if the enum {@link JalaliMonth}
+     * Application code is frequently clearer if the enum {@link MonthJalali}
      * is used by calling {@link #getMonth()}.
      *
      * @return the month-of-year, from 1 to 12
@@ -836,16 +836,16 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
     /**
      * Gets the month-of-year field using the {@code JalaliMonth} enum.
      * <p>
-     * This method returns the enum {@link JalaliMonth} for the month.
+     * This method returns the enum {@link MonthJalali} for the month.
      * This avoids confusion as to what {@code int} values mean.
      * If you need access to the primitive {@code int} value then the enum
-     * provides the {@link JalaliMonth#getValue() int value}.
+     * provides the {@link MonthJalali#getValue() int value}.
      *
      * @return the month-of-year, not null
      * @see #getMonthValue()
      */
-    public JalaliMonth getMonth() {
-        return JalaliMonth.of(month);
+    public MonthJalali getMonth() {
+        return MonthJalali.of(month);
     }
 
     /**
@@ -910,7 +910,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override // override for Javadoc and performance
     public boolean isLeapYear() {
-        return JalaliChronology.INSTANCE.isLeapYear(year);
+        return ChronologyJalali.INSTANCE.isLeapYear(year);
     }
 
     /**
@@ -964,7 +964,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * {@link TemporalAdjusters TemporalAdjusters}.
      * These include finding the "last day of the month" and "next Wednesday".
      * Key date-time classes also implement the {@code TemporalAdjuster} interface,
-     * such as {@link JalaliMonth} and {@link MonthDay MonthDay}.
+     * such as {@link MonthJalali} and {@link MonthDay MonthDay}.
      * The adjuster is responsible for handling special cases, such as the varying
      * lengths of month and leap years.
      * <p>
@@ -988,12 +988,12 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public JalaliDate with(TemporalAdjuster adjuster) {
+    public LocalDateJalali with(TemporalAdjuster adjuster) {
         // optimizations
-        if (adjuster instanceof JalaliDate) {
-            return (JalaliDate) adjuster;
+        if (adjuster instanceof LocalDateJalali) {
+            return (LocalDateJalali) adjuster;
         }
-        return (JalaliDate) adjuster.adjustInto(this);
+        return (LocalDateJalali) adjuster.adjustInto(this);
     }
 
     /**
@@ -1101,7 +1101,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public JalaliDate with(TemporalField field, long newValue) {
+    public LocalDateJalali with(TemporalField field, long newValue) {
         if (field instanceof ChronoField) {
             ChronoField f = (ChronoField) field;
             f.checkValidValue(newValue);
@@ -1117,7 +1117,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
                 case DAY_OF_YEAR:
                     return withDayOfYear((int) newValue);
                 case EPOCH_DAY:
-                    return JalaliDate.ofEpochDay(newValue);
+                    return LocalDateJalali.ofEpochDay(newValue);
                 case ALIGNED_WEEK_OF_MONTH:
                     return plusWeeks(newValue - getLong(ALIGNED_WEEK_OF_MONTH));
                 case ALIGNED_WEEK_OF_YEAR:
@@ -1151,7 +1151,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the requested year, not null
      * @throws DateTimeException if the year value is invalid
      */
-    public JalaliDate withYear(int year) {
+    public LocalDateJalali withYear(int year) {
         if (this.year == year) {
             return this;
         }
@@ -1170,7 +1170,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the requested month, not null
      * @throws DateTimeException if the month-of-year value is invalid
      */
-    public JalaliDate withMonth(int month) {
+    public LocalDateJalali withMonth(int month) {
         if (this.month == month) {
             return this;
         }
@@ -1190,7 +1190,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException if the day-of-month value is invalid,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public JalaliDate withDayOfMonth(int dayOfMonth) {
+    public LocalDateJalali withDayOfMonth(int dayOfMonth) {
         if (this.day == dayOfMonth) {
             return this;
         }
@@ -1209,7 +1209,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException if the day-of-year value is invalid,
      *                           or if the day-of-year is invalid for the year
      */
-    public JalaliDate withDayOfYear(int dayOfYear) {
+    public LocalDateJalali withDayOfYear(int dayOfYear) {
         if (this.getDayOfYear() == dayOfYear) {
             return this;
         }
@@ -1239,13 +1239,13 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public JalaliDate plus(TemporalAmount amountToAdd) {
+    public LocalDateJalali plus(TemporalAmount amountToAdd) {
         if (amountToAdd instanceof Period) {
             Period periodToAdd = (Period) amountToAdd;
             return plusMonths(periodToAdd.toTotalMonths()).plusDays(periodToAdd.getDays());
         }
         Objects.requireNonNull(amountToAdd, "amountToAdd");
-        return (JalaliDate) amountToAdd.addTo(this);
+        return (LocalDateJalali) amountToAdd.addTo(this);
     }
 
     /**
@@ -1330,7 +1330,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public JalaliDate plus(long amountToAdd, TemporalUnit unit) {
+    public LocalDateJalali plus(long amountToAdd, TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {
             ChronoUnit f = (ChronoUnit) unit;
             switch (f) {
@@ -1378,7 +1378,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the years added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate plusYears(long yearsToAdd) {
+    public LocalDateJalali plusYears(long yearsToAdd) {
         if (yearsToAdd == 0) {
             return this;
         }
@@ -1397,8 +1397,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * </ol>
      * <p>
      * For example, 2007-03-31 plus one month would result in the invalid date
-     * 2007-04-31. Instead of returning an invalid result, the last valid day
-     * of the month, 2007-04-30, is selected instead.
+     * 1367-08-12. Instead of returning an invalid result, the last valid day
+     * of the month, 1367-08-12, is selected instead.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
@@ -1406,7 +1406,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the months added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate plusMonths(long monthsToAdd) {
+    public LocalDateJalali plusMonths(long monthsToAdd) {
         if (monthsToAdd == 0) {
             return this;
         }
@@ -1432,7 +1432,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the weeks added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate plusWeeks(long weeksToAdd) {
+    public LocalDateJalali plusWeeks(long weeksToAdd) {
         return plusDays(Math.multiplyExact(weeksToAdd, 7L));
     }
 
@@ -1451,12 +1451,12 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the days added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate plusDays(long daysToAdd) {
+    public LocalDateJalali plusDays(long daysToAdd) {
         if (daysToAdd == 0) {
             return this;
         }
-        JalaliYear year = JalaliYear.of(getYear());
-        JalaliMonth month = getMonth();
+        YearJalali year = YearJalali.of(getYear());
+        MonthJalali month = getMonth();
         int dayOfMonth = getDayOfMonth();
         while (daysToAdd >= year.length()) {
             daysToAdd -= year.length();
@@ -1465,7 +1465,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         while (daysToAdd >= month.length(year.isLeap())) {
             daysToAdd -= month.length(year.isLeap());
             month = month.plus(1);
-            if (month == JalaliMonth.FARVARDIN) {
+            if (month == MonthJalali.FARVARDIN) {
                 year = year.plusYears(1);
             }
         }
@@ -1473,7 +1473,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         if (dayOfMonth > month.length(year.isLeap())) {
             dayOfMonth -= month.length(year.isLeap());
             month = month.plus(1);
-            if (month == JalaliMonth.FARVARDIN) {
+            if (month == MonthJalali.FARVARDIN) {
                 year = year.plusYears(1);
             }
         }
@@ -1505,13 +1505,13 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public JalaliDate minus(TemporalAmount amountToSubtract) {
+    public LocalDateJalali minus(TemporalAmount amountToSubtract) {
         if (amountToSubtract instanceof Period) {
             Period periodToSubtract = (Period) amountToSubtract;
             return minusMonths(periodToSubtract.toTotalMonths()).minusDays(periodToSubtract.getDays());
         }
         Objects.requireNonNull(amountToSubtract, "amountToSubtract");
-        return (JalaliDate) amountToSubtract.subtractFrom(this);
+        return (LocalDateJalali) amountToSubtract.subtractFrom(this);
     }
 
     /**
@@ -1534,7 +1534,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public JalaliDate minus(long amountToSubtract, TemporalUnit unit) {
+    public LocalDateJalali minus(long amountToSubtract, TemporalUnit unit) {
         return (amountToSubtract == Long.MIN_VALUE ? plus(Long.MAX_VALUE, unit).plus(1, unit) : plus(-amountToSubtract, unit));
     }
 
@@ -1560,7 +1560,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the years subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate minusYears(long yearsToSubtract) {
+    public LocalDateJalali minusYears(long yearsToSubtract) {
         return (yearsToSubtract == Long.MIN_VALUE ? plusYears(Long.MAX_VALUE).plusYears(1) : plusYears(-yearsToSubtract));
     }
 
@@ -1574,8 +1574,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * <li>Adjust the day-of-month to the last valid day if necessary</li>
      * </ol>
      * <p>
-     * For example, 2007-03-31 minus one month would result in the invalid date
-     * 2007-02-31. Instead of returning an invalid result, the last valid day
+     * For example, 1367-01-31 minus one month would result in the invalid date
+     * 1366-12-31. Instead of returning an invalid result, the last valid day
      * of the month, 2007-02-28, is selected instead.
      * <p>
      * This instance is immutable and unaffected by this method call.
@@ -1584,7 +1584,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the months subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate minusMonths(long monthsToSubtract) {
+    public LocalDateJalali minusMonths(long monthsToSubtract) {
         return (monthsToSubtract == Long.MIN_VALUE ? plusMonths(Long.MAX_VALUE).plusMonths(1) : plusMonths(-monthsToSubtract));
     }
 
@@ -1603,7 +1603,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the weeks subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate minusWeeks(long weeksToSubtract) {
+    public LocalDateJalali minusWeeks(long weeksToSubtract) {
         return (weeksToSubtract == Long.MIN_VALUE ? plusWeeks(Long.MAX_VALUE).plusWeeks(1) : plusWeeks(-weeksToSubtract));
     }
 
@@ -1622,7 +1622,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return a {@code JalaliDate} based on this date with the days subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public JalaliDate minusDays(long daysToSubtract) {
+    public LocalDateJalali minusDays(long daysToSubtract) {
         return (daysToSubtract == Long.MIN_VALUE ? plusDays(Long.MAX_VALUE).plusDays(1) : plusDays(-daysToSubtract));
     }
 
@@ -1733,7 +1733,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override
     public long until(Temporal endExclusive, TemporalUnit unit) {
-        JalaliDate end = JalaliDate.from(endExclusive);
+        LocalDateJalali end = LocalDateJalali.from(endExclusive);
         if (unit instanceof ChronoUnit) {
             switch ((ChronoUnit) unit) {
                 case DAYS:
@@ -1758,11 +1758,11 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         return unit.between(this, end);
     }
 
-    long daysUntil(JalaliDate end) {
+    long daysUntil(LocalDateJalali end) {
         return end.toEpochDay() - toEpochDay();  // no overflow
     }
 
-    private long monthsUntil(JalaliDate end) {
+    private long monthsUntil(LocalDateJalali end) {
         long packed1 = getProlepticMonth() * 32L + getDayOfMonth();  // no overflow
         long packed2 = end.getProlepticMonth() * 32L + end.getDayOfMonth();  // no overflow
         return (packed2 - packed1) / 32;
@@ -1802,12 +1802,12 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override
     public Period until(ChronoLocalDate endDateExclusive) {
-        JalaliDate end = JalaliDate.from(endDateExclusive);
+        LocalDateJalali end = LocalDateJalali.from(endDateExclusive);
         long totalMonths = end.getProlepticMonth() - this.getProlepticMonth();  // safe
         int days = end.day - this.day;
         if (totalMonths > 0 && days < 0) {
             totalMonths--;
-            JalaliDate calcDate = this.plusMonths(totalMonths);
+            LocalDateJalali calcDate = this.plusMonths(totalMonths);
             days = (int) (end.toEpochDay() - calcDate.toEpochDay());  // safe
         } else if (totalMonths < 0 && days > 0) {
             totalMonths++;
@@ -1845,8 +1845,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      */
     @Override
-    public final JalaliDateTime atTime(LocalTime time) {
-        return JalaliDateTime.of(this, time);
+    public final LocaleDateTimeJalali atTime(LocalTime time) {
+        return LocaleDateTimeJalali.of(this, time);
     }
 
     /**
@@ -1863,7 +1863,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      * @throws DateTimeException if the value of any field is out of range
      */
-    public JalaliDateTime atTime(int hour, int minute) {
+    public LocaleDateTimeJalali atTime(int hour, int minute) {
         return atTime(LocalTime.of(hour, minute));
     }
 
@@ -1882,7 +1882,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      * @throws DateTimeException if the value of any field is out of range
      */
-    public JalaliDateTime atTime(int hour, int minute, int second) {
+    public LocaleDateTimeJalali atTime(int hour, int minute, int second) {
         return atTime(LocalTime.of(hour, minute, second));
     }
 
@@ -1901,7 +1901,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      * @throws DateTimeException if the value of any field is out of range
      */
-    public JalaliDateTime atTime(int hour, int minute, int second, int nanoOfSecond) {
+    public LocaleDateTimeJalali atTime(int hour, int minute, int second, int nanoOfSecond) {
         return atTime(LocalTime.of(hour, minute, second, nanoOfSecond));
     }
 
@@ -1914,8 +1914,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      *
      * @return the local date-time of midnight at the start of this date, not null
      */
-    public JalaliDateTime atStartOfDay() {
-        return JalaliDateTime.of(this, LocalTime.MIDNIGHT);
+    public LocaleDateTimeJalali atStartOfDay() {
+        return LocaleDateTimeJalali.of(this, LocalTime.MIDNIGHT);
     }
 
     //-----------------------------------------------------------------------
@@ -1923,7 +1923,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
     public long toEpochDay() {
         long total = year * 365;
         for (int i = 0; i < year; i++) {
-            if (JalaliYear.isLeap(i)) {
+            if (YearJalali.isLeap(i)) {
                 total++;
             }
         }
@@ -1949,13 +1949,13 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override  // override for Javadoc and performance
     public int compareTo(ChronoLocalDate other) {
-        if (other instanceof JalaliDate) {
-            return compareTo0((JalaliDate) other);
+        if (other instanceof LocalDateJalali) {
+            return compareTo0((LocalDateJalali) other);
         }
         return ChronoLocalDate.super.compareTo(other);
     }
 
-    int compareTo0(JalaliDate otherDate) {
+    int compareTo0(LocalDateJalali otherDate) {
         int cmp = (year - otherDate.year);
         if (cmp == 0) {
             cmp = (month - otherDate.month);
@@ -1989,8 +1989,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override  // override for Javadoc and performance
     public boolean isAfter(ChronoLocalDate other) {
-        if (other instanceof JalaliDate) {
-            return compareTo0((JalaliDate) other) > 0;
+        if (other instanceof LocalDateJalali) {
+            return compareTo0((LocalDateJalali) other) > 0;
         }
         return ChronoLocalDate.super.isAfter(other);
     }
@@ -2018,8 +2018,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override  // override for Javadoc and performance
     public boolean isBefore(ChronoLocalDate other) {
-        if (other instanceof JalaliDate) {
-            return compareTo0((JalaliDate) other) < 0;
+        if (other instanceof LocalDateJalali) {
+            return compareTo0((LocalDateJalali) other) < 0;
         }
         return ChronoLocalDate.super.isBefore(other);
     }
@@ -2047,8 +2047,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
      */
     @Override  // override for Javadoc and performance
     public boolean isEqual(ChronoLocalDate other) {
-        if (other instanceof JalaliDate) {
-            return compareTo0((JalaliDate) other) == 0;
+        if (other instanceof LocalDateJalali) {
+            return compareTo0((LocalDateJalali) other) == 0;
         }
         return ChronoLocalDate.super.isEqual(other);
     }
@@ -2072,8 +2072,8 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof JalaliDate) {
-            return compareTo0((JalaliDate) obj) == 0;
+        if (obj instanceof LocalDateJalali) {
+            return compareTo0((LocalDateJalali) obj) == 0;
         }
         return false;
     }
@@ -2092,7 +2092,7 @@ public final class JalaliDate implements ChronoLocalDate, Serializable {
     //-----------------------------------------------------------------------
 
     /**
-     * Outputs this date as a {@code String}, such as {@code 2007-12-03}.
+     * Outputs this date as a {@code String}, such as {@code 1367-08-12}.
      * <p>
      * The output will be in the ISO-8601 format {@code uuuu-MM-dd}.
      *

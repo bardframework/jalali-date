@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.JalaliChronology;
+import org.bardframework.time.ChronologyJalali;
 
 import java.io.IOException;
 import java.text.ParsePosition;
@@ -27,7 +27,7 @@ import static java.time.temporal.ChronoField.*;
  * </ul>
  * <p>
  * More complex formatters are provided by
- * {@link JalaliDateTimeFormatterBuilder JalaliDateTimeFormatterBuilder}.
+ * {@link DateTimeFormatterBuilderJalali JalaliDateTimeFormatterBuilder}.
  *
  * <p>
  * The main date-time classes provide two methods - one for formatting,
@@ -237,7 +237,7 @@ import static java.time.temporal.ChronoField.*;
  * <p>
  * <b>Year</b>: The count of letters determines the minimum field width below
  * which padding is used. If the count of letters is two, then a
- * {@link JalaliDateTimeFormatterBuilder#appendValueReduced reduced} two digit form is
+ * {@link DateTimeFormatterBuilderJalali#appendValueReduced reduced} two digit form is
  * used. For printing, this outputs the rightmost two digits. For parsing, this
  * will parse using the base value of 2000, resulting in a year within the range
  * 2000 to 2099 inclusive. If the count of letters is less than four (but not
@@ -287,13 +287,13 @@ import static java.time.temporal.ChronoField.*;
  * Six or more letters throws {@code IllegalArgumentException}.
  * <p>
  * <b>Optional section</b>: The optional section markers work exactly like
- * calling {@link JalaliDateTimeFormatterBuilder#optionalStart()} and
- * {@link JalaliDateTimeFormatterBuilder#optionalEnd()}.
+ * calling {@link DateTimeFormatterBuilderJalali#optionalStart()} and
+ * {@link DateTimeFormatterBuilderJalali#optionalEnd()}.
  * <p>
  * <b>Pad modifier</b>: Modifies the pattern that immediately follows to be
  * padded with spaces. The pad width is determined by the number of pattern
  * letters. This is the same as calling
- * {@link JalaliDateTimeFormatterBuilder#padNext(int)}.
+ * {@link DateTimeFormatterBuilderJalali#padNext(int)}.
  * <p>
  * For example, 'ppH' outputs the hour-of-day padded on the left with spaces to
  * a width of 2.
@@ -353,7 +353,7 @@ import static java.time.temporal.ChronoField.*;
  * <p>
  * This class is immutable and thread-safe.
  */
-public final class JalaliDateTimeFormatter {
+public final class DateTimeFormatterJalali {
 
     public static final Map<Long, String> DAY_OF_WEEK = new HashMap<>();
     public static final Map<Long, String> MONTH_OF_YEAR = new HashMap<>();
@@ -381,7 +381,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_LOCAL_DATE;
+    public static final DateTimeFormatterJalali ISO_LOCAL_DATE;
     /**
      * The RFC-1123 date-time formatter, such as 'Tue, 3 Jun 2008 11:05:30 GMT'.
      * <p>
@@ -425,7 +425,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#SMART SMART} resolver style.
      */
-    public static final JalaliDateTimeFormatter RFC_1123_DATE_TIME;
+    public static final DateTimeFormatterJalali RFC_1123_DATE_TIME;
     /**
      * The ISO date formatter that formats or parses a date with an
      * offset, such as '2011-12-03+01:00'.
@@ -444,7 +444,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_OFFSET_DATE;
+    public static final DateTimeFormatterJalali ISO_OFFSET_DATE;
     /**
      * The ISO date formatter that formats or parses a date with the
      * offset if available, such as '2011-12-03' or '2011-12-03+01:00'.
@@ -464,7 +464,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_DATE;
+    public static final DateTimeFormatterJalali ISO_DATE;
     /**
      * The ISO time formatter that formats or parses a time without an
      * offset, such as '10:15' or '10:15:30'.
@@ -491,7 +491,7 @@ public final class JalaliDateTimeFormatter {
      * The returned formatter has no override chronology or zone.
      * It uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_LOCAL_TIME;
+    public static final DateTimeFormatterJalali ISO_LOCAL_TIME;
     /**
      * The ISO time formatter that formats or parses a time with an
      * offset, such as '10:15+01:00' or '10:15:30+01:00'.
@@ -509,7 +509,7 @@ public final class JalaliDateTimeFormatter {
      * The returned formatter has no override chronology or zone.
      * It uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_OFFSET_TIME;
+    public static final DateTimeFormatterJalali ISO_OFFSET_TIME;
     /**
      * The ISO time formatter that formats or parses a time, with the
      * offset if available, such as '10:15', '10:15:30' or '10:15:30+01:00'.
@@ -527,7 +527,7 @@ public final class JalaliDateTimeFormatter {
      * The returned formatter has no override chronology or zone.
      * It uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_TIME;
+    public static final DateTimeFormatterJalali ISO_TIME;
     /**
      * The ISO date-time formatter that formats or parses a date-time without
      * an offset, such as '2011-12-03T10:15:30'.
@@ -545,7 +545,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_LOCAL_DATE_TIME;
+    public static final DateTimeFormatterJalali ISO_LOCAL_DATE_TIME;
     //-----------------------------------------------------------------------
     /**
      * The ISO date-time formatter that formats or parses a date-time with an
@@ -565,7 +565,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_OFFSET_DATE_TIME;
+    public static final DateTimeFormatterJalali ISO_OFFSET_DATE_TIME;
     //-----------------------------------------------------------------------
     /**
      * The ISO-like date-time formatter that formats or parses a date-time with
@@ -589,7 +589,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_ZONED_DATE_TIME;
+    public static final DateTimeFormatterJalali ISO_ZONED_DATE_TIME;
     //-----------------------------------------------------------------------
     /**
      * The ISO-like date-time formatter that formats or parses a date-time with
@@ -616,7 +616,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_DATE_TIME;
+    public static final DateTimeFormatterJalali ISO_DATE_TIME;
 
     //-----------------------------------------------------------------------
     /**
@@ -643,7 +643,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_ORDINAL_DATE;
+    public static final DateTimeFormatterJalali ISO_ORDINAL_DATE;
     /**
      * The ISO date formatter that formats or parses the week-based date
      * without an offset, such as '2012-W48-6'.
@@ -672,7 +672,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_WEEK_DATE;
+    public static final DateTimeFormatterJalali ISO_WEEK_DATE;
 
     //-----------------------------------------------------------------------
     /**
@@ -705,7 +705,7 @@ public final class JalaliDateTimeFormatter {
      * The returned formatter has no override chronology or zone.
      * It uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter ISO_INSTANT;
+    public static final DateTimeFormatterJalali ISO_INSTANT;
     /**
      * The ISO date formatter that formats or parses a date without an
      * offset, such as '20111203'.
@@ -730,7 +730,7 @@ public final class JalaliDateTimeFormatter {
      * other calendar systems are correctly converted.
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
-    public static final JalaliDateTimeFormatter BASIC_ISO_DATE;
+    public static final DateTimeFormatterJalali BASIC_ISO_DATE;
 
     //-----------------------------------------------------------------------
     private static final TemporalQuery<Boolean> PARSED_LEAP_SECOND = t -> {
@@ -765,7 +765,7 @@ public final class JalaliDateTimeFormatter {
         MONTH_OF_YEAR.put(10L, "دی");
         MONTH_OF_YEAR.put(11L, "بهمن");
         MONTH_OF_YEAR.put(12L, "اسفند");
-        RFC_1123_DATE_TIME = new JalaliDateTimeFormatterBuilder()
+        RFC_1123_DATE_TIME = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .parseLenient()
             .optionalStart()
@@ -787,40 +787,40 @@ public final class JalaliDateTimeFormatter {
             .optionalEnd()
             .appendLiteral(' ')
             .appendOffset("+HHMM", "GMT")  // should handle UT/Z/EST/EDT/CST/CDT/MST/MDT/PST/MDT
-            .toFormatter(ResolverStyle.SMART, JalaliChronology.INSTANCE);
-        ISO_LOCAL_DATE = new JalaliDateTimeFormatterBuilder()
+            .toFormatter(ResolverStyle.SMART, ChronologyJalali.INSTANCE);
+        ISO_LOCAL_DATE = new DateTimeFormatterBuilderJalali()
             .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
             .appendLiteral('-')
             .appendValue(ChronoField.MONTH_OF_YEAR, 2)
             .appendLiteral('-')
             .appendValue(DAY_OF_MONTH, 2)
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
 
     }
 
     //-----------------------------------------------------------------------
 
     static {
-        ISO_OFFSET_DATE = new JalaliDateTimeFormatterBuilder()
+        ISO_OFFSET_DATE = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_DATE)
             .appendOffsetId()
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     static {
-        ISO_DATE = new JalaliDateTimeFormatterBuilder()
+        ISO_DATE = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_DATE)
             .optionalStart()
             .appendOffsetId()
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     //-----------------------------------------------------------------------
 
     static {
-        ISO_LOCAL_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_LOCAL_TIME = new DateTimeFormatterBuilderJalali()
             .appendValue(HOUR_OF_DAY, 2)
             .appendLiteral(':')
             .appendValue(MINUTE_OF_HOUR, 2)
@@ -833,7 +833,7 @@ public final class JalaliDateTimeFormatter {
     }
 
     static {
-        ISO_OFFSET_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_OFFSET_TIME = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_TIME)
             .appendOffsetId()
@@ -843,7 +843,7 @@ public final class JalaliDateTimeFormatter {
     //-----------------------------------------------------------------------
 
     static {
-        ISO_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_TIME = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_TIME)
             .optionalStart()
@@ -852,39 +852,39 @@ public final class JalaliDateTimeFormatter {
     }
 
     static {
-        ISO_LOCAL_DATE_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_LOCAL_DATE_TIME = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_DATE)
             .appendLiteral('T')
             .append(ISO_LOCAL_TIME)
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     //-----------------------------------------------------------------------
 
     static {
-        ISO_OFFSET_DATE_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_OFFSET_DATE_TIME = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .append(ISO_LOCAL_DATE_TIME)
             .appendOffsetId()
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     static {
-        ISO_ZONED_DATE_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_ZONED_DATE_TIME = new DateTimeFormatterBuilderJalali()
             .append(ISO_OFFSET_DATE_TIME)
             .optionalStart()
             .appendLiteral('[')
             .parseCaseSensitive()
             .appendZoneRegionId()
             .appendLiteral(']')
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     //-----------------------------------------------------------------------
 
     static {
-        ISO_DATE_TIME = new JalaliDateTimeFormatterBuilder()
+        ISO_DATE_TIME = new DateTimeFormatterBuilderJalali()
             .append(ISO_LOCAL_DATE_TIME)
             .optionalStart()
             .appendOffsetId()
@@ -893,24 +893,24 @@ public final class JalaliDateTimeFormatter {
             .parseCaseSensitive()
             .appendZoneRegionId()
             .appendLiteral(']')
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     static {
-        ISO_ORDINAL_DATE = new JalaliDateTimeFormatterBuilder()
+        ISO_ORDINAL_DATE = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
             .appendLiteral('-')
             .appendValue(DAY_OF_YEAR, 3)
             .optionalStart()
             .appendOffsetId()
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     //-----------------------------------------------------------------------
 
     static {
-        ISO_WEEK_DATE = new JalaliDateTimeFormatterBuilder()
+        ISO_WEEK_DATE = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .appendValue(IsoFields.WEEK_BASED_YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
             .appendLiteral("-W")
@@ -919,11 +919,11 @@ public final class JalaliDateTimeFormatter {
             .appendValue(ChronoField.DAY_OF_WEEK, 1)
             .optionalStart()
             .appendOffsetId()
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     static {
-        ISO_INSTANT = new JalaliDateTimeFormatterBuilder()
+        ISO_INSTANT = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .appendInstant()
             .toFormatter(ResolverStyle.STRICT, null);
@@ -932,20 +932,20 @@ public final class JalaliDateTimeFormatter {
     //-----------------------------------------------------------------------
 
     static {
-        BASIC_ISO_DATE = new JalaliDateTimeFormatterBuilder()
+        BASIC_ISO_DATE = new DateTimeFormatterBuilderJalali()
             .parseCaseInsensitive()
             .appendValue(YEAR, 4)
             .appendValue(ChronoField.MONTH_OF_YEAR, 2)
             .appendValue(DAY_OF_MONTH, 2)
             .optionalStart()
             .appendOffset("+HHMMss", "Z")
-            .toFormatter(ResolverStyle.STRICT, JalaliChronology.INSTANCE);
+            .toFormatter(ResolverStyle.STRICT, ChronologyJalali.INSTANCE);
     }
 
     /**
      * The printer and/or parser to use, not null.
      */
-    private final JalaliDateTimeFormatterBuilder.CompositePrinterParser printerParser;
+    private final DateTimeFormatterBuilderJalali.CompositePrinterParser printerParser;
 
     //-----------------------------------------------------------------------
     /**
@@ -988,7 +988,7 @@ public final class JalaliDateTimeFormatter {
      * @param chrono         the chronology to use, null for no override
      * @param zone           the zone to use, null for no override
      */
-    JalaliDateTimeFormatter(JalaliDateTimeFormatterBuilder.CompositePrinterParser printerParser,
+    DateTimeFormatterJalali(DateTimeFormatterBuilderJalali.CompositePrinterParser printerParser,
                             Locale locale, DecimalStyle decimalStyle,
                             ResolverStyle resolverStyle, Set<TemporalField> resolverFields,
                             Chronology chrono, ZoneId zone) {
@@ -1010,7 +1010,7 @@ public final class JalaliDateTimeFormatter {
      * For example, {@code d MMM uuuu} will format 2011-12-03 as '3 Dec 2011'.
      * <p>
      * The formatter will use the {@link Locale#getDefault(Locale.Category) default FORMAT locale}.
-     * This can be changed using {@link JalaliDateTimeFormatter#withLocale(Locale)} on the returned formatter
+     * This can be changed using {@link DateTimeFormatterJalali#withLocale(Locale)} on the returned formatter
      * <p>
      * The returned formatter has no override chronology or zone.
      * It uses {@link ResolverStyle#SMART SMART} resolver style.
@@ -1018,10 +1018,10 @@ public final class JalaliDateTimeFormatter {
      * @param pattern the pattern to use, not null
      * @return the formatter based on the pattern, not null
      * @throws IllegalArgumentException if the pattern is invalid
-     * @see JalaliDateTimeFormatterBuilder#appendPattern(String)
+     * @see DateTimeFormatterBuilderJalali#appendPattern(String)
      */
-    public static JalaliDateTimeFormatter ofPattern(String pattern) {
-        return new JalaliDateTimeFormatterBuilder().appendPattern(pattern).toFormatter();
+    public static DateTimeFormatterJalali ofPattern(String pattern) {
+        return new DateTimeFormatterBuilderJalali().appendPattern(pattern).toFormatter();
     }
 
     //-----------------------------------------------------------------------
@@ -1037,7 +1037,7 @@ public final class JalaliDateTimeFormatter {
      * Leap seconds occur at '23:59:60' in the UTC time-zone, but at other
      * local times in different time-zones. To avoid this potential ambiguity,
      * the handling of leap-seconds is limited to
-     * {@link JalaliDateTimeFormatterBuilder#appendInstant()}, as that method
+     * {@link DateTimeFormatterBuilderJalali#appendInstant()}, as that method
      * always parses the instant with the UTC zone offset.
      * <p>
      * If the time '23:59:60' is received, then a simple conversion is applied,
@@ -1086,11 +1086,11 @@ public final class JalaliDateTimeFormatter {
      * @param locale the new locale, not null
      * @return a formatter based on this formatter with the requested locale, not null
      */
-    public JalaliDateTimeFormatter withLocale(Locale locale) {
+    public DateTimeFormatterJalali withLocale(Locale locale) {
         if (this.locale.equals(locale)) {
             return this;
         }
-        return new JalaliDateTimeFormatter(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
+        return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
     }
 
     //-----------------------------------------------------------------------
@@ -1112,11 +1112,11 @@ public final class JalaliDateTimeFormatter {
      * @param decimalStyle the new DecimalStyle, not null
      * @return a formatter based on this formatter with the requested DecimalStyle, not null
      */
-    public JalaliDateTimeFormatter withDecimalStyle(DecimalStyle decimalStyle) {
+    public DateTimeFormatterJalali withDecimalStyle(DecimalStyle decimalStyle) {
         if (this.decimalStyle.equals(decimalStyle)) {
             return this;
         }
-        return new JalaliDateTimeFormatter(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
+        return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
     }
 
     //-----------------------------------------------------------------------
@@ -1156,7 +1156,7 @@ public final class JalaliDateTimeFormatter {
      * <p>
      * When parsing, there are two distinct cases to consider.
      * If a chronology has been parsed directly from the text, perhaps because
-     * {@link JalaliDateTimeFormatterBuilder#appendChronologyId()} was used, then
+     * {@link DateTimeFormatterBuilderJalali#appendChronologyId()} was used, then
      * this override chronology has no effect.
      * If no zone has been parsed, then this override chronology will be used
      * to interpret the {@code ChronoField} values into a date according to the
@@ -1167,11 +1167,11 @@ public final class JalaliDateTimeFormatter {
      * @param chrono the new chronology, null if no override
      * @return a formatter based on this formatter with the requested override chronology, not null
      */
-    public JalaliDateTimeFormatter withChronology(Chronology chrono) {
+    public DateTimeFormatterJalali withChronology(Chronology chrono) {
         if (Objects.equals(this.chrono, chrono)) {
             return this;
         }
-        return new JalaliDateTimeFormatter(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
+        return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
     }
 
     //-----------------------------------------------------------------------
@@ -1215,7 +1215,7 @@ public final class JalaliDateTimeFormatter {
      * <p>
      * When parsing, there are two distinct cases to consider.
      * If a zone has been parsed directly from the text, perhaps because
-     * {@link JalaliDateTimeFormatterBuilder#appendZoneId()} was used, then
+     * {@link DateTimeFormatterBuilderJalali#appendZoneId()} was used, then
      * this override zone has no effect.
      * If no zone has been parsed, then this override zone will be included in
      * the result of the parse where it can be used to build instants and date-times.
@@ -1225,11 +1225,11 @@ public final class JalaliDateTimeFormatter {
      * @param zone the new override zone, null if no override
      * @return a formatter based on this formatter with the requested override zone, not null
      */
-    public JalaliDateTimeFormatter withZone(ZoneId zone) {
+    public DateTimeFormatterJalali withZone(ZoneId zone) {
         if (Objects.equals(this.zone, zone)) {
             return this;
         }
-        return new JalaliDateTimeFormatter(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
+        return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
     }
 
     /**
@@ -1279,7 +1279,7 @@ public final class JalaliDateTimeFormatter {
         Objects.requireNonNull(temporal, "temporal");
         Objects.requireNonNull(appendable, "appendable");
         try {
-            JalaliDateTimePrintContext context = new JalaliDateTimePrintContext(temporal, this);
+            DateTimePrintContextJalali context = new DateTimePrintContextJalali(temporal, this);
             if (appendable instanceof StringBuilder) {
                 printerParser.format(context, (StringBuilder) appendable);
             } else {
@@ -1419,7 +1419,7 @@ public final class JalaliDateTimeFormatter {
      */
     private TemporalAccessor parseResolved0(final CharSequence text, final ParsePosition position) {
         ParsePosition pos = (position != null ? position : new ParsePosition(0));
-        JalaliDateTimeParseContext context = parseUnresolved0(text, pos);
+        DateTimeParseContextJalali context = parseUnresolved0(text, pos);
         if (context == null || pos.getErrorIndex() >= 0 || (position == null && pos.getIndex() < text.length())) {
             String abbr;
             if (text.length() > 64) {
@@ -1438,10 +1438,10 @@ public final class JalaliDateTimeFormatter {
         return context.toResolved(resolverStyle, resolverFields);
     }
 
-    private JalaliDateTimeParseContext parseUnresolved0(CharSequence text, ParsePosition position) {
+    private DateTimeParseContextJalali parseUnresolved0(CharSequence text, ParsePosition position) {
         Objects.requireNonNull(text, "text");
         Objects.requireNonNull(position, "position");
-        JalaliDateTimeParseContext context = new JalaliDateTimeParseContext(this);
+        DateTimeParseContextJalali context = new DateTimeParseContextJalali(this);
         int pos = position.getIndex();
         pos = printerParser.parse(context, text, pos);
         if (pos < 0) {
@@ -1460,7 +1460,7 @@ public final class JalaliDateTimeFormatter {
      * @param optional whether the printer/parser should be optional
      * @return the printer/parser, not null
      */
-    JalaliDateTimeFormatterBuilder.CompositePrinterParser toPrinterParser(boolean optional) {
+    DateTimeFormatterBuilderJalali.CompositePrinterParser toPrinterParser(boolean optional) {
         return printerParser.withOptional(optional);
     }
 

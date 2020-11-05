@@ -11,9 +11,9 @@ import java.util.Random;
 /**
  * Created by Vahid Zafari on 4/29/2016.
  */
-public class JalaliDateTest {
+public class LocalDateJalaliTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JalaliDateTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocalDateJalaliTest.class);
 
     private int getRandomNumberInRange(int min, int max) {
         return new Random().ints(min, (max + 1)).findFirst().orElse(min);
@@ -21,12 +21,12 @@ public class JalaliDateTest {
 
     @Test
     public void jalaliToLocalBatch() {
-        JalaliDate generatedDate;
+        LocalDateJalali generatedDate;
         for (int i = 0; i < 10000; i++) {
             generatedDate = null;
             while (null == generatedDate) {
                 try {
-                    generatedDate = JalaliDate.of(getRandomNumberInRange(1200, 1500), getRandomNumberInRange(1, 12), getRandomNumberInRange(1, 31));
+                    generatedDate = LocalDateJalali.of(getRandomNumberInRange(1200, 1500), getRandomNumberInRange(1, 12), getRandomNumberInRange(1, 31));
                 } catch (Exception e) {
                     /*
                       maybe invalid date generated.
@@ -34,7 +34,7 @@ public class JalaliDateTest {
                 }
             }
             LocalDate localDate = generatedDate.toLocalDate();
-            JalaliDate returnedDate = JalaliDate.of(localDate);
+            LocalDateJalali returnedDate = LocalDateJalali.of(localDate);
             LOGGER.info("test converting JalaliDate --> JalaliDate  --> JalaliDate : {} --> {}  --> {}", generatedDate, localDate, returnedDate);
             Assertions.assertEquals(generatedDate, returnedDate);
         }
@@ -54,17 +54,17 @@ public class JalaliDateTest {
                      */
                 }
             }
-            JalaliDate jalaliDate = JalaliDate.of(generatedDate);
-            LocalDate returnedDate = jalaliDate.toLocalDate();
-            LOGGER.info("test converting LocalDate --> JalaliDate  --> LocalDate : {} --> {}  --> {}", generatedDate, jalaliDate, returnedDate);
+            LocalDateJalali localDateJalali = LocalDateJalali.of(generatedDate);
+            LocalDate returnedDate = localDateJalali.toLocalDate();
+            LOGGER.info("test converting LocalDate --> JalaliDate  --> LocalDate : {} --> {}  --> {}", generatedDate, localDateJalali, returnedDate);
             Assertions.assertEquals(generatedDate, returnedDate);
         }
     }
 
     @Test
     public void testEpochDay() {
-        JalaliDate jalaliDate = JalaliDate.now();
-        long epoch = jalaliDate.toEpochDay();
-        Assertions.assertEquals(jalaliDate, JalaliDate.ofEpochDay(epoch));
+        LocalDateJalali localDateJalali = LocalDateJalali.now();
+        long epoch = localDateJalali.toEpochDay();
+        Assertions.assertEquals(localDateJalali, LocalDateJalali.ofEpochDay(epoch));
     }
 }

@@ -5,7 +5,7 @@ package org.bardframework.time.format;
  * <p>
  * The formatting engine allows the positive and negative signs of numbers
  * to be controlled using this enum.
- * See {@link JalaliDateTimeFormatterBuilder} for usage.
+ * See {@link DateTimeFormatterBuilderJalali} for usage.
  */
 public enum SignStyle {
 
