@@ -27,8 +27,7 @@ import static java.time.temporal.TemporalAdjusters.previousOrSame;
  * </ul>
  * These different rule types can be expressed and queried.
  *
- * @implSpec This class is immutable and thread-safe.
- * @since 1.8
+ * this class is immutable and thread-safe.
  */
 public final class ZoneOffsetTransitionRule implements Serializable {
 

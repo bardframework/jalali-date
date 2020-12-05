@@ -5,10 +5,8 @@ import java.time.ZoneOffset;
 
 /**
  * The shared serialization delegate for this package.
- *
- * @implNote This class is mutable and should be created once per serialization.
- * @serial include
- * @since 1.8
+ * <p>
+ * This class is mutable and should be created once per serialization.
  */
 final class Ser implements Externalizable {
 

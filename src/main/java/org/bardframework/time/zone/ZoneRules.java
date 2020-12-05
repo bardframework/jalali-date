@@ -28,8 +28,7 @@ import java.util.concurrent.ConcurrentMap;
  * Applications should treat the data provided as representing the best information
  * available to the implementation of this rule.
  *
- * @implSpec This class is immutable and thread-safe.
- * @since 1.8
+ * this class is immutable and thread-safe.
  */
 public final class ZoneRules implements Serializable {
 

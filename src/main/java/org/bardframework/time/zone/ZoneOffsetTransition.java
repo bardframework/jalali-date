@@ -27,8 +27,7 @@ import java.util.Objects;
  * An example would be when the offset changes from {@code +04:00} to {@code +03:00}.
  * This might be described as 'the clocks will move back one hour tonight at 2am'.
  *
- * @implSpec This class is immutable and thread-safe.
- * @since 1.8
+ * this class is immutable and thread-safe.
  */
 public final class ZoneOffsetTransition
     implements Comparable<ZoneOffsetTransition>, Serializable {

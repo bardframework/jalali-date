@@ -45,8 +45,6 @@ import static java.time.temporal.ChronoField.EPOCH_DAY;
  * <ul>
  * <li> a JalaliDate,
  * </ul>
- *
- * @since 1.8
  */
 public final class TemporalQueriesJalali {
     /**

@@ -43,8 +43,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * {@code OffsetDateTime} may have unpredictable results and should be avoided.
  * The {@code equals} method should be used for comparisons.
  *
- * @implSpec This class is immutable and thread-safe.
- * @since 1.8
+ * this class is immutable and thread-safe.
  */
 public final class OffsetDateTimeJalali
     implements Temporal, TemporalAdjuster, Comparable<OffsetDateTimeJalali>, Serializable {

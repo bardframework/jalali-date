@@ -74,14 +74,13 @@ import static java.time.temporal.ChronoField.*;
  * {@code ZonedDateTime} may have unpredictable results and should be avoided.
  * The {@code equals} method should be used for comparisons.
  *
- * @implSpec A {@code ZonedDateTime} holds state equivalent to three separate objects,
+ * A {@code ZonedDateTime} holds state equivalent to three separate objects,
  * a {@code JalaliDateTime}, a {@code ZoneId} and the resolved {@code ZoneOffset}.
  * The offset and local date-time are used to define an instant when necessary.
  * The zone ID is used to obtain the rules for how and when the offset changes.
  * The offset cannot be freely set, as the zone controls which offsets are valid.
  * <p>
  * This class is immutable and thread-safe.
- * @since 1.8
  */
 public final class ZonedDateTimeJalali
     implements Temporal, ChronoZonedDateTime<LocalDateJalali>, Serializable {
