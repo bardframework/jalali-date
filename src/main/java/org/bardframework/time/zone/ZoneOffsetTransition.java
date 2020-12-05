@@ -1,6 +1,6 @@
 package org.bardframework.time.zone;
 
-import org.bardframework.time.LocaleDateTimeJalali;
+import org.bardframework.time.LocalDateTimeJalali;
 
 import java.io.*;
 import java.time.Duration;
@@ -44,7 +44,7 @@ public final class ZoneOffsetTransition
     /**
      * The local transition date-time at the transition.
      */
-    private final LocaleDateTimeJalali transition;
+    private final LocalDateTimeJalali transition;
     /**
      * The offset before transition.
      */
@@ -63,7 +63,7 @@ public final class ZoneOffsetTransition
      * @param offsetBefore the offset before the transition, not null
      * @param offsetAfter  the offset at and after the transition, not null
      */
-    ZoneOffsetTransition(LocaleDateTimeJalali transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
+    ZoneOffsetTransition(LocalDateTimeJalali transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
         assert transition.getNano() == 0;
         this.epochSecond = transition.toEpochSecond(offsetBefore);
         this.transition = transition;
@@ -80,7 +80,7 @@ public final class ZoneOffsetTransition
      */
     ZoneOffsetTransition(long epochSecond, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
         this.epochSecond = epochSecond;
-        this.transition = LocaleDateTimeJalali.ofEpochSecond(epochSecond, 0, offsetBefore);
+        this.transition = LocalDateTimeJalali.ofEpochSecond(epochSecond, 0, offsetBefore);
         this.offsetBefore = offsetBefore;
         this.offsetAfter = offsetAfter;
     }
@@ -99,7 +99,7 @@ public final class ZoneOffsetTransition
      * @throws IllegalArgumentException if {@code offsetBefore} and {@code offsetAfter}
      *                                  are equal, or {@code transition.getNano()} returns non-zero value
      */
-    public static ZoneOffsetTransition of(LocaleDateTimeJalali transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
+    public static ZoneOffsetTransition of(LocalDateTimeJalali transition, ZoneOffset offsetBefore, ZoneOffset offsetAfter) {
         Objects.requireNonNull(transition, "transition");
         Objects.requireNonNull(offsetBefore, "offsetBefore");
         Objects.requireNonNull(offsetAfter, "offsetAfter");
@@ -214,7 +214,7 @@ public final class ZoneOffsetTransition
      *
      * @return the transition date-time expressed with the before offset, not null
      */
-    public LocaleDateTimeJalali getDateTimeBefore() {
+    public LocalDateTimeJalali getDateTimeBefore() {
         return transition;
     }
 
@@ -228,7 +228,7 @@ public final class ZoneOffsetTransition
      *
      * @return the transition date-time expressed with the after offset, not null
      */
-    public LocaleDateTimeJalali getDateTimeAfter() {
+    public LocalDateTimeJalali getDateTimeAfter() {
         return transition.plusSeconds(getDurationSeconds());
     }
 

@@ -53,18 +53,18 @@ public final class OffsetDateTimeJalali
      * The minimum supported {@code OffsetDateTime}, '-999999999-01-01T00:00:00+18:00'.
      * This is the local date-time of midnight at the start of the minimum date
      * in the maximum offset (larger offsets are earlier on the time-line).
-     * This combines {@link LocaleDateTimeJalali#MIN} and {@link ZoneOffset#MAX}.
+     * This combines {@link LocalDateTimeJalali#MIN} and {@link ZoneOffset#MAX}.
      * This could be used by an application as a "far past" date-time.
      */
-    public static final OffsetDateTimeJalali MIN = LocaleDateTimeJalali.MIN.atOffset(ZoneOffset.MAX);
+    public static final OffsetDateTimeJalali MIN = LocalDateTimeJalali.MIN.atOffset(ZoneOffset.MAX);
     /**
      * The maximum supported {@code OffsetDateTime}, '+999999999-12-31T23:59:59.999999999-18:00'.
      * This is the local date-time just before midnight at the end of the maximum date
      * in the minimum offset (larger negative offsets are later on the time-line).
-     * This combines {@link LocaleDateTimeJalali#MAX} and {@link ZoneOffset#MIN}.
+     * This combines {@link LocalDateTimeJalali#MAX} and {@link ZoneOffset#MIN}.
      * This could be used by an application as a "far future" date-time.
      */
-    public static final OffsetDateTimeJalali MAX = LocaleDateTimeJalali.MAX.atOffset(ZoneOffset.MIN);
+    public static final OffsetDateTimeJalali MAX = LocalDateTimeJalali.MAX.atOffset(ZoneOffset.MIN);
     /**
      * Serialization version.
      */
@@ -72,7 +72,7 @@ public final class OffsetDateTimeJalali
     /**
      * The local date-time.
      */
-    private final LocaleDateTimeJalali dateTime;
+    private final LocalDateTimeJalali dateTime;
     /**
      * The offset from UTC/Greenwich.
      */
@@ -84,7 +84,7 @@ public final class OffsetDateTimeJalali
      * @param dateTime the local date-time, not null
      * @param offset   the zone offset, not null
      */
-    private OffsetDateTimeJalali(LocaleDateTimeJalali dateTime, ZoneOffset offset) {
+    private OffsetDateTimeJalali(LocalDateTimeJalali dateTime, ZoneOffset offset) {
         this.dateTime = Objects.requireNonNull(dateTime, "dateTime");
         this.offset = Objects.requireNonNull(offset, "offset");
     }
@@ -190,7 +190,7 @@ public final class OffsetDateTimeJalali
      * @return the offset date-time, not null
      */
     public static OffsetDateTimeJalali of(LocalDateJalali date, LocalTime time, ZoneOffset offset) {
-        LocaleDateTimeJalali dt = LocaleDateTimeJalali.of(date, time);
+        LocalDateTimeJalali dt = LocalDateTimeJalali.of(date, time);
         return new OffsetDateTimeJalali(dt, offset);
     }
 
@@ -203,7 +203,7 @@ public final class OffsetDateTimeJalali
      * @param offset   the zone offset, not null
      * @return the offset date-time, not null
      */
-    public static OffsetDateTimeJalali of(LocaleDateTimeJalali dateTime, ZoneOffset offset) {
+    public static OffsetDateTimeJalali of(LocalDateTimeJalali dateTime, ZoneOffset offset) {
         return new OffsetDateTimeJalali(dateTime, offset);
     }
 
@@ -236,7 +236,7 @@ public final class OffsetDateTimeJalali
     public static OffsetDateTimeJalali of(
         int year, int month, int dayOfMonth,
         int hour, int minute, int second, int nanoOfSecond, ZoneOffset offset) {
-        LocaleDateTimeJalali dt = LocaleDateTimeJalali.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
+        LocalDateTimeJalali dt = LocalDateTimeJalali.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
         return new OffsetDateTimeJalali(dt, offset);
     }
 
@@ -259,7 +259,7 @@ public final class OffsetDateTimeJalali
         Objects.requireNonNull(zone, "zone");
         ZoneRules rules = zone.getRules();
         ZoneOffset offset = rules.getOffset(instant);
-        LocaleDateTimeJalali ldt = LocaleDateTimeJalali.ofEpochSecond(instant.getEpochSecond(), instant.getNano(), offset);
+        LocalDateTimeJalali ldt = LocalDateTimeJalali.ofEpochSecond(instant.getEpochSecond(), instant.getNano(), offset);
         return new OffsetDateTimeJalali(ldt, offset);
     }
 
@@ -344,7 +344,7 @@ public final class OffsetDateTimeJalali
      * @param dateTime the date-time to create with, not null
      * @param offset   the zone offset to create with, not null
      */
-    private OffsetDateTimeJalali with(LocaleDateTimeJalali dateTime, ZoneOffset offset) {
+    private OffsetDateTimeJalali with(LocalDateTimeJalali dateTime, ZoneOffset offset) {
         if (this.dateTime == dateTime && this.offset.equals(offset)) {
             return this;
         }
@@ -627,7 +627,7 @@ public final class OffsetDateTimeJalali
             return this;
         }
         int difference = offset.getTotalSeconds() - this.offset.getTotalSeconds();
-        LocaleDateTimeJalali adjusted = dateTime.plusSeconds(difference);
+        LocalDateTimeJalali adjusted = dateTime.plusSeconds(difference);
         return new OffsetDateTimeJalali(adjusted, offset);
     }
 
@@ -641,7 +641,7 @@ public final class OffsetDateTimeJalali
      *
      * @return the local date-time part of this date-time, not null
      */
-    public LocaleDateTimeJalali toJalaliDateTime() {
+    public LocalDateTimeJalali toJalaliDateTime() {
         return dateTime;
     }
 
@@ -840,7 +840,7 @@ public final class OffsetDateTimeJalali
     @Override
     public OffsetDateTimeJalali with(TemporalAdjuster adjuster) {
         // optimizations
-        if (adjuster instanceof LocalDateJalali || adjuster instanceof LocalTime || adjuster instanceof LocaleDateTimeJalali) {
+        if (adjuster instanceof LocalDateJalali || adjuster instanceof LocalTime || adjuster instanceof LocalDateTimeJalali) {
             return with(dateTime.with(adjuster), offset);
         } else if (adjuster instanceof Instant) {
             return ofInstant((Instant) adjuster, offset);
@@ -877,7 +877,7 @@ public final class OffsetDateTimeJalali
      * then a {@code DateTimeException} will be thrown.
      * <p>
      * The other {@link #isSupported(TemporalField) supported fields} will behave as per
-     * the matching method on {@link LocaleDateTimeJalali#with(TemporalField, long) JalaliDateTime}.
+     * the matching method on {@link LocalDateTimeJalali#with(TemporalField, long) JalaliDateTime}.
      * In this case, the offset is not part of the calculation and will be unchanged.
      * <p>
      * All other {@code ChronoField} instances will throw an {@code UnsupportedTemporalTypeException}.
@@ -1105,7 +1105,7 @@ public final class OffsetDateTimeJalali
      * unit is not supported or for some other reason, an exception is thrown.
      * <p>
      * If the field is a {@link ChronoUnit} then the addition is implemented by
-     * {@link LocaleDateTimeJalali#plus(long, TemporalUnit)}.
+     * {@link LocalDateTimeJalali#plus(long, TemporalUnit)}.
      * The offset is not part of the calculation and will be unchanged in the result.
      * <p>
      * If the field is not a {@code ChronoUnit}, then the result of this method
@@ -1653,7 +1653,7 @@ public final class OffsetDateTimeJalali
      * Time-zone rules, such as daylight savings, mean that not every time on the
      * local time-line exists. If the local date-time is in a gap or overlap according to
      * the rules then a resolver is used to determine the resultant local time and offset.
-     * This method uses {@link ZonedDateTimeJalali#ofLocal(LocaleDateTimeJalali, ZoneId, ZoneOffset)}
+     * This method uses {@link ZonedDateTimeJalali#ofLocal(LocalDateTimeJalali, ZoneId, ZoneOffset)}
      * to retain the offset from this instance if possible.
      * <p>
      * Finer control over gaps and overlaps is available in two ways.

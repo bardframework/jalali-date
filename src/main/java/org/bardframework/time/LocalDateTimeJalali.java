@@ -49,7 +49,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * @author Vahid Zafari
  * This class is immutable and thread-safe.
  */
-public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, ChronoLocalDateTime<LocalDateJalali>, Serializable {
+public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, ChronoLocalDateTime<LocalDateJalali>, Serializable {
 
 
     /**
@@ -58,14 +58,14 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * This combines {@link LocalDateJalali#MIN} and {@link LocalTime#MIN}.
      * This could be used by an application as a "far past" date-time.
      */
-    public static final LocaleDateTimeJalali MIN = LocaleDateTimeJalali.of(LocalDateJalali.MIN, LocalTime.MIN);
+    public static final LocalDateTimeJalali MIN = LocalDateTimeJalali.of(LocalDateJalali.MIN, LocalTime.MIN);
     /**
      * The maximum supported {@code JalaliDateTime}, '+999999999-12-31T23:59:59.999999999'.
      * This is the local date-time just before midnight at the end of the maximum date.
      * This combines {@link LocalDateJalali#MAX} and {@link LocalTime#MAX}.
      * This could be used by an application as a "far future" date-time.
      */
-    public static final LocaleDateTimeJalali MAX = LocaleDateTimeJalali.of(LocalDateJalali.MAX, LocalTime.MAX);
+    public static final LocalDateTimeJalali MAX = LocalDateTimeJalali.of(LocalDateJalali.MAX, LocalTime.MAX);
     /**
      * Hours per day.
      */
@@ -136,7 +136,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @param date the date part of the date-time, validated not null
      * @param time the time part of the date-time, validated not null
      */
-    private LocaleDateTimeJalali(LocalDateJalali date, LocalTime time) {
+    private LocalDateTimeJalali(LocalDateJalali date, LocalTime time) {
         this.date = date;
         this.time = time;
     }
@@ -152,7 +152,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      *
      * @return the current date-time using the system clock and default time-zone, not null
      */
-    public static LocaleDateTimeJalali now() {
+    public static LocalDateTimeJalali now() {
         return now(Clock.system(ZoneOffset.UTC));
     }
 
@@ -168,7 +168,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @param clock the clock to use, not null
      * @return the current date-time, not null
      */
-    public static LocaleDateTimeJalali now(Clock clock) {
+    public static LocalDateTimeJalali now(Clock clock) {
         Objects.requireNonNull(clock, "clock");
         final Instant now = clock.instant();  // called once
         return ofEpochSecond(now.getEpochSecond(), now.getNano());
@@ -192,10 +192,10 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static LocaleDateTimeJalali of(int year, MonthJalali month, int dayOfMonth, int hour, int minute) {
+    public static LocalDateTimeJalali of(int year, MonthJalali month, int dayOfMonth, int hour, int minute) {
         LocalDateJalali date = LocalDateJalali.of(year, month, dayOfMonth);
         LocalTime time = LocalTime.of(hour, minute);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     /**
@@ -217,10 +217,10 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static LocaleDateTimeJalali of(int year, MonthJalali month, int dayOfMonth, int hour, int minute, int second) {
+    public static LocalDateTimeJalali of(int year, MonthJalali month, int dayOfMonth, int hour, int minute, int second) {
         LocalDateJalali date = LocalDateJalali.of(year, month, dayOfMonth);
         LocalTime time = LocalTime.of(hour, minute, second);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     //-----------------------------------------------------------------------
@@ -244,10 +244,10 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static LocaleDateTimeJalali of(int year, MonthJalali month, int dayOfMonth, int hour, int minute, int second, int nanoOfSecond) {
+    public static LocalDateTimeJalali of(int year, MonthJalali month, int dayOfMonth, int hour, int minute, int second, int nanoOfSecond) {
         LocalDateJalali date = LocalDateJalali.of(year, month, dayOfMonth);
         LocalTime time = LocalTime.of(hour, minute, second, nanoOfSecond);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     /**
@@ -268,11 +268,11 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static LocaleDateTimeJalali of(int year, int month, int dayOfMonth, int hour, int minute)
+    public static LocalDateTimeJalali of(int year, int month, int dayOfMonth, int hour, int minute)
         throws DateTimeException {
         LocalDateJalali date = LocalDateJalali.of(year, month, dayOfMonth);
         LocalTime time = LocalTime.of(hour, minute);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     /**
@@ -294,10 +294,10 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static LocaleDateTimeJalali of(int year, int month, int dayOfMonth, int hour, int minute, int second) {
+    public static LocalDateTimeJalali of(int year, int month, int dayOfMonth, int hour, int minute, int second) {
         LocalDateJalali date = LocalDateJalali.of(year, month, dayOfMonth);
         LocalTime time = LocalTime.of(hour, minute, second);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     /**
@@ -319,10 +319,10 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the value of any field is out of range,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public static LocaleDateTimeJalali of(int year, int month, int dayOfMonth, int hour, int minute, int second, int nanoOfSecond) {
+    public static LocalDateTimeJalali of(int year, int month, int dayOfMonth, int hour, int minute, int second, int nanoOfSecond) {
         LocalDateJalali date = LocalDateJalali.of(year, month, dayOfMonth);
         LocalTime time = LocalTime.of(hour, minute, second, nanoOfSecond);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     //-------------------------------------------------------------------------
@@ -334,18 +334,18 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @param time the local time, not null
      * @return the local date-time, not null
      */
-    public static LocaleDateTimeJalali of(LocalDateJalali date, LocalTime time) {
+    public static LocalDateTimeJalali of(LocalDateJalali date, LocalTime time) {
         Objects.requireNonNull(date, "date");
         Objects.requireNonNull(time, "time");
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
-    public static LocaleDateTimeJalali of(LocalDateTime dateTime) {
+    public static LocalDateTimeJalali of(LocalDateTime dateTime) {
         Objects.requireNonNull(dateTime, "dateTime");
-        return new LocaleDateTimeJalali(LocalDateJalali.of(dateTime.toLocalDate()), dateTime.toLocalTime());
+        return new LocalDateTimeJalali(LocalDateJalali.of(dateTime.toLocalDate()), dateTime.toLocalTime());
     }
 
-    public static LocaleDateTimeJalali of(String jalaliDateTimeString) {
+    public static LocalDateTimeJalali of(String jalaliDateTimeString) {
         if (null == jalaliDateTimeString) {
             throw new IllegalArgumentException("invalid jalaliDateTimeString: " + jalaliDateTimeString);
         }
@@ -367,7 +367,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
         if (14 < digit.length()) {
             nanoOfSecond = Integer.parseInt(digit.substring(14));
         }
-        return LocaleDateTimeJalali.of(localDateJalali, LocalTime.of(hour, minute, second, nanoOfSecond));
+        return LocalDateTimeJalali.of(localDateJalali, LocalTime.of(hour, minute, second, nanoOfSecond));
     }
 
     /**
@@ -379,7 +379,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return the local date-time, not null
      * @throws DateTimeException if the result exceeds the supported range
      */
-    public static LocaleDateTimeJalali ofInstant(Instant instant) {
+    public static LocalDateTimeJalali ofInstant(Instant instant) {
         Objects.requireNonNull(instant, "instant");
         return ofEpochSecond(instant.getEpochSecond(), instant.getNano());
     }
@@ -399,7 +399,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the result exceeds the supported range,
      *                           or if the nano-of-second is invalid
      */
-    public static LocaleDateTimeJalali ofEpochSecond(long epochSecond, int nanoOfSecond, ZoneOffset offset) {
+    public static LocalDateTimeJalali ofEpochSecond(long epochSecond, int nanoOfSecond, ZoneOffset offset) {
         Objects.requireNonNull(offset, "offset");
         NANO_OF_SECOND.checkValidValue(nanoOfSecond);
         long localSecond = epochSecond + offset.getTotalSeconds();  // overflow caught later
@@ -407,7 +407,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
         long secsOfDay = Math.floorMod(localSecond, SECONDS_PER_DAY);
         LocalDateJalali date = LocalDateJalali.ofEpochDay(localEpochDay);
         LocalTime time = LocalTime.ofNanoOfDay(secsOfDay * NANOS_PER_SECOND + nanoOfSecond);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     /**
@@ -424,13 +424,13 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the result exceeds the supported range,
      *                           or if the nano-of-second is invalid
      */
-    public static LocaleDateTimeJalali ofEpochSecond(long epochSecond, int nanoOfSecond) {
+    public static LocalDateTimeJalali ofEpochSecond(long epochSecond, int nanoOfSecond) {
         NANO_OF_SECOND.checkValidValue(nanoOfSecond);
         long localEpochDay = Math.floorDiv(epochSecond, SECONDS_PER_DAY);
         long secsOfDay = Math.floorMod(epochSecond, SECONDS_PER_DAY);
         LocalDateJalali date = LocalDateJalali.ofEpochDay(localEpochDay);
         LocalTime time = LocalTime.ofNanoOfDay(secsOfDay * NANOS_PER_SECOND + nanoOfSecond);
-        return new LocaleDateTimeJalali(date, time);
+        return new LocalDateTimeJalali(date, time);
     }
 
     /**
@@ -452,14 +452,14 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return the local date-time, not null
      * @throws DateTimeException if unable to toModel to a {@code LocalDateTime}
      */
-    public static LocaleDateTimeJalali from(TemporalAccessor temporal) {
-        if (temporal instanceof LocaleDateTimeJalali) {
-            return (LocaleDateTimeJalali) temporal;
+    public static LocalDateTimeJalali from(TemporalAccessor temporal) {
+        if (temporal instanceof LocalDateTimeJalali) {
+            return (LocalDateTimeJalali) temporal;
         }
         try {
             LocalDateJalali date = LocalDateJalali.from(temporal);
             LocalTime time = LocalTime.from(temporal);
-            return new LocaleDateTimeJalali(date, time);
+            return new LocalDateTimeJalali(date, time);
         } catch (DateTimeException ex) {
             throw new DateTimeException("Unable to obtain LocalDateTime from TemporalAccessor: " +
                 temporal + " of type " + temporal.getClass().getName(), ex);
@@ -476,7 +476,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return the parsed local date-time, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static LocaleDateTimeJalali parse(CharSequence text) {
+    public static LocalDateTimeJalali parse(CharSequence text) {
         return parse(text, DateTimeFormatterJalali.ISO_LOCAL_DATE_TIME);
     }
 
@@ -490,9 +490,9 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return the parsed jalali date-time, not null
      * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static LocaleDateTimeJalali parse(CharSequence text, DateTimeFormatterJalali formatter) {
+    public static LocalDateTimeJalali parse(CharSequence text, DateTimeFormatterJalali formatter) {
         Objects.requireNonNull(formatter, "formatter");
-        return formatter.withChronology(ChronologyJalali.INSTANCE).parse(text, LocaleDateTimeJalali::from);
+        return formatter.withChronology(ChronologyJalali.INSTANCE).parse(text, LocalDateTimeJalali::from);
     }
 
     public LocalDateTime toLocalDateTime() {
@@ -514,11 +514,11 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @param newTime the time of the new date-time, not null
      * @return the date-time, not null
      */
-    private LocaleDateTimeJalali with(LocalDateJalali newDate, LocalTime newTime) {
+    private LocalDateTimeJalali with(LocalDateJalali newDate, LocalTime newTime) {
         if (date == newDate && time == newTime) {
             return this;
         }
-        return new LocaleDateTimeJalali(newDate, newTime);
+        return new LocalDateTimeJalali(newDate, newTime);
     }
 
     //-----------------------------------------------------------------------
@@ -923,16 +923,16 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public LocaleDateTimeJalali with(TemporalAdjuster adjuster) {
+    public LocalDateTimeJalali with(TemporalAdjuster adjuster) {
         // optimizations
         if (adjuster instanceof LocalDateJalali) {
             return with((LocalDateJalali) adjuster, time);
         } else if (adjuster instanceof LocalTime) {
             return with(date, (LocalTime) adjuster);
-        } else if (adjuster instanceof LocaleDateTimeJalali) {
-            return (LocaleDateTimeJalali) adjuster;
+        } else if (adjuster instanceof LocalDateTimeJalali) {
+            return (LocalDateTimeJalali) adjuster;
         }
-        return (LocaleDateTimeJalali) adjuster.adjustInto(this);
+        return (LocalDateTimeJalali) adjuster.adjustInto(this);
     }
 
     /**
@@ -970,7 +970,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public LocaleDateTimeJalali with(TemporalField field, long newValue) {
+    public LocalDateTimeJalali with(TemporalField field, long newValue) {
         if (field instanceof ChronoField) {
             ChronoField f = (ChronoField) field;
             if (f.isTimeBased()) {
@@ -996,7 +996,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the requested year, not null
      * @throws DateTimeException if the year value is invalid
      */
-    public LocaleDateTimeJalali withYear(int year) {
+    public LocalDateTimeJalali withYear(int year) {
         return with(date.withYear(year), time);
     }
 
@@ -1012,7 +1012,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the requested month, not null
      * @throws DateTimeException if the month-of-year value is invalid
      */
-    public LocaleDateTimeJalali withMonth(int month) {
+    public LocalDateTimeJalali withMonth(int month) {
         return with(date.withMonth(month), time);
     }
 
@@ -1029,7 +1029,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the day-of-month value is invalid,
      *                           or if the day-of-month is invalid for the month-year
      */
-    public LocaleDateTimeJalali withDayOfMonth(int dayOfMonth) {
+    public LocalDateTimeJalali withDayOfMonth(int dayOfMonth) {
         return with(date.withDayOfMonth(dayOfMonth), time);
     }
 
@@ -1045,7 +1045,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException if the day-of-year value is invalid,
      *                           or if the day-of-year is invalid for the year
      */
-    public LocaleDateTimeJalali withDayOfYear(int dayOfYear) {
+    public LocalDateTimeJalali withDayOfYear(int dayOfYear) {
         return with(date.withDayOfYear(dayOfYear), time);
     }
 
@@ -1060,7 +1060,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the requested hour, not null
      * @throws DateTimeException if the hour value is invalid
      */
-    public LocaleDateTimeJalali withHour(int hour) {
+    public LocalDateTimeJalali withHour(int hour) {
         LocalTime newTime = time.withHour(hour);
         return with(date, newTime);
     }
@@ -1074,7 +1074,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the requested minute, not null
      * @throws DateTimeException if the minute value is invalid
      */
-    public LocaleDateTimeJalali withMinute(int minute) {
+    public LocalDateTimeJalali withMinute(int minute) {
         LocalTime newTime = time.withMinute(minute);
         return with(date, newTime);
     }
@@ -1088,7 +1088,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the requested second, not null
      * @throws DateTimeException if the second value is invalid
      */
-    public LocaleDateTimeJalali withSecond(int second) {
+    public LocalDateTimeJalali withSecond(int second) {
         LocalTime newTime = time.withSecond(second);
         return with(date, newTime);
     }
@@ -1102,7 +1102,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the requested nanosecond, not null
      * @throws DateTimeException if the nano value is invalid
      */
-    public LocaleDateTimeJalali withNano(int nanoOfSecond) {
+    public LocalDateTimeJalali withNano(int nanoOfSecond) {
         LocalTime newTime = time.withNano(nanoOfSecond);
         return with(date, newTime);
     }
@@ -1129,7 +1129,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws DateTimeException                if unable to truncate
      * @throws UnsupportedTemporalTypeException if the unit is not supported
      */
-    public LocaleDateTimeJalali truncatedTo(TemporalUnit unit) {
+    public LocalDateTimeJalali truncatedTo(TemporalUnit unit) {
         return with(date, time.truncatedTo(unit));
     }
 
@@ -1156,13 +1156,13 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public LocaleDateTimeJalali plus(TemporalAmount amountToAdd) {
+    public LocalDateTimeJalali plus(TemporalAmount amountToAdd) {
         if (amountToAdd instanceof Period) {
             Period periodToAdd = (Period) amountToAdd;
             return with(date.plus(periodToAdd), time);
         }
         Objects.requireNonNull(amountToAdd, "amountToAdd");
-        return (LocaleDateTimeJalali) amountToAdd.addTo(this);
+        return (LocalDateTimeJalali) amountToAdd.addTo(this);
     }
 
     /**
@@ -1192,7 +1192,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public LocaleDateTimeJalali plus(long amountToAdd, TemporalUnit unit) {
+    public LocalDateTimeJalali plus(long amountToAdd, TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {
             ChronoUnit f = (ChronoUnit) unit;
             switch (f) {
@@ -1238,7 +1238,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the years added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusYears(long years) {
+    public LocalDateTimeJalali plusYears(long years) {
         LocalDateJalali newDate = date.plusYears(years);
         return with(newDate, time);
     }
@@ -1263,7 +1263,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the months added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusMonths(long months) {
+    public LocalDateTimeJalali plusMonths(long months) {
         LocalDateJalali newDate = date.plusMonths(months);
         return with(newDate, time);
     }
@@ -1283,7 +1283,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the weeks added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusWeeks(long weeks) {
+    public LocalDateTimeJalali plusWeeks(long weeks) {
         LocalDateJalali newDate = date.plusWeeks(weeks);
         return with(newDate, time);
     }
@@ -1303,7 +1303,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the days added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusDays(long days) {
+    public LocalDateTimeJalali plusDays(long days) {
         LocalDateJalali newDate = date.plusDays(days);
         return with(newDate, time);
     }
@@ -1319,7 +1319,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the hours added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusHours(long hours) {
+    public LocalDateTimeJalali plusHours(long hours) {
         return plusWithOverflow(date, hours, 0, 0, 0, 1);
     }
 
@@ -1332,7 +1332,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the minutes added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusMinutes(long minutes) {
+    public LocalDateTimeJalali plusMinutes(long minutes) {
         return plusWithOverflow(date, 0, minutes, 0, 0, 1);
     }
 
@@ -1345,7 +1345,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the seconds added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusSeconds(long seconds) {
+    public LocalDateTimeJalali plusSeconds(long seconds) {
         return plusWithOverflow(date, 0, 0, seconds, 0, 1);
     }
 
@@ -1358,7 +1358,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the nanoseconds added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali plusNanos(long nanos) {
+    public LocalDateTimeJalali plusNanos(long nanos) {
         return plusWithOverflow(date, 0, 0, 0, nanos, 1);
     }
 
@@ -1385,13 +1385,13 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws ArithmeticException if numeric overflow occurs
      */
     @Override
-    public LocaleDateTimeJalali minus(TemporalAmount amountToSubtract) {
+    public LocalDateTimeJalali minus(TemporalAmount amountToSubtract) {
         if (amountToSubtract instanceof Period) {
             Period periodToSubtract = (Period) amountToSubtract;
             return with(date.minus(periodToSubtract), time);
         }
         Objects.requireNonNull(amountToSubtract, "amountToSubtract");
-        return (LocaleDateTimeJalali) amountToSubtract.subtractFrom(this);
+        return (LocalDateTimeJalali) amountToSubtract.subtractFrom(this);
     }
 
     /**
@@ -1414,7 +1414,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @throws ArithmeticException              if numeric overflow occurs
      */
     @Override
-    public LocaleDateTimeJalali minus(long amountToSubtract, TemporalUnit unit) {
+    public LocalDateTimeJalali minus(long amountToSubtract, TemporalUnit unit) {
         return (amountToSubtract == Long.MIN_VALUE ? plus(Long.MAX_VALUE, unit).plus(1, unit) : plus(-amountToSubtract, unit));
     }
 
@@ -1440,7 +1440,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the years subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusYears(long years) {
+    public LocalDateTimeJalali minusYears(long years) {
         return (years == Long.MIN_VALUE ? plusYears(Long.MAX_VALUE).plusYears(1) : plusYears(-years));
     }
 
@@ -1464,7 +1464,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the months subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusMonths(long months) {
+    public LocalDateTimeJalali minusMonths(long months) {
         return (months == Long.MIN_VALUE ? plusMonths(Long.MAX_VALUE).plusMonths(1) : plusMonths(-months));
     }
 
@@ -1483,7 +1483,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the weeks subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusWeeks(long weeks) {
+    public LocalDateTimeJalali minusWeeks(long weeks) {
         return (weeks == Long.MIN_VALUE ? plusWeeks(Long.MAX_VALUE).plusWeeks(1) : plusWeeks(-weeks));
     }
 
@@ -1502,7 +1502,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the days subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusDays(long days) {
+    public LocalDateTimeJalali minusDays(long days) {
         return (days == Long.MIN_VALUE ? plusDays(Long.MAX_VALUE).plusDays(1) : plusDays(-days));
     }
 
@@ -1517,7 +1517,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the hours subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusHours(long hours) {
+    public LocalDateTimeJalali minusHours(long hours) {
         return plusWithOverflow(date, hours, 0, 0, 0, -1);
     }
 
@@ -1530,7 +1530,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the minutes subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusMinutes(long minutes) {
+    public LocalDateTimeJalali minusMinutes(long minutes) {
         return plusWithOverflow(date, 0, minutes, 0, 0, -1);
     }
 
@@ -1543,7 +1543,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the seconds subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusSeconds(long seconds) {
+    public LocalDateTimeJalali minusSeconds(long seconds) {
         return plusWithOverflow(date, 0, 0, seconds, 0, -1);
     }
 
@@ -1556,7 +1556,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @return a {@code JalaliDateTime} based on this date-time with the nanoseconds subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
-    public LocaleDateTimeJalali minusNanos(long nanos) {
+    public LocalDateTimeJalali minusNanos(long nanos) {
         return plusWithOverflow(date, 0, 0, 0, nanos, -1);
     }
 
@@ -1575,7 +1575,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      * @param sign    the sign to determine add or subtract
      * @return the combined result, not null
      */
-    private LocaleDateTimeJalali plusWithOverflow(LocalDateJalali newDate, long hours, long minutes, long seconds, long nanos, int sign) {
+    private LocalDateTimeJalali plusWithOverflow(LocalDateJalali newDate, long hours, long minutes, long seconds, long nanos, int sign) {
         // 9223372036854775808 long, 2147483648 int
         if ((hours | minutes | seconds | nanos) == 0) {
             return with(newDate, time);
@@ -1720,7 +1720,7 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      */
     @Override
     public long until(Temporal endExclusive, TemporalUnit unit) {
-        LocaleDateTimeJalali end = LocaleDateTimeJalali.from(endExclusive);
+        LocalDateTimeJalali end = LocalDateTimeJalali.from(endExclusive);
         if (unit instanceof ChronoUnit) {
             if (unit.isTimeBased()) {
                 long amount = date.daysUntil(end.date);
@@ -1856,13 +1856,13 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      */
     @Override  // override for Javadoc and performance
     public int compareTo(ChronoLocalDateTime<?> other) {
-        if (other instanceof LocaleDateTimeJalali) {
-            return compareTo0((LocaleDateTimeJalali) other);
+        if (other instanceof LocalDateTimeJalali) {
+            return compareTo0((LocalDateTimeJalali) other);
         }
         return ChronoLocalDateTime.super.compareTo(other);
     }
 
-    private int compareTo0(LocaleDateTimeJalali other) {
+    private int compareTo0(LocalDateTimeJalali other) {
         int cmp = date.compareTo0(other.toLocalDate());
         if (cmp == 0) {
             cmp = time.compareTo(other.toLocalTime());
@@ -1893,8 +1893,8 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      */
     @Override  // override for Javadoc and performance
     public boolean isAfter(ChronoLocalDateTime<?> other) {
-        if (other instanceof LocaleDateTimeJalali) {
-            return compareTo0((LocaleDateTimeJalali) other) > 0;
+        if (other instanceof LocalDateTimeJalali) {
+            return compareTo0((LocalDateTimeJalali) other) > 0;
         }
         return ChronoLocalDateTime.super.isAfter(other);
     }
@@ -1922,8 +1922,8 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      */
     @Override  // override for Javadoc and performance
     public boolean isBefore(ChronoLocalDateTime<?> other) {
-        if (other instanceof LocaleDateTimeJalali) {
-            return compareTo0((LocaleDateTimeJalali) other) < 0;
+        if (other instanceof LocalDateTimeJalali) {
+            return compareTo0((LocalDateTimeJalali) other) < 0;
         }
         return ChronoLocalDateTime.super.isBefore(other);
     }
@@ -1951,8 +1951,8 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
      */
     @Override  // override for Javadoc and performance
     public boolean isEqual(ChronoLocalDateTime<?> other) {
-        if (other instanceof LocaleDateTimeJalali) {
-            return compareTo0((LocaleDateTimeJalali) other) == 0;
+        if (other instanceof LocalDateTimeJalali) {
+            return compareTo0((LocalDateTimeJalali) other) == 0;
         }
         return ChronoLocalDateTime.super.isEqual(other);
     }
@@ -1973,8 +1973,8 @@ public final class LocaleDateTimeJalali implements Temporal, TemporalAdjuster, C
         if (this == obj) {
             return true;
         }
-        if (obj instanceof LocaleDateTimeJalali) {
-            LocaleDateTimeJalali other = (LocaleDateTimeJalali) obj;
+        if (obj instanceof LocalDateTimeJalali) {
+            LocalDateTimeJalali other = (LocalDateTimeJalali) obj;
             return date.equals(other.date) && time.equals(other.time);
         }
         return false;

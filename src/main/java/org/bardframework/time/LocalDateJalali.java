@@ -1845,8 +1845,8 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      */
     @Override
-    public final LocaleDateTimeJalali atTime(LocalTime time) {
-        return LocaleDateTimeJalali.of(this, time);
+    public final LocalDateTimeJalali atTime(LocalTime time) {
+        return LocalDateTimeJalali.of(this, time);
     }
 
     /**
@@ -1863,7 +1863,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      * @throws DateTimeException if the value of any field is out of range
      */
-    public LocaleDateTimeJalali atTime(int hour, int minute) {
+    public LocalDateTimeJalali atTime(int hour, int minute) {
         return atTime(LocalTime.of(hour, minute));
     }
 
@@ -1882,7 +1882,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      * @throws DateTimeException if the value of any field is out of range
      */
-    public LocaleDateTimeJalali atTime(int hour, int minute, int second) {
+    public LocalDateTimeJalali atTime(int hour, int minute, int second) {
         return atTime(LocalTime.of(hour, minute, second));
     }
 
@@ -1901,7 +1901,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      * @throws DateTimeException if the value of any field is out of range
      */
-    public LocaleDateTimeJalali atTime(int hour, int minute, int second, int nanoOfSecond) {
+    public LocalDateTimeJalali atTime(int hour, int minute, int second, int nanoOfSecond) {
         return atTime(LocalTime.of(hour, minute, second, nanoOfSecond));
     }
 
@@ -1914,8 +1914,8 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      *
      * @return the local date-time of midnight at the start of this date, not null
      */
-    public LocaleDateTimeJalali atStartOfDay() {
-        return LocaleDateTimeJalali.of(this, LocalTime.MIDNIGHT);
+    public LocalDateTimeJalali atStartOfDay() {
+        return LocalDateTimeJalali.of(this, LocalTime.MIDNIGHT);
     }
 
     //-----------------------------------------------------------------------

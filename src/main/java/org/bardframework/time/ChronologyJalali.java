@@ -186,15 +186,15 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
     /**
      * Obtains an JALALI local date-time from another date-time object.
      * <p>
-     * This is equivalent to {@link LocaleDateTimeJalali#from(TemporalAccessor)}.
+     * This is equivalent to {@link LocalDateTimeJalali#from(TemporalAccessor)}.
      *
      * @param temporal the date-time object to toModel, not null
      * @return the JALALI local date-time, not null
      * @throws DateTimeException if unable to create the date-time
      */
     @Override  // override with covariant return type
-    public LocaleDateTimeJalali localDateTime(TemporalAccessor temporal) {
-        return LocaleDateTimeJalali.from(temporal);
+    public LocalDateTimeJalali localDateTime(TemporalAccessor temporal) {
+        return LocalDateTimeJalali.from(temporal);
     }
 
     /**

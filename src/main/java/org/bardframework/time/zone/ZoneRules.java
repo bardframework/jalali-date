@@ -1,6 +1,6 @@
 package org.bardframework.time.zone;
 
-import org.bardframework.time.LocaleDateTimeJalali;
+import org.bardframework.time.LocalDateTimeJalali;
 
 import java.io.*;
 import java.time.*;
@@ -53,7 +53,7 @@ public final class ZoneRules implements Serializable {
     /**
      * The zero-length ldt array.
      */
-    private static final LocaleDateTimeJalali[] EMPTY_LDT_ARRAY = new LocaleDateTimeJalali[0];
+    private static final LocalDateTimeJalali[] EMPTY_LDT_ARRAY = new LocalDateTimeJalali[0];
     /**
      * The number of days in a 400 year cycle.
      */
@@ -81,7 +81,7 @@ public final class ZoneRules implements Serializable {
      * This is a paired array, where the first entry is the start of the transition
      * and the second entry is the end of the transition.
      */
-    private final LocaleDateTimeJalali[] savingsLocalTransitions;
+    private final LocalDateTimeJalali[] savingsLocalTransitions;
     /**
      * The wall offsets.
      */
@@ -124,7 +124,7 @@ public final class ZoneRules implements Serializable {
         }
 
         // convert savings transitions to locals
-        List<LocaleDateTimeJalali> localTransitionList = new ArrayList<>();
+        List<LocalDateTimeJalali> localTransitionList = new ArrayList<>();
         List<ZoneOffset> localTransitionOffsetList = new ArrayList<>();
         localTransitionOffsetList.add(baseWallOffset);
         for (ZoneOffsetTransition trans : transitionList) {
@@ -137,7 +137,7 @@ public final class ZoneRules implements Serializable {
             }
             localTransitionOffsetList.add(trans.getOffsetAfter());
         }
-        this.savingsLocalTransitions = localTransitionList.toArray(new LocaleDateTimeJalali[localTransitionList.size()]);
+        this.savingsLocalTransitions = localTransitionList.toArray(new LocalDateTimeJalali[localTransitionList.size()]);
         this.wallOffsets = localTransitionOffsetList.toArray(new ZoneOffset[localTransitionOffsetList.size()]);
 
         // convert savings transitions to instants
@@ -179,7 +179,7 @@ public final class ZoneRules implements Serializable {
             this.savingsLocalTransitions = EMPTY_LDT_ARRAY;
         } else {
             // convert savings transitions to locals
-            List<LocaleDateTimeJalali> localTransitionList = new ArrayList<>();
+            List<LocalDateTimeJalali> localTransitionList = new ArrayList<>();
             for (int i = 0; i < savingsInstantTransitions.length; i++) {
                 ZoneOffset before = wallOffsets[i];
                 ZoneOffset after = wallOffsets[i + 1];
@@ -192,7 +192,7 @@ public final class ZoneRules implements Serializable {
                     localTransitionList.add(trans.getDateTimeBefore());
                 }
             }
-            this.savingsLocalTransitions = localTransitionList.toArray(new LocaleDateTimeJalali[localTransitionList.size()]);
+            this.savingsLocalTransitions = localTransitionList.toArray(new LocalDateTimeJalali[localTransitionList.size()]);
         }
     }
 
@@ -462,13 +462,13 @@ public final class ZoneRules implements Serializable {
      * Since, in the case of Gap and Overlap, the offset returned is a "best" value, rather
      * than the "correct" value, it should be treated with care. Applications that care
      * about the correct offset should use a combination of this method,
-     * {@link #getValidOffsets(LocaleDateTimeJalali)} and {@link #getTransition(LocaleDateTimeJalali)}.
+     * {@link #getValidOffsets(LocalDateTimeJalali)} and {@link #getTransition(LocalDateTimeJalali)}.
      *
      * @param localDateTime the local date-time to query, not null, but null
      *                      may be ignored if the rules have a single offset for all instants
      * @return the best available offset for the local date-time, not null
      */
-    public ZoneOffset getOffset(LocaleDateTimeJalali localDateTime) {
+    public ZoneOffset getOffset(LocalDateTimeJalali localDateTime) {
         Object info = getOffsetInfo(localDateTime);
         if (info instanceof ZoneOffsetTransition) {
             return ((ZoneOffsetTransition) info).getOffsetBefore();
@@ -518,7 +518,7 @@ public final class ZoneRules implements Serializable {
      *                      may be ignored if the rules have a single offset for all instants
      * @return the list of valid offsets, may be immutable, not null
      */
-    public List<ZoneOffset> getValidOffsets(LocaleDateTimeJalali localDateTime) {
+    public List<ZoneOffset> getValidOffsets(LocalDateTimeJalali localDateTime) {
         // should probably be optimized
         Object info = getOffsetInfo(localDateTime);
         if (info instanceof ZoneOffsetTransition) {
@@ -561,12 +561,12 @@ public final class ZoneRules implements Serializable {
      *                      may be ignored if the rules have a single offset for all instants
      * @return the offset transition, null if the local date-time is not in transition
      */
-    public ZoneOffsetTransition getTransition(LocaleDateTimeJalali localDateTime) {
+    public ZoneOffsetTransition getTransition(LocalDateTimeJalali localDateTime) {
         Object info = getOffsetInfo(localDateTime);
         return (info instanceof ZoneOffsetTransition ? (ZoneOffsetTransition) info : null);
     }
 
-    private Object getOffsetInfo(LocaleDateTimeJalali dt) {
+    private Object getOffsetInfo(LocalDateTimeJalali dt) {
         if (savingsLocalTransitions.length == 0) {
             return wallOffsets[0];
         }
@@ -600,8 +600,8 @@ public final class ZoneRules implements Serializable {
         }
         if ((index & 1) == 0) {
             // gap or overlap
-            LocaleDateTimeJalali dtBefore = savingsLocalTransitions[index];
-            LocaleDateTimeJalali dtAfter = savingsLocalTransitions[index + 1];
+            LocalDateTimeJalali dtBefore = savingsLocalTransitions[index];
+            LocalDateTimeJalali dtAfter = savingsLocalTransitions[index + 1];
             ZoneOffset offsetBefore = wallOffsets[index / 2];
             ZoneOffset offsetAfter = wallOffsets[index / 2 + 1];
             if (offsetAfter.getTotalSeconds() > offsetBefore.getTotalSeconds()) {
@@ -624,8 +624,8 @@ public final class ZoneRules implements Serializable {
      * @param trans the transition, not null
      * @return the offset info, not null
      */
-    private Object findOffsetInfo(LocaleDateTimeJalali dt, ZoneOffsetTransition trans) {
-        LocaleDateTimeJalali localTransition = trans.getDateTimeBefore();
+    private Object findOffsetInfo(LocalDateTimeJalali dt, ZoneOffsetTransition trans) {
+        LocalDateTimeJalali localTransition = trans.getDateTimeBefore();
         if (trans.isGap()) {
             if (dt.isBefore(localTransition)) {
                 return trans.getOffsetBefore();
@@ -636,7 +636,7 @@ public final class ZoneRules implements Serializable {
                 return trans.getOffsetAfter();
             }
         } else {
-            if (dt.isBefore(localTransition) == false) {
+            if (!dt.isBefore(localTransition)) {
                 return trans.getOffsetAfter();
             }
             if (dt.isBefore(trans.getDateTimeAfter())) {
@@ -736,7 +736,7 @@ public final class ZoneRules implements Serializable {
      * @return the standard offset, not null
      */
     public boolean isDaylightSavings(Instant instant) {
-        return (getStandardOffset(instant).equals(getOffset(instant)) == false);
+        return (!getStandardOffset(instant).equals(getOffset(instant)));
     }
 
     /**
@@ -745,7 +745,7 @@ public final class ZoneRules implements Serializable {
      * To be valid, the local date-time must not be in a gap and the offset
      * must match one of the valid offsets.
      * <p>
-     * This default implementation checks if {@link #getValidOffsets(LocaleDateTimeJalali)}
+     * This default implementation checks if {@link #getValidOffsets(LocalDateTimeJalali)}
      * contains the specified offset.
      *
      * @param localDateTime the date-time to check, not null, but null
@@ -753,7 +753,7 @@ public final class ZoneRules implements Serializable {
      * @param offset        the offset to check, null returns false
      * @return true if the offset date-time is valid for these rules
      */
-    public boolean isValidOffset(LocaleDateTimeJalali localDateTime, ZoneOffset offset) {
+    public boolean isValidOffset(LocalDateTimeJalali localDateTime, ZoneOffset offset) {
         return getValidOffsets(localDateTime).contains(offset);
     }
 

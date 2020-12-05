@@ -94,7 +94,7 @@ public final class ZonedDateTimeJalali
     /**
      * The local date-time.
      */
-    private final LocaleDateTimeJalali dateTime;
+    private final LocalDateTimeJalali dateTime;
     /**
      * The offset from UTC/Greenwich.
      */
@@ -113,7 +113,7 @@ public final class ZonedDateTimeJalali
      * @param offset   the zone offset, validated as not null
      * @param zone     the time-zone, validated as not null
      */
-    private ZonedDateTimeJalali(LocaleDateTimeJalali dateTime, ZoneOffset offset, ZoneId zone) {
+    private ZonedDateTimeJalali(LocalDateTimeJalali dateTime, ZoneOffset offset, ZoneId zone) {
         this.dateTime = dateTime;
         this.offset = offset;
         this.zone = zone;
@@ -199,7 +199,7 @@ public final class ZonedDateTimeJalali
      * @return the offset date-time, not null
      */
     public static ZonedDateTimeJalali of(LocalDateJalali date, LocalTime time, ZoneId zone) {
-        return of(LocaleDateTimeJalali.of(date, time), zone);
+        return of(LocalDateTimeJalali.of(date, time), zone);
     }
 
     /**
@@ -226,7 +226,7 @@ public final class ZonedDateTimeJalali
      * @param zone          the time-zone, not null
      * @return the zoned date-time, not null
      */
-    public static ZonedDateTimeJalali of(LocaleDateTimeJalali localDateTime, ZoneId zone) {
+    public static ZonedDateTimeJalali of(LocalDateTimeJalali localDateTime, ZoneId zone) {
         return ofLocal(localDateTime, zone, null);
     }
 
@@ -273,7 +273,7 @@ public final class ZonedDateTimeJalali
     public static ZonedDateTimeJalali of(
         int year, int month, int dayOfMonth,
         int hour, int minute, int second, int nanoOfSecond, ZoneId zone) {
-        LocaleDateTimeJalali dt = LocaleDateTimeJalali.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
+        LocalDateTimeJalali dt = LocalDateTimeJalali.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
         return ofLocal(dt, zone, null);
     }
 
@@ -302,7 +302,7 @@ public final class ZonedDateTimeJalali
      * @param preferredOffset the zone offset, null if no preference
      * @return the zoned date-time, not null
      */
-    public static ZonedDateTimeJalali ofLocal(LocaleDateTimeJalali localDateTime, ZoneId zone, ZoneOffset preferredOffset) {
+    public static ZonedDateTimeJalali ofLocal(LocalDateTimeJalali localDateTime, ZoneId zone, ZoneOffset preferredOffset) {
         Objects.requireNonNull(localDateTime, "localDateTime");
         Objects.requireNonNull(zone, "zone");
         if (zone instanceof ZoneOffset) {
@@ -351,7 +351,7 @@ public final class ZonedDateTimeJalali
      * Obtains an instance of {@code ZonedDateTime} from the instant formed by combining
      * the local date-time and offset.
      * <p>
-     * This creates a zoned date-time by {@link LocaleDateTimeJalali#toInstant(ZoneOffset) combining}
+     * This creates a zoned date-time by {@link LocalDateTimeJalali#toInstant(ZoneOffset) combining}
      * the {@code JalaliDateTime} and {@code ZoneOffset}.
      * This combination uniquely specifies an instant without ambiguity.
      * <p>
@@ -360,14 +360,14 @@ public final class ZonedDateTimeJalali
      * then the date-time and offset of the zoned date-time will differ from those specified.
      * <p>
      * If the {@code ZoneId} to be used is a {@code ZoneOffset}, this method is equivalent
-     * to {@link #of(LocaleDateTimeJalali, ZoneId)}.
+     * to {@link #of(LocalDateTimeJalali, ZoneId)}.
      *
      * @param localDateTime the local date-time, not null
      * @param offset        the zone offset, not null
      * @param zone          the time-zone, not null
      * @return the zoned date-time, not null
      */
-    public static ZonedDateTimeJalali ofInstant(LocaleDateTimeJalali localDateTime, ZoneOffset offset, ZoneId zone) {
+    public static ZonedDateTimeJalali ofInstant(LocalDateTimeJalali localDateTime, ZoneOffset offset, ZoneId zone) {
         Objects.requireNonNull(localDateTime, "localDateTime");
         Objects.requireNonNull(offset, "offset");
         Objects.requireNonNull(zone, "zone");
@@ -393,7 +393,7 @@ public final class ZonedDateTimeJalali
         ZoneRules rules = ZoneUtils.getRules(zone);
         Instant instant = Instant.ofEpochSecond(epochSecond, nanoOfSecond);  // TODO: rules should be queryable by epochSeconds
         ZoneOffset offset = rules.getOffset(instant);
-        LocaleDateTimeJalali ldt = LocaleDateTimeJalali.ofEpochSecond(epochSecond, nanoOfSecond, offset);
+        LocalDateTimeJalali ldt = LocalDateTimeJalali.ofEpochSecond(epochSecond, nanoOfSecond, offset);
         return new ZonedDateTimeJalali(ldt, offset, zone);
     }
 
@@ -411,12 +411,12 @@ public final class ZonedDateTimeJalali
      * @return the zoned date-time, not null
      * @throws DateTimeException if the combination of arguments is invalid
      */
-    public static ZonedDateTimeJalali ofStrict(LocaleDateTimeJalali localDateTime, ZoneOffset offset, ZoneId zone) {
+    public static ZonedDateTimeJalali ofStrict(LocalDateTimeJalali localDateTime, ZoneOffset offset, ZoneId zone) {
         Objects.requireNonNull(localDateTime, "localDateTime");
         Objects.requireNonNull(offset, "offset");
         Objects.requireNonNull(zone, "zone");
         ZoneRules rules = ZoneUtils.getRules(zone);
-        if (rules.isValidOffset(localDateTime, offset) == false) {
+        if (!rules.isValidOffset(localDateTime, offset)) {
             ZoneOffsetTransition trans = rules.getTransition(localDateTime);
             if (trans != null && trans.isGap()) {
                 // error message says daylight savings for simplicity
@@ -454,11 +454,11 @@ public final class ZonedDateTimeJalali
      * @param zone          the time-zone, not null
      * @return the zoned date-time, not null
      */
-    private static ZonedDateTimeJalali ofLenient(LocaleDateTimeJalali localDateTime, ZoneOffset offset, ZoneId zone) {
+    private static ZonedDateTimeJalali ofLenient(LocalDateTimeJalali localDateTime, ZoneOffset offset, ZoneId zone) {
         Objects.requireNonNull(localDateTime, "localDateTime");
         Objects.requireNonNull(offset, "offset");
         Objects.requireNonNull(zone, "zone");
-        if (zone instanceof ZoneOffset && offset.equals(zone) == false) {
+        if (zone instanceof ZoneOffset && !offset.equals(zone)) {
             throw new IllegalArgumentException("ZoneId must match ZoneOffset");
         }
         return new ZonedDateTimeJalali(localDateTime, offset, zone);
@@ -547,7 +547,7 @@ public final class ZonedDateTimeJalali
      * @param newDateTime the new local date-time, not null
      * @return the zoned date-time, not null
      */
-    private ZonedDateTimeJalali resolveLocal(LocaleDateTimeJalali newDateTime) {
+    private ZonedDateTimeJalali resolveLocal(LocalDateTimeJalali newDateTime) {
         return ofLocal(newDateTime, zone, offset);
     }
 
@@ -557,7 +557,7 @@ public final class ZonedDateTimeJalali
      * @param newDateTime the new local date-time, not null
      * @return the zoned date-time, not null
      */
-    private ZonedDateTimeJalali resolveInstant(LocaleDateTimeJalali newDateTime) {
+    private ZonedDateTimeJalali resolveInstant(LocalDateTimeJalali newDateTime) {
         return ofInstant(newDateTime, offset, zone);
     }
 
@@ -570,7 +570,7 @@ public final class ZonedDateTimeJalali
      * @return the zoned date-time, not null
      */
     private ZonedDateTimeJalali resolveOffset(ZoneOffset offset) {
-        if (offset.equals(this.offset) == false && ZoneUtils.getRules(zone).isValidOffset(dateTime, offset)) {
+        if (!offset.equals(this.offset) && ZoneUtils.getRules(zone).isValidOffset(dateTime, offset)) {
             return new ZonedDateTimeJalali(dateTime, offset, zone);
         }
         return this;
@@ -826,7 +826,7 @@ public final class ZonedDateTimeJalali
         ZoneOffsetTransition trans = ZoneUtils.getRules(getZone()).getTransition(dateTime);
         if (trans != null && trans.isOverlap()) {
             ZoneOffset earlierOffset = trans.getOffsetBefore();
-            if (earlierOffset.equals(offset) == false) {
+            if (!earlierOffset.equals(offset)) {
                 return new ZonedDateTimeJalali(dateTime, earlierOffset, zone);
             }
         }
@@ -854,7 +854,7 @@ public final class ZonedDateTimeJalali
         ZoneOffsetTransition trans = ZoneUtils.getRules(zone).getTransition(toLocalDateTime());
         if (trans != null) {
             ZoneOffset laterOffset = trans.getOffsetAfter();
-            if (laterOffset.equals(offset) == false) {
+            if (!laterOffset.equals(offset)) {
                 return new ZonedDateTimeJalali(dateTime, laterOffset, zone);
             }
         }
@@ -888,7 +888,7 @@ public final class ZonedDateTimeJalali
      * This method changes the time-zone and retains the local date-time.
      * The local date-time is only changed if it is invalid for the new zone,
      * determined using the same approach as
-     * {@link #ofLocal(LocaleDateTimeJalali, ZoneId, ZoneOffset)}.
+     * {@link #ofLocal(LocalDateTimeJalali, ZoneId, ZoneOffset)}.
      * <p>
      * To change the zone and adjust the local date-time,
      * use {@link #withZoneSameInstant(ZoneId)}.
@@ -960,7 +960,7 @@ public final class ZonedDateTimeJalali
      * @return the local date-time part of this date-time, not null
      */
     @Override  // override for return type
-    public LocaleDateTimeJalali toLocalDateTime() {
+    public LocalDateTimeJalali toLocalDateTime() {
         return dateTime;
     }
 
@@ -1168,11 +1168,11 @@ public final class ZonedDateTimeJalali
     public ZonedDateTimeJalali with(TemporalAdjuster adjuster) {
         // optimizations
         if (adjuster instanceof LocalDateJalali) {
-            return resolveLocal(LocaleDateTimeJalali.of((LocalDateJalali) adjuster, dateTime.toLocalTime()));
+            return resolveLocal(LocalDateTimeJalali.of((LocalDateJalali) adjuster, dateTime.toLocalTime()));
         } else if (adjuster instanceof LocalTime) {
-            return resolveLocal(LocaleDateTimeJalali.of(dateTime.toLocalDate(), (LocalTime) adjuster));
-        } else if (adjuster instanceof LocaleDateTimeJalali) {
-            return resolveLocal((LocaleDateTimeJalali) adjuster);
+            return resolveLocal(LocalDateTimeJalali.of(dateTime.toLocalDate(), (LocalTime) adjuster));
+        } else if (adjuster instanceof LocalDateTimeJalali) {
+            return resolveLocal((LocalDateTimeJalali) adjuster);
         } else if (adjuster instanceof OffsetDateTimeJalali) {
             OffsetDateTimeJalali odt = (OffsetDateTimeJalali) adjuster;
             return ofLocal(odt.toJalaliDateTime(), zone, odt.getOffset());
@@ -1215,7 +1215,7 @@ public final class ZonedDateTimeJalali
      * If the new offset value is outside the valid range then a {@code DateTimeException} will be thrown.
      * <p>
      * The other {@link #isSupported(TemporalField) supported fields} will behave as per
-     * the matching method on {@link LocaleDateTimeJalali#with(TemporalField, long) JalaliDateTime}.
+     * the matching method on {@link LocalDateTimeJalali#with(TemporalField, long) JalaliDateTime}.
      * The zone is not part of the calculation and will be unchanged.
      * When converting back to {@code ZonedDateTime}, if the local date-time is in an overlap,
      * then the offset will be retained if possible, otherwise the earlier offset will be used.
@@ -1259,7 +1259,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the year altered.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#withYear(int) changing the year} of the local date-time.
+     * {@link LocalDateTimeJalali#withYear(int) changing the year} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1281,7 +1281,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the month-of-year altered.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#withMonth(int) changing the month} of the local date-time.
+     * {@link LocalDateTimeJalali#withMonth(int) changing the month} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1303,7 +1303,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the day-of-month altered.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#withDayOfMonth(int) changing the day-of-month} of the local date-time.
+     * {@link LocalDateTimeJalali#withDayOfMonth(int) changing the day-of-month} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1326,7 +1326,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the day-of-year altered.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#withDayOfYear(int) changing the day-of-year} of the local date-time.
+     * {@link LocalDateTimeJalali#withDayOfYear(int) changing the day-of-year} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1351,7 +1351,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the hour-of-day altered.
      * <p>
      * This operates on the local time-line,
-     * {@linkplain LocaleDateTimeJalali#withHour(int) changing the time} of the local date-time.
+     * {@linkplain LocalDateTimeJalali#withHour(int) changing the time} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1373,7 +1373,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the minute-of-hour altered.
      * <p>
      * This operates on the local time-line,
-     * {@linkplain LocaleDateTimeJalali#withMinute(int) changing the time} of the local date-time.
+     * {@linkplain LocalDateTimeJalali#withMinute(int) changing the time} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1395,7 +1395,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the second-of-minute altered.
      * <p>
      * This operates on the local time-line,
-     * {@linkplain LocaleDateTimeJalali#withSecond(int) changing the time} of the local date-time.
+     * {@linkplain LocalDateTimeJalali#withSecond(int) changing the time} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1417,7 +1417,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the nano-of-second altered.
      * <p>
      * This operates on the local time-line,
-     * {@linkplain LocaleDateTimeJalali#withNano(int) changing the time} of the local date-time.
+     * {@linkplain LocalDateTimeJalali#withNano(int) changing the time} of the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1451,7 +1451,7 @@ public final class ZonedDateTimeJalali
      * {@link ChronoUnit#DAYS DAYS}. Other units throw an exception.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#truncatedTo(TemporalUnit) truncating}
+     * {@link LocalDateTimeJalali#truncatedTo(TemporalUnit) truncating}
      * the underlying local date-time. This is then converted back to a
      * {@code ZonedDateTime}, using the zone ID to obtain the offset.
      * <p>
@@ -1516,13 +1516,13 @@ public final class ZonedDateTimeJalali
      * Date units operate on the local time-line.
      * The period is first added to the local date-time, then converted back
      * to a zoned date-time using the zone ID.
-     * The conversion uses {@link #ofLocal(LocaleDateTimeJalali, ZoneId, ZoneOffset)}
+     * The conversion uses {@link #ofLocal(LocalDateTimeJalali, ZoneId, ZoneOffset)}
      * with the offset before the addition.
      * <p>
      * Time units operate on the instant time-line.
      * The period is first added to the local date-time, then converted back to
      * a zoned date-time using the zone ID.
-     * The conversion uses {@link #ofInstant(LocaleDateTimeJalali, ZoneOffset, ZoneId)}
+     * The conversion uses {@link #ofInstant(LocalDateTimeJalali, ZoneOffset, ZoneId)}
      * with the offset before the addition.
      * <p>
      * If the field is not a {@code ChronoUnit}, then the result of this method
@@ -1557,7 +1557,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of years added.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#plusYears(long) adding years} to the local date-time.
+     * {@link LocalDateTimeJalali#plusYears(long) adding years} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1579,7 +1579,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of months added.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#plusMonths(long) adding months} to the local date-time.
+     * {@link LocalDateTimeJalali#plusMonths(long) adding months} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1601,7 +1601,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of weeks added.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#plusWeeks(long) adding weeks} to the local date-time.
+     * {@link LocalDateTimeJalali#plusWeeks(long) adding weeks} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1623,7 +1623,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of days added.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#plusDays(long) adding days} to the local date-time.
+     * {@link LocalDateTimeJalali#plusDays(long) adding days} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1774,13 +1774,13 @@ public final class ZonedDateTimeJalali
      * Date units operate on the local time-line.
      * The period is first subtracted from the local date-time, then converted back
      * to a zoned date-time using the zone ID.
-     * The conversion uses {@link #ofLocal(LocaleDateTimeJalali, ZoneId, ZoneOffset)}
+     * The conversion uses {@link #ofLocal(LocalDateTimeJalali, ZoneId, ZoneOffset)}
      * with the offset before the subtraction.
      * <p>
      * Time units operate on the instant time-line.
      * The period is first subtracted from the local date-time, then converted back to
      * a zoned date-time using the zone ID.
-     * The conversion uses {@link #ofInstant(LocaleDateTimeJalali, ZoneOffset, ZoneId)}
+     * The conversion uses {@link #ofInstant(LocalDateTimeJalali, ZoneOffset, ZoneId)}
      * with the offset before the subtraction.
      * <p>
      * This method is equivalent to {@link #plus(long, TemporalUnit)} with the amount negated.
@@ -1806,7 +1806,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of years subtracted.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#minusYears(long) subtracting years} to the local date-time.
+     * {@link LocalDateTimeJalali#minusYears(long) subtracting years} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1828,7 +1828,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of months subtracted.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#minusMonths(long) subtracting months} to the local date-time.
+     * {@link LocalDateTimeJalali#minusMonths(long) subtracting months} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1850,7 +1850,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of weeks subtracted.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#minusWeeks(long) subtracting weeks} to the local date-time.
+     * {@link LocalDateTimeJalali#minusWeeks(long) subtracting weeks} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>
@@ -1872,7 +1872,7 @@ public final class ZonedDateTimeJalali
      * Returns a copy of this {@code ZonedDateTime} with the specified number of days subtracted.
      * <p>
      * This operates on the local time-line,
-     * {@link LocaleDateTimeJalali#minusDays(long) subtracting days} to the local date-time.
+     * {@link LocalDateTimeJalali#minusDays(long) subtracting days} to the local date-time.
      * This is then converted back to a {@code ZonedDateTime}, using the zone ID
      * to obtain the offset.
      * <p>

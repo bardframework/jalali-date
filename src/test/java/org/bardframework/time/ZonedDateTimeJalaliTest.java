@@ -23,8 +23,8 @@ public class ZonedDateTimeJalaliTest {
         ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
         System.out.println(DateTimeFormatter.ofPattern(pattern).format(zonedDateTime));
 
-        LocaleDateTimeJalali localeDateTimeJalali = LocaleDateTimeJalali.of(localDateTime);
-        ZonedDateTimeJalali zonedDateTimeJalali = localeDateTimeJalali.atZone(zoneId);
+        LocalDateTimeJalali localDateTimeJalali = LocalDateTimeJalali.of(localDateTime);
+        ZonedDateTimeJalali zonedDateTimeJalali = localDateTimeJalali.atZone(zoneId);
         System.out.println(DateTimeFormatterJalali.ofPattern(pattern).withZone(ZoneOffset.UTC).format(zonedDateTimeJalali));
         System.out.println(DateTimeFormatterJalali.ofPattern(pattern).format(zonedDateTimeJalali));
         zonedDateTimeJalali = ZonedDateTimeJalali.of(1399, 5, 20, 3, 30, 0, 0, zoneId);

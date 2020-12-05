@@ -1,6 +1,6 @@
 package org.bardframework.time.format;
 
-import org.bardframework.time.LocaleDateTimeJalali;
+import org.bardframework.time.LocalDateTimeJalali;
 import org.bardframework.time.ZonedDateTimeJalali;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +9,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-class LocaleDateTimeJalaliFormatterTest {
+class LocalDateTimeJalaliFormatterTest {
 
     public static Date getDateOfJalaliString(String jalaliString, String pattern, ZoneId zoneId) {
         DateTimeFormatterJalali formatter = DateTimeFormatterJalali.ofPattern(pattern);
-        LocaleDateTimeJalali jalaliDateTime = LocaleDateTimeJalali.parse(jalaliString, formatter);
+        LocalDateTimeJalali jalaliDateTime = LocalDateTimeJalali.parse(jalaliString, formatter);
         LocalDateTime localDateTime = jalaliDateTime.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
         return Date.from(zonedDateTime.toInstant());
@@ -21,7 +21,7 @@ class LocaleDateTimeJalaliFormatterTest {
 
     public static String formatJalali(LocalDateTime dateTime, String pattern) {
         DateTimeFormatterJalali formatter = DateTimeFormatterJalali.ofPattern(pattern);
-        return formatter.format(LocaleDateTimeJalali.of(dateTime));
+        return formatter.format(LocalDateTimeJalali.of(dateTime));
     }
 
     @Test
@@ -40,8 +40,8 @@ class LocaleDateTimeJalaliFormatterTest {
         ZoneId zoneId = ZoneId.systemDefault();
         Locale locale = new Locale("en");
         String pattern = "yyyy MMM dd HH:mm";
-        LocaleDateTimeJalali localeDateTimeJalali = LocaleDateTimeJalali.of(localDateTime);
-        ZonedDateTimeJalali zonedDateTimeJalali = localeDateTimeJalali.atZone(zoneId);
+        LocalDateTimeJalali localDateTimeJalali = LocalDateTimeJalali.of(localDateTime);
+        ZonedDateTimeJalali zonedDateTimeJalali = localDateTimeJalali.atZone(zoneId);
         System.out.println(DateTimeFormatterJalali.ofPattern(pattern).withLocale(locale).withZone(zoneId).format(zonedDateTimeJalali));
         System.out.println(DateTimeFormatter.ofPattern(pattern).withLocale(locale).withZone(zoneId).format(localDateTime));
     }

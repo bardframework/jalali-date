@@ -1,7 +1,7 @@
 package org.bardframework.time.zone;
 
 import org.bardframework.time.LocalDateJalali;
-import org.bardframework.time.LocaleDateTimeJalali;
+import org.bardframework.time.LocalDateTimeJalali;
 import org.bardframework.time.MonthJalali;
 
 import java.io.*;
@@ -160,7 +160,7 @@ public final class ZoneOffsetTransitionRule implements Serializable {
         if (dayOfMonthIndicator < -28 || dayOfMonthIndicator > 31 || dayOfMonthIndicator == 0) {
             throw new IllegalArgumentException("Day of month indicator must be between -28 and 31 inclusive excluding zero");
         }
-        if (timeEndOfDay && time.equals(LocalTime.MIDNIGHT) == false) {
+        if (timeEndOfDay && !time.equals(LocalTime.MIDNIGHT)) {
             throw new IllegalArgumentException("Time must be midnight when end of day flag is true");
         }
         if (time.getNano() != 0) {
@@ -435,8 +435,8 @@ public final class ZoneOffsetTransitionRule implements Serializable {
         if (timeEndOfDay) {
             date = date.plusDays(1);
         }
-        LocaleDateTimeJalali localDT = LocaleDateTimeJalali.of(date, time);
-        LocaleDateTimeJalali transition = timeDefinition.createDateTime(localDT, standardOffset, offsetBefore);
+        LocalDateTimeJalali localDT = LocalDateTimeJalali.of(date, time);
+        LocalDateTimeJalali transition = timeDefinition.createDateTime(localDT, standardOffset, offsetBefore);
         return new ZoneOffsetTransition(transition, offsetBefore, offsetAfter);
     }
 
@@ -557,7 +557,7 @@ public final class ZoneOffsetTransitionRule implements Serializable {
          * @param wallOffset     the wall offset, not null
          * @return the date-time relative to the wall/before offset, not null
          */
-        public LocaleDateTimeJalali createDateTime(LocaleDateTimeJalali dateTime, ZoneOffset standardOffset, ZoneOffset wallOffset) {
+        public LocalDateTimeJalali createDateTime(LocalDateTimeJalali dateTime, ZoneOffset standardOffset, ZoneOffset wallOffset) {
             switch (this) {
                 case UTC: {
                     int difference = wallOffset.getTotalSeconds() - ZoneOffset.UTC.getTotalSeconds();
