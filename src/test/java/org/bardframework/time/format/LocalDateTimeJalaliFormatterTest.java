@@ -1,5 +1,6 @@
 package org.bardframework.time.format;
 
+import org.bardframework.time.LocalDateJalali;
 import org.bardframework.time.LocalDateTimeJalali;
 import org.bardframework.time.ZonedDateTimeJalali;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,25 @@ class LocalDateTimeJalaliFormatterTest {
         String jalaliString = formatJalali(localDateTime, pattern);
         Date revertedDate = getDateOfJalaliString(jalaliString, pattern, zoneId);
         System.out.println(generatedDate + " -> " + jalaliString + " -> " + " -> " + revertedDate);
+    }
+
+    @Test
+    void testJalali() {
+        String date = "1398/06/01 12:00:00";
+        ZoneId zoneId = ZoneId.systemDefault();
+        DateTimeFormatterJalali fmt = DateTimeFormatterJalali.ofPattern("yyyy/MM/dd HH:mm:ss");
+        Instant first = LocalDateTimeJalali.from(fmt.parse(date)).atZone(zoneId).toInstant();
+        Instant second = LocalDateTimeJalali.from(fmt.parse(date)).toLocalDateTime().atZone(zoneId).toInstant();
+
+        System.out.println(date + " -> " + first + " & " + second);
+    }
+
+    @Test
+    void testJalali2() {
+        LocalDateJalali first = LocalDateJalali.of(1400, 12, 29);
+        LocalDateJalali second = first.plusDays(1);
+
+        System.out.println(first + " -> " + second);
     }
 
     public static void main(String[] args) {
