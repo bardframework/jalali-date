@@ -1427,7 +1427,7 @@ public final class DateTimeFormatterJalali {
     private DateTimeParseException createError(CharSequence text, RuntimeException ex) {
         String abbr;
         if (text.length() > 64) {
-            abbr = text.subSequence(0, 64).toString() + "...";
+            abbr = text.subSequence(0, 64) + "...";
         } else {
             abbr = text.toString();
         }
@@ -1455,7 +1455,7 @@ public final class DateTimeFormatterJalali {
         if (context == null || pos.getErrorIndex() >= 0 || (position == null && pos.getIndex() < text.length())) {
             String abbr;
             if (text.length() > 64) {
-                abbr = text.subSequence(0, 64).toString() + "...";
+                abbr = text.subSequence(0, 64) + "...";
             } else {
                 abbr = text.toString();
             }

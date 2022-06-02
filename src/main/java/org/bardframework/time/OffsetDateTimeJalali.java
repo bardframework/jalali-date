@@ -1862,6 +1862,6 @@ public final class OffsetDateTimeJalali
      */
     @Override
     public String toString() {
-        return dateTime.toString() + offset.toString();
+        return dateTime.toString() + offset;
     }
 }
