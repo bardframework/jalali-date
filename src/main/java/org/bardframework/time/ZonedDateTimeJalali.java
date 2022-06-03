@@ -513,7 +513,7 @@ public final class ZonedDateTimeJalali
      * {@code 1367-08-12T10:15:30+03:30[Asia/Tehran]}.
      * <p>
      * The string must represent a valid date-time and is parsed using
-     * {@link java.time.format.DateTimeFormatter#ISO_ZONED_DATE_TIME}.
+     * {@link DateTimeFormatter#ISO_ZONED_DATE_TIME}.
      *
      * @param text the text to parse such as "1367-08-12T10:15:30+03:30[Asia/Tehran]", not null
      * @return the parsed zoned date-time, not null
@@ -1123,10 +1123,10 @@ public final class ZonedDateTimeJalali
      * A simple adjuster might simply set the one of the fields, such as the year field.
      * A more complex adjuster might set the date to the last day of the month.
      * A selection of common adjustments is provided in
-     * {@link java.time.temporal.TemporalAdjusters TemporalAdjusters}.
+     * {@link TemporalAdjusters TemporalAdjusters}.
      * These include finding the "last day of the month" and "next Wednesday".
      * Key date-time classes also implement the {@code TemporalAdjuster} interface,
-     * such as {@link Month} and {@link java.time.MonthDay MonthDay}.
+     * such as {@link Month} and {@link MonthDay MonthDay}.
      * The adjuster is responsible for handling special cases, such as the varying
      * lengths of month and leap years.
      * <p>

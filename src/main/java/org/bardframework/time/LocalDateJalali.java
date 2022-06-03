@@ -57,7 +57,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
     public static final LocalDateJalali MAX = LocalDateJalali.of(Year.MAX_VALUE, 12, 30);
     public static final LocalDateJalali LOCAL_1970_01_01 = of(1348, 10, 11);
     public static final int DAYS_LEFT_IN_1970_01_01 = 492_634;
-    public static final java.time.LocalDate JALALI_0001_01_01 = java.time.LocalDate.of(622, Month.MARCH, 22);
+    public static final LocalDate JALALI_0001_01_01 = LocalDate.of(622, Month.MARCH, 22);
     /**
      * Hours per day.
      */
@@ -305,7 +305,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
         return new LocalDateJalali(year, moy.getValue(), dom);
     }
 
-    public static LocalDateJalali of(java.time.LocalDate localDate) {
+    public static LocalDateJalali of(LocalDate localDate) {
         return getFirstDayOfGregorianYearInJalaliDate(localDate.getYear()).plusDays(localDate.getDayOfYear() - 1);
 //        return ofEpochDay(localDate.toEpochDay());
     }

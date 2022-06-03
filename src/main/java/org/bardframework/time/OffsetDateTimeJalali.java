@@ -802,7 +802,7 @@ public final class OffsetDateTimeJalali
      * A simple adjuster might simply set the one of the fields, such as the year field.
      * A more complex adjuster might set the date to the last day of the month.
      * A selection of common adjustments is provided in
-     * {@link java.time.temporal.TemporalAdjusters TemporalAdjusters}.
+     * {@link TemporalAdjusters TemporalAdjusters}.
      * These include finding the "last day of the month" and "next Wednesday".
      * Key date-time classes also implement the {@code TemporalAdjuster} interface,
      * such as {@link Month} and {@link MonthDay MonthDay}.
