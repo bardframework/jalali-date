@@ -2285,10 +2285,12 @@ public final class DateTimeFormatterBuilderJalali {
             this.value = value;
         }
 
+        @Override
         public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
             return true;
         }
 
+        @Override
         public int parse(DateTimeParseContextJalali context, CharSequence text, int position) {
             if (context.getParsed(field) == null) {
                 context.setParsedField(field, value, position, position);
@@ -4114,6 +4116,7 @@ public final class DateTimeFormatterBuilderJalali {
                 return c == ' ' || c == '_' || c == '/';
             }
 
+            @Override
             protected String toKey(String k) {
                 for (int i = 0; i < k.length(); i++) {
                     if (isLenientChar(k.charAt(i))) {
