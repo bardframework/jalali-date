@@ -359,7 +359,7 @@ public class CalendarJalali extends Calendar {
                 , internalGet(HOUR_OF_DAY), internalGet(MINUTE), internalGet(SECOND));
             time = cal.getTimeInMillis();
 
-        } else if (!isTimeSet && isTimeSeted) {
+        } else if (!isTimeSet) {
             if (internalGet(HOUR_OF_DAY) >= 12 && internalGet(HOUR_OF_DAY) <= 23) {
                 super.set(AM_PM, PM);
                 super.set(HOUR, internalGet(HOUR_OF_DAY) - 12);
@@ -675,7 +675,8 @@ public class CalendarJalali extends Calendar {
             }
             case DAY_OF_MONTH: {
                 int unit = 0;
-                if (0 <= get(MONTH) && get(MONTH) <= 5) {
+                get(MONTH);
+                if (get(MONTH) <= 5) {
                     unit = 31;
                 }
                 if (6 <= get(MONTH) && get(MONTH) <= 10) {

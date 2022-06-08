@@ -347,7 +347,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
 
     public static LocalDateTimeJalali of(String jalaliDateTimeString) {
         if (null == jalaliDateTimeString) {
-            throw new IllegalArgumentException("invalid jalaliDateTimeString: " + jalaliDateTimeString);
+            throw new IllegalArgumentException("invalid jalaliDateTimeString.");
         }
         String digit = jalaliDateTimeString.replaceAll("[^\\d]", "");
         if (8 > digit.length() || 23 < digit.length()) {

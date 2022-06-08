@@ -314,7 +314,7 @@ public final class ZonedDateTimeJalali
             offset = validOffsets.get(0);
         } else if (validOffsets.size() == 0) {
             ZoneOffsetTransition trans = rules.getTransition(localDateTime);
-            localDateTime = localDateTime.plusSeconds(trans.getDuration().getSeconds());
+            localDateTime = localDateTime.plusSeconds(Objects.requireNonNull(trans).getDuration().getSeconds());
             offset = trans.getOffsetAfter();
         } else {
             if (preferredOffset != null && validOffsets.contains(preferredOffset)) {

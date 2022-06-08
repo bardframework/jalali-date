@@ -427,7 +427,7 @@ public final class ZoneRules implements Serializable {
                     return trans.getOffsetBefore();
                 }
             }
-            return trans.getOffsetAfter();
+            return Objects.requireNonNull(trans).getOffsetAfter();
         }
 
         // using historic rules

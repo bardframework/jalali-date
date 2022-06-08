@@ -1908,9 +1908,7 @@ public final class DateTimeFormatterBuilderJalali {
     private int appendInternal(DateTimePrinterParser pp) {
         Objects.requireNonNull(pp, "pp");
         if (active.padNextWidth > 0) {
-            if (pp != null) {
-                pp = new PadPrinterParserDecorator(pp, active.padNextWidth, active.padNextChar);
-            }
+            pp = new PadPrinterParserDecorator(pp, active.padNextWidth, active.padNextChar);
             active.padNextWidth = 0;
             active.padNextChar = 0;
         }
@@ -2574,7 +2572,7 @@ public final class DateTimeFormatterBuilderJalali {
             long total = 0;
             BigInteger totalBig = null;
             int pos = position;
-            for (int pass = 0; pass < 2; pass++) {
+            for (int pass = 0; true; pass++) {
                 int maxEndPos = Math.min(pos + effMaxWidth, length);
                 while (pos < maxEndPos) {
                     char ch = text.charAt(pos++);
@@ -3371,7 +3369,7 @@ public final class DateTimeFormatterBuilderJalali {
                 return required;
             }
             int value = (ch1 - 48) * 10 + (ch2 - 48);
-            if (value < 0 || value > 59) {
+            if (value > 59) {
                 return required;
             }
             array[arrayIndex] = value;
@@ -3415,9 +3413,7 @@ public final class DateTimeFormatterBuilderJalali {
                 return false;
             }
             String gmtText = "GMT";  // TODO: get localized version of 'GMT'
-            if (gmtText != null) {
-                buf.append(gmtText);
-            }
+            buf.append(gmtText);
             int totalSecs = Math.toIntExact(offsetSecs);
             if (totalSecs != 0) {
                 int absHours = Math.abs((totalSecs / 3600) % 100);  // anything larger than 99 silently dropped
@@ -3592,23 +3588,7 @@ public final class DateTimeFormatterBuilderJalali {
             Map<Locale, String[]> perLocale = null;
             if (ref == null || (perLocale = ref.get()) == null || (names = perLocale.get(locale)) == null) {
 //                names = TimeZoneNameUtility.retrieveDisplayNames(id, locale);
-                if (names == null) {
-                    return null;
-                }
-                names = Arrays.copyOfRange(names, 0, 7);
-//                names[5] = TimeZoneNameUtility.retrieveGenericDisplayName(id, TimeZone.LONG, locale);
-                if (names[5] == null) {
-                    names[5] = names[0]; // use the id
-                }
-//                names[6] = TimeZoneNameUtility.retrieveGenericDisplayName(id, TimeZone.SHORT, locale);
-                if (names[6] == null) {
-                    names[6] = names[0];
-                }
-                if (perLocale == null) {
-                    perLocale = new ConcurrentHashMap<>();
-                }
-                perLocale.put(locale, names);
-                cache.put(id, new SoftReference<>(perLocale));
+                return null;
             }
             switch (type) {
                 case STD:

@@ -268,7 +268,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
 
     public static LocalDateJalali of(String jalaliDate) {
         if (null == jalaliDate) {
-            throw new IllegalArgumentException("invalid date: " + jalaliDate);
+            throw new IllegalArgumentException("invalid date: " + null);
         }
         String digit = jalaliDate.replaceAll("[^\\d]", "");
         if (8 != digit.length()) {

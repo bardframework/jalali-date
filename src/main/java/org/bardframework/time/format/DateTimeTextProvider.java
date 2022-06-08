@@ -218,41 +218,7 @@ class DateTimeTextProvider {
 
         int calendarStyle = (style == null) ? Calendar.ALL_STYLES : style.toCalendarStyle();
         Map<String, Integer> map = null;
-        if (map == null) {
-            return null;
-        }
-        List<Entry<String, Long>> list = new ArrayList<>(map.size());
-        switch (fieldIndex) {
-            case Calendar.ERA:
-                for (Entry<String, Integer> entry : map.entrySet()) {
-                    int era = entry.getValue();
-                    if (chrono == JapaneseChronology.INSTANCE) {
-                        if (era == 0) {
-                            era = -999;
-                        } else {
-                            era -= 2;
-                        }
-                    }
-                    list.add(createEntry(entry.getKey(), (long) era));
-                }
-                break;
-            case Calendar.MONTH:
-                for (Entry<String, Integer> entry : map.entrySet()) {
-                    list.add(createEntry(entry.getKey(), (long) (entry.getValue() + 1)));
-                }
-                break;
-            case Calendar.DAY_OF_WEEK:
-                for (Entry<String, Integer> entry : map.entrySet()) {
-                    list.add(createEntry(entry.getKey(), (long) toWeekDay(entry.getValue())));
-                }
-                break;
-            default:
-                for (Entry<String, Integer> entry : map.entrySet()) {
-                    list.add(createEntry(entry.getKey(), (long) entry.getValue()));
-                }
-                break;
-        }
-        return list.iterator();
+        return null;
     }
 
     private Object findStore(TemporalField field, Locale locale) {
@@ -275,15 +241,6 @@ class DateTimeTextProvider {
                     continue;
                 }
                 Map<String, Integer> displayNames = null;
-                if (displayNames != null) {
-                    Map<Long, String> map = new HashMap<>();
-                    for (Entry<String, Integer> entry : displayNames.entrySet()) {
-                        map.put((long) entry.getValue(), entry.getKey());
-                    }
-                    if (!map.isEmpty()) {
-                        styleMap.put(textStyle, map);
-                    }
-                }
             }
             return new LocaleStore(styleMap);
         }
