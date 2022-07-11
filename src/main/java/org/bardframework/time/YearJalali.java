@@ -169,7 +169,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
      * <p>
      * The conversion extracts the {@link ChronoField#YEAR year} field.
      * The extraction is only permitted if the temporal object has an ISO
-     * chronology, or can be converted to a {@code JalaliDate}.
+     * chronology, or can be converted to a {@code LocalDateJalali}.
      * <p>
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code JalaliYear::from}.
@@ -907,9 +907,9 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
     //-----------------------------------------------------------------------
 
     /**
-     * Combines this year with a day-of-year to create a {@code JalaliDate}.
+     * Combines this year with a day-of-year to create a {@code LocalDateJalali}.
      * <p>
-     * This returns a {@code JalaliDate} formed from this year and the specified day-of-year.
+     * This returns a {@code LocalDateJalali} formed from this year and the specified day-of-year.
      * <p>
      * The day-of-year value 366 is only valid in a leap year.
      *
@@ -930,7 +930,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
      * <p>
      * This method can be used as part of a chain to produce a date:
      * <pre>
-     *  JalaliDate date = year.atMonth(month).atDay(day);
+     *  LocalDateJalali date = year.atMonth(month).atDay(day);
      * </pre>
      *
      * @param month the month-of-year to use, not null
@@ -948,7 +948,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
      * <p>
      * This method can be used as part of a chain to produce a date:
      * <pre>
-     *  JalaliDate date = year.atMonth(month).atDay(day);
+     *  LocalDateJalali date = year.atMonth(month).atDay(day);
      * </pre>
      *
      * @param month the month-of-year to use, from 1 (January) to 12 (December)
@@ -960,9 +960,9 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
     }
 
     /**
-     * Combines this year with a month-day to create a {@code JalaliDate}.
+     * Combines this year with a month-day to create a {@code LocalDateJalali}.
      * <p>
-     * This returns a {@code JalaliDate} formed from this year and the specified month-day.
+     * This returns a {@code LocalDateJalali} formed from this year and the specified month-day.
      * <p>
      * A month-day of February 29th will be adjusted to February 28th in the resulting
      * date if the year is not a leap year.

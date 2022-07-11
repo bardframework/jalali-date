@@ -162,7 +162,7 @@ public enum MonthJalali implements TemporalAccessor, TemporalAdjuster {
      * <p>
      * The conversion extracts the {@link ChronoField#MONTH_OF_YEAR MONTH_OF_YEAR} field.
      * The extraction is only permitted if the temporal object has an ISO
-     * chronology, or can be converted to a {@code JalaliDate}.
+     * chronology, or can be converted to a {@code LocalDateJalali}.
      * <p>
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code JalaliMonth::from}.

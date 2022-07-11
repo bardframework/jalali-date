@@ -40,15 +40,15 @@ import static java.time.temporal.ChronoField.EPOCH_DAY;
  * as it is a lot clearer to read in code.
  * <p>
  * The most common implementations are method references, such as
- * {@code JalaliDate::from} and {@code ZoneId::from}.
+ * {@code LocalDateJalali::from} and {@code ZoneId::from}.
  * Additional common queries are provided to return:
  * <ul>
- * <li> a JalaliDate,
+ * <li> a LocalDateJalali,
  * </ul>
  */
 public final class TemporalQueriesJalali {
     /**
-     * A query for {@code JalaliDate} returning null if not found.
+     * A query for {@code LocalDateJalali} returning null if not found.
      */
     static final TemporalQuery<LocalDateJalali> LOCAL_DATE = new TemporalQuery<LocalDateJalali>() {
         @Override
@@ -61,7 +61,7 @@ public final class TemporalQueriesJalali {
 
         @Override
         public String toString() {
-            return "JalaliDate";
+            return "LocalDateJalali";
         }
     };
 
@@ -72,18 +72,18 @@ public final class TemporalQueriesJalali {
     }
 
     /**
-     * A query for {@code JalaliDate} returning null if not found.
+     * A query for {@code LocalDateJalali} returning null if not found.
      * <p>
      * This returns a {@code TemporalQuery} that can be used to query a temporal
      * object for the local date. The query will return null if the temporal
      * object cannot supply a local date.
      * <p>
      * The query implementation examines the {@link ChronoField#EPOCH_DAY EPOCH_DAY}
-     * field and uses it to create a {@code JalaliDate}.
+     * field and uses it to create a {@code LocalDateJalali}.
      * <p>
      * The method {@link ZoneOffset#from(TemporalAccessor)} can be used as a
-     * {@code TemporalQuery} via a method reference, {@code JalaliDate::from}.
-     * This query and {@code JalaliDate::from} will return the same result if the
+     * {@code TemporalQuery} via a method reference, {@code LocalDateJalali::from}.
+     * This query and {@code LocalDateJalali::from} will return the same result if the
      * temporal object contains a date. If the temporal object does not contain
      * a date, then the method reference will throw an exception, whereas this
      * query will return null.

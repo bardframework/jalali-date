@@ -168,7 +168,7 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
      * The conversion extracts the {@link ChronoField#YEAR YEAR} and
      * {@link ChronoField#MONTH_OF_YEAR MONTH_OF_YEAR} fields.
      * The extraction is only permitted if the temporal object has an ISO
-     * chronology, or can be converted to a {@code JalaliDate}.
+     * chronology, or can be converted to a {@code LocalDateJalali}.
      * <p>
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code JalaliYearMonth::from}.
@@ -1023,15 +1023,15 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
     //-----------------------------------------------------------------------
 
     /**
-     * Combines this year-month with a day-of-month to create a {@code JalaliDate}.
+     * Combines this year-month with a day-of-month to create a {@code LocalDateJalali}.
      * <p>
-     * This returns a {@code JalaliDate} formed from this year-month and the specified day-of-month.
+     * This returns a {@code LocalDateJalali} formed from this year-month and the specified day-of-month.
      * <p>
      * The day-of-month value must be valid for the year-month.
      * <p>
      * This method can be used as part of a chain to produce a date:
      * <pre>
-     *  JalaliDate date = year.atMonth(month).atDay(day);
+     *  LocalDateJalali date = year.atMonth(month).atDay(day);
      * </pre>
      *
      * @param dayOfMonth the day-of-month to use, from 1 to 31
@@ -1044,15 +1044,15 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
     }
 
     /**
-     * Returns a {@code JalaliDate} at the end of the month.
+     * Returns a {@code LocalDateJalali} at the end of the month.
      * <p>
-     * This returns a {@code JalaliDate} based on this year-month.
+     * This returns a {@code LocalDateJalali} based on this year-month.
      * The day-of-month is set to the last valid day of the month, taking
      * into user leap years.
      * <p>
      * This method can be used as part of a chain to produce a date:
      * <pre>
-     *  JalaliDate date = year.atMonth(month).atEndOfMonth();
+     *  LocalDateJalali date = year.atMonth(month).atEndOfMonth();
      * </pre>
      *
      * @return the last valid date of this year-month, not null

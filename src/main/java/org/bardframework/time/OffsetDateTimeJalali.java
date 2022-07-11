@@ -116,7 +116,7 @@ public final class OffsetDateTimeJalali
      */
     private static int compareInstant(OffsetDateTimeJalali datetime1, OffsetDateTimeJalali datetime2) {
         if (datetime1.getOffset().equals(datetime2.getOffset())) {
-            return datetime1.toJalaliDateTime().compareTo(datetime2.toJalaliDateTime());
+            return datetime1.toLocalDateTimeJalali().compareTo(datetime2.toLocalDateTimeJalali());
         }
         int cmp = Long.compare(datetime1.toEpochSecond(), datetime2.toEpochSecond());
         if (cmp == 0) {
@@ -216,7 +216,7 @@ public final class OffsetDateTimeJalali
      * <p>
      * This method exists primarily for writing test cases.
      * Non test-code will typically use other methods to create an offset time.
-     * {@code JalaliDateTime} has five additional convenience variants of the
+     * {@code LocalDateTimeJalali} has five additional convenience variants of the
      * equivalent factory method taking fewer arguments.
      * They are not provided here to reduce the footprint of the API.
      *
@@ -272,9 +272,9 @@ public final class OffsetDateTimeJalali
      * which this factory converts to an instance of {@code OffsetDateTime}.
      * <p>
      * The conversion will first obtain a {@code ZoneOffset} from the temporal object.
-     * It will then try to obtain a {@code JalaliDateTime}, falling back to an {@code Instant} if necessary.
+     * It will then try to obtain a {@code LocalDateTimeJalali}, falling back to an {@code Instant} if necessary.
      * The result will be the combination of {@code ZoneOffset} with either
-     * with {@code JalaliDateTime} or {@code Instant}.
+     * with {@code LocalDateTimeJalali} or {@code Instant}.
      * Implementations are permitted to perform optimizations such as accessing
      * those fields that are equivalent to the relevant objects.
      * <p>
@@ -585,7 +585,7 @@ public final class OffsetDateTimeJalali
      * Returns a copy of this {@code OffsetDateTime} with the specified offset ensuring
      * that the result has the same local date-time.
      * <p>
-     * This method returns an object with the same {@code JalaliDateTime} and the specified {@code ZoneOffset}.
+     * This method returns an object with the same {@code LocalDateTimeJalali} and the specified {@code ZoneOffset}.
      * No calculation is needed or performed.
      * For example, if this time represents {@code 1367-08-12T10:30+02:00} and the offset specified is
      * {@code +03:00}, then this method will return {@code 1367-08-12T10:30+03:00}.
@@ -606,7 +606,7 @@ public final class OffsetDateTimeJalali
      * Returns a copy of this {@code OffsetDateTime} with the specified offset ensuring
      * that the result is at the same instant.
      * <p>
-     * This method returns an object with the specified {@code ZoneOffset} and a {@code JalaliDateTime}
+     * This method returns an object with the specified {@code ZoneOffset} and a {@code LocalDateTimeJalali}
      * adjusted by the difference between the two offsets.
      * This will result in the old and new objects representing the same instant.
      * This is useful for finding the local time in a different offset.
@@ -633,23 +633,23 @@ public final class OffsetDateTimeJalali
     //-----------------------------------------------------------------------
 
     /**
-     * Gets the {@code JalaliDateTime} part of this date-time.
+     * Gets the {@code LocalDateTimeJalali} part of this date-time.
      * <p>
-     * This returns a {@code JalaliDateTime} with the same year, month, day and time
+     * This returns a {@code LocalDateTimeJalali} with the same year, month, day and time
      * as this date-time.
      *
      * @return the local date-time part of this date-time, not null
      */
-    public LocalDateTimeJalali toJalaliDateTime() {
+    public LocalDateTimeJalali toLocalDateTimeJalali() {
         return dateTime;
     }
 
     //-----------------------------------------------------------------------
 
     /**
-     * Gets the {@code JalaliDate} part of this date-time.
+     * Gets the {@code LocalDateJalali} part of this date-time.
      * <p>
-     * This returns a {@code JalaliDate} with the same year, month and day
+     * This returns a {@code LocalDateJalali} with the same year, month and day
      * as this date-time.
      *
      * @return the date part of this date-time, not null
@@ -876,7 +876,7 @@ public final class OffsetDateTimeJalali
      * then a {@code DateTimeException} will be thrown.
      * <p>
      * The other {@link #isSupported(TemporalField) supported fields} will behave as per
-     * the matching method on {@link LocalDateTimeJalali#with(TemporalField, long) JalaliDateTime}.
+     * the matching method on {@link LocalDateTimeJalali#with(TemporalField, long) LocalDateTimeJalali}.
      * In this case, the offset is not part of the calculation and will be unchanged.
      * <p>
      * All other {@code ChronoField} instances will throw an {@code UnsupportedTemporalTypeException}.
@@ -1752,7 +1752,7 @@ public final class OffsetDateTimeJalali
     public int compareTo(OffsetDateTimeJalali other) {
         int cmp = compareInstant(this, other);
         if (cmp == 0) {
-            cmp = toJalaliDateTime().compareTo(other.toJalaliDateTime());
+            cmp = toLocalDateTimeJalali().compareTo(other.toLocalDateTimeJalali());
         }
         return cmp;
     }

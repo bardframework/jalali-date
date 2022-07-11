@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>0.5.1</version>
+    <version>1.4.3</version>
 
     <packaging>jar</packaging>
 

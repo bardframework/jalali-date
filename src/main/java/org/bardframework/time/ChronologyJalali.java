@@ -338,7 +338,7 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
      * {@code ChronoField} instances on the JALALI calendar system are resolved
      * as follows.
      * <ul>
-     * <li>{@code EPOCH_DAY} - If present, this is converted to a {@code JalaliDate}
+     * <li>{@code EPOCH_DAY} - If present, this is converted to a {@code LocalDateJalali}
      * and all other date fields are then cross-checked against the date.
      * <li>{@code PROLEPTIC_MONTH} - If present, then it is split into the
      * {@code YEAR} and {@code MONTH_OF_YEAR}. If the mode is strict or smart
@@ -351,7 +351,7 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
      * is assumed. In strict mode, no era is assumed and the {@code YEAR_OF_ERA} is
      * left untouched. If only the {@code ERA} is present, then it is left untouched.
      * <li>{@code YEAR}, {@code MONTH_OF_YEAR} and {@code DAY_OF_MONTH} -
-     * If all three are present, then they are combined to form a {@code JalaliDate}.
+     * If all three are present, then they are combined to form a {@code LocalDateJalali}.
      * In all three modes, the {@code YEAR} is validated. If the mode is smart or strict,
      * then the month and day are validated, with the day validated from 1 to 31.
      * If the mode is lenient, then the date is combined in a manner equivalent to
@@ -361,7 +361,7 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
      * the year-month, then the day-of-month is adjusted to the last day-of-month.
      * If the mode is strict, then the three fields must form a valid date.
      * <li>{@code YEAR} and {@code DAY_OF_YEAR} -
-     * If both are present, then they are combined to form a {@code JalaliDate}.
+     * If both are present, then they are combined to form a {@code LocalDateJalali}.
      * In all three modes, the {@code YEAR} is validated.
      * If the mode is lenient, then the date is combined in a manner equivalent to
      * creating a date on the first of January in the requested year, then adding
@@ -369,7 +369,7 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
      * If the mode is smart or strict, then the two fields must form a valid date.
      * <li>{@code YEAR}, {@code MONTH_OF_YEAR}, {@code ALIGNED_WEEK_OF_MONTH} and
      * {@code ALIGNED_DAY_OF_WEEK_IN_MONTH} -
-     * If all four are present, then they are combined to form a {@code JalaliDate}.
+     * If all four are present, then they are combined to form a {@code LocalDateJalali}.
      * In all three modes, the {@code YEAR} is validated.
      * If the mode is lenient, then the date is combined in a manner equivalent to
      * creating a date on the first of January in the requested year, then adding
@@ -382,12 +382,12 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
      * did not change the month.
      * <li>{@code YEAR}, {@code MONTH_OF_YEAR}, {@code ALIGNED_WEEK_OF_MONTH} and
      * {@code DAY_OF_WEEK} - If all four are present, then they are combined to
-     * form a {@code JalaliDate}. The approach is the same as described above for
+     * form a {@code LocalDateJalali}. The approach is the same as described above for
      * years, months and weeks in {@code ALIGNED_DAY_OF_WEEK_IN_MONTH}.
      * The day-of-week is adjusted as the next or same matching day-of-week once
      * the years, months and weeks have been handled.
      * <li>{@code YEAR}, {@code ALIGNED_WEEK_OF_YEAR} and {@code ALIGNED_DAY_OF_WEEK_IN_YEAR} -
-     * If all three are present, then they are combined to form a {@code JalaliDate}.
+     * If all three are present, then they are combined to form a {@code LocalDateJalali}.
      * In all three modes, the {@code YEAR} is validated.
      * If the mode is lenient, then the date is combined in a manner equivalent to
      * creating a date on the first of January in the requested year, then adding
@@ -399,7 +399,7 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
      * the date is additionally validated to check that the day and week adjustment
      * did not change the year.
      * <li>{@code YEAR}, {@code ALIGNED_WEEK_OF_YEAR} and {@code DAY_OF_WEEK} -
-     * If all three are present, then they are combined to form a {@code JalaliDate}.
+     * If all three are present, then they are combined to form a {@code LocalDateJalali}.
      * The approach is the same as described above for years and weeks in
      * {@code ALIGNED_DAY_OF_WEEK_IN_YEAR}. The day-of-week is adjusted as the
      * next or same matching day-of-week once the years and weeks have been handled.

@@ -198,7 +198,7 @@ final class Ser implements Externalizable {
      * <li><a href="{@docRoot}/serialized-form.html#ZoneRules">ZoneRules</a>
      * - {@code ZoneRules.of(standardTransitions, standardOffsets, savingsInstantTransitions, wallOffsets, lastRules);}
      * <li><a href="{@docRoot}/serialized-form.html#ZoneOffsetTransition">ZoneOffsetTransition</a>
-     * - {@code ZoneOffsetTransition of(JalaliDateTime.ofEpochSecond(epochSecond), offsetBefore, offsetAfter);}
+     * - {@code ZoneOffsetTransition of(LocalDateTimeJalali.ofEpochSecond(epochSecond), offsetBefore, offsetAfter);}
      * <li><a href="{@docRoot}/serialized-form.html#ZoneOffsetTransitionRule">ZoneOffsetTransitionRule</a>
      * - {@code ZoneOffsetTransitionRule.of(month, dom, dow, time, timeEndOfDay, timeDefinition, standardOffset, offsetBefore, offsetAfter);}
      * </ul>

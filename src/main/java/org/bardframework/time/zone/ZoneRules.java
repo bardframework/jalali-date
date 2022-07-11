@@ -495,7 +495,7 @@ public final class ZoneRules implements Serializable {
      * In the case where there are two offsets, the earlier offset is returned at index 0
      * and the later offset at index 1.
      * <p>
-     * There are various ways to handle the conversion from a {@code JalaliDateTime}.
+     * There are various ways to handle the conversion from a {@code LocalDateTimeJalali}.
      * One technique, using this method, would be:
      * <pre>
      *  List&lt;ZoneOffset&gt; validOffsets = rules.getValidOffsets(localDT);
@@ -544,7 +544,7 @@ public final class ZoneRules implements Serializable {
      * A transition is used to model the cases of a Gap or Overlap.
      * The Normal case will return null.
      * <p>
-     * There are various ways to handle the conversion from a {@code JalaliDateTime}.
+     * There are various ways to handle the conversion from a {@code LocalDateTimeJalali}.
      * One technique, using this method, would be:
      * <pre>
      *  ZoneOffsetTransition trans = rules.getTransition(localDT);

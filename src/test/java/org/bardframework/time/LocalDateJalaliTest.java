@@ -35,7 +35,7 @@ public class LocalDateJalaliTest {
             }
             LocalDate localDate = generatedDate.toLocalDate();
             LocalDateJalali returnedDate = LocalDateJalali.of(localDate);
-            LOGGER.info("test converting JalaliDate --> JalaliDate  --> JalaliDate : {} --> {}  --> {}", generatedDate, localDate, returnedDate);
+            LOGGER.info("test converting LocalDateJalali --> LocalDate  --> LocalDateJalali : {} --> {}  --> {}", generatedDate, localDate, returnedDate);
             Assertions.assertEquals(generatedDate, returnedDate);
         }
     }
@@ -56,7 +56,7 @@ public class LocalDateJalaliTest {
             }
             LocalDateJalali localDateJalali = LocalDateJalali.of(generatedDate);
             LocalDate returnedDate = localDateJalali.toLocalDate();
-            LOGGER.info("test converting LocalDate --> JalaliDate  --> LocalDate : {} --> {}  --> {}", generatedDate, localDateJalali, returnedDate);
+            LOGGER.info("test converting LocalDate --> LocalDateJalali  --> LocalDate : {} --> {}  --> {}", generatedDate, localDateJalali, returnedDate);
             Assertions.assertEquals(generatedDate, returnedDate);
         }
     }
@@ -66,5 +66,20 @@ public class LocalDateJalaliTest {
         LocalDateJalali localDateJalali = LocalDateJalali.now();
         long epoch = localDateJalali.toEpochDay();
         Assertions.assertEquals(localDateJalali, LocalDateJalali.ofEpochDay(epoch));
+    }
+
+    @Test
+    public void testPlusMonth1() {
+        Assertions.assertEquals(LocalDateJalali.of(1401, 6, 31).plusMonths(1).getDayOfMonth(), 30);
+    }
+
+    @Test
+    public void testPlusMonth2() {
+        Assertions.assertEquals(LocalDateJalali.of(1401, 12, 29).plusMonths(1).getDayOfMonth(), 29);
+    }
+
+    @Test
+    public void testPlusDay1() {
+        Assertions.assertEquals(LocalDateJalali.of(1401, 12, 29).plusDays(1).getDayOfMonth(), 1);
     }
 }

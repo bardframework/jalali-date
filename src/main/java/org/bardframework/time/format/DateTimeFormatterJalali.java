@@ -27,12 +27,12 @@ import static java.time.temporal.ChronoField.*;
  * </ul>
  * <p>
  * More complex formatters are provided by
- * {@link DateTimeFormatterBuilderJalali JalaliDateTimeFormatterBuilder}.
+ * {@link DateTimeFormatterBuilderJalali DateTimeFormatterJalaliBuilder}.
  *
  * <p>
  * The main date-time classes provide two methods - one for formatting,
  * {@code format(DateTimeFormatter formatter)}, and one for parsing,
- * {@code parse(CharSequence text, JalaliDateTimeFormatter formatter)}.
+ * {@code parse(CharSequence text, DateTimeFormatterJalali formatter)}.
  * <p>For example:
  * <blockquote><pre>
  *  LocalDate date = LocalDate.now();
@@ -60,12 +60,13 @@ import static java.time.temporal.ChronoField.*;
  * overrides the {@link DecimalStyle}. The DecimalStyle symbols are used for
  * formatting and parsing.
  * <h3 id="predefined">Predefined Formatters</h3>
- * <table summary="Predefined Formatters" cellpadding="2" cellspacing="3" border="0" >
+ * <table class="striped" style="text-align:left">
+ * <caption>Predefined Formatters</caption>
  * <thead>
  * <tr class="tableSubHeadingColor">
- * <th class="colFirst" align="left">Formatter</th>
- * <th class="colFirst" align="left">Description</th>
- * <th class="colLast" align="left">Example</th>
+ * <th class="colFirst" style="text-align:left">Formatter</th>
+ * <th class="colFirst" style="text-align:left">Description</th>
+ * <th class="colLast" style="text-align:left">Example</th>
  * </tr>
  * </thead>
  * <tbody>
@@ -154,7 +155,7 @@ import static java.time.temporal.ChronoField.*;
  * For example:
  * <blockquote><pre>
  *  LocalDate date = LocalDate.now();
- *  JalaliDateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+ *  DateTimeFormatterJalali formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
  *  String text = date.format(formatter);
  *  LocalDate parsedDate = LocalDate.parse(text, formatter);
  * </pre></blockquote>

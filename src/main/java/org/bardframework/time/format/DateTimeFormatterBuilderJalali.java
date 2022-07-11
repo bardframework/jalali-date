@@ -25,7 +25,7 @@ import static java.time.temporal.ChronoField.*;
 /**
  * Builder to create date-time formatters.
  * <p>
- * This allows a {@code JalaliDateTimeFormatter} to be created.
+ * This allows a {@code DateTimeFormatterJalali} to be created.
  * All date-time formatters are created ultimately using this builder.
  * <p>
  * The basic elements of date-time can all be added:
@@ -1196,7 +1196,7 @@ public final class DateTimeFormatterBuilderJalali {
      * <ul>
      * <li>the {@code dateStyle} specified to this method
      * <li>the {@code timeStyle} specified to this method
-     * <li>the {@code Locale} of the {@code JalaliDateTimeFormatter}
+     * <li>the {@code Locale} of the {@code DateTimeFormatterJalali}
      * <li>the {@code Chronology}, selecting the best available
      * </ul>
      * During formatting, the chronology is obtained from the temporal object
@@ -1204,7 +1204,7 @@ public final class DateTimeFormatterBuilderJalali {
      * {@link DateTimeFormatterJalali#withChronology(Chronology)}.
      * <p>
      * During parsing, if a chronology has already been parsed, then it is used.
-     * Otherwise the default from {@code JalaliDateTimeFormatter.withChronology(Chronology)}
+     * Otherwise the default from {@code DateTimeFormatterJalali.withChronology(Chronology)}
      * is used, with {@code IsoChronology} as the fallback.
      * <p>
      * Note that this method provides similar functionality to methods on
@@ -1351,7 +1351,7 @@ public final class DateTimeFormatterBuilderJalali {
      * </pre>
      * <p>
      * The count of pattern letters determine the format.
-     * See <a href="JalaliDateTimeFormatter.html#patterns">JalaliDateTimeFormatter</a> for a user-focused description of the patterns.
+     * See <a href="DateTimeFormatterJalali.html#patterns">DateTimeFormatterJalali</a> for a user-focused description of the patterns.
      * The following tables define how the pattern letters map to the builder.
      * <p>
      * <b>Date fields</b>: Pattern letters to output a date.
@@ -1918,7 +1918,7 @@ public final class DateTimeFormatterBuilderJalali {
     }
 
     /**
-     * Completes this builder by creating the {@code JalaliDateTimeFormatter}
+     * Completes this builder by creating the {@code DateTimeFormatterJalali}
      * using the default locale.
      * <p>
      * This will create a formatter with the {@linkplain Locale#getDefault(Locale.Category) default FORMAT locale}.
@@ -1938,7 +1938,7 @@ public final class DateTimeFormatterBuilderJalali {
     }
 
     /**
-     * Completes this builder by creating the {@code JalaliDateTimeFormatter}
+     * Completes this builder by creating the {@code DateTimeFormatterJalali}
      * using the specified locale.
      * <p>
      * This will create a formatter with the specified locale.
@@ -2210,7 +2210,7 @@ public final class DateTimeFormatterBuilderJalali {
          * @param padChar       the pad character
          */
         PadPrinterParserDecorator(DateTimePrinterParser printerParser, int padWidth, char padChar) {
-            // input checked by JalaliDateTimeFormatterBuilder
+            // input checked by DateTimeFormatterJalaliBuilder
             this.printerParser = printerParser;
             this.padWidth = padWidth;
             this.padChar = padChar;

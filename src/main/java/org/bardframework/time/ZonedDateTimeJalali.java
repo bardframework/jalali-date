@@ -26,7 +26,7 @@ import static java.time.temporal.ChronoField.*;
  * "2nd October 2007 at 13:45.30.123456789 +02:00 in the Europe/Paris time-zone"
  * can be stored in a {@code ZonedDateTime}.
  * <p>
- * This class handles conversion from the local time-line of {@code JalaliDateTime}
+ * This class handles conversion from the local time-line of {@code LocalDateTimeJalali}
  * to the instant time-line of {@code Instant}.
  * The difference between the two time-lines is the offset from UTC/Greenwich,
  * represented by a {@code ZoneOffset}.
@@ -63,7 +63,7 @@ import static java.time.temporal.ChronoField.*;
  * help manage the case of an overlap.
  * <p>
  * In terms of design, this class should be viewed primarily as the combination
- * of a {@code JalaliDateTime} and a {@code ZoneId}. The {@code ZoneOffset} is
+ * of a {@code LocalDateTimeJalali} and a {@code ZoneId}. The {@code ZoneOffset} is
  * a vital, but secondary, piece of information, used to ensure that the class
  * represents an instant, especially during a daylight savings overlap.
  *
@@ -75,7 +75,7 @@ import static java.time.temporal.ChronoField.*;
  * The {@code equals} method should be used for comparisons.
  *
  * A {@code ZonedDateTime} holds state equivalent to three separate objects,
- * a {@code JalaliDateTime}, a {@code ZoneId} and the resolved {@code ZoneOffset}.
+ * a {@code LocalDateTimeJalali}, a {@code ZoneId} and the resolved {@code ZoneOffset}.
  * The offset and local date-time are used to define an instant when necessary.
  * The zone ID is used to obtain the rules for how and when the offset changes.
  * The offset cannot be freely set, as the zone controls which offsets are valid.
@@ -253,7 +253,7 @@ public final class ZonedDateTimeJalali
      * <p>
      * This method exists primarily for writing test cases.
      * Non test-code will typically use other methods to create an offset time.
-     * {@code JalaliDateTime} has five additional convenience variants of the
+     * {@code LocalDateTimeJalali} has five additional convenience variants of the
      * equivalent factory method taking fewer arguments.
      * They are not provided here to reduce the footprint of the API.
      *
@@ -351,7 +351,7 @@ public final class ZonedDateTimeJalali
      * the local date-time and offset.
      * <p>
      * This creates a zoned date-time by {@link LocalDateTimeJalali#toInstant(ZoneOffset) combining}
-     * the {@code JalaliDateTime} and {@code ZoneOffset}.
+     * the {@code LocalDateTimeJalali} and {@code ZoneOffset}.
      * This combination uniquely specifies an instant without ambiguity.
      * <p>
      * Converting an instant to a zoned date-time is simple as there is only one valid
@@ -420,11 +420,11 @@ public final class ZonedDateTimeJalali
             if (trans != null && trans.isGap()) {
                 // error message says daylight savings for simplicity
                 // even though there are other kinds of gaps
-                throw new DateTimeException("JalaliDateTime '" + localDateTime +
+                throw new DateTimeException("LocalDateTimeJalali '" + localDateTime +
                     "' does not exist in zone '" + zone +
                     "' due to a gap in the local time-line, typically caused by daylight savings");
             }
-            throw new DateTimeException("ZoneOffset '" + offset + "' is not valid for JalaliDateTime '" +
+            throw new DateTimeException("ZoneOffset '" + offset + "' is not valid for LocalDateTimeJalali '" +
                 localDateTime + "' in zone '" + zone + "'");
         }
         return new ZonedDateTimeJalali(localDateTime, offset, zone);
@@ -474,9 +474,9 @@ public final class ZonedDateTimeJalali
      * <p>
      * The conversion will first obtain a {@code ZoneId} from the temporal object,
      * falling back to a {@code ZoneOffset} if necessary. It will then try to obtain
-     * an {@code Instant}, falling back to a {@code JalaliDateTime} if necessary.
+     * an {@code Instant}, falling back to a {@code LocalDateTimeJalali} if necessary.
      * The result will be either the combination of {@code ZoneId} or {@code ZoneOffset}
-     * with {@code Instant} or {@code JalaliDateTime}.
+     * with {@code Instant} or {@code LocalDateTimeJalali}.
      * Implementations are permitted to perform optimizations such as accessing
      * those fields that are equivalent to the relevant objects.
      * <p>
@@ -940,7 +940,7 @@ public final class ZonedDateTimeJalali
      * as most protocols, such as ISO-8601, only handle offsets,
      * and not region-based zone IDs.
      * <p>
-     * This is equivalent to {@code ZonedDateTime.of(zdt.toJalaliDateTime(), zdt.getOffset())}.
+     * This is equivalent to {@code ZonedDateTime.of(zdt.toLocalDateTimeJalali(), zdt.getOffset())}.
      *
      * @return a {@code ZonedDateTime} with the zone ID set to the offset, not null
      */
@@ -951,9 +951,9 @@ public final class ZonedDateTimeJalali
     //-----------------------------------------------------------------------
 
     /**
-     * Gets the {@code JalaliDateTime} part of this date-time.
+     * Gets the {@code LocalDateTimeJalali} part of this date-time.
      * <p>
-     * This returns a {@code JalaliDateTime} with the same year, month, day and time
+     * This returns a {@code LocalDateTimeJalali} with the same year, month, day and time
      * as this date-time.
      *
      * @return the local date-time part of this date-time, not null
@@ -966,9 +966,9 @@ public final class ZonedDateTimeJalali
     //-----------------------------------------------------------------------
 
     /**
-     * Gets the {@code JalaliDate} part of this date-time.
+     * Gets the {@code LocalDateJalali} part of this date-time.
      * <p>
-     * This returns a {@code JalaliDate} with the same year, month and day
+     * This returns a {@code LocalDateJalali} with the same year, month and day
      * as this date-time.
      *
      * @return the date part of this date-time, not null
@@ -1174,7 +1174,7 @@ public final class ZonedDateTimeJalali
             return resolveLocal((LocalDateTimeJalali) adjuster);
         } else if (adjuster instanceof OffsetDateTimeJalali) {
             OffsetDateTimeJalali odt = (OffsetDateTimeJalali) adjuster;
-            return ofLocal(odt.toJalaliDateTime(), zone, odt.getOffset());
+            return ofLocal(odt.toLocalDateTimeJalali(), zone, odt.getOffset());
         } else if (adjuster instanceof Instant) {
             Instant instant = (Instant) adjuster;
             return create(instant.getEpochSecond(), instant.getNano(), zone);
@@ -1214,7 +1214,7 @@ public final class ZonedDateTimeJalali
      * If the new offset value is outside the valid range then a {@code DateTimeException} will be thrown.
      * <p>
      * The other {@link #isSupported(TemporalField) supported fields} will behave as per
-     * the matching method on {@link LocalDateTimeJalali#with(TemporalField, long) JalaliDateTime}.
+     * the matching method on {@link LocalDateTimeJalali#with(TemporalField, long) LocalDateTimeJalali}.
      * The zone is not part of the calculation and will be unchanged.
      * When converting back to {@code ZonedDateTime}, if the local date-time is in an overlap,
      * then the offset will be retained if possible, otherwise the earlier offset will be used.
@@ -2163,7 +2163,7 @@ public final class ZonedDateTimeJalali
      * Outputs this date-time as a {@code String}, such as
      * {@code 1367-08-12T10:15:30+03:30[Asia/Tehran]}.
      * <p>
-     * The format consists of the {@code JalaliDateTime} followed by the {@code ZoneOffset}.
+     * The format consists of the {@code LocalDateTimeJalali} followed by the {@code ZoneOffset}.
      * If the {@code ZoneId} is not the same as the offset, then the ID is output.
      * The output is compatible with ISO-8601 if the offset and ID are the same.
      *

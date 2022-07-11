@@ -196,7 +196,7 @@ public final class MonthDayJalali implements TemporalAccessor, TemporalAdjuster,
      * The conversion extracts the {@link ChronoField#MONTH_OF_YEAR MONTH_OF_YEAR} and
      * {@link ChronoField#DAY_OF_MONTH DAY_OF_MONTH} fields.
      * The extraction is only permitted if the temporal object has an ISO
-     * chronology, or can be converted to a {@code JalaliDate}.
+     * chronology, or can be converted to a {@code LocalDateJalali}.
      * <p>
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code JalaliMonthDay::from}.
@@ -586,9 +586,9 @@ public final class MonthDayJalali implements TemporalAccessor, TemporalAdjuster,
     //-----------------------------------------------------------------------
 
     /**
-     * Combines this month-day with a year to create a {@code JalaliDate}.
+     * Combines this month-day with a year to create a {@code LocalDateJalali}.
      * <p>
-     * This returns a {@code JalaliDate} formed from this month-day and the specified year.
+     * This returns a {@code LocalDateJalali} formed from this month-day and the specified year.
      * <p>
      * A month-day of February 29th will be adjusted to February 28th in the resulting
      * date if the year is not a leap year.

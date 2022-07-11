@@ -13,8 +13,8 @@ class LocalDateTimeJalaliFormatterTest {
 
     public static Date getDateOfJalaliString(String jalaliString, String pattern, ZoneId zoneId) {
         DateTimeFormatterJalali formatter = DateTimeFormatterJalali.ofPattern(pattern);
-        LocalDateTimeJalali jalaliDateTime = LocalDateTimeJalali.parse(jalaliString, formatter);
-        LocalDateTime localDateTime = jalaliDateTime.toLocalDateTime();
+        LocalDateTimeJalali dateTimeJalali = LocalDateTimeJalali.parse(jalaliString, formatter);
+        LocalDateTime localDateTime = dateTimeJalali.toLocalDateTime();
         ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
         return Date.from(zonedDateTime.toInstant());
     }

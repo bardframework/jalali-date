@@ -20,12 +20,12 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * A date-time without a time-zone in the ISO-8601 calendar system,
  * such as {@code 1367-08-12T10:15:30}.
  * <p>
- * {@code JalaliDateTime} is an immutable date-time object that represents a date-time,
+ * {@code LocalDateTimeJalali} is an immutable date-time object that represents a date-time,
  * often viewed as year-month-day-hour-minute-second. Other date and time fields,
  * such as day-of-year, day-of-week and week-of-year, can also be accessed.
  * Time is represented to nanosecond precision.
  * For example, the value "2nd October 2007 at 13:45.30.123456789" can be
- * stored in a {@code JalaliDateTime}.
+ * stored in a {@code LocalDateTimeJalali}.
  * <p>
  * This class does not store or represent a time-zone.
  * Instead, it is a description of the date, as used for birthdays, combined with
@@ -43,7 +43,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * This is a <a href="{@docRoot}/java/lang/doc-files/ValueBased.html">value-based</a>
  * class; use of identity-sensitive operations (including reference equality
  * ({@code ==}), identity hash code, or synchronization) on instances of
- * {@code JalaliDateTime} may have unpredictable results and should be avoided.
+ * {@code LocalDateTimeJalali} may have unpredictable results and should be avoided.
  * The {@code equals} method should be used for comparisons.
  *
  * @author Vahid Zafari
@@ -53,14 +53,14 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
 
 
     /**
-     * The minimum supported {@code JalaliDateTime}, '-999999999-01-01T00:00:00'.
+     * The minimum supported {@code LocalDateTimeJalali}, '-999999999-01-01T00:00:00'.
      * This is the local date-time of midnight at the start of the minimum date.
      * This combines {@link LocalDateJalali#MIN} and {@link LocalTime#MIN}.
      * This could be used by an application as a "far past" date-time.
      */
     public static final LocalDateTimeJalali MIN = LocalDateTimeJalali.of(LocalDateJalali.MIN, LocalTime.MIN);
     /**
-     * The maximum supported {@code JalaliDateTime}, '+999999999-12-31T23:59:59.999999999'.
+     * The maximum supported {@code LocalDateTimeJalali}, '+999999999-12-31T23:59:59.999999999'.
      * This is the local date-time just before midnight at the end of the maximum date.
      * This combines {@link LocalDateJalali#MAX} and {@link LocalTime#MAX}.
      * This could be used by an application as a "far future" date-time.
@@ -175,10 +175,10 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from year, month,
+     * Obtains an instance of {@code LocalDateTimeJalali} from year, month,
      * day, hour and minute, setting the second and nanosecond to zero.
      * <p>
-     * This returns a {@code JalaliDateTime} with the specified year, month,
+     * This returns a {@code LocalDateTimeJalali} with the specified year, month,
      * day-of-month, hour and minute.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      * The second and nanosecond fields will be set to zero.
@@ -199,10 +199,10 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from year, month,
+     * Obtains an instance of {@code LocalDateTimeJalali} from year, month,
      * day, hour, minute and second, setting the nanosecond to zero.
      * <p>
-     * This returns a {@code JalaliDateTime} with the specified year, month,
+     * This returns a {@code LocalDateTimeJalali} with the specified year, month,
      * day-of-month, hour, minute and second.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      * The nanosecond field will be set to zero.
@@ -226,10 +226,10 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from year, month,
+     * Obtains an instance of {@code LocalDateTimeJalali} from year, month,
      * day, hour, minute, second and nanosecond.
      * <p>
-     * This returns a {@code JalaliDateTime} with the specified year, month,
+     * This returns a {@code LocalDateTimeJalali} with the specified year, month,
      * day-of-month, hour, minute, second and nanosecond.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      *
@@ -251,10 +251,10 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from year, month,
+     * Obtains an instance of {@code LocalDateTimeJalali} from year, month,
      * day, hour and minute, setting the second and nanosecond to zero.
      * <p>
-     * This returns a {@code JalaliDateTime} with the specified year, month,
+     * This returns a {@code LocalDateTimeJalali} with the specified year, month,
      * day-of-month, hour and minute.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      * The second and nanosecond fields will be set to zero.
@@ -276,10 +276,10 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from year, month,
+     * Obtains an instance of {@code LocalDateTimeJalali} from year, month,
      * day, hour, minute and second, setting the nanosecond to zero.
      * <p>
-     * This returns a {@code JalaliDateTime} with the specified year, month,
+     * This returns a {@code LocalDateTimeJalali} with the specified year, month,
      * day-of-month, hour, minute and second.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      * The nanosecond field will be set to zero.
@@ -301,10 +301,10 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from year, month,
+     * Obtains an instance of {@code LocalDateTimeJalali} from year, month,
      * day, hour, minute, second and nanosecond.
      * <p>
-     * This returns a {@code JalaliDateTime} with the specified year, month,
+     * This returns a {@code LocalDateTimeJalali} with the specified year, month,
      * day-of-month, hour, minute, second and nanosecond.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      *
@@ -328,7 +328,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-------------------------------------------------------------------------
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from a date and time.
+     * Obtains an instance of {@code LocalDateTimeJalali} from a date and time.
      *
      * @param date the local date, not null
      * @param time the local time, not null
@@ -345,11 +345,11 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
         return new LocalDateTimeJalali(LocalDateJalali.of(dateTime.toLocalDate()), dateTime.toLocalTime());
     }
 
-    public static LocalDateTimeJalali of(String jalaliDateTimeString) {
-        if (null == jalaliDateTimeString) {
-            throw new IllegalArgumentException("invalid jalaliDateTimeString.");
+    public static LocalDateTimeJalali of(String localDateTimeJalaliString) {
+        if (null == localDateTimeJalaliString) {
+            throw new IllegalArgumentException("invalid localDateTimeJalaliString.");
         }
-        String digit = jalaliDateTimeString.replaceAll("[^\\d]", "");
+        String digit = localDateTimeJalaliString.replaceAll("[^\\d]", "");
         if (8 > digit.length() || 23 < digit.length()) {
             throw new IllegalArgumentException("cant obtain date value from: " + digit + " min digit count is 8 (yyyymmdd) and max is 23 (yyyymmddhhmmssnnnnnnnnnn) ");
         }
@@ -371,7 +371,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime}.
+     * Obtains an instance of {@code LocalDateTimeJalali}.
      * <p>
      * This creates a local date-time based on the specified instant.
      *
@@ -411,7 +411,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} using seconds from the
+     * Obtains an instance of {@code LocalDateTimeJalali} using seconds from the
      * epoch of 1970-01-01T00:00:00Z.
      * <p>
      * This allows the {@link ChronoField#INSTANT_SECONDS epoch-second} field
@@ -440,7 +440,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * A {@code TemporalAccessor} represents an arbitrary set of date and time information,
      * which this factory converts to an instance of {@code LocalDateTime}.
      * <p>
-     * The conversion extracts and combines the {@code JalaliDate} and the
+     * The conversion extracts and combines the {@code LocalDateJalali} and the
      * {@code LocalTime} from the temporal object.
      * Implementations are permitted to perform optimizations such as accessing
      * those fields that are equivalent to the relevant objects.
@@ -467,7 +467,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from a text string such as {@code 1367-08-12T10:15:30}.
+     * Obtains an instance of {@code LocalDateTimeJalali} from a text string such as {@code 1367-08-12T10:15:30}.
      * <p>
      * The string must represent a valid date-time and is parsed using
      * {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME}.
@@ -481,7 +481,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Obtains an instance of {@code JalaliDateTime} from a text string using a specific formatter.
+     * Obtains an instance of {@code LocalDateTimeJalali} from a text string using a specific formatter.
      * <p>
      * The text is parsed using the formatter, returning a date-time.
      *
@@ -881,7 +881,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Returns an adjusted copy of this date-time.
      * <p>
-     * This returns a {@code JalaliDateTime}, based on this one, with the date-time adjusted.
+     * This returns a {@code LocalDateTimeJalali}, based on this one, with the date-time adjusted.
      * The adjustment takes place using the specified adjuster strategy object.
      * Read the documentation of the adjuster to understand what adjustment will be made.
      * <p>
@@ -901,14 +901,14 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      *  import static java.time.JalaliMonth.*;
      *  import static java.time.temporal.TemporalAdjusters.*;
      *
-     *  result = JalaliDateTime.with(JULY).with(lastDayOfMonth());
+     *  result = LocalDateTimeJalali.with(JULY).with(lastDayOfMonth());
      * </pre>
      * <p>
      * The classes {@link LocalDateJalali} and {@link LocalTime} implement {@code TemporalAdjuster},
      * thus this method can be used to change the date, time or offset:
      * <pre>
-     *  result = JalaliDateTime.with(date);
-     *  result = JalaliDateTime.with(time);
+     *  result = LocalDateTimeJalali.with(date);
+     *  result = LocalDateTimeJalali.with(time);
      * </pre>
      * <p>
      * The result of this method is obtained by invoking the
@@ -918,7 +918,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param adjuster the adjuster to use, not null
-     * @return a {@code JalaliDateTime} based on {@code this} with the adjustment made, not null
+     * @return a {@code LocalDateTimeJalali} based on {@code this} with the adjustment made, not null
      * @throws DateTimeException   if the adjustment cannot be made
      * @throws ArithmeticException if numeric overflow occurs
      */
@@ -938,7 +938,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Returns a copy of this date-time with the specified field set to a new value.
      * <p>
-     * This returns a {@code JalaliDateTime}, based on this one, with the value
+     * This returns a {@code LocalDateTimeJalali}, based on this one, with the value
      * for the specified field changed.
      * This can be used to change any supported field, such as the year, month or day-of-month.
      * If it is not possible to set the value, because the field is not supported or for
@@ -951,7 +951,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * <p>
      * If the field is a {@link ChronoField} then the adjustment is implemented here.
      * The {@link #isSupported(TemporalField) supported fields} will behave as per
-     * the matching method on {@link LocalDateJalali#with(TemporalField, long) JalaliDate}
+     * the matching method on {@link LocalDateJalali#with(TemporalField, long) LocalDateJalali}
      * or {@link LocalTime#with(TemporalField, long) LocalTime}.
      * All other {@code ChronoField} instances will throw an {@code UnsupportedTemporalTypeException}.
      * <p>
@@ -964,7 +964,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      *
      * @param field    the field to set in the result, not null
      * @param newValue the new value of the field in the result
-     * @return a {@code JalaliDateTime} based on {@code this} with the specified field set, not null
+     * @return a {@code LocalDateTimeJalali} based on {@code this} with the specified field set, not null
      * @throws DateTimeException                if the field cannot be set
      * @throws UnsupportedTemporalTypeException if the field is not supported
      * @throws ArithmeticException              if numeric overflow occurs
@@ -985,7 +985,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the year altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the year altered.
      * <p>
      * The time does not affect the calculation and will be the same in the result.
      * If the day-of-month is invalid for the year, it will be changed to the last valid day of the month.
@@ -993,7 +993,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param year the year to set in the result, from MIN_YEAR to MAX_YEAR
-     * @return a {@code JalaliDateTime} based on this date-time with the requested year, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested year, not null
      * @throws DateTimeException if the year value is invalid
      */
     public LocalDateTimeJalali withYear(int year) {
@@ -1001,7 +1001,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the month-of-year altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the month-of-year altered.
      * <p>
      * The time does not affect the calculation and will be the same in the result.
      * If the day-of-month is invalid for the year, it will be changed to the last valid day of the month.
@@ -1009,7 +1009,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param month the month-of-year to set in the result, from 1 (January) to 12 (December)
-     * @return a {@code JalaliDateTime} based on this date-time with the requested month, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested month, not null
      * @throws DateTimeException if the month-of-year value is invalid
      */
     public LocalDateTimeJalali withMonth(int month) {
@@ -1017,7 +1017,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the day-of-month altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the day-of-month altered.
      * <p>
      * If the resulting date-time is invalid, an exception is thrown.
      * The time does not affect the calculation and will be the same in the result.
@@ -1025,7 +1025,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param dayOfMonth the day-of-month to set in the result, from 1 to 28-31
-     * @return a {@code JalaliDateTime} based on this date-time with the requested day, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested day, not null
      * @throws DateTimeException if the day-of-month value is invalid,
      *                           or if the day-of-month is invalid for the month-year
      */
@@ -1034,14 +1034,14 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the day-of-year altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the day-of-year altered.
      * <p>
      * If the resulting date-time is invalid, an exception is thrown.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param dayOfYear the day-of-year to set in the result, from 1 to 365-366
-     * @return a {@code JalaliDateTime} based on this date with the requested day, not null
+     * @return a {@code LocalDateTimeJalali} based on this date with the requested day, not null
      * @throws DateTimeException if the day-of-year value is invalid,
      *                           or if the day-of-year is invalid for the year
      */
@@ -1052,12 +1052,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the hour-of-day altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the hour-of-day altered.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param hour the hour-of-day to set in the result, from 0 to 23
-     * @return a {@code JalaliDateTime} based on this date-time with the requested hour, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested hour, not null
      * @throws DateTimeException if the hour value is invalid
      */
     public LocalDateTimeJalali withHour(int hour) {
@@ -1066,12 +1066,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the minute-of-hour altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the minute-of-hour altered.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param minute the minute-of-hour to set in the result, from 0 to 59
-     * @return a {@code JalaliDateTime} based on this date-time with the requested minute, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested minute, not null
      * @throws DateTimeException if the minute value is invalid
      */
     public LocalDateTimeJalali withMinute(int minute) {
@@ -1080,12 +1080,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the second-of-minute altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the second-of-minute altered.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param second the second-of-minute to set in the result, from 0 to 59
-     * @return a {@code JalaliDateTime} based on this date-time with the requested second, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested second, not null
      * @throws DateTimeException if the second value is invalid
      */
     public LocalDateTimeJalali withSecond(int second) {
@@ -1094,12 +1094,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the nano-of-second altered.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the nano-of-second altered.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param nanoOfSecond the nano-of-second to set in the result, from 0 to 999,999,999
-     * @return a {@code JalaliDateTime} based on this date-time with the requested nanosecond, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the requested nanosecond, not null
      * @throws DateTimeException if the nano value is invalid
      */
     public LocalDateTimeJalali withNano(int nanoOfSecond) {
@@ -1110,7 +1110,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the time truncated.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the time truncated.
      * <p>
      * Truncation returns a copy of the original date-time with fields
      * smaller than the specified unit set to zero.
@@ -1125,7 +1125,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param unit the unit to truncate to, not null
-     * @return a {@code JalaliDateTime} based on this date-time with the time truncated, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the time truncated, not null
      * @throws DateTimeException                if unable to truncate
      * @throws UnsupportedTemporalTypeException if the unit is not supported
      */
@@ -1138,7 +1138,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Returns a copy of this date-time with the specified amount added.
      * <p>
-     * This returns a {@code JalaliDateTime}, based on this one, with the specified amount added.
+     * This returns a {@code LocalDateTimeJalali}, based on this one, with the specified amount added.
      * The amount is typically {@link Period} or {@link Duration} but may be
      * any other type implementing the {@link TemporalAmount} interface.
      * <p>
@@ -1151,7 +1151,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param amountToAdd the amount to add, not null
-     * @return a {@code JalaliDateTime} based on this date-time with the addition made, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the addition made, not null
      * @throws DateTimeException   if the addition cannot be made
      * @throws ArithmeticException if numeric overflow occurs
      */
@@ -1168,7 +1168,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Returns a copy of this date-time with the specified amount added.
      * <p>
-     * This returns a {@code JalaliDateTime}, based on this one, with the amount
+     * This returns a {@code LocalDateTimeJalali}, based on this one, with the amount
      * in terms of the unit added. If it is not possible to add the amount, because the
      * unit is not supported or for some other reason, an exception is thrown.
      * <p>
@@ -1186,7 +1186,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      *
      * @param amountToAdd the amount of the unit to add to the result, may be negative
      * @param unit        the unit of the amount to add, not null
-     * @return a {@code JalaliDateTime} based on this date-time with the specified amount added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the specified amount added, not null
      * @throws DateTimeException                if the addition cannot be made
      * @throws UnsupportedTemporalTypeException if the unit is not supported
      * @throws ArithmeticException              if numeric overflow occurs
@@ -1219,7 +1219,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of years added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of years added.
      * <p>
      * This method adds the specified amount to the years field in three steps:
      * <ol>
@@ -1235,7 +1235,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param years the years to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the years added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the years added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusYears(long years) {
@@ -1244,7 +1244,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of months added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of months added.
      * <p>
      * This method adds the specified amount to the months field in three steps:
      * <ol>
@@ -1260,7 +1260,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param months the months to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the months added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the months added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusMonths(long months) {
@@ -1269,7 +1269,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of weeks added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of weeks added.
      * <p>
      * This method adds the specified amount in weeks to the days field incrementing
      * the month and year fields as necessary to ensure the result remains valid.
@@ -1280,7 +1280,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param weeks the weeks to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the weeks added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the weeks added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusWeeks(long weeks) {
@@ -1289,7 +1289,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of days added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of days added.
      * <p>
      * This method adds the specified amount to the days field incrementing the
      * month and year fields as necessary to ensure the result remains valid.
@@ -1300,7 +1300,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param days the days to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the days added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the days added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusDays(long days) {
@@ -1311,12 +1311,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of hours added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of hours added.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param hours the hours to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the hours added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the hours added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusHours(long hours) {
@@ -1324,12 +1324,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of minutes added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of minutes added.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param minutes the minutes to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the minutes added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the minutes added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusMinutes(long minutes) {
@@ -1337,12 +1337,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of seconds added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of seconds added.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param seconds the seconds to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the seconds added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the seconds added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusSeconds(long seconds) {
@@ -1350,12 +1350,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of nanoseconds added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of nanoseconds added.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param nanos the nanos to add, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the nanoseconds added, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the nanoseconds added, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali plusNanos(long nanos) {
@@ -1367,7 +1367,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Returns a copy of this date-time with the specified amount subtracted.
      * <p>
-     * This returns a {@code JalaliDateTime}, based on this one, with the specified amount subtracted.
+     * This returns a {@code LocalDateTimeJalali}, based on this one, with the specified amount subtracted.
      * The amount is typically {@link Period} or {@link Duration} but may be
      * any other type implementing the {@link TemporalAmount} interface.
      * <p>
@@ -1380,7 +1380,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param amountToSubtract the amount to subtract, not null
-     * @return a {@code JalaliDateTime} based on this date-time with the subtraction made, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the subtraction made, not null
      * @throws DateTimeException   if the subtraction cannot be made
      * @throws ArithmeticException if numeric overflow occurs
      */
@@ -1397,7 +1397,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Returns a copy of this date-time with the specified amount subtracted.
      * <p>
-     * This returns a {@code JalaliDateTime}, based on this one, with the amount
+     * This returns a {@code LocalDateTimeJalali}, based on this one, with the amount
      * in terms of the unit subtracted. If it is not possible to subtract the amount,
      * because the unit is not supported or for some other reason, an exception is thrown.
      * <p>
@@ -1408,7 +1408,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      *
      * @param amountToSubtract the amount of the unit to subtract from the result, may be negative
      * @param unit             the unit of the amount to subtract, not null
-     * @return a {@code JalaliDateTime} based on this date-time with the specified amount subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the specified amount subtracted, not null
      * @throws DateTimeException                if the subtraction cannot be made
      * @throws UnsupportedTemporalTypeException if the unit is not supported
      * @throws ArithmeticException              if numeric overflow occurs
@@ -1421,7 +1421,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of years subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of years subtracted.
      * <p>
      * This method subtracts the specified amount from the years field in three steps:
      * <ol>
@@ -1437,7 +1437,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param years the years to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the years subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the years subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusYears(long years) {
@@ -1445,7 +1445,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of months subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of months subtracted.
      * <p>
      * This method subtracts the specified amount from the months field in three steps:
      * <ol>
@@ -1461,7 +1461,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param months the months to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the months subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the months subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusMonths(long months) {
@@ -1469,7 +1469,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of weeks subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of weeks subtracted.
      * <p>
      * This method subtracts the specified amount in weeks from the days field decrementing
      * the month and year fields as necessary to ensure the result remains valid.
@@ -1480,7 +1480,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param weeks the weeks to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the weeks subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the weeks subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusWeeks(long weeks) {
@@ -1488,7 +1488,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of days subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of days subtracted.
      * <p>
      * This method subtracts the specified amount from the days field decrementing the
      * month and year fields as necessary to ensure the result remains valid.
@@ -1499,7 +1499,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This instance is immutable and unaffected by this method call.
      *
      * @param days the days to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the days subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the days subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusDays(long days) {
@@ -1509,12 +1509,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of hours subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of hours subtracted.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param hours the hours to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the hours subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the hours subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusHours(long hours) {
@@ -1522,12 +1522,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of minutes subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of minutes subtracted.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param minutes the minutes to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the minutes subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the minutes subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusMinutes(long minutes) {
@@ -1535,12 +1535,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of seconds subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of seconds subtracted.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param seconds the seconds to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the seconds subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the seconds subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusSeconds(long seconds) {
@@ -1548,12 +1548,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     }
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified number of nanoseconds subtracted.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified number of nanoseconds subtracted.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
      * @param nanos the nanos to subtract, may be negative
-     * @return a {@code JalaliDateTime} based on this date-time with the nanoseconds subtracted, not null
+     * @return a {@code LocalDateTimeJalali} based on this date-time with the nanoseconds subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
      */
     public LocalDateTimeJalali minusNanos(long nanos) {
@@ -1563,7 +1563,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     //-----------------------------------------------------------------------
 
     /**
-     * Returns a copy of this {@code JalaliDateTime} with the specified period added.
+     * Returns a copy of this {@code LocalDateTimeJalali} with the specified period added.
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
@@ -1651,8 +1651,8 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * {@link Temporal#with(TemporalAdjuster)}:
      * <pre>
      *   // these two lines are equivalent, but the second approach is recommended
-     *   temporal = thisJalaliDateTime.adjustInto(temporal);
-     *   temporal = temporal.with(thisJalaliDateTime);
+     *   temporal = thisLocalDateTimeJalali.adjustInto(temporal);
+     *   temporal = temporal.with(thisLocalDateTimeJalali);
      * </pre>
      * <p>
      * This instance is immutable and unaffected by this method call.
@@ -1672,12 +1672,12 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Calculates the amount of time until another date-time in terms of the specified unit.
      * <p>
-     * This calculates the amount of time between two {@code JalaliDateTime}
+     * This calculates the amount of time between two {@code LocalDateTimeJalali}
      * objects in terms of a single {@code TemporalUnit}.
      * The start and end points are {@code this} and the specified date-time.
      * The result will be negative if the end is before the start.
      * The {@code Temporal} passed to this method is converted to a
-     * {@code JalaliDateTime} using {@link #from(TemporalAccessor)}.
+     * {@code LocalDateTimeJalali} using {@link #from(TemporalAccessor)}.
      * For example, the amount in days between two date-times can be calculated
      * using {@code startDateTime.until(endDateTime, DAYS)}.
      * <p>
@@ -1710,11 +1710,11 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
-     * @param endExclusive the end date, exclusive, which is converted to a {@code JalaliDateTime}, not null
+     * @param endExclusive the end date, exclusive, which is converted to a {@code LocalDateTimeJalali}, not null
      * @param unit         the unit to measure the amount in, not null
      * @return the amount of time between this date-time and the end date-time
      * @throws DateTimeException                if the amount cannot be calculated, or the end
-     *                                          temporal cannot be converted to a {@code JalaliDateTime}
+     *                                          temporal cannot be converted to a {@code LocalDateTimeJalali}
      * @throws UnsupportedTemporalTypeException if the unit is not supported
      * @throws ArithmeticException              if numeric overflow occurs
      */
@@ -1846,7 +1846,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * The comparison is primarily based on the date-time, from earliest to latest.
      * It is "consistent with equals", as defined by {@link Comparable}.
      * <p>
-     * If all the date-times being compared are instances of {@code JalaliDateTime},
+     * If all the date-times being compared are instances of {@code LocalDateTimeJalali},
      * then the comparison will be entirely based on the date-time.
      * If some dates being compared are in different chronologies, then the
      * chronology is also considered, see {@link ChronoLocalDateTime#compareTo}.
@@ -1876,8 +1876,8 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This checks to see if this date-time represents a point on the
      * local time-line after the other date-time.
      * <pre>
-     *   JalaliDate a = JalaliDateTime.of(2012, 6, 30, 12, 00);
-     *   JalaliDate b = JalaliDateTime.of(2012, 7, 1, 12, 00);
+     *   LocalDateTimeJalali a = LocalDateTimeJalali.of(2012, 6, 30, 12, 00);
+     *   LocalDateTimeJalali b = LocalDateTimeJalali.of(2012, 7, 1, 12, 00);
      *   a.isAfter(b) == false
      *   a.isAfter(a) == false
      *   b.isAfter(a) == true
@@ -1905,8 +1905,8 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This checks to see if this date-time represents a point on the
      * local time-line before the other date-time.
      * <pre>
-     *   JalaliDate a = JalaliDateTime.of(2012, 6, 30, 12, 00);
-     *   JalaliDate b = JalaliDateTime.of(2012, 7, 1, 12, 00);
+     *   LocalDateTimeJalali a = LocalDateTimeJalali.of(2012, 6, 30, 12, 00);
+     *   LocalDateTimeJalali b = LocalDateTimeJalali.of(2012, 7, 1, 12, 00);
      *   a.isBefore(b) == true
      *   a.isBefore(a) == false
      *   b.isBefore(a) == false
@@ -1934,8 +1934,8 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      * This checks to see if this date-time represents the same point on the
      * local time-line as the other date-time.
      * <pre>
-     *   JalaliDate a = JalaliDateTime.of(2012, 6, 30, 12, 00);
-     *   JalaliDate b = JalaliDateTime.of(2012, 7, 1, 12, 00);
+     *   LocalDateTimeJalali a = LocalDateTimeJalali.of(2012, 6, 30, 12, 00);
+     *   LocalDateTimeJalali b = LocalDateTimeJalali.of(2012, 7, 1, 12, 00);
      *   a.isEqual(b) == false
      *   a.isEqual(a) == true
      *   b.isEqual(a) == false
@@ -1962,8 +1962,8 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
     /**
      * Checks if this date-time is equal to another date-time.
      * <p>
-     * Compares this {@code JalaliDateTime} with another ensuring that the date-time is the same.
-     * Only objects of type {@code JalaliDateTime} are compared, other types return false.
+     * Compares this {@code LocalDateTimeJalali} with another ensuring that the date-time is the same.
+     * Only objects of type {@code LocalDateTimeJalali} are compared, other types return false.
      *
      * @param obj the object to check, null returns false
      * @return true if this is equal to the other date-time
