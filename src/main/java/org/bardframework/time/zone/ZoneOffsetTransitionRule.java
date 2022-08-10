@@ -26,7 +26,7 @@ import static java.time.temporal.TemporalAdjusters.previousOrSame;
  * <li>the last Sunday in February
  * </ul>
  * These different rule types can be expressed and queried.
- *
+ * <p>
  * this class is immutable and thread-safe.
  */
 public final class ZoneOffsetTransitionRule implements Serializable {

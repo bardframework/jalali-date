@@ -355,11 +355,6 @@ import static java.time.temporal.ChronoField.*;
  * This class is immutable and thread-safe.
  */
 public final class DateTimeFormatterJalali {
-    private static final Locale LOCALE_FA = new Locale("fa");
-    private static final Locale LOCALE_EN = new Locale("en");
-    private static final Map<Locale, Map<Long, String>> DAY_OF_WEEK = new HashMap<>();
-    private static final Map<Locale, Map<Long, String>> MONTH_OF_YEAR = new HashMap<>();
-    private static final Map<Locale, Map<Long, String>> AMPM_OF_DAY = new HashMap<>();
     /**
      * The ISO date formatter that formats or parses a date without an
      * offset, such as '2011-12-03'.
@@ -548,7 +543,6 @@ public final class DateTimeFormatterJalali {
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali ISO_LOCAL_DATE_TIME;
-    //-----------------------------------------------------------------------
     /**
      * The ISO date-time formatter that formats or parses a date-time with an
      * offset, such as '2011-12-03T10:15:30+01:00'.
@@ -568,7 +562,6 @@ public final class DateTimeFormatterJalali {
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali ISO_OFFSET_DATE_TIME;
-    //-----------------------------------------------------------------------
     /**
      * The ISO-like date-time formatter that formats or parses a date-time with
      * offset and zone, such as '2011-12-03T10:15:30+01:00[Europe/Paris]'.
@@ -592,7 +585,6 @@ public final class DateTimeFormatterJalali {
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali ISO_ZONED_DATE_TIME;
-    //-----------------------------------------------------------------------
     /**
      * The ISO-like date-time formatter that formats or parses a date-time with
      * the offset and zone if available, such as '2011-12-03T10:15:30',
@@ -619,8 +611,6 @@ public final class DateTimeFormatterJalali {
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali ISO_DATE_TIME;
-
-    //-----------------------------------------------------------------------
     /**
      * The ISO date formatter that formats or parses the ordinal date
      * without an offset, such as '2012-337'.
@@ -675,7 +665,6 @@ public final class DateTimeFormatterJalali {
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali ISO_WEEK_DATE;
-
     //-----------------------------------------------------------------------
     /**
      * The ISO instant formatter that formats or parses an instant in UTC,
@@ -708,6 +697,7 @@ public final class DateTimeFormatterJalali {
      * It uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali ISO_INSTANT;
+    //-----------------------------------------------------------------------
     /**
      * The ISO date formatter that formats or parses a date without an
      * offset, such as '20111203'.
@@ -733,7 +723,16 @@ public final class DateTimeFormatterJalali {
      * It has no override zone and uses the {@link ResolverStyle#STRICT STRICT} resolver style.
      */
     public static final DateTimeFormatterJalali BASIC_ISO_DATE;
+    //-----------------------------------------------------------------------
+    private static final Locale LOCALE_FA = new Locale("fa");
 
+    //-----------------------------------------------------------------------
+    private static final Locale LOCALE_EN = new Locale("en");
+    private static final Map<Locale, Map<Long, String>> DAY_OF_WEEK = new HashMap<>();
+
+    //-----------------------------------------------------------------------
+    private static final Map<Locale, Map<Long, String>> MONTH_OF_YEAR = new HashMap<>();
+    private static final Map<Locale, Map<Long, String>> AMPM_OF_DAY = new HashMap<>();
     //-----------------------------------------------------------------------
     private static final TemporalQuery<Boolean> PARSED_LEAP_SECOND = t -> {
         if (t instanceof Parsed) {
@@ -1096,6 +1095,49 @@ public final class DateTimeFormatterJalali {
 
     //-----------------------------------------------------------------------
 
+    static String retrieveJavaTimeFieldValueName(int field, long value, int style, Locale locale) {
+        if (field == Calendar.MONTH) {
+            return getMonthOfYear(locale).get(value);
+        } else if (field == Calendar.DAY_OF_WEEK) {
+            return getDayOfWeek(locale).get(value);
+        } else if (field == Calendar.AM_PM) {
+            return getAmPm(locale).get(value);
+        } else {
+            return null;
+        }
+    }
+
+    public static Map<Long, String> getDayOfWeek(Locale locale) {
+        if (locale.getLanguage().startsWith("fa")) {
+            locale = LOCALE_FA;
+        } else {
+            locale = LOCALE_EN;
+        }
+        return DAY_OF_WEEK.get(locale);
+    }
+
+    //-----------------------------------------------------------------------
+
+    public static Map<Long, String> getAmPm(Locale locale) {
+        if (locale.getLanguage().startsWith("fa")) {
+            locale = LOCALE_FA;
+        } else {
+            locale = LOCALE_EN;
+        }
+        return AMPM_OF_DAY.get(locale);
+    }
+
+    public static Map<Long, String> getMonthOfYear(Locale locale) {
+        if (locale.getLanguage().startsWith("fa")) {
+            locale = LOCALE_FA;
+        } else {
+            locale = LOCALE_EN;
+        }
+        return MONTH_OF_YEAR.get(locale);
+    }
+
+    //-----------------------------------------------------------------------
+
     /**
      * Gets the locale to be used during formatting.
      * <p>
@@ -1152,8 +1194,6 @@ public final class DateTimeFormatterJalali {
         return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
     }
 
-    //-----------------------------------------------------------------------
-
     /**
      * Gets the overriding chronology to be used during formatting.
      * <p>
@@ -1206,8 +1246,6 @@ public final class DateTimeFormatterJalali {
         }
         return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
     }
-
-    //-----------------------------------------------------------------------
 
     /**
      * Gets the overriding zone to be used during formatting.
@@ -1326,6 +1364,8 @@ public final class DateTimeFormatterJalali {
         }
     }
 
+    //-----------------------------------------------------------------------
+
     /**
      * Fully parses the text producing a temporal object.
      * <p>
@@ -1394,6 +1434,8 @@ public final class DateTimeFormatterJalali {
         }
     }
 
+    //-----------------------------------------------------------------------
+
     /**
      * Fully parses the text producing an object of the specified type.
      * <p>
@@ -1425,6 +1467,8 @@ public final class DateTimeFormatterJalali {
         }
     }
 
+    //-----------------------------------------------------------------------
+
     private DateTimeParseException createError(CharSequence text, RuntimeException ex) {
         String abbr;
         if (text.length() > 64) {
@@ -1434,8 +1478,6 @@ public final class DateTimeFormatterJalali {
         }
         return new DateTimeParseException("Text '" + abbr + "' could not be parsed: " + ex.getMessage(), text, 0, ex);
     }
-
-    //-----------------------------------------------------------------------
 
     /**
      * Parses and resolves the specified text.
@@ -1485,8 +1527,6 @@ public final class DateTimeFormatterJalali {
         return context;
     }
 
-    //-----------------------------------------------------------------------
-
     /**
      * Returns the formatter as a composite printer parser.
      *
@@ -1496,8 +1536,6 @@ public final class DateTimeFormatterJalali {
     DateTimeFormatterBuilderJalali.CompositePrinterParser toPrinterParser(boolean optional) {
         return printerParser.withOptional(optional);
     }
-
-    //-----------------------------------------------------------------------
 
     /**
      * Returns a description of the underlying formatters.
@@ -1509,44 +1547,5 @@ public final class DateTimeFormatterJalali {
         String pattern = printerParser.toString();
         pattern = pattern.startsWith("[") ? pattern : pattern.substring(1, pattern.length() - 1);
         return pattern;
-    }
-
-    static String retrieveJavaTimeFieldValueName(int field, long value, int style, Locale locale) {
-        if (field == Calendar.MONTH) {
-            return getMonthOfYear(locale).get(value);
-        } else if (field == Calendar.DAY_OF_WEEK) {
-            return getDayOfWeek(locale).get(value);
-        } else if (field == Calendar.AM_PM) {
-            return getAmPm(locale).get(value);
-        } else {
-            return null;
-        }
-    }
-
-    public static Map<Long, String> getDayOfWeek(Locale locale) {
-        if (locale.getLanguage().startsWith("fa")) {
-            locale = LOCALE_FA;
-        } else {
-            locale = LOCALE_EN;
-        }
-        return DAY_OF_WEEK.get(locale);
-    }
-
-    public static Map<Long, String> getAmPm(Locale locale) {
-        if (locale.getLanguage().startsWith("fa")) {
-            locale = LOCALE_FA;
-        } else {
-            locale = LOCALE_EN;
-        }
-        return AMPM_OF_DAY.get(locale);
-    }
-
-    public static Map<Long, String> getMonthOfYear(Locale locale) {
-        if (locale.getLanguage().startsWith("fa")) {
-            locale = LOCALE_FA;
-        } else {
-            locale = LOCALE_EN;
-        }
-        return MONTH_OF_YEAR.get(locale);
     }
 }

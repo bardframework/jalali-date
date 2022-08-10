@@ -24,17 +24,6 @@ class LocalDateTimeJalaliFormatterTest {
         return formatter.format(LocalDateTimeJalali.of(dateTime));
     }
 
-    @Test
-    void test() {
-        Date generatedDate = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-        String pattern = "yyyy MM dd HH:mm";
-        ZoneId zoneId = ZoneId.systemDefault();
-        LocalDateTime localDateTime = Instant.ofEpochMilli(generatedDate.getTime()).atZone(zoneId).toLocalDateTime();
-        String jalaliString = formatJalali(localDateTime, pattern);
-        Date revertedDate = getDateOfJalaliString(jalaliString, pattern, zoneId);
-        System.out.println(generatedDate + " -> " + jalaliString + " -> " + " -> " + revertedDate);
-    }
-
     public static void main(String[] args) {
         LocalDateTime localDateTime = LocalDateTime.now();
         ZoneId zoneId = ZoneId.systemDefault();
@@ -44,5 +33,16 @@ class LocalDateTimeJalaliFormatterTest {
         ZonedDateTimeJalali zonedDateTimeJalali = localDateTimeJalali.atZone(zoneId);
         System.out.println(DateTimeFormatterJalali.ofPattern(pattern).withLocale(locale).withZone(zoneId).format(zonedDateTimeJalali));
         System.out.println(DateTimeFormatter.ofPattern(pattern).withLocale(locale).withZone(zoneId).format(localDateTime));
+    }
+
+    @Test
+    void test() {
+        Date generatedDate = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
+        String pattern = "yyyy MM dd HH:mm";
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDateTime localDateTime = Instant.ofEpochMilli(generatedDate.getTime()).atZone(zoneId).toLocalDateTime();
+        String jalaliString = formatJalali(localDateTime, pattern);
+        Date revertedDate = getDateOfJalaliString(jalaliString, pattern, zoneId);
+        System.out.println(generatedDate + " -> " + jalaliString + " -> " + " -> " + revertedDate);
     }
 }

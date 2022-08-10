@@ -26,7 +26,7 @@ import java.util.Objects;
  * Overlaps occur where there are local date-times that exist twice.
  * An example would be when the offset changes from {@code +04:00} to {@code +03:00}.
  * This might be described as 'the clocks will move back one hour tonight at 2am'.
- *
+ * <p>
  * this class is immutable and thread-safe.
  */
 public final class ZoneOffsetTransition
@@ -387,16 +387,15 @@ public final class ZoneOffsetTransition
      */
     @Override
     public String toString() {
-        StringBuilder buf = new StringBuilder();
-        buf.append("Transition[")
-            .append(isGap() ? "Gap" : "Overlap")
-            .append(" at ")
-            .append(transition)
-            .append(offsetBefore)
-            .append(" to ")
-            .append(offsetAfter)
-            .append(']');
-        return buf.toString();
+        String buf = "Transition[" +
+            (isGap() ? "Gap" : "Overlap") +
+            " at " +
+            transition +
+            offsetBefore +
+            " to " +
+            offsetAfter +
+            ']';
+        return buf;
     }
 
 }

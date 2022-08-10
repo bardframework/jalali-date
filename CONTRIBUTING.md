@@ -14,7 +14,7 @@ Getting Started
   + Clearly describe the issue including steps to reproduce when it is a bug.
   + Make sure you fill in the earliest version that you know has the issue.
 + Find the corresponding [repository on GitHub][github-search],
-[fork][github-fork] and check out your forked repository.
+  [fork][github-fork] and check out your forked repository.
 
 Making Changes
 --------------
@@ -48,7 +48,7 @@ Submitting Changes
 + Push your changes to a topic branch in your fork of the repository.
 + Submit a _Pull Request_ to the corresponding repository in the `bard` organization.
   * Verify _Files Changed_ shows only your intended changes and does not
-  include additional files like `target/*.class`
+    include additional files like `target/*.class`
 + Update your ticket and include a link to the pull request in the ticket.
 
 If you prefer to not use GitHub, then you can instead use
@@ -57,15 +57,23 @@ If you prefer to not use GitHub, then you can instead use
 
 Additional Resources
 --------------------
+
 + [General GitHub documentation][github-help]
 + [GitHub pull request documentation][github-pull-request]
 + [Bard Framework Twitter Account][twitter]
 
 [github-fork]:https://help.github.com/en/github/getting-started-with-github/fork-a-repo
+
 [github-help]:https://help.github.com
+
 [github-pull-request]:https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
+
 [github-search]:https://github.com/bardframework?tab=repositories
+
 [github-signup]:https://github.com/signup/free
+
 [mails]:https://bardframework.org/mails-list.html
+
 [maven]:https://maven-badges.herokuapp.com/maven-central/org.bardframework/bard-parent
+
 [twitter]:https://twitter.com/BardFramework

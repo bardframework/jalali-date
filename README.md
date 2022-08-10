@@ -7,8 +7,8 @@ Bard Framework Jalali Date
 [![Javadocs](https://javadoc.io/badge/org.bardframework/jalali-date/0.5.svg)](https://javadoc.io/doc/org.bardframework/jalali-date/0.5)
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-Bard Framework Jalali Date, is a Jalali (Shamsi) calendar implementation in java for parsing, validating, manipulating, 
-  converting and formatting persian dates (like java 8 LocalDate(Time) in java 8)
+Bard Framework Jalali Date, is a Jalali (Shamsi) calendar implementation in java for parsing, validating, manipulating,
+converting and formatting persian dates (like java 8 LocalDate(Time) in java 8)
 
 Documentation
 -------------
@@ -34,6 +34,7 @@ Contributing
 ------------
 We accept Pull Requests via GitHub. The [developer mailing list][ml] is the main channel of communication for contributors.
 There are some guidelines which will make applying PRs easier for us:
+
 + No spaces! Please use tabs for indentation.
 + Respect the code style.
 + Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
@@ -51,6 +52,7 @@ You like Bard Framework? Then [donate](https://bardframework.org/donate) to supp
 
 Additional Resources
 --------------------
+
 + [Bard Framework Homepage](https://bardframework.org/)
 + [Bard Framework Jalali Date Issue Tracker](https://github.com/bardframework/jalali-date/issues)
 + [Bard Framework Twitter Account](https://twitter.com/BardFramework)

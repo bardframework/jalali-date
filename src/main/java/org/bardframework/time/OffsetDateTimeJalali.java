@@ -42,7 +42,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * ({@code ==}), identity hash code, or synchronization) on instances of
  * {@code OffsetDateTime} may have unpredictable results and should be avoided.
  * The {@code equals} method should be used for comparisons.
- *
+ * <p>
  * this class is immutable and thread-safe.
  */
 public final class OffsetDateTimeJalali

@@ -73,7 +73,7 @@ import static java.time.temporal.ChronoField.*;
  * ({@code ==}), identity hash code, or synchronization) on instances of
  * {@code ZonedDateTime} may have unpredictable results and should be avoided.
  * The {@code equals} method should be used for comparisons.
- *
+ * <p>
  * A {@code ZonedDateTime} holds state equivalent to three separate objects,
  * a {@code LocalDateTimeJalali}, a {@code ZoneId} and the resolved {@code ZoneOffset}.
  * The offset and local date-time are used to define an instant when necessary.

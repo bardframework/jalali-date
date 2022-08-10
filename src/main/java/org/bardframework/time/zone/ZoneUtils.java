@@ -23,6 +23,7 @@ public class ZoneUtils {
      * Each individual call will be still remain thread-safe.
      * <p>
      * {@link ZoneOffset} will always return a set of rules where the offset never changes.
+     *
      * @param zone zone
      * @return the rules, not null
      * @throws ZoneRulesException if no rules are available for this ID
