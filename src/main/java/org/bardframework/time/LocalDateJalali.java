@@ -1860,7 +1860,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      * @return the local date-time formed from this date and the specified time, not null
      */
     @Override
-    public final LocalDateTimeJalali atTime(LocalTime time) {
+    public LocalDateTimeJalali atTime(LocalTime time) {
         return LocalDateTimeJalali.of(this, time);
     }
 
@@ -1936,7 +1936,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
     //-----------------------------------------------------------------------
     @Override
     public long toEpochDay() {
-        long total = year * 365;
+        long total = year * 365L;
         for (int i = 0; i < year; i++) {
             if (YearJalali.isLeap(i)) {
                 total++;
