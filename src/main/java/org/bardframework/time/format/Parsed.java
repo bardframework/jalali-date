@@ -87,8 +87,8 @@ public final class Parsed implements TemporalAccessor {
     @Override
     public boolean isSupported(TemporalField field) {
         if (fieldValues.containsKey(field) ||
-            (date != null && date.isSupported(field)) ||
-            (time != null && time.isSupported(field))) {
+                (date != null && date.isSupported(field)) ||
+                (time != null && time.isSupported(field))) {
             return true;
         }
         return field != null && (!(field instanceof ChronoField)) && field.isSupportedBy(this);
@@ -209,7 +209,7 @@ public final class Parsed implements TemporalAccessor {
                             continue outer;  // have to restart to avoid concurrent modification
                         }
                         throw new DateTimeException("Method resolve() can only return ChronoZonedDateTime, " +
-                            "ChronoLocalDateTime, ChronoLocalDate or LocalTime");
+                                "ChronoLocalDateTime, ChronoLocalDate or LocalTime");
                     } else if (!fieldValues.containsKey(targetField)) {
                         changedCount++;
                         continue outer;  // have to restart to avoid concurrent modification
@@ -233,8 +233,8 @@ public final class Parsed implements TemporalAccessor {
         Long old = fieldValues.put(changeField, changeValue);
         if (old != null && old.longValue() != changeValue.longValue()) {
             throw new DateTimeException("Conflict found: " + changeField + " " + old +
-                " differs from " + changeField + " " + changeValue +
-                " while resolving  " + targetField);
+                    " differs from " + changeField + " " + changeValue +
+                    " while resolving  " + targetField);
         }
     }
 
@@ -378,7 +378,7 @@ public final class Parsed implements TemporalAccessor {
 
         // convert to time if all four fields available (optimization)
         if (fieldValues.containsKey(HOUR_OF_DAY) && fieldValues.containsKey(MINUTE_OF_HOUR) &&
-            fieldValues.containsKey(SECOND_OF_MINUTE) && fieldValues.containsKey(NANO_OF_SECOND)) {
+                fieldValues.containsKey(SECOND_OF_MINUTE) && fieldValues.containsKey(NANO_OF_SECOND)) {
             long hod = fieldValues.remove(HOUR_OF_DAY);
             long moh = fieldValues.remove(MINUTE_OF_HOUR);
             long som = fieldValues.remove(SECOND_OF_MINUTE);
@@ -421,7 +421,7 @@ public final class Parsed implements TemporalAccessor {
 
                 // check for invalid combinations that cannot be defaulted
                 if ((moh == null && (som != null || nos != null)) ||
-                    (moh != null && som == null && nos != null)) {
+                        (moh != null && som == null && nos != null)) {
                     return;
                 }
 
@@ -483,9 +483,9 @@ public final class Parsed implements TemporalAccessor {
         // ensure fractional seconds available as ChronoField requires
         // resolveTimeLenient() will have merged MICRO_OF_SECOND/MILLI_OF_SECOND to NANO_OF_SECOND
         if (time == null &&
-            (fieldValues.containsKey(INSTANT_SECONDS) ||
-                fieldValues.containsKey(SECOND_OF_DAY) ||
-                fieldValues.containsKey(SECOND_OF_MINUTE))) {
+                (fieldValues.containsKey(INSTANT_SECONDS) ||
+                        fieldValues.containsKey(SECOND_OF_DAY) ||
+                        fieldValues.containsKey(SECOND_OF_MINUTE))) {
             if (fieldValues.containsKey(NANO_OF_SECOND)) {
                 long nos = fieldValues.get(NANO_OF_SECOND);
                 fieldValues.put(MICRO_OF_SECOND, nos / 1000);
@@ -560,7 +560,7 @@ public final class Parsed implements TemporalAccessor {
                 long val2 = entry.getValue();
                 if (val1 != val2) {
                     throw new DateTimeException("Conflict found: Field " + field + " " + val1 +
-                        " differs from " + field + " " + val2 + " derived from " + target);
+                            " differs from " + field + " " + val2 + " derived from " + target);
                 }
                 it.remove();
             }

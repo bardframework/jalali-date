@@ -281,12 +281,12 @@ class DateTimeTextProvider {
         if (field == IsoFields.QUARTER_OF_YEAR) {
             // The order of keys must correspond to the TextStyle.values() order.
             final String[] keys = {
-                "QuarterNames",
-                "standalone.QuarterNames",
-                "QuarterAbbreviations",
-                "standalone.QuarterAbbreviations",
-                "QuarterNarrows",
-                "standalone.QuarterNarrows",
+                    "QuarterNames",
+                    "standalone.QuarterNames",
+                    "QuarterAbbreviations",
+                    "standalone.QuarterAbbreviations",
+                    "QuarterNarrows",
+                    "standalone.QuarterNarrows",
             };
             for (int i = 0; i < keys.length; i++) {
                 String[] names = getLocalizedResource(keys[i], locale);

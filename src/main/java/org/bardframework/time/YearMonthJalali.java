@@ -52,10 +52,10 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
      * Parser.
      */
     private static final DateTimeFormatter PARSER = new DateTimeFormatterBuilder()
-        .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-        .appendLiteral('-')
-        .appendValue(MONTH_OF_YEAR, 2)
-        .toFormatter();
+            .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral('-')
+            .appendValue(MONTH_OF_YEAR, 2)
+            .toFormatter();
 
     /**
      * The year.
@@ -1156,7 +1156,7 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
             buf.append(year);
         }
         return buf.append(month < 10 ? "-0" : "-")
-            .append(month)
-            .toString();
+                .append(month)
+                .toString();
     }
 }

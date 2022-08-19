@@ -30,7 +30,7 @@ import java.util.Objects;
  * this class is immutable and thread-safe.
  */
 public final class ZoneOffsetTransition
-    implements Comparable<ZoneOffsetTransition>, Serializable {
+        implements Comparable<ZoneOffsetTransition>, Serializable {
 
     /**
      * Serialization version.
@@ -363,7 +363,7 @@ public final class ZoneOffsetTransition
         if (other instanceof ZoneOffsetTransition) {
             ZoneOffsetTransition d = (ZoneOffsetTransition) other;
             return epochSecond == d.epochSecond &&
-                offsetBefore.equals(d.offsetBefore) && offsetAfter.equals(d.offsetAfter);
+                    offsetBefore.equals(d.offsetBefore) && offsetAfter.equals(d.offsetAfter);
         }
         return false;
     }
@@ -388,13 +388,13 @@ public final class ZoneOffsetTransition
     @Override
     public String toString() {
         String buf = "Transition[" +
-            (isGap() ? "Gap" : "Overlap") +
-            " at " +
-            transition +
-            offsetBefore +
-            " to " +
-            offsetAfter +
-            ']';
+                (isGap() ? "Gap" : "Overlap") +
+                " at " +
+                transition +
+                offsetBefore +
+                " to " +
+                offsetAfter +
+                ']';
         return buf;
     }
 

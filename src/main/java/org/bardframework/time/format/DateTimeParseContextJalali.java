@@ -69,8 +69,8 @@ final class DateTimeParseContextJalali {
      */
     static boolean charEqualsIgnoreCase(char c1, char c2) {
         return c1 == c2 ||
-            Character.toUpperCase(c1) == Character.toUpperCase(c2) ||
-            Character.toLowerCase(c1) == Character.toLowerCase(c2);
+                Character.toUpperCase(c1) == Character.toUpperCase(c2) ||
+                Character.toLowerCase(c1) == Character.toLowerCase(c2);
     }
 
     //-----------------------------------------------------------------------
@@ -175,7 +175,7 @@ final class DateTimeParseContextJalali {
                 char ch1 = cs1.charAt(offset1 + i);
                 char ch2 = cs2.charAt(offset2 + i);
                 if (ch1 != ch2 && Character.toUpperCase(ch1) != Character.toUpperCase(ch2) &&
-                    Character.toLowerCase(ch1) != Character.toLowerCase(ch2)) {
+                        Character.toLowerCase(ch1) != Character.toLowerCase(ch2)) {
                     return false;
                 }
             }

@@ -69,8 +69,8 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
      * Parser.
      */
     private static final DateTimeFormatter PARSER = new DateTimeFormatterBuilder()
-        .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-        .toFormatter();
+            .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .toFormatter();
 
     /**
      * The year being represented.
@@ -153,7 +153,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
      * @throws DateTimeException if the field is invalid
      */
     public static YearJalali of(int isoYear)
-        throws DateTimeException {
+            throws DateTimeException {
         YEAR.checkValidValue(isoYear);
         return new YearJalali(isoYear);
     }
@@ -190,7 +190,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
             return of(temporal.get(YEAR));
         } catch (DateTimeException ex) {
             throw new DateTimeException("Unable to obtain JalaliYear from TemporalAccessor: " +
-                temporal + " of type " + temporal.getClass().getName(), ex);
+                    temporal + " of type " + temporal.getClass().getName(), ex);
         }
     }
 
@@ -249,7 +249,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
     public static boolean isLeap(long year) {
         //Algorithm from www.wikipedia.com
         return (year % 33 == 1 || year % 33 == 5 || year % 33 == 9 || year % 33 == 13 ||
-            year % 33 == 17 || year % 33 == 22 || year % 33 == 26 || year % 33 == 30);
+                year % 33 == 17 || year % 33 == 22 || year % 33 == 26 || year % 33 == 30);
 
 //        long remain = year % 128;
 //        int[] remaining;

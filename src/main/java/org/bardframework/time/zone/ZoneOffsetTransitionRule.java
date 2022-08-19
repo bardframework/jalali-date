@@ -97,15 +97,15 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * @throws IllegalArgumentException if the end of day flag is true when the time is not midnight
      */
     ZoneOffsetTransitionRule(
-        MonthJalali month,
-        int dayOfMonthIndicator,
-        DayOfWeek dayOfWeek,
-        LocalTime time,
-        boolean timeEndOfDay,
-        TimeDefinition timeDefinition,
-        ZoneOffset standardOffset,
-        ZoneOffset offsetBefore,
-        ZoneOffset offsetAfter) {
+            MonthJalali month,
+            int dayOfMonthIndicator,
+            DayOfWeek dayOfWeek,
+            LocalTime time,
+            boolean timeEndOfDay,
+            TimeDefinition timeDefinition,
+            ZoneOffset standardOffset,
+            ZoneOffset offsetBefore,
+            ZoneOffset offsetAfter) {
         assert time.getNano() == 0;
         this.month = month;
         this.dom = (byte) dayOfMonthIndicator;
@@ -141,15 +141,15 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      * @throws IllegalArgumentException if {@code time.getNano()} returns non-zero value
      */
     public static ZoneOffsetTransitionRule of(
-        MonthJalali month,
-        int dayOfMonthIndicator,
-        DayOfWeek dayOfWeek,
-        LocalTime time,
-        boolean timeEndOfDay,
-        TimeDefinition timeDefinition,
-        ZoneOffset standardOffset,
-        ZoneOffset offsetBefore,
-        ZoneOffset offsetAfter) {
+            MonthJalali month,
+            int dayOfMonthIndicator,
+            DayOfWeek dayOfWeek,
+            LocalTime time,
+            boolean timeEndOfDay,
+            TimeDefinition timeDefinition,
+            ZoneOffset standardOffset,
+            ZoneOffset offsetBefore,
+            ZoneOffset offsetAfter) {
         Objects.requireNonNull(month, "month");
         Objects.requireNonNull(time, "time");
         Objects.requireNonNull(timeDefinition, "timeDefinition");
@@ -270,13 +270,13 @@ public final class ZoneOffsetTransitionRule implements Serializable {
         final int afterByte = (afterDiff == 0 || afterDiff == 1800 || afterDiff == 3600 ? afterDiff / 1800 : 3);
         final int dowByte = (dow == null ? 0 : dow.getValue());
         int b = (month.getValue() << 28) +          // 4 bits
-            ((dom + 32) << 22) +                // 6 bits
-            (dowByte << 19) +                   // 3 bits
-            (timeByte << 14) +                  // 5 bits
-            (timeDefinition.ordinal() << 12) +  // 2 bits
-            (stdOffsetByte << 4) +              // 8 bits
-            (beforeByte << 2) +                 // 2 bits
-            afterByte;                          // 2 bits
+                ((dom + 32) << 22) +                // 6 bits
+                (dowByte << 19) +                   // 3 bits
+                (timeByte << 14) +                  // 5 bits
+                (timeDefinition.ordinal() << 12) +  // 2 bits
+                (stdOffsetByte << 4) +              // 8 bits
+                (beforeByte << 2) +                 // 2 bits
+                afterByte;                          // 2 bits
         out.writeInt(b);
         if (timeByte == 31) {
             out.writeInt(timeSecs);
@@ -457,12 +457,12 @@ public final class ZoneOffsetTransitionRule implements Serializable {
         if (otherRule instanceof ZoneOffsetTransitionRule) {
             ZoneOffsetTransitionRule other = (ZoneOffsetTransitionRule) otherRule;
             return month == other.month && dom == other.dom && dow == other.dow &&
-                timeDefinition == other.timeDefinition &&
-                time.equals(other.time) &&
-                timeEndOfDay == other.timeEndOfDay &&
-                standardOffset.equals(other.standardOffset) &&
-                offsetBefore.equals(other.offsetBefore) &&
-                offsetAfter.equals(other.offsetAfter);
+                    timeDefinition == other.timeDefinition &&
+                    time.equals(other.time) &&
+                    timeEndOfDay == other.timeEndOfDay &&
+                    standardOffset.equals(other.standardOffset) &&
+                    offsetBefore.equals(other.offsetBefore) &&
+                    offsetAfter.equals(other.offsetAfter);
         }
         return false;
     }
@@ -475,10 +475,10 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     @Override
     public int hashCode() {
         int hash = ((time.toSecondOfDay() + (timeEndOfDay ? 1 : 0)) << 15) +
-            (month.ordinal() << 11) + ((dom + 32) << 5) +
-            ((dow == null ? 7 : dow.ordinal()) << 2) + (timeDefinition.ordinal());
+                (month.ordinal() << 11) + ((dom + 32) << 5) +
+                ((dow == null ? 7 : dow.ordinal()) << 2) + (timeDefinition.ordinal());
         return hash ^ standardOffset.hashCode() ^
-            offsetBefore.hashCode() ^ offsetAfter.hashCode();
+                offsetBefore.hashCode() ^ offsetAfter.hashCode();
     }
 
     //-----------------------------------------------------------------------
@@ -492,8 +492,8 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     public String toString() {
         StringBuilder buf = new StringBuilder();
         buf.append("TransitionRule[")
-            .append(offsetBefore.compareTo(offsetAfter) > 0 ? "Gap " : "Overlap ")
-            .append(offsetBefore).append(" to ").append(offsetAfter).append(", ");
+                .append(offsetBefore.compareTo(offsetAfter) > 0 ? "Gap " : "Overlap ")
+                .append(offsetBefore).append(" to ").append(offsetAfter).append(", ");
         if (dow != null) {
             if (dom == -1) {
                 buf.append(dow.name()).append(" on or before last day of ").append(month.name());
@@ -506,9 +506,9 @@ public final class ZoneOffsetTransitionRule implements Serializable {
             buf.append(month.name()).append(' ').append(dom);
         }
         buf.append(" at ").append(timeEndOfDay ? "24:00" : time.toString())
-            .append(" ").append(timeDefinition)
-            .append(", standard offset ").append(standardOffset)
-            .append(']');
+                .append(" ").append(timeDefinition)
+                .append(", standard offset ").append(standardOffset)
+                .append(']');
         return buf.toString();
     }
 

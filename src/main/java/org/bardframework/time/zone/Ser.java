@@ -83,7 +83,7 @@ final class Ser implements Externalizable {
     //-----------------------------------------------------------------------
 
     private static Serializable readInternal(byte type, DataInput in)
-        throws IOException, ClassNotFoundException {
+            throws IOException, ClassNotFoundException {
         switch (type) {
             case ZRULES:
                 return ZoneRules.readExternal(in);

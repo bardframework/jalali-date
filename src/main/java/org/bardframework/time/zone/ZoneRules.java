@@ -48,7 +48,7 @@ public final class ZoneRules implements Serializable {
      * The zero-length lastrules array.
      */
     private static final ZoneOffsetTransitionRule[] EMPTY_LASTRULES =
-        new ZoneOffsetTransitionRule[0];
+            new ZoneOffsetTransitionRule[0];
     /**
      * The zero-length ldt array.
      */
@@ -93,7 +93,7 @@ public final class ZoneRules implements Serializable {
      * The map of recent transitions.
      */
     private final transient ConcurrentMap<Integer, ZoneOffsetTransition[]> lastRulesCache =
-        new ConcurrentHashMap<Integer, ZoneOffsetTransition[]>();
+            new ConcurrentHashMap<Integer, ZoneOffsetTransition[]>();
 
     /**
      * Creates an instance.
@@ -232,7 +232,7 @@ public final class ZoneRules implements Serializable {
         Objects.requireNonNull(transitionList, "transitionList");
         Objects.requireNonNull(lastRules, "lastRules");
         return new ZoneRules(baseStandardOffset, baseWallOffset,
-            standardOffsetTransitionList, transitionList, lastRules);
+                standardOffsetTransitionList, transitionList, lastRules);
     }
 
     /**
@@ -257,7 +257,7 @@ public final class ZoneRules implements Serializable {
     static ZoneRules readExternal(DataInput in) throws IOException, ClassNotFoundException {
         int stdSize = in.readInt();
         long[] stdTrans = (stdSize == 0) ? EMPTY_LONG_ARRAY
-            : new long[stdSize];
+                : new long[stdSize];
         for (int i = 0; i < stdSize; i++) {
             stdTrans[i] = Ser.readEpochSec(in);
         }
@@ -267,7 +267,7 @@ public final class ZoneRules implements Serializable {
         }
         int savSize = in.readInt();
         long[] savTrans = (savSize == 0) ? EMPTY_LONG_ARRAY
-            : new long[savSize];
+                : new long[savSize];
         for (int i = 0; i < savSize; i++) {
             savTrans[i] = Ser.readEpochSec(in);
         }
@@ -277,7 +277,7 @@ public final class ZoneRules implements Serializable {
         }
         int ruleSize = in.readByte();
         ZoneOffsetTransitionRule[] rules = (ruleSize == 0) ?
-            EMPTY_LASTRULES : new ZoneOffsetTransitionRule[ruleSize];
+                EMPTY_LASTRULES : new ZoneOffsetTransitionRule[ruleSize];
         for (int i = 0; i < ruleSize; i++) {
             rules[i] = ZoneOffsetTransitionRule.readExternal(in);
         }
@@ -394,9 +394,9 @@ public final class ZoneRules implements Serializable {
      */
     public boolean isFixedOffset() {
         return standardOffsets[0].equals(wallOffsets[0]) &&
-            standardTransitions.length == 0 &&
-            savingsInstantTransitions.length == 0 &&
-            lastRules.length == 0;
+                standardTransitions.length == 0 &&
+                savingsInstantTransitions.length == 0 &&
+                lastRules.length == 0;
     }
 
     /**
@@ -417,7 +417,7 @@ public final class ZoneRules implements Serializable {
         long epochSec = instant.getEpochSecond();
         // check if using last rules
         if (lastRules.length > 0 &&
-            epochSec > savingsInstantTransitions[savingsInstantTransitions.length - 1]) {
+                epochSec > savingsInstantTransitions[savingsInstantTransitions.length - 1]) {
             int year = findYear(epochSec, wallOffsets[wallOffsets.length - 1]);
             ZoneOffsetTransition[] transArray = findTransitionArray(year);
             ZoneOffsetTransition trans = null;
@@ -571,7 +571,7 @@ public final class ZoneRules implements Serializable {
         }
         // check if using last rules
         if (lastRules.length > 0 &&
-            dt.isAfter(savingsLocalTransitions[savingsLocalTransitions.length - 1])) {
+                dt.isAfter(savingsLocalTransitions[savingsLocalTransitions.length - 1])) {
             ZoneOffsetTransition[] transArray = findTransitionArray(dt.getYear());
             Object info = null;
             for (ZoneOffsetTransition trans : transArray) {
@@ -593,7 +593,7 @@ public final class ZoneRules implements Serializable {
             // switch negative insert position to start of matched range
             index = -index - 2;
         } else if (index < savingsLocalTransitions.length - 1 &&
-            savingsLocalTransitions[index].equals(savingsLocalTransitions[index + 1])) {
+                savingsLocalTransitions[index].equals(savingsLocalTransitions[index + 1])) {
             // handle overlap immediately following gap
             index++;
         }
@@ -951,10 +951,10 @@ public final class ZoneRules implements Serializable {
         if (otherRules instanceof ZoneRules) {
             ZoneRules other = (ZoneRules) otherRules;
             return Arrays.equals(standardTransitions, other.standardTransitions) &&
-                Arrays.equals(standardOffsets, other.standardOffsets) &&
-                Arrays.equals(savingsInstantTransitions, other.savingsInstantTransitions) &&
-                Arrays.equals(wallOffsets, other.wallOffsets) &&
-                Arrays.equals(lastRules, other.lastRules);
+                    Arrays.equals(standardOffsets, other.standardOffsets) &&
+                    Arrays.equals(savingsInstantTransitions, other.savingsInstantTransitions) &&
+                    Arrays.equals(wallOffsets, other.wallOffsets) &&
+                    Arrays.equals(lastRules, other.lastRules);
         }
         return false;
     }
@@ -967,10 +967,10 @@ public final class ZoneRules implements Serializable {
     @Override
     public int hashCode() {
         return Arrays.hashCode(standardTransitions) ^
-            Arrays.hashCode(standardOffsets) ^
-            Arrays.hashCode(savingsInstantTransitions) ^
-            Arrays.hashCode(wallOffsets) ^
-            Arrays.hashCode(lastRules);
+                Arrays.hashCode(standardOffsets) ^
+                Arrays.hashCode(savingsInstantTransitions) ^
+                Arrays.hashCode(wallOffsets) ^
+                Arrays.hashCode(lastRules);
     }
 
     /**

@@ -46,7 +46,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * this class is immutable and thread-safe.
  */
 public final class OffsetDateTimeJalali
-    implements Temporal, TemporalAdjuster, Comparable<OffsetDateTimeJalali>, Serializable {
+        implements Temporal, TemporalAdjuster, Comparable<OffsetDateTimeJalali>, Serializable {
 
     /**
      * The minimum supported {@code OffsetDateTime}, '-999999999-01-01T00:00:00+18:00'.
@@ -233,8 +233,8 @@ public final class OffsetDateTimeJalali
      *                           if the day-of-month is invalid for the month-year
      */
     public static OffsetDateTimeJalali of(
-        int year, int month, int dayOfMonth,
-        int hour, int minute, int second, int nanoOfSecond, ZoneOffset offset) {
+            int year, int month, int dayOfMonth,
+            int hour, int minute, int second, int nanoOfSecond, ZoneOffset offset) {
         LocalDateTimeJalali dt = LocalDateTimeJalali.of(year, month, dayOfMonth, hour, minute, second, nanoOfSecond);
         return new OffsetDateTimeJalali(dt, offset);
     }
@@ -301,7 +301,7 @@ public final class OffsetDateTimeJalali
             }
         } catch (DateTimeException ex) {
             throw new DateTimeException("Unable to obtain OffsetDateTime from TemporalAccessor: " +
-                temporal + " of type " + temporal.getClass().getName(), ex);
+                    temporal + " of type " + temporal.getClass().getName(), ex);
         }
     }
 
@@ -1534,9 +1534,9 @@ public final class OffsetDateTimeJalali
         // the offset is set after the date and time, as it is typically a small
         // tweak to the result, with ZonedDateTime frequently ignoring the offset
         return temporal
-            .with(EPOCH_DAY, toLocalDate().toEpochDay())
-            .with(NANO_OF_DAY, toLocalTime().toNanoOfDay())
-            .with(OFFSET_SECONDS, getOffset().getTotalSeconds());
+                .with(EPOCH_DAY, toLocalDate().toEpochDay())
+                .with(NANO_OF_DAY, toLocalTime().toNanoOfDay())
+                .with(OFFSET_SECONDS, getOffset().getTotalSeconds());
     }
 
     /**
@@ -1773,7 +1773,7 @@ public final class OffsetDateTimeJalali
         long thisEpochSec = toEpochSecond();
         long otherEpochSec = other.toEpochSecond();
         return thisEpochSec > otherEpochSec ||
-            (thisEpochSec == otherEpochSec && toLocalTime().getNano() > other.toLocalTime().getNano());
+                (thisEpochSec == otherEpochSec && toLocalTime().getNano() > other.toLocalTime().getNano());
     }
 
     /**
@@ -1790,7 +1790,7 @@ public final class OffsetDateTimeJalali
         long thisEpochSec = toEpochSecond();
         long otherEpochSec = other.toEpochSecond();
         return thisEpochSec < otherEpochSec ||
-            (thisEpochSec == otherEpochSec && toLocalTime().getNano() < other.toLocalTime().getNano());
+                (thisEpochSec == otherEpochSec && toLocalTime().getNano() < other.toLocalTime().getNano());
     }
 
     /**
@@ -1805,7 +1805,7 @@ public final class OffsetDateTimeJalali
      */
     public boolean isEqual(OffsetDateTimeJalali other) {
         return toEpochSecond() == other.toEpochSecond() &&
-            toLocalTime().getNano() == other.toLocalTime().getNano();
+                toLocalTime().getNano() == other.toLocalTime().getNano();
     }
 
     //-----------------------------------------------------------------------

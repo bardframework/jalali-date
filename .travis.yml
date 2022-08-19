@@ -1,17 +1,17 @@
 language: java
 os:
-    - linux
+  - linux
 dist: xenial
 jdk:
-    - openjdk14
+  - openjdk14
 
 addons:
-    sonarcloud:
-        organization: "bardframework"
-        token: $SOANR_TOKEN
+  sonarcloud:
+    organization: "bardframework"
+    token: $SOANR_TOKEN
 
 script:
-    - mvn clean package
+  - mvn clean package
 
 after_success:
-    - mvn clean jacoco:report install coveralls:report sonar:sonar -Dsonar.projectKey=bardframework_jalali-date
+  - mvn clean jacoco:report install coveralls:report sonar:sonar -Dsonar.projectKey=bardframework_jalali-date

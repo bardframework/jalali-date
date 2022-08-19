@@ -429,8 +429,7 @@ public final class DateTimeFormatterBuilderJalali {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the widths are invalid
      */
-    public DateTimeFormatterBuilderJalali appendValue(
-        TemporalField field, int minWidth, int maxWidth, SignStyle signStyle) {
+    public DateTimeFormatterBuilderJalali appendValue(TemporalField field, int minWidth, int maxWidth, SignStyle signStyle) {
         if (minWidth == maxWidth && signStyle == SignStyle.NOT_NEGATIVE) {
             return appendValue(field, maxWidth);
         }
@@ -443,8 +442,7 @@ public final class DateTimeFormatterBuilderJalali {
             throw new IllegalArgumentException("The maximum width must be from 1 to 19 inclusive but was " + maxWidth);
         }
         if (maxWidth < minWidth) {
-            throw new IllegalArgumentException("The maximum width must exceed or equal the minimum width but " +
-                maxWidth + " < " + minWidth);
+            throw new IllegalArgumentException("The maximum width must exceed or equal the minimum width but " + maxWidth + " < " + minWidth);
         }
         NumberPrinterParser pp = new NumberPrinterParser(field, minWidth, maxWidth, signStyle);
         appendValue(pp);
@@ -486,8 +484,7 @@ public final class DateTimeFormatterBuilderJalali {
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the width or base value is invalid
      */
-    public DateTimeFormatterBuilderJalali appendValueReduced(TemporalField field,
-                                                             int width, int maxWidth, int baseValue) {
+    public DateTimeFormatterBuilderJalali appendValueReduced(TemporalField field, int width, int maxWidth, int baseValue) {
         Objects.requireNonNull(field, "field");
         ReducedPrinterParser pp = new ReducedPrinterParser(field, width, maxWidth, baseValue, null);
         appendValue(pp);
@@ -630,8 +627,7 @@ public final class DateTimeFormatterBuilderJalali {
      * @throws IllegalArgumentException if the field has a variable set of valid values or
      *                                  either width is invalid
      */
-    public DateTimeFormatterBuilderJalali appendFraction(
-        TemporalField field, int minWidth, int maxWidth, boolean decimalPoint) {
+    public DateTimeFormatterBuilderJalali appendFraction(TemporalField field, int minWidth, int maxWidth, boolean decimalPoint) {
         appendInternal(new FractionPrinterParser(field, minWidth, maxWidth, decimalPoint));
         return this;
     }
@@ -702,8 +698,7 @@ public final class DateTimeFormatterBuilderJalali {
         final DateTimeTextProvider.LocaleStore store = new DateTimeTextProvider.LocaleStore(map);
         DateTimeTextProvider provider = new DateTimeTextProvider() {
             @Override
-            public String getText(Chronology chrono, TemporalField field,
-                                  long value, TextStyle style, Locale locale) {
+            public String getText(Chronology chrono, TemporalField field, long value, TextStyle style, Locale locale) {
                 return store.getText(value, style);
             }
 
@@ -713,14 +708,12 @@ public final class DateTimeFormatterBuilderJalali {
             }
 
             @Override
-            public Iterator<Entry<String, Long>> getTextIterator(Chronology chrono,
-                                                                 TemporalField field, TextStyle style, Locale locale) {
+            public Iterator<Entry<String, Long>> getTextIterator(Chronology chrono, TemporalField field, TextStyle style, Locale locale) {
                 return store.getTextIterator(style);
             }
 
             @Override
-            public Iterator<Entry<String, Long>> getTextIterator(TemporalField field,
-                                                                 TextStyle style, Locale locale) {
+            public Iterator<Entry<String, Long>> getTextIterator(TemporalField field, TextStyle style, Locale locale) {
                 return store.getTextIterator(style);
             }
         };
@@ -1137,8 +1130,7 @@ public final class DateTimeFormatterBuilderJalali {
      * @param preferredZones the set of preferred zone ids, not null
      * @return this, for chaining, not null
      */
-    public DateTimeFormatterBuilderJalali appendZoneText(TextStyle textStyle,
-                                                         Set<ZoneId> preferredZones) {
+    public DateTimeFormatterBuilderJalali appendZoneText(TextStyle textStyle, Set<ZoneId> preferredZones) {
         Objects.requireNonNull(preferredZones, "preferredZones");
         appendInternal(new ZoneTextPrinterParser(textStyle, preferredZones));
         return this;
@@ -1544,8 +1536,7 @@ public final class DateTimeFormatterBuilderJalali {
                         }
                     }
                     if (pad == 0) {
-                        throw new IllegalArgumentException(
-                            "Pad letter 'p' must be followed by valid pad pattern: " + pattern);
+                        throw new IllegalArgumentException("Pad letter 'p' must be followed by valid pad pattern: " + pattern);
                     }
                     padNext(pad); // pad and continue parsing
                 }
@@ -1997,10 +1988,7 @@ public final class DateTimeFormatterBuilderJalali {
      * Enumeration to apply simple parse settings.
      */
     enum SettingsParser implements DateTimePrinterParser {
-        SENSITIVE,
-        INSENSITIVE,
-        STRICT,
-        LENIENT;
+        SENSITIVE, INSENSITIVE, STRICT, LENIENT;
 
         @Override
         public boolean format(DateTimePrintContextJalali context, StringBuilder buf) {
@@ -2228,8 +2216,7 @@ public final class DateTimeFormatterBuilderJalali {
             }
             int len = buf.length() - preLen;
             if (len > padWidth) {
-                throw new DateTimeException(
-                    "Cannot print as output of " + len + " characters exceeds pad width of " + padWidth);
+                throw new DateTimeException("Cannot print as output of " + len + " characters exceeds pad width of " + padWidth);
             }
             for (int i = 0; i < padWidth - len; i++) {
                 buf.insert(preLen, padChar);
@@ -2327,9 +2314,7 @@ public final class DateTimeFormatterBuilderJalali {
             }
             char ch = text.charAt(position);
             if (ch != literal) {
-                if (context.isCaseSensitive() ||
-                    (Character.toUpperCase(ch) != Character.toUpperCase(literal) &&
-                        Character.toLowerCase(ch) != Character.toLowerCase(literal))) {
+                if (context.isCaseSensitive() || (Character.toUpperCase(ch) != Character.toUpperCase(literal) && Character.toLowerCase(ch) != Character.toLowerCase(literal))) {
                     return ~position;
                 }
             }
@@ -2392,19 +2377,7 @@ public final class DateTimeFormatterBuilderJalali {
         /**
          * Array of 10 to the power of n.
          */
-        static final long[] EXCEED_POINTS = new long[]{
-            0L,
-            10L,
-            100L,
-            1000L,
-            10000L,
-            100000L,
-            1000000L,
-            10000000L,
-            100000000L,
-            1000000000L,
-            10000000000L,
-        };
+        static final long[] EXCEED_POINTS = new long[]{0L, 10L, 100L, 1000L, 10000L, 100000L, 1000000L, 10000000L, 100000000L, 1000000000L, 10000000000L,};
 
         final TemporalField field;
         final int minWidth;
@@ -2480,9 +2453,7 @@ public final class DateTimeFormatterBuilderJalali {
             DecimalStyle decimalStyle = context.getDecimalStyle();
             String str = (value == Long.MIN_VALUE ? "9223372036854775808" : Long.toString(Math.abs(value)));
             if (str.length() > maxWidth) {
-                throw new DateTimeException("Field " + field +
-                    " cannot be printed as the value " + value +
-                    " exceeds the maximum print width of " + maxWidth);
+                throw new DateTimeException("Field " + field + " cannot be printed as the value " + value + " exceeds the maximum print width of " + maxWidth);
             }
             str = decimalStyle.convertNumberToI18N(str);
 
@@ -2505,9 +2476,7 @@ public final class DateTimeFormatterBuilderJalali {
                         buf.append(decimalStyle.getNegativeSign());
                         break;
                     case NOT_NEGATIVE:
-                        throw new DateTimeException("Field " + field +
-                            " cannot be printed as the value " + value +
-                            " cannot be negative according to the SignStyle");
+                        throw new DateTimeException("Field " + field + " cannot be printed as the value " + value + " cannot be negative according to the SignStyle");
                 }
             }
             for (int i = 0; i < minWidth - str.length(); i++) {
@@ -2537,8 +2506,7 @@ public final class DateTimeFormatterBuilderJalali {
          * @see DateTimeFormatterBuilderJalali#appendValue(TemporalField, int)
          */
         boolean isFixedWidth(DateTimeParseContextJalali context) {
-            return subsequentWidth == -1 ||
-                (subsequentWidth > 0 && minWidth == maxWidth && signStyle == SignStyle.NOT_NEGATIVE);
+            return subsequentWidth == -1 || (subsequentWidth > 0 && minWidth == maxWidth && signStyle == SignStyle.NOT_NEGATIVE);
         }
 
         @Override
@@ -2700,8 +2668,7 @@ public final class DateTimeFormatterBuilderJalali {
                 throw new IllegalArgumentException("The maxWidth must be from 1 to 10 inclusive but was " + minWidth);
             }
             if (maxWidth < minWidth) {
-                throw new IllegalArgumentException("Maximum width must exceed or equal the minimum width but " +
-                    maxWidth + " < " + minWidth);
+                throw new IllegalArgumentException("Maximum width must exceed or equal the minimum width but " + maxWidth + " < " + minWidth);
             }
             if (baseDate == null) {
                 if (!field.range().isValidValue(baseValue)) {
@@ -2754,14 +2721,13 @@ public final class DateTimeFormatterBuilderJalali {
 
                 // In case the Chronology is changed later, add a callback when/if it changes
                 final long initialValue = value;
-                context.addChronoChangedListener(
-                    (_unused) -> {
-                        /* Repeat the set of the field using the current Chronology
-                         * The success/error position is ignored because the value is
-                         * intentionally being overwritten.
-                         */
-                        setValue(context, initialValue, errorPos, successPos);
-                    });
+                context.addChronoChangedListener((_unused) -> {
+                    /* Repeat the set of the field using the current Chronology
+                     * The success/error position is ignored because the value is
+                     * intentionally being overwritten.
+                     */
+                    setValue(context, initialValue, errorPos, successPos);
+                });
             }
             int parseLen = successPos - errorPos;
             if (parseLen == minWidth && value >= 0) {
@@ -2801,8 +2767,7 @@ public final class DateTimeFormatterBuilderJalali {
          */
         @Override
         ReducedPrinterParser withSubsequentWidth(int subsequentWidth) {
-            return new ReducedPrinterParser(field, minWidth, maxWidth, baseValue, baseDate,
-                this.subsequentWidth + subsequentWidth);
+            return new ReducedPrinterParser(field, minWidth, maxWidth, baseValue, baseDate, this.subsequentWidth + subsequentWidth);
         }
 
         /**
@@ -2858,8 +2823,7 @@ public final class DateTimeFormatterBuilderJalali {
                 throw new IllegalArgumentException("Maximum width must be from 1 to 9 inclusive but was " + maxWidth);
             }
             if (maxWidth < minWidth) {
-                throw new IllegalArgumentException("Maximum width must exceed or equal the minimum width but " +
-                    maxWidth + " < " + minWidth);
+                throw new IllegalArgumentException("Maximum width must exceed or equal the minimum width but " + maxWidth + " < " + minWidth);
             }
             this.field = field;
             this.minWidth = minWidth;
@@ -3163,9 +3127,7 @@ public final class DateTimeFormatterBuilderJalali {
             if ((fractionalDigits < 0 && inNano > 0) || fractionalDigits > 0) {
                 buf.append('.');
                 int div = 100_000_000;
-                for (int i = 0; ((fractionalDigits == -1 && inNano > 0) ||
-                    (fractionalDigits == -2 && (inNano > 0 || (i % 3) != 0)) ||
-                    i < fractionalDigits); i++) {
+                for (int i = 0; ((fractionalDigits == -1 && inNano > 0) || (fractionalDigits == -2 && (inNano > 0 || (i % 3) != 0)) || i < fractionalDigits); i++) {
                     int digit = inNano / div;
                     buf.append((char) (digit + '0'));
                     inNano = inNano - (digit * div);
@@ -3181,14 +3143,7 @@ public final class DateTimeFormatterBuilderJalali {
             // new context to avoid overwriting fields like year/month/day
             int minDigits = Math.max(fractionalDigits, 0);
             int maxDigits = (fractionalDigits < 0 ? 9 : fractionalDigits);
-            CompositePrinterParser parser = new DateTimeFormatterBuilderJalali()
-                .append(DateTimeFormatterJalali.ISO_LOCAL_DATE).appendLiteral('T')
-                .appendValue(HOUR_OF_DAY, 2).appendLiteral(':')
-                .appendValue(MINUTE_OF_HOUR, 2).appendLiteral(':')
-                .appendValue(SECOND_OF_MINUTE, 2)
-                .appendFraction(NANO_OF_SECOND, minDigits, maxDigits, true)
-                .appendLiteral('Z')
-                .toFormatter().toPrinterParser(false);
+            CompositePrinterParser parser = new DateTimeFormatterBuilderJalali().append(DateTimeFormatterJalali.ISO_LOCAL_DATE).appendLiteral('T').appendValue(HOUR_OF_DAY, 2).appendLiteral(':').appendValue(MINUTE_OF_HOUR, 2).appendLiteral(':').appendValue(SECOND_OF_MINUTE, 2).appendFraction(NANO_OF_SECOND, minDigits, maxDigits, true).appendLiteral('Z').toFormatter().toPrinterParser(false);
             DateTimeParseContextJalali newContext = context.copy();
             int pos = parser.parse(newContext, text, position);
             if (pos < 0) {
@@ -3239,9 +3194,7 @@ public final class DateTimeFormatterBuilderJalali {
      * Prints or parses an offset ID.
      */
     static final class OffsetIdPrinterParser implements DateTimePrinterParser {
-        static final String[] PATTERNS = new String[]{
-            "+HH", "+HHmm", "+HH:mm", "+HHMM", "+HH:MM", "+HHMMss", "+HH:MM:ss", "+HHMMSS", "+HH:MM:SS",
-        };  // order used in pattern builder
+        static final String[] PATTERNS = new String[]{"+HH", "+HHmm", "+HH:mm", "+HHMM", "+HH:MM", "+HHMMss", "+HH:MM:ss", "+HHMMSS", "+HH:MM:SS",};  // order used in pattern builder
         static final OffsetIdPrinterParser INSTANCE_ID_Z = new OffsetIdPrinterParser("+HH:MM:ss", "Z");
         static final OffsetIdPrinterParser INSTANCE_ID_ZERO = new OffsetIdPrinterParser("+HH:MM:ss", "0");
 
@@ -3285,15 +3238,12 @@ public final class DateTimeFormatterBuilderJalali {
                 int absSeconds = Math.abs(totalSecs % 60);
                 int bufPos = buf.length();
                 int output = absHours;
-                buf.append(totalSecs < 0 ? "-" : "+")
-                    .append((char) (absHours / 10 + '0')).append((char) (absHours % 10 + '0'));
+                buf.append(totalSecs < 0 ? "-" : "+").append((char) (absHours / 10 + '0')).append((char) (absHours % 10 + '0'));
                 if (type >= 3 || (type >= 1 && absMinutes > 0)) {
-                    buf.append((type % 2) == 0 ? ":" : "")
-                        .append((char) (absMinutes / 10 + '0')).append((char) (absMinutes % 10 + '0'));
+                    buf.append((type % 2) == 0 ? ":" : "").append((char) (absMinutes / 10 + '0')).append((char) (absMinutes % 10 + '0'));
                     output += absMinutes;
                     if (type >= 7 || (type >= 5 && absSeconds > 0)) {
-                        buf.append((type % 2) == 0 ? ":" : "")
-                            .append((char) (absSeconds / 10 + '0')).append((char) (absSeconds % 10 + '0'));
+                        buf.append((type % 2) == 0 ? ":" : "").append((char) (absSeconds / 10 + '0')).append((char) (absSeconds % 10 + '0'));
                         output += absSeconds;
                     }
                 }
@@ -3329,9 +3279,7 @@ public final class DateTimeFormatterBuilderJalali {
                 int negative = (sign == '-' ? -1 : 1);
                 int[] array = new int[4];
                 array[0] = position + 1;
-                if (!(parseNumber(array, 1, text, true) ||
-                    parseNumber(array, 2, text, type >= 3) ||
-                    parseNumber(array, 3, text, false))) {
+                if (!(parseNumber(array, 1, text, true) || parseNumber(array, 2, text, type >= 3) || parseNumber(array, 3, text, false))) {
                     // success
                     long offsetSecs = negative * (array[1] * 3600L + array[2] * 60L + array[3]);
                     return context.setParsedField(OFFSET_SECONDS, offsetSecs, position, array[0]);
@@ -3406,8 +3354,7 @@ public final class DateTimeFormatterBuilderJalali {
         }
 
         private static StringBuilder appendHMS(StringBuilder buf, int t) {
-            return buf.append((char) (t / 10 + '0'))
-                .append((char) (t % 10 + '0'));
+            return buf.append((char) (t / 10 + '0')).append((char) (t % 10 + '0'));
         }
 
         @Override
@@ -3556,17 +3503,14 @@ public final class DateTimeFormatterBuilderJalali {
         private static final int STD = 0;
         private static final int DST = 1;
         private static final int GENERIC = 2;
-        private static final Map<String, SoftReference<Map<Locale, String[]>>> cache =
-            new ConcurrentHashMap<>();
+        private static final Map<String, SoftReference<Map<Locale, String[]>>> cache = new ConcurrentHashMap<>();
         /**
          * The text style to output.
          */
         private final TextStyle textStyle;
         // cache per instance for now
-        private final Map<Locale, Entry<Integer, SoftReference<PrefixTree>>>
-            cachedTree = new HashMap<>();
-        private final Map<Locale, Entry<Integer, SoftReference<PrefixTree>>>
-            cachedTreeCI = new HashMap<>();
+        private final Map<Locale, Entry<Integer, SoftReference<PrefixTree>>> cachedTree = new HashMap<>();
+        private final Map<Locale, Entry<Integer, SoftReference<PrefixTree>>> cachedTreeCI = new HashMap<>();
         /**
          * The preferred zoneid map
          */
@@ -3612,11 +3556,7 @@ public final class DateTimeFormatterBuilderJalali {
             String zname = zone.getId();
             if (!(zone instanceof ZoneOffset)) {
                 TemporalAccessor dt = context.getTemporal();
-                String name = getDisplayName(zname,
-                    dt.isSupported(ChronoField.INSTANT_SECONDS)
-                        ? (zone.getRules().isDaylightSavings(Instant.from(dt)) ? DST : STD)
-                        : GENERIC,
-                    context.getLocale());
+                String name = getDisplayName(zname, dt.isSupported(ChronoField.INSTANT_SECONDS) ? (zone.getRules().isDaylightSavings(Instant.from(dt)) ? DST : STD) : GENERIC, context.getLocale());
                 if (name != null) {
                     zname = name;
                 }
@@ -3708,8 +3648,7 @@ public final class DateTimeFormatterBuilderJalali {
             // prepare parse tree
             Set<String> regionIds = ZoneRulesProvider.getAvailableZoneIds();
             final int regionIdsSize = regionIds.size();
-            Entry<Integer, PrefixTree> cached = context.isCaseSensitive()
-                ? cachedPrefixTree : cachedPrefixTreeCI;
+            Entry<Integer, PrefixTree> cached = context.isCaseSensitive() ? cachedPrefixTree : cachedPrefixTreeCI;
             if (cached == null || cached.getKey() != regionIdsSize) {
                 synchronized (this) {
                     cached = context.isCaseSensitive() ? cachedPrefixTree : cachedPrefixTreeCI;
@@ -3752,8 +3691,7 @@ public final class DateTimeFormatterBuilderJalali {
                         return parseOffsetBased(context, text, position, position + 3, OffsetIdPrinterParser.INSTANCE_ID_ZERO);
                     }
                     return parseOffsetBased(context, text, position, position + 2, OffsetIdPrinterParser.INSTANCE_ID_ZERO);
-                } else if (context.charEquals(nextChar, 'G') && length >= position + 3 &&
-                    context.charEquals(nextNextChar, 'M') && context.charEquals(text.charAt(position + 2), 'T')) {
+                } else if (context.charEquals(nextChar, 'G') && length >= position + 3 && context.charEquals(nextNextChar, 'M') && context.charEquals(text.charAt(position + 2), 'T')) {
                     return parseOffsetBased(context, text, position, position + 3, OffsetIdPrinterParser.INSTANCE_ID_ZERO);
                 }
             }
@@ -3793,8 +3731,7 @@ public final class DateTimeFormatterBuilderJalali {
             }
 
             // '0' or 'Z' after prefix is not part of a valid ZoneId; use bare prefix
-            if (text.charAt(position) == '0' ||
-                context.charEquals(text.charAt(position), 'Z')) {
+            if (text.charAt(position) == '0' || context.charEquals(text.charAt(position), 'Z')) {
                 context.setParsed(ZoneId.of(prefix));
                 return position;
             }
@@ -4304,8 +4241,7 @@ public final class DateTimeFormatterBuilderJalali {
 
         @Override
         public String toString() {
-            return "Localized(" + (dateStyle != null ? dateStyle : "") + "," +
-                (timeStyle != null ? timeStyle : "") + ")";
+            return "Localized(" + (dateStyle != null ? dateStyle : "") + "," + (timeStyle != null ? timeStyle : "") + ")";
         }
     }
 
@@ -4359,8 +4295,7 @@ public final class DateTimeFormatterBuilderJalali {
                     if (count == 2) {
                         return new ReducedPrinterParser(field, 2, 2, 0, ReducedPrinterParser.BASE_DATE, 0);
                     } else {
-                        return new NumberPrinterParser(field, count, 19,
-                            (count < 4) ? SignStyle.NORMAL : SignStyle.EXCEEDS_PAD, -1);
+                        return new NumberPrinterParser(field, count, 19, (count < 4) ? SignStyle.NORMAL : SignStyle.EXCEEDS_PAD, -1);
                     }
                 case 'e':
                 case 'c':
@@ -4388,9 +4323,7 @@ public final class DateTimeFormatterBuilderJalali {
                 } else if (count == 2) {
                     sb.append("ReducedValue(WeekBasedYear,2,2,2000-01-01)");
                 } else {
-                    sb.append("WeekBasedYear,").append(count).append(",")
-                        .append(19).append(",")
-                        .append((count < 4) ? SignStyle.NORMAL : SignStyle.EXCEEDS_PAD);
+                    sb.append("WeekBasedYear,").append(count).append(",").append(19).append(",").append((count < 4) ? SignStyle.NORMAL : SignStyle.EXCEEDS_PAD);
                 }
             } else {
                 switch (chr) {
