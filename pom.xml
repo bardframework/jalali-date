@@ -20,20 +20,29 @@
     <url>https://github.com/bardframework/jalali-date</url>
 
     <properties>
-        <junit-jupiter.version>5.7.0</junit-jupiter.version>
-        <slf4j.version>1.7.30</slf4j.version>
+        <bardframework.version>1.7.10</bardframework.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.bardframework</groupId>
+                <artifactId>bard-bom</artifactId>
+                <version>${bardframework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
