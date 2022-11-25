@@ -360,10 +360,9 @@ public final class ZoneOffsetTransition
         if (other == this) {
             return true;
         }
-        if (other instanceof ZoneOffsetTransition) {
-            ZoneOffsetTransition d = (ZoneOffsetTransition) other;
+        if (other instanceof ZoneOffsetTransition d) {
             return epochSecond == d.epochSecond &&
-                    offsetBefore.equals(d.offsetBefore) && offsetAfter.equals(d.offsetAfter);
+                offsetBefore.equals(d.offsetBefore) && offsetAfter.equals(d.offsetAfter);
         }
         return false;
     }

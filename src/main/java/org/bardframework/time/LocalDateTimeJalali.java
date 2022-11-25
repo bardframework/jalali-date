@@ -575,8 +575,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public boolean isSupported(TemporalField field) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             return f.isDateBased() || f.isTimeBased();
         }
         return field != null && field.isSupportedBy(this);
@@ -653,8 +652,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public ValueRange range(TemporalField field) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             return (f.isTimeBased() ? time.range(field) : date.range(field));
         }
         return field.rangeRefinedBy(this);
@@ -690,8 +688,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public int get(TemporalField field) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             return (f.isTimeBased() ? time.get(field) : date.get(field));
         }
         ValueRange range = range(field);
@@ -730,8 +727,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public long getLong(TemporalField field) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             return (f.isTimeBased() ? time.getLong(field) : date.getLong(field));
         }
         if (WeekFields.WEEK_BASED_YEARS.equals(field)) {
@@ -971,8 +967,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public LocalDateTimeJalali with(TemporalField field, long newValue) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             if (f.isTimeBased()) {
                 return with(date, time.with(field, newValue));
             } else {
@@ -1157,8 +1152,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public LocalDateTimeJalali plus(TemporalAmount amountToAdd) {
-        if (amountToAdd instanceof Period) {
-            Period periodToAdd = (Period) amountToAdd;
+        if (amountToAdd instanceof Period periodToAdd) {
             return with(date.plus(periodToAdd), time);
         }
         Objects.requireNonNull(amountToAdd, "amountToAdd");
@@ -1193,8 +1187,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public LocalDateTimeJalali plus(long amountToAdd, TemporalUnit unit) {
-        if (unit instanceof ChronoUnit) {
-            ChronoUnit f = (ChronoUnit) unit;
+        if (unit instanceof ChronoUnit f) {
             switch (f) {
                 case NANOS:
                     return plusNanos(amountToAdd);
@@ -1386,8 +1379,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
      */
     @Override
     public LocalDateTimeJalali minus(TemporalAmount amountToSubtract) {
-        if (amountToSubtract instanceof Period) {
-            Period periodToSubtract = (Period) amountToSubtract;
+        if (amountToSubtract instanceof Period periodToSubtract) {
             return with(date.minus(periodToSubtract), time);
         }
         Objects.requireNonNull(amountToSubtract, "amountToSubtract");
@@ -1973,8 +1965,7 @@ public final class LocalDateTimeJalali implements Temporal, TemporalAdjuster, Ch
         if (this == obj) {
             return true;
         }
-        if (obj instanceof LocalDateTimeJalali) {
-            LocalDateTimeJalali other = (LocalDateTimeJalali) obj;
+        if (obj instanceof LocalDateTimeJalali other) {
             return date.equals(other.date) && time.equals(other.time);
         }
         return false;

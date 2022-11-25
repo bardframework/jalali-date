@@ -606,8 +606,7 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
      */
     @Override
     public YearMonthJalali with(TemporalField field, long newValue) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             f.checkValidValue(newValue);
             switch (f) {
                 case MONTH_OF_YEAR:
@@ -1116,8 +1115,7 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
         if (this == obj) {
             return true;
         }
-        if (obj instanceof YearMonthJalali) {
-            YearMonthJalali other = (YearMonthJalali) obj;
+        if (obj instanceof YearMonthJalali other) {
             return year == other.year && month == other.month;
         }
         return false;

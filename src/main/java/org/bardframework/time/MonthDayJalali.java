@@ -658,8 +658,7 @@ public final class MonthDayJalali implements TemporalAccessor, TemporalAdjuster,
         if (this == obj) {
             return true;
         }
-        if (obj instanceof MonthDayJalali) {
-            MonthDayJalali other = (MonthDayJalali) obj;
+        if (obj instanceof MonthDayJalali other) {
             return month == other.month && day == other.day;
         }
         return false;

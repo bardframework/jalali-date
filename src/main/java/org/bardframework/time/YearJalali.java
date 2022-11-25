@@ -565,8 +565,7 @@ public final class YearJalali implements Temporal, TemporalAdjuster, Comparable<
      */
     @Override
     public YearJalali with(TemporalField field, long newValue) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             f.checkValidValue(newValue);
             switch (f) {
                 case YEAR_OF_ERA:

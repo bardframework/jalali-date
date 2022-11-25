@@ -1172,11 +1172,9 @@ public final class ZonedDateTimeJalali
             return resolveLocal(LocalDateTimeJalali.of(dateTime.toLocalDate(), (LocalTime) adjuster));
         } else if (adjuster instanceof LocalDateTimeJalali) {
             return resolveLocal((LocalDateTimeJalali) adjuster);
-        } else if (adjuster instanceof OffsetDateTimeJalali) {
-            OffsetDateTimeJalali odt = (OffsetDateTimeJalali) adjuster;
+        } else if (adjuster instanceof OffsetDateTimeJalali odt) {
             return ofLocal(odt.toLocalDateTimeJalali(), zone, odt.getOffset());
-        } else if (adjuster instanceof Instant) {
-            Instant instant = (Instant) adjuster;
+        } else if (adjuster instanceof Instant instant) {
             return create(instant.getEpochSecond(), instant.getNano(), zone);
         } else if (adjuster instanceof ZoneOffset) {
             return resolveOffset((ZoneOffset) adjuster);
@@ -1238,8 +1236,7 @@ public final class ZonedDateTimeJalali
      */
     @Override
     public ZonedDateTimeJalali with(TemporalField field, long newValue) {
-        if (field instanceof ChronoField) {
-            ChronoField f = (ChronoField) field;
+        if (field instanceof ChronoField f) {
             switch (f) {
                 case INSTANT_SECONDS:
                     return create(newValue, getNano(), zone);
@@ -1493,8 +1490,7 @@ public final class ZonedDateTimeJalali
      */
     @Override
     public ZonedDateTimeJalali plus(TemporalAmount amountToAdd) {
-        if (amountToAdd instanceof Period) {
-            Period periodToAdd = (Period) amountToAdd;
+        if (amountToAdd instanceof Period periodToAdd) {
             return resolveLocal(dateTime.plus(periodToAdd));
         }
         Objects.requireNonNull(amountToAdd, "amountToAdd");
@@ -1753,8 +1749,7 @@ public final class ZonedDateTimeJalali
      */
     @Override
     public ZonedDateTimeJalali minus(TemporalAmount amountToSubtract) {
-        if (amountToSubtract instanceof Period) {
-            Period periodToSubtract = (Period) amountToSubtract;
+        if (amountToSubtract instanceof Period periodToSubtract) {
             return resolveLocal(dateTime.minus(periodToSubtract));
         }
         Objects.requireNonNull(amountToSubtract, "amountToSubtract");
@@ -2138,11 +2133,10 @@ public final class ZonedDateTimeJalali
         if (this == obj) {
             return true;
         }
-        if (obj instanceof ZonedDateTimeJalali) {
-            ZonedDateTimeJalali other = (ZonedDateTimeJalali) obj;
+        if (obj instanceof ZonedDateTimeJalali other) {
             return dateTime.equals(other.dateTime) &&
-                    offset.equals(other.offset) &&
-                    zone.equals(other.zone);
+                offset.equals(other.offset) &&
+                zone.equals(other.zone);
         }
         return false;
     }

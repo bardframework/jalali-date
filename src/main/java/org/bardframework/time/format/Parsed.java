@@ -182,8 +182,7 @@ public final class Parsed implements TemporalAccessor {
                         resolvedObject = targetField.resolve(fieldValues, this, resolverStyle);
                     }
                     if (resolvedObject != null) {
-                        if (resolvedObject instanceof ChronoZonedDateTime) {
-                            ChronoZonedDateTime<?> czdt = (ChronoZonedDateTime<?>) resolvedObject;
+                        if (resolvedObject instanceof ChronoZonedDateTime<?> czdt) {
                             if (zone == null) {
                                 zone = czdt.getZone();
                             } else if (!zone.equals(czdt.getZone())) {
@@ -191,8 +190,7 @@ public final class Parsed implements TemporalAccessor {
                             }
                             resolvedObject = czdt.toLocalDateTime();
                         }
-                        if (resolvedObject instanceof ChronoLocalDateTime) {
-                            ChronoLocalDateTime<?> cldt = (ChronoLocalDateTime<?>) resolvedObject;
+                        if (resolvedObject instanceof ChronoLocalDateTime<?> cldt) {
                             updateCheckConflict(cldt.toLocalTime(), Period.ZERO);
                             updateCheckConflict(cldt.toLocalDate());
                             changedCount++;
