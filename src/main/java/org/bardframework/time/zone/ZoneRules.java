@@ -928,7 +928,7 @@ public final class ZoneRules implements Serializable {
      * @return an immutable list of transition rules, not null
      */
     public List<ZoneOffsetTransitionRule> getTransitionRules() {
-        return Arrays.asList(lastRules);
+        return List.of(lastRules);
     }
 
     /**

@@ -11,7 +11,10 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalField;
 import java.time.temporal.ValueRange;
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * The JALALI calendar system.
@@ -321,7 +324,7 @@ public final class ChronologyJalali extends AbstractChronology implements Serial
 
     @Override
     public List<Era> eras() {
-        return Arrays.asList(IsoEra.values());
+        return List.of(IsoEra.values());
     }
 
     //-----------------------------------------------------------------------

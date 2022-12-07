@@ -326,7 +326,7 @@ public final class ZoneOffsetTransition
         if (isGap()) {
             return Collections.emptyList();
         }
-        return Arrays.asList(getOffsetBefore(), getOffsetAfter());
+        return List.of(getOffsetBefore(), getOffsetAfter());
     }
 
     //-----------------------------------------------------------------------
