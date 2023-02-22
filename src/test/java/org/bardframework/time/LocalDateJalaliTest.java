@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class LocalDateJalaliTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocalDateJalaliTest.class);
+    private static final Logger log = LoggerFactory.getLogger(LocalDateJalaliTest.class);
 
     private int getRandomNumberInRange(int min, int max) {
         return new Random().ints(min, (max + 1)).findFirst().orElse(min);
@@ -35,7 +35,7 @@ public class LocalDateJalaliTest {
             }
             LocalDate localDate = generatedDate.toLocalDate();
             LocalDateJalali returnedDate = LocalDateJalali.of(localDate);
-            LOGGER.info("test converting LocalDateJalali --> LocalDate  --> LocalDateJalali : {} --> {}  --> {}", generatedDate, localDate, returnedDate);
+            log.info("test converting LocalDateJalali --> LocalDate  --> LocalDateJalali : {} --> {}  --> {}", generatedDate, localDate, returnedDate);
             Assertions.assertEquals(generatedDate, returnedDate);
         }
     }
@@ -56,7 +56,7 @@ public class LocalDateJalaliTest {
             }
             LocalDateJalali localDateJalali = LocalDateJalali.of(generatedDate);
             LocalDate returnedDate = localDateJalali.toLocalDate();
-            LOGGER.info("test converting LocalDate --> LocalDateJalali  --> LocalDate : {} --> {}  --> {}", generatedDate, localDateJalali, returnedDate);
+            log.info("test converting LocalDate --> LocalDateJalali  --> LocalDate : {} --> {}  --> {}", generatedDate, localDateJalali, returnedDate);
             Assertions.assertEquals(generatedDate, returnedDate);
         }
     }

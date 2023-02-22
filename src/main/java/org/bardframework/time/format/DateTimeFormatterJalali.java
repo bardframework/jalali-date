@@ -59,7 +59,6 @@ import static java.time.temporal.ChronoField.*;
  * The {@link #withDecimalStyle withDecimalStyle} method returns a new formatter that
  * overrides the {@link DecimalStyle}. The DecimalStyle symbols are used for
  * formatting and parsing.
- * <h3 id="predefined">Predefined Formatters</h3>
  * <table class="striped" style="text-align:left">
  * <caption>Predefined Formatters</caption>
  * <thead>
@@ -146,7 +145,6 @@ import static java.time.temporal.ChronoField.*;
  * </tbody>
  * </table>
  *
- * <h3 id="patterns">Patterns for Formatting and Parsing</h3>
  * Patterns are based on a simple sequence of letters and symbols.
  * {@code "d MMM uuuu"} will format 2011-12-03 as '3&nbsp;Dec&nbsp;2011'.
  * A formatter created from a pattern can be used as many times as necessary,
@@ -305,7 +303,6 @@ import static java.time.temporal.ChronoField.*;
  * that you want to output directly to ensure that future changes do not break
  * your application.
  *
- * <h3 id="resolving">Resolving</h3>
  * Parsing is implemented as a two-phase operation.
  * First, the text is parsed using the layout defined by the formatter, producing
  * a {@code Map} of field to value, a {@code ZoneId} and a {@code Chronology}.
