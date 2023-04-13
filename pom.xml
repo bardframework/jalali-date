@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>1.12.6</version>
+    <version>2.1.6</version>
 
     <packaging>jar</packaging>
 
@@ -20,7 +20,7 @@
     <url>https://github.com/bardframework/jalali-date</url>
 
     <properties>
-        <bardframework.version>1.12.10</bardframework.version>
+        <bardframework.version>2.1.10</bardframework.version>
     </properties>
 
     <dependencyManagement>
@@ -74,10 +74,6 @@
         <developer>
             <name>Vahid Zafari</name>
             <email>va.zafari@gmail.com</email>
-        </developer>
-        <developer>
-            <name>Jamshid Rostami</name>
-            <email>jamshidrostami@gmail.com</email>
         </developer>
     </developers>
 </project>
