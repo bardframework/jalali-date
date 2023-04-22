@@ -1,9 +1,8 @@
 package org.bardframework.time;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -11,9 +10,8 @@ import java.util.Random;
 /**
  * Created by Vahid Zafari on 4/29/2016.
  */
+@Slf4j
 public class LocalDateJalaliTest {
-
-    private static final Logger log = LoggerFactory.getLogger(LocalDateJalaliTest.class);
 
     private int getRandomNumberInRange(int min, int max) {
         return new Random().ints(min, (max + 1)).findFirst().orElse(min);
