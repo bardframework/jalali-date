@@ -2127,10 +2127,10 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
             buf.append(yearValue);
         }
         return buf.append(monthValue < 10 ? "-0" : "-")
-                .append(monthValue)
-                .append(dayValue < 10 ? "-0" : "-")
-                .append(dayValue)
-                .toString();
+            .append(monthValue)
+            .append(dayValue < 10 ? "-0" : "-")
+            .append(dayValue)
+            .toString();
     }
 
 }

@@ -7,7 +7,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.zone.ZoneRules;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +29,7 @@ import java.util.Objects;
  * this class is immutable and thread-safe.
  */
 public final class ZoneOffsetTransition
-        implements Comparable<ZoneOffsetTransition>, Serializable {
+    implements Comparable<ZoneOffsetTransition>, Serializable {
 
     /**
      * Serialization version.
@@ -387,13 +386,13 @@ public final class ZoneOffsetTransition
     @Override
     public String toString() {
         String buf = "Transition[" +
-                (isGap() ? "Gap" : "Overlap") +
-                " at " +
-                transition +
-                offsetBefore +
-                " to " +
-                offsetAfter +
-                ']';
+            (isGap() ? "Gap" : "Overlap") +
+            " at " +
+            transition +
+            offsetBefore +
+            " to " +
+            offsetAfter +
+            ']';
         return buf;
     }
 
