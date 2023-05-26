@@ -66,6 +66,7 @@ public class LocalDateJalaliTest {
         Assertions.assertEquals(localDateJalali, LocalDateJalali.ofEpochDay(epoch));
     }
 
+
     @Test
     public void testPlusMonth1() {
         Assertions.assertEquals(LocalDateJalali.of(1401, 6, 31).plusMonths(1).getDayOfMonth(), 30);
@@ -79,5 +80,12 @@ public class LocalDateJalaliTest {
     @Test
     public void testPlusDay1() {
         Assertions.assertEquals(LocalDateJalali.of(1401, 12, 29).plusDays(1).getDayOfMonth(), 1);
+    }
+
+    @Test
+    public void testMinusDay1() {
+        Assertions.assertEquals(LocalDateJalali.of(1401, 10, 1).minusDays(1), LocalDateJalali.of(1401, 9, 30));
+        Assertions.assertEquals(LocalDateJalali.of(1402, 1, 1).minusDays(1), LocalDateJalali.of(1401, 12, 29));
+        Assertions.assertEquals(LocalDateJalali.of(1404, 1, 1).minusDays(1), LocalDateJalali.of(1403, 12, 30));
     }
 }

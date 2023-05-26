@@ -1487,6 +1487,13 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
                 year = year.plusYears(1);
             }
         }
+        if (dayOfMonth == 0) {
+            month = month.minus(1);
+            if (month == MonthJalali.ESFAND) {
+                year = year.minusYears(1);
+            }
+            dayOfMonth = month.length(year.isLeap());
+        }
         return of(year.getValue(), month, dayOfMonth);
 //        long mjDay = Math.addExact(toEpochDay(), daysToAdd);
 //        return LocalDateJalali.ofEpochDay(mjDay);
