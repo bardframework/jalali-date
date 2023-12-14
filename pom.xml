@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.bardframework</groupId>
         <artifactId>bard-parent</artifactId>
-        <version>19</version>
+        <version>20</version>
         <relativePath/>
     </parent>
     <artifactId>jalali-date</artifactId>
