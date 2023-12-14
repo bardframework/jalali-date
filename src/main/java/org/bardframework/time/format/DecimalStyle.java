@@ -187,7 +187,8 @@ final class DecimalStyle {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof DecimalStyle other) {
+        if (obj instanceof DecimalStyle) {
+            DecimalStyle other = (DecimalStyle) obj;
             return (zeroDigit == other.zeroDigit && positiveSign == other.positiveSign &&
                 negativeSign == other.negativeSign && decimalSeparator == other.decimalSeparator);
         }

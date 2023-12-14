@@ -20,6 +20,7 @@
     <url>https://github.com/bardframework/jalali-date</url>
 
     <properties>
+        <maven.compiler.release>11</maven.compiler.release>
         <bardframework.version>2.6.30</bardframework.version>
     </properties>
 

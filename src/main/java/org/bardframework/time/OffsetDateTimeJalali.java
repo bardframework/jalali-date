@@ -897,7 +897,8 @@ public final class OffsetDateTimeJalali
      */
     @Override
     public OffsetDateTimeJalali with(TemporalField field, long newValue) {
-        if (field instanceof ChronoField f) {
+        if (field instanceof ChronoField) {
+            ChronoField f = (ChronoField) field;
             switch (f) {
                 case INSTANT_SECONDS:
                     return ofInstant(Instant.ofEpochSecond(newValue, getNano()), offset);
@@ -1824,7 +1825,8 @@ public final class OffsetDateTimeJalali
         if (this == obj) {
             return true;
         }
-        if (obj instanceof OffsetDateTimeJalali other) {
+        if (obj instanceof OffsetDateTimeJalali) {
+            OffsetDateTimeJalali other = (OffsetDateTimeJalali) obj;
             return dateTime.equals(other.dateTime) && offset.equals(other.offset);
         }
         return false;

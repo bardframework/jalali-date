@@ -454,7 +454,8 @@ public final class ZoneOffsetTransitionRule implements Serializable {
         if (otherRule == this) {
             return true;
         }
-        if (otherRule instanceof ZoneOffsetTransitionRule other) {
+        if (otherRule instanceof ZoneOffsetTransitionRule) {
+            ZoneOffsetTransitionRule other = (ZoneOffsetTransitionRule) otherRule;
             return month == other.month && dom == other.dom && dow == other.dow &&
                 timeDefinition == other.timeDefinition &&
                 time.equals(other.time) &&
