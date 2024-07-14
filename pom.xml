@@ -7,11 +7,11 @@
     <parent>
         <groupId>org.bardframework</groupId>
         <artifactId>bard-parent</artifactId>
-        <version>22</version>
+        <version>23</version>
         <relativePath/>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>3.1.27</version>
+    <version>3.4.17</version>
 
     <packaging>jar</packaging>
 
@@ -21,7 +21,7 @@
 
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
-        <bardframework.version>3.1.30</bardframework.version>
+        <bardframework.version>3.4.20</bardframework.version>
     </properties>
 
     <dependencyManagement>
