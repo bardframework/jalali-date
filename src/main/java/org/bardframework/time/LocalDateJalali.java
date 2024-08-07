@@ -1,5 +1,7 @@
 package org.bardframework.time;
 
+import org.bardframework.time.format.DateTimeFormatterJalali;
+
 import java.io.Serializable;
 import java.time.*;
 import java.time.chrono.ChronoLocalDate;
@@ -437,6 +439,11 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
      * @throws DateTimeParseException if the text cannot be parsed
      */
     public static LocalDateJalali parse(CharSequence text, DateTimeFormatter formatter) {
+        Objects.requireNonNull(formatter, "formatter");
+        return formatter.parse(text, LocalDateJalali::from);
+    }
+
+    public static LocalDateJalali parse(CharSequence text, DateTimeFormatterJalali formatter) {
         Objects.requireNonNull(formatter, "formatter");
         return formatter.parse(text, LocalDateJalali::from);
     }
