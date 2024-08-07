@@ -148,7 +148,6 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
     private static final int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     /**
      * The year.
-
      */
     private final int year;
     /**
@@ -551,6 +550,8 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
     }
 
     /**
+     * get remain day of year
+     *
      * @return the number of remaining days of the current year
      */
     public int getRemainDayOfYear() {

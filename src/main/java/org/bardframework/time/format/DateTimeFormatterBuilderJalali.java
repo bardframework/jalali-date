@@ -875,7 +875,6 @@ public final class DateTimeFormatterBuilderJalali {
      * During parsing, the offset is parsed using the format defined above.
      * If the offset cannot be parsed then an exception is thrown unless the
      * section of the formatter is optional.
-     * <p>
      *
      * @param style the format style to use, not null
      * @return this, for chaining, not null
@@ -1079,7 +1078,7 @@ public final class DateTimeFormatterBuilderJalali {
      * is accepted. Many textual zone names are not unique, such as CST can be
      * for both "Central Standard Time" and "China Standard Time". In this
      * situation, the zone id will be determined by the region information from
-     * formatter's  {@link DateTimeFormatterJalali#getLocale() locale} and the standard
+     * formatter's  {@link DateTimeFormatterJalali} and the standard
      * zone id for that area, for example, America/New_York for the America Eastern
      * zone. The {@link #appendZoneText(TextStyle, Set)} may be used
      * to specify a set of preferred {@link ZoneId} in this situation.
@@ -1117,7 +1116,7 @@ public final class DateTimeFormatterBuilderJalali {
      * is accepted. Many textual zone names are not unique, such as CST can be
      * for both "Central Standard Time" and "China Standard Time". In this
      * situation, the zone id will be determined by the region information from
-     * formatter's  {@link DateTimeFormatterJalali#getLocale() locale} and the standard
+     * formatter's  {@link DateTimeFormatterJalali} and the standard
      * zone id for that area, for example, America/New_York for the America Eastern
      * zone. This method also allows a set of preferred {@link ZoneId} to be
      * specified for parsing. The matched preferred zone id will be used if the
