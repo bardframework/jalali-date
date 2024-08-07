@@ -1,5 +1,6 @@
 package org.bardframework.time.zone;
 
+import lombok.Getter;
 import org.bardframework.time.LocalDateJalali;
 import org.bardframework.time.LocalDateTimeJalali;
 import org.bardframework.time.MonthJalali;
@@ -29,6 +30,7 @@ import static java.time.temporal.TemporalAdjusters.previousOrSame;
  * <p>
  * this class is immutable and thread-safe.
  */
+@Getter
 public final class ZoneOffsetTransitionRule implements Serializable {
 
     /**
@@ -39,6 +41,7 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     /**
      * The month of the month-day of the first day of the cutover week.
      * The actual date will be adjusted by the dowChange field.
+
      */
     private final MonthJalali month;
     /**
@@ -64,18 +67,22 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     private final boolean timeEndOfDay;
     /**
      * The definition of how the local time should be interpreted.
+
      */
     private final TimeDefinition timeDefinition;
     /**
      * The standard offset at the cutover.
+
      */
     private final ZoneOffset standardOffset;
     /**
      * The offset before the cutover.
+
      */
     private final ZoneOffset offsetBefore;
     /**
      * The offset after the cutover.
+
      */
     private final ZoneOffset offsetAfter;
 
@@ -295,20 +302,6 @@ public final class ZoneOffsetTransitionRule implements Serializable {
     //-----------------------------------------------------------------------
 
     /**
-     * Gets the month of the transition.
-     * <p>
-     * If the rule defines an exact date then the month is the month of that date.
-     * <p>
-     * If the rule defines a week where the transition might occur, then the month
-     * if the month of either the earliest or latest possible date of the cutover.
-     *
-     * @return the month of the transition, not null
-     */
-    public MonthJalali getMonth() {
-        return month;
-    }
-
-    /**
      * Gets the indicator of the day-of-month of the transition.
      * <p>
      * If the rule defines an exact date then the day is the month of that date.
@@ -367,45 +360,6 @@ public final class ZoneOffsetTransitionRule implements Serializable {
      */
     public boolean isMidnightEndOfDay() {
         return timeEndOfDay;
-    }
-
-    /**
-     * Gets the time definition, specifying how to convert the time to an instant.
-     * <p>
-     * The local time can be converted to an instant using the standard offset,
-     * the wall offset or UTC.
-     *
-     * @return the time definition, not null
-     */
-    public TimeDefinition getTimeDefinition() {
-        return timeDefinition;
-    }
-
-    /**
-     * Gets the standard offset in force at the transition.
-     *
-     * @return the standard offset, not null
-     */
-    public ZoneOffset getStandardOffset() {
-        return standardOffset;
-    }
-
-    /**
-     * Gets the offset before the transition.
-     *
-     * @return the offset before, not null
-     */
-    public ZoneOffset getOffsetBefore() {
-        return offsetBefore;
-    }
-
-    /**
-     * Gets the offset after the transition.
-     *
-     * @return the offset after, not null
-     */
-    public ZoneOffset getOffsetAfter() {
-        return offsetAfter;
     }
 
     //-----------------------------------------------------------------------

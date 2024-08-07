@@ -1,5 +1,6 @@
 package org.bardframework.time;
 
+import lombok.Getter;
 import org.bardframework.time.temporal.TemporalQueriesJalali;
 
 import java.io.Serializable;
@@ -45,6 +46,7 @@ import static java.time.temporal.ChronoUnit.NANOS;
  * <p>
  * this class is immutable and thread-safe.
  */
+@Getter
 public final class OffsetDateTimeJalali
     implements Temporal, TemporalAdjuster, Comparable<OffsetDateTimeJalali>, Serializable {
 
@@ -74,6 +76,7 @@ public final class OffsetDateTimeJalali
     private final LocalDateTimeJalali dateTime;
     /**
      * The offset from UTC/Greenwich.
+
      */
     private final ZoneOffset offset;
 
@@ -569,17 +572,6 @@ public final class OffsetDateTimeJalali
     }
 
     //-----------------------------------------------------------------------
-
-    /**
-     * Gets the zone offset, such as '+01:00'.
-     * <p>
-     * This is the offset of the local date-time from UTC/Greenwich.
-     *
-     * @return the zone offset, not null
-     */
-    public ZoneOffset getOffset() {
-        return offset;
-    }
 
     /**
      * Returns a copy of this {@code OffsetDateTime} with the specified offset ensuring

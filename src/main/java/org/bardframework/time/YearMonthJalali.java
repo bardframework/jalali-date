@@ -1,5 +1,7 @@
 package org.bardframework.time;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.time.Clock;
 import java.time.DateTimeException;
@@ -42,6 +44,7 @@ import static java.time.temporal.ChronoUnit.*;
  * @author Vahid Zafari
  * This class is immutable and thread-safe.
  */
+@Getter
 public final class YearMonthJalali implements Temporal, TemporalAdjuster, Comparable<YearMonthJalali>, Serializable {
 
     /**
@@ -59,6 +62,7 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
 
     /**
      * The year.
+
      */
     private final int year;
     /**
@@ -424,19 +428,6 @@ public final class YearMonthJalali implements Temporal, TemporalAdjuster, Compar
     }
 
     //-----------------------------------------------------------------------
-
-    /**
-     * Gets the year field.
-     * <p>
-     * This method returns the primitive {@code int} value for the year.
-     * <p>
-     * The year returned by this method is proleptic as per {@code get(YEAR)}.
-     *
-     * @return the year, from MIN_YEAR to MAX_YEAR
-     */
-    public int getYear() {
-        return year;
-    }
 
     /**
      * Gets the month-of-year field from 1 to 12.

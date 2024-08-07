@@ -1,5 +1,6 @@
 package org.bardframework.time.format;
 
+import lombok.Getter;
 import org.bardframework.time.ChronologyJalali;
 
 import java.io.IOException;
@@ -351,6 +352,7 @@ import static java.time.temporal.ChronoField.*;
  * <p>
  * This class is immutable and thread-safe.
  */
+@Getter
 public final class DateTimeFormatterJalali {
     /**
      * The ISO date formatter that formats or parses a date without an
@@ -979,16 +981,19 @@ public final class DateTimeFormatterJalali {
     //-----------------------------------------------------------------------
     /**
      * The locale to use for formatting, not null.
+
      */
     private final Locale locale;
     /**
      * The symbols to use for formatting, not null.
+
      */
     private final DecimalStyle decimalStyle;
 
     //-----------------------------------------------------------------------
     /**
      * The resolver style to use, not null.
+
      */
     private final ResolverStyle resolverStyle;
     /**
@@ -1003,6 +1008,7 @@ public final class DateTimeFormatterJalali {
     private final Chronology chrono;
     /**
      * The zone to use for formatting, null for no override.
+
      */
     private final ZoneId zone;
 
@@ -1136,18 +1142,6 @@ public final class DateTimeFormatterJalali {
     //-----------------------------------------------------------------------
 
     /**
-     * Gets the locale to be used during formatting.
-     * <p>
-     * This is used to lookup any part of the formatter needing specific
-     * localization, such as the text or localized pattern.
-     *
-     * @return the locale of this formatter, not null
-     */
-    public Locale getLocale() {
-        return locale;
-    }
-
-    /**
      * Returns a copy of this formatter with a new locale.
      * <p>
      * This is used to lookup any part of the formatter needing specific
@@ -1166,15 +1160,6 @@ public final class DateTimeFormatterJalali {
     }
 
     //-----------------------------------------------------------------------
-
-    /**
-     * Gets the DecimalStyle to be used during formatting.
-     *
-     * @return the locale of this formatter, not null
-     */
-    public DecimalStyle getDecimalStyle() {
-        return decimalStyle;
-    }
 
     /**
      * Returns a copy of this formatter with a new DecimalStyle.
@@ -1245,19 +1230,6 @@ public final class DateTimeFormatterJalali {
     }
 
     /**
-     * Gets the overriding zone to be used during formatting.
-     * <p>
-     * This returns the override zone, used to convert instants.
-     * By default, a formatter has no override zone, returning null.
-     * See {@link #withZone(ZoneId)} for more details on overriding.
-     *
-     * @return the override zone of this formatter, null if no override
-     */
-    public ZoneId getZone() {
-        return zone;
-    }
-
-    /**
      * Returns a copy of this formatter with a new override zone.
      * <p>
      * This returns a formatter with similar state to this formatter but
@@ -1298,19 +1270,6 @@ public final class DateTimeFormatterJalali {
             return this;
         }
         return new DateTimeFormatterJalali(printerParser, locale, decimalStyle, resolverStyle, resolverFields, chrono, zone);
-    }
-
-    /**
-     * Gets the resolver style to use during parsing.
-     * <p>
-     * This returns the resolver style, used during the second phase of parsing
-     * when fields are resolved into dates and times.
-     * By default, a formatter has the {@link ResolverStyle#SMART SMART} resolver style.
-     *
-     * @return the resolver style of this formatter, not null
-     */
-    public ResolverStyle getResolverStyle() {
-        return resolverStyle;
     }
 
     /**

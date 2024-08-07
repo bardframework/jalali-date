@@ -1,5 +1,7 @@
 package org.bardframework.time.format;
 
+import lombok.Getter;
+
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.Objects;
@@ -12,6 +14,7 @@ import java.util.concurrent.ConcurrentMap;
  * A significant part of dealing with dates and times is the localization.
  * This class acts as a central point for accessing the information.
  */
+@Getter
 final class DecimalStyle {
 
     /**
@@ -27,18 +30,22 @@ final class DecimalStyle {
 
     /**
      * The zero digit.
+
      */
     private final char zeroDigit;
     /**
      * The positive sign.
+
      */
     private final char positiveSign;
     /**
      * The negative sign.
+
      */
     private final char negativeSign;
     /**
      * The decimal separator.
+
      */
     private final char decimalSeparator;
 
@@ -92,56 +99,9 @@ final class DecimalStyle {
 
     //-----------------------------------------------------------------------
 
-    /**
-     * Gets the character that represents zero.
-     * <p>
-     * The character used to represent digits may vary by culture.
-     * This method specifies the zero character to use, which implies the characters for one to nine.
-     *
-     * @return the character for zero
-     */
-    public char getZeroDigit() {
-        return zeroDigit;
-    }
-
-    /**
-     * Gets the character that represents the positive sign.
-     * <p>
-     * The character used to represent a positive number may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @return the character for the positive sign
-     */
-    public char getPositiveSign() {
-        return positiveSign;
-    }
     //-----------------------------------------------------------------------
 
-    /**
-     * Gets the character that represents the negative sign.
-     * <p>
-     * The character used to represent a negative number may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @return the character for the negative sign
-     */
-    public char getNegativeSign() {
-        return negativeSign;
-    }
-
     //-----------------------------------------------------------------------
-
-    /**
-     * Gets the character that represents the decimal point.
-     * <p>
-     * The character used to represent a decimal point may vary by culture.
-     * This method specifies the character to use.
-     *
-     * @return the character for the decimal point
-     */
-    public char getDecimalSeparator() {
-        return decimalSeparator;
-    }
 
     //-----------------------------------------------------------------------
 

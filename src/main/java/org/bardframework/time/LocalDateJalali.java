@@ -1,5 +1,6 @@
 package org.bardframework.time;
 
+import lombok.Getter;
 import org.bardframework.time.format.DateTimeFormatterJalali;
 
 import java.io.Serializable;
@@ -44,6 +45,7 @@ import static java.time.temporal.ChronoField.*;
  * @author Vahid Zafari
  * This class is immutable and thread-safe.
  */
+@Getter
 public final class LocalDateJalali implements ChronoLocalDate, Serializable {
 
     /**
@@ -146,6 +148,7 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
     private static final int[] gregorianDaysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     /**
      * The year.
+
      */
     private final int year;
     /**
@@ -824,20 +827,6 @@ public final class LocalDateJalali implements ChronoLocalDate, Serializable {
     @Override // override for Javadoc
     public Era getEra() {
         return ChronoLocalDate.super.getEra();
-    }
-
-    /**
-     * Gets the year field.
-     * <p>
-     * This method returns the primitive {@code int} value for the year.
-     * <p>
-     * The year returned by this method is proleptic as per {@code get(YEAR)}.
-     * To obtain the year-of-era, use {@code get(YEAR_OF_ERA)}.
-     *
-     * @return the year, from MIN_YEAR to MAX_YEAR
-     */
-    public int getYear() {
-        return year;
     }
 
     /**

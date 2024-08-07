@@ -1,5 +1,6 @@
 package org.bardframework.time.zone;
 
+import lombok.Getter;
 import org.bardframework.time.LocalDateTimeJalali;
 
 import java.io.*;
@@ -28,8 +29,8 @@ import java.util.Objects;
  * <p>
  * this class is immutable and thread-safe.
  */
-public final class ZoneOffsetTransition
-    implements Comparable<ZoneOffsetTransition>, Serializable {
+@Getter
+public final class ZoneOffsetTransition implements Comparable<ZoneOffsetTransition>, Serializable {
 
     /**
      * Serialization version.
@@ -45,10 +46,12 @@ public final class ZoneOffsetTransition
     private final LocalDateTimeJalali transition;
     /**
      * The offset before transition.
+
      */
     private final ZoneOffset offsetBefore;
     /**
      * The offset after transition.
+
      */
     private final ZoneOffset offsetAfter;
 
@@ -228,28 +231,6 @@ public final class ZoneOffsetTransition
      */
     public LocalDateTimeJalali getDateTimeAfter() {
         return transition.plusSeconds(getDurationSeconds());
-    }
-
-    /**
-     * Gets the offset before the transition.
-     * <p>
-     * This is the offset in use before the instant of the transition.
-     *
-     * @return the offset before the transition, not null
-     */
-    public ZoneOffset getOffsetBefore() {
-        return offsetBefore;
-    }
-
-    /**
-     * Gets the offset after the transition.
-     * <p>
-     * This is the offset in use on and after the instant of the transition.
-     *
-     * @return the offset after the transition, not null
-     */
-    public ZoneOffset getOffsetAfter() {
-        return offsetAfter;
     }
 
     /**
