@@ -7,11 +7,11 @@
     <parent>
         <groupId>org.bardframework</groupId>
         <artifactId>bard-parent</artifactId>
-        <version>24</version>
+        <version>25</version>
         <relativePath/>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>3.6.7</version>
+    <version>3.7.7</version>
 
     <packaging>jar</packaging>
 
@@ -21,7 +21,7 @@
 
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
-        <bardframework.version>3.6.10</bardframework.version>
+        <bardframework.version>3.7.10</bardframework.version>
     </properties>
 
     <dependencyManagement>
@@ -72,7 +72,7 @@
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
