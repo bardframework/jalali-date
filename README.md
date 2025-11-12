@@ -26,7 +26,7 @@ Alternatively you can pull it from the central Maven repositories:
 <dependency>
   <groupId>org.bardframework</groupId>
   <artifactId>jalali-date</artifactId>
-    <version>4.1.17</version>
+    <version>4.5.7</version>
 </dependency>
 ```
 
