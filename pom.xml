@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
     <artifactId>jalali-date</artifactId>
-    <version>4.7.7</version>
+    <version>5.3.7</version>
 
     <packaging>jar</packaging>
 
@@ -21,7 +21,7 @@
 
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
-        <bardframework.version>4.7.10</bardframework.version>
+        <bardframework.version>5.3.10</bardframework.version>
     </properties>
 
     <dependencyManagement>
